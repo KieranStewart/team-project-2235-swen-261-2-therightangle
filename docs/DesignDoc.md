@@ -9,7 +9,7 @@ geometry: margin=1in
 > and appear in the generated PDF in italics but do so only **after** all team members agree that the requirements for that section and current Sprint have been met. **Do not** delete future Sprint expectations._
 
 ## Team Information
-* Team name: TEAMNAME
+* Team name: The Right Angle
 * Team members
   * MEMBER1
   * Kieran Stewart
