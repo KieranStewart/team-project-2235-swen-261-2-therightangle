@@ -1,15 +1,15 @@
-# U-Fund:  _____ _replace with your particular fundraising type_ _____
+# U-Fund:  ____
 # Modify this document to expand any and all sections that are applicable for a better understanding from your users/testers/collaborators (remove this comment and other instructions areas for your FINAL release)
 
-An online U-Fund system built in Java 17=> and ___ _replace with other platform requirements_ ___
+An online U-Fund system built in Java 17=> and Angular 17.1.2
   
 ## Team
 
-- May Jiang
 - Douglas Tavolette
 - Logan Nickerson
 - Leah Delnesa
-- Kieran Stewart
+- Kieran Stewart 
+- May Jiang
 
 
 ## Prerequisites
