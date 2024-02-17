@@ -11,10 +11,10 @@ geometry: margin=1in
 ## Team Information
 * Team name: The Right Angle
 * Team members
-  * MEMBER1
+  * Logan Nickerson
+  * Leah Delnesa
+  * May Jiang
   * Kieran Stewart
-  * MEMBER3
-  * MEMBER4
 
 ## Executive Summary
 
