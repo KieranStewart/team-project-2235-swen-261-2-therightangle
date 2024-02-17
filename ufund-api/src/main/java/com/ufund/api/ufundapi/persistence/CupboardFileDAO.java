@@ -50,6 +50,9 @@ public class CupboardFileDAO implements CupboardDAO {
         load();
     }
 
+    /**
+     * @return All cupboard needs in an array
+     */
     private Need[] getNeedArray() {
         ArrayList<Need> needArrayList = new ArrayList<>();
     
