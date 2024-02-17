@@ -41,8 +41,12 @@ public class CupboardController {
     public ResponseEntity<Need> createNeed(@RequestBody Need need) {
         LOG.info("POST /needs " + need);
         try {
-            cupboardDao.createNeed(need);
-            return new ResponseEntity<Need>(need, HttpStatus.CREATED);
+            boolean success = cupboardDao.createNeed(need);
+            if(success) {
+                return new ResponseEntity<Need>(need, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
         } catch (Exception e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
