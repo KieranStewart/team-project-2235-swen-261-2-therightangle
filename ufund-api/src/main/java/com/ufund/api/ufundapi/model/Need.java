@@ -1,4 +1,5 @@
 package com.ufund.api.ufundapi.model;
+import java.util.Arrays;
 import java.util.logging.Logger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,7 +19,7 @@ public class Need {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Hero [id=%d, name=%s]";
+    static final String STRING_FORMAT = "Need [goal = %d, progress = %d, name = %s, description = %s, volunteer dates = %s, deadline = %s]";
 
     @JsonProperty("goal") private int goal;
     @JsonProperty("progress") private int progress;
@@ -91,6 +92,6 @@ public class Need {
 
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT);
+        return String.format(STRING_FORMAT, goal, progress, name, description, Arrays.toString(volunteerDates), deadline);
     }
 }
