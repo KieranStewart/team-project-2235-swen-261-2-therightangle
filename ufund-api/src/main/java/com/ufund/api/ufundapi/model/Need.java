@@ -3,9 +3,9 @@ import java.util.logging.Logger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents a single need for the Hope Center
+ * Represents a single need for the Hope Center.
  * Please note that the excessive getters and setters
- * are required for JSON
+ * are for JSON
  * @author Logan Nickerson
  */
 public class Need {
