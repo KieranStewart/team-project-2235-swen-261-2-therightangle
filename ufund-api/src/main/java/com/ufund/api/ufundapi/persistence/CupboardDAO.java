@@ -4,7 +4,7 @@ import java.io.IOException;
 import com.ufund.api.ufundapi.model.Need;
 
 /**
- * Interface for doing stuff to cupboard.
+ * Interface for doing stuff to the cupboard.
  * Add and remove methods as necessary.
  * @author Logan Nickerson
  */
