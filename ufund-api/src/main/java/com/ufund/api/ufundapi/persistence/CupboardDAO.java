@@ -6,6 +6,8 @@ import com.ufund.api.ufundapi.model.Need;
 /**
  * Interface for doing stuff to the cupboard.
  * Add and remove methods as necessary.
+ * 
+ * Adapted from SWEN Faculty
  * @author Logan Nickerson
  */
 public interface CupboardDAO {

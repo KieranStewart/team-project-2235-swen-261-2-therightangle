@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Represents a single need for the Hope Center.
  * Please note that the excessive getters and setters
  * are for JSON
+ * 
+ * Adapted from SWEN Faculty
  * @author Logan Nickerson
  */
 public class Need {

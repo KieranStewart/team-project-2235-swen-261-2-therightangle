@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * Uses JSON to store needs
+ * 
+ * Adapted from SWEN Faculty
  * @author Logan Nickerson
  */
 
@@ -110,25 +112,25 @@ public class CupboardFileDAO implements CupboardDAO {
     }
 
     @Override
-    public boolean deleteNeed(String name) throws IOException {
+    public boolean deleteNeed(String name) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public Need getNeed(String name) throws IOException {
+    public Need getNeed(String name) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Need[] getNeeds() throws IOException {
+    public Need[] getNeeds() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Need updateNeed(Need Need) throws IOException {
+    public Need updateNeed(Need Need) {
         // TODO Auto-generated method stub
         return null;
     }

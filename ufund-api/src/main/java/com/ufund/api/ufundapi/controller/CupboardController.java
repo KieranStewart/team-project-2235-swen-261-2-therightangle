@@ -13,6 +13,11 @@ import java.util.logging.Logger;
 import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.persistence.CupboardDAO;
 
+/**
+ * Handles HTTP communication.
+ * 
+ * Adapted from SWEN Faculty
+ */
 @RestController
 @RequestMapping("cupboard")
 public class CupboardController {
