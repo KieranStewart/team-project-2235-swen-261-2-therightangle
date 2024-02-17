@@ -44,7 +44,7 @@ public class CupboardFileDAO implements CupboardDAO {
      * 
      * @throws IOException when file cannot be accessed
      */
-    public CupboardFileDAO(@Value("${needs.file}") String filename,ObjectMapper objectMapper) throws IOException {
+    public CupboardFileDAO(@Value("${cupboard.file}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
         load();
