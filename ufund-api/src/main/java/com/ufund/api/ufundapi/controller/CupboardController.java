@@ -59,6 +59,10 @@ public class CupboardController {
     }
 
     @PostMapping("")
+    /**
+     * Gets the needs from the Cupboard file DAO and returns them in a ResponseEntity
+     * @return ResponseEntity the needs from the Cupboard file DAO
+     */
     public ResponseEntity<Need[]> getNeeds()
     {
         LOG.info("GET /needs");
