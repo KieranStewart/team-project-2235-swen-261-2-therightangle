@@ -58,6 +58,18 @@ public class CupboardController {
         }
     }
 
+    @PostMapping("")
+    public ResponseEntity<Need[]> getNeeds()
+    {
+        LOG.info("GET /needs");
+        try {
+            Need[] outNeeds = cupboardDao.getNeeds();
+            return new ResponseEntity<Need[]>(outNeeds, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     /**
      * Other REST methods here
      */
