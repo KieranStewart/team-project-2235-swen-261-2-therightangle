@@ -101,7 +101,11 @@ public class CupboardFileDAOTest {
     @Test
     public void testGetNeeds()
     {
-        for (int i = 0; i < testNeeds.length; i ++)
+        // Setup
+        Need[] actualNeeds = cupboardFileDAO.getNeeds();
+
+        // Analyze
+        for (int i = 0; i < actualNeeds.length; i ++)
         {
             assertEquals(testNeeds[i].toString(), cupboardFileDAO.getNeeds()[i].toString());
         }
