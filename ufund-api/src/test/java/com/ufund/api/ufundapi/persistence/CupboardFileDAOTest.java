@@ -52,7 +52,7 @@ public class CupboardFileDAOTest {
         cupboardFileDAO = new CupboardFileDAO("doesnt_matter.txt",mockObjectMapper);
     }
 
-    // Uncomment this when Get Need is implemented!
+    // // Uncomment this when Get Need is implemented!
     // @Test
     // public void testCreateNeed() {
     //     // Setup
@@ -96,5 +96,14 @@ public class CupboardFileDAOTest {
         assertThrows(IOException.class,
                         () -> new CupboardFileDAO("doesnt_matter.txt",mockObjectMapper),
                         "IOException not thrown");
+    }
+
+    @Test
+    public void testGetNeeds()
+    {
+        for (int i = 0; i < testNeeds.length; i ++)
+        {
+            assertEquals(testNeeds[i].toString(), cupboardFileDAO.getNeeds()[i].toString());
+        }
     }
 }
