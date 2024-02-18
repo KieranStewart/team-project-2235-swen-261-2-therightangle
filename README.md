@@ -9,7 +9,7 @@ An online U-Fund system built in Java 17=> and Angular 17.1.2
 - Logan Nickerson
 - Leah Delnesa
 - Kieran Stewart 
-- May 
+- May Jiang
 
 
 ## Prerequisites
