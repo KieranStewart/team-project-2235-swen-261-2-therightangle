@@ -133,7 +133,8 @@ public class CupboardFileDAO implements CupboardDAO {
     @Override
     public Need updateNeed(Need need) throws IOException {
         synchronized(needs) {
-            if(needs.containsKey(need.getName())) {
+            System.out.println(needs);
+            if((needs.containsKey(need.getName()) == false)) {
                 return null; // if doesn't exist return null
             }
             needs.put(need.getName(), need);
