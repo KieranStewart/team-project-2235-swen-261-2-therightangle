@@ -2,6 +2,8 @@ package com.ufund.api.ufundapi.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -52,7 +54,7 @@ public class CupboardFileDAOTest {
         cupboardFileDAO = new CupboardFileDAO("doesnt_matter.txt",mockObjectMapper);
     }
 
-    // Uncomment this when Get Need is implemented!
+    // // Uncomment this when Get Need is implemented!
     // @Test
     // public void testCreateNeed() {
     //     // Setup
@@ -96,5 +98,45 @@ public class CupboardFileDAOTest {
         assertThrows(IOException.class,
                         () -> new CupboardFileDAO("doesnt_matter.txt",mockObjectMapper),
                         "IOException not thrown");
+    }
+
+    @Test
+    public void testGetNeeds()
+    {
+        // Setup
+        Need[] actualNeeds = cupboardFileDAO.getNeeds();
+
+        // Analyze
+        for (int i = 0; i < actualNeeds.length; i ++)
+        {
+            assertEquals(testNeeds[i].toString(), cupboardFileDAO.getNeeds()[i].toString());
+        }
+      }
+        @Test
+    public void testUpdateHero() {
+        // Setup
+        Need need = new Need(0, 0, "new new test need", "update need", null, null);
+
+        // Invoke
+        Need result = assertDoesNotThrow(() -> cupboardFileDAO.updateNeed(need),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertNotNull(result);
+        Need actual = cupboardFileDAO.getNeed(need.getName());
+        assertEquals(actual,need);
+    }
+
+        @Test
+    public void testUpdateHeroNotFound() {
+        // Setup
+        Need need = new Need(0, 0, "unavaliable",null , null, null);
+
+        // Invoke
+        Need result = assertDoesNotThrow(() -> cupboardFileDAO.updateNeed(need),
+                                                "Unexpected exception thrown");
+
+        // Analyze
+        assertNull(result);
     }
 }
