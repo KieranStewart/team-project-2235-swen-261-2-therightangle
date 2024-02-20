@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
  * 
  * Adapted from SWEN Faculty
  * @author Logan Nickerson
+ * @author May Jiang
  */
 
 @Component
@@ -133,9 +134,16 @@ public class CupboardFileDAO implements CupboardDAO {
     }
 
     @Override
-    public Need updateNeed(Need Need) {
-        // TODO Auto-generated method stub
-        return null;
+    public Need updateNeed(Need need) throws IOException {
+        synchronized(needs) {
+            System.out.println(needs);
+            if((needs.containsKey(need.getName()) == false)) {
+                return null; // if doesn't exist return null
+            }
+            needs.put(need.getName(), need);
+            save(); //can throw IOException
+            return need;
+        }
     }
 
     
