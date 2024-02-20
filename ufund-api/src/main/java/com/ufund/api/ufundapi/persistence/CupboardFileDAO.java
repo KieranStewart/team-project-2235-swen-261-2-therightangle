@@ -114,14 +114,13 @@ public class CupboardFileDAO implements CupboardDAO {
 
     @Override
     public boolean deleteNeed(String name) {
-        // TODO Auto-generated method stub
-        return false;
+        needs.remove(name);
+        return true;
     }
 
     @Override
     public Need getNeed(String name) {
-        // TODO Auto-generated method stub
-        return null;
+        return needs.get(name);
     }
 
     @Override
