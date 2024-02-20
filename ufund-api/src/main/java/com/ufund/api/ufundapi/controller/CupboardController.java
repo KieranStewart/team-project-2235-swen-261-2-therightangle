@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -86,6 +87,22 @@ public class CupboardController {
         }    
     }
 
+    /**
+     * Gets the needs from the Cupboard file DAO and returns them in a ResponseEntity
+     * @return ResponseEntity the needs from the Cupboard file DAO
+     */
+    @GetMapping("")
+    public ResponseEntity<Need[]> getNeeds()
+    {
+        LOG.info("GET /needs");
+        try {
+            Need[] outNeeds = cupboardDao.getNeeds();
+            return new ResponseEntity<Need[]>(outNeeds, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     /**
      * Other REST methods here
      */

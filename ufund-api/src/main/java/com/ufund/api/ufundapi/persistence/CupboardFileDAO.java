@@ -125,9 +125,12 @@ public class CupboardFileDAO implements CupboardDAO {
     }
 
     @Override
+    /**
+     * Gets an array of all the needs in the Cupboard
+     * @return Need[] Needs The needs in the Cupboard
+     */
     public Need[] getNeeds() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.getNeedArray();
     }
 
     @Override
