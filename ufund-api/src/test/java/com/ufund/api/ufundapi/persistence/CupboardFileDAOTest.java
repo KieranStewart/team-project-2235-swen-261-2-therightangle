@@ -42,7 +42,7 @@ public class CupboardFileDAOTest {
     public void setupNeedFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testNeeds = new Need[3];
-        testNeeds[0] = new Need(0, 0, null, null, null, null);
+        testNeeds[0] = new Need(0, 0, "update me", "not update", null, null);
         testNeeds[1] = new Need(0, 0, null, null, null, null);
         testNeeds[2] = new Need(0, 0, null, null, null, null);
 
@@ -115,7 +115,7 @@ public class CupboardFileDAOTest {
         @Test
     public void testUpdateHero() {
         // Setup
-        Need need = new Need(0, 0, "new new test need", "update need", null, null);
+        Need need = new Need(0, 0, "update me", "updated", null, null);
 
         // Invoke
         Need result = assertDoesNotThrow(() -> cupboardFileDAO.updateNeed(need),
