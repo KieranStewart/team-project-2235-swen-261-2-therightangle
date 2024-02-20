@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 
 /**
  * Test the Cupboard Controller class
@@ -80,6 +81,53 @@ public class CupboardControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+
+    @Test
+    public void testSearchNeeds() throws IOException{
+        // Setup
+        String searchNeed = "Volunteers";
+        Need[] needs = new Need[3];
+        needs[0] = new Need(0, 0, "Money", null, null, null);
+        needs[1] = new Need(0, 0, "Staff", null, null, null);
+        needs[2] = new Need(0, 0, "Volunteers", null, null, null);
+    
+        when(mockCupboardDAO.getNeeds()).thenReturn(needs);
+
+        //Invoke
+        ResponseEntity<Need> response = cupboardController.searchNeeds(searchNeed);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
+    @Test
+    public void testSearchNeedsFailed() throws IOException {
+        // Setup
+        String searchNeed = "Volunteers";
+        Need[] needs = null;
+
+        when(mockCupboardDAO.getNeeds()).thenReturn(needs);
+
+        // Invoke
+        ResponseEntity<Need> response = cupboardController.searchNeeds(searchNeed);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    public void testSearchNeedsHandleException() throws IOException {
+        // Setup
+        String searchNeed = "Volunteers";
+
+        doThrow(new IOException()).when(mockCupboardDAO).getNeeds();
+
+        // Invoke
+        ResponseEntity<Need> response = cupboardController.searchNeeds(searchNeed);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
     /**
      * Add other controller tests here
      */

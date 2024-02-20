@@ -2,11 +2,14 @@ package com.ufund.api.ufundapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,6 +59,44 @@ public class CupboardController {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    /***
+     * @param name used to identify searched for need
+     * 
+     * @return ResponseEntity with and HTTP status of Success<br>
+     * ResponseEntity with HTTP satus if {@link Need need} object doesn't exist
+     * ResponseEntity with HTTP satus status of INTERNAL_SERVER_ERROR otherwise
+     * @throws IOException 
+     */
+    @GetMapping("/")
+    public ResponseEntity<Need> searchNeeds(@RequestParam String name) throws IOException {
+        try {
+            Need[] needs = this.cupboardDao.getNeeds();
+            LOG.info("GET /needs/?name="+name);
+    
+            // Check if any needs are found
+            if (needs == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else {
+                Need need = null;
+                for(int i = 0; i < needs.length; i++){
+                    need = needs[i];
+                    if(need.getName().equals(name)){
+                        break;
+                    }
+                }
+                if (need != null) {
+                    return new ResponseEntity<>(need, HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+            }
+        } catch (IOException e) {
+            LOG.warning("Error occurred while searching through needs: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     /**
