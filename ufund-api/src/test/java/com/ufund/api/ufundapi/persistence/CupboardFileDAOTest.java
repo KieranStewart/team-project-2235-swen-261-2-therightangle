@@ -13,6 +13,8 @@ import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ufund.api.ufundapi.model.Need;
@@ -43,8 +45,8 @@ public class CupboardFileDAOTest {
         mockObjectMapper = mock(ObjectMapper.class);
         testNeeds = new Need[3];
         testNeeds[0] = new Need(0, 0, "update me", "not update", null, null);
-        testNeeds[1] = new Need(0, 0, null, null, null, null);
-        testNeeds[2] = new Need(0, 0, null, null, null, null);
+        testNeeds[1] = new Need(0, 0, "Thing One", null, null, null);
+        testNeeds[2] = new Need(0, 0, "Thing Two", null, null, null);
 
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the need array above
@@ -108,18 +110,31 @@ public class CupboardFileDAOTest {
      * If it is to be ordered, the order should not be arbitrary, but dependent on a new field of Need (on design principle)
      * If it is to not be ordered, refactor this test so it does not require insertion order to be maintained
      */
-    // @Test
-    // public void testGetNeeds()
-    // {
-    //     // Setup
-    //     Need[] actualNeeds = cupboardFileDAO.getNeeds();
+    @Test
+    public void testGetNeeds()
+    {
+        // Setup
+        Need[] actualNeeds;
 
-    //     // Analyze
-    //     for (int i = 0; i < actualNeeds.length; i++)
-    //     {
-    //         assertEquals(testNeeds[i].toString(), actualNeeds[i].toString());
-    //     }
-    //   }
+        // Invoke
+        actualNeeds = cupboardFileDAO.getNeeds();
+
+        // Analyze
+        Comparator<Need> comparator = new Comparator<Need>() { 
+            /** 
+             * HashMap doesn't maintain insertion order, and we don't intend to implement a natural order of Needs from a design
+             * perspective.  Use this to sort needs so we can test that the getNeeds method actually works.
+             */
+            @Override
+            public int compare(Need o1, Need o2) {
+                return o1.getName().compareTo(o2.getName());
+            }};
+        Arrays.sort(actualNeeds, comparator);
+        Arrays.sort(testNeeds, comparator);
+        for(int i = 0; i < actualNeeds.length; i++) {
+            assertEquals(testNeeds[i].toString(), actualNeeds[i].toString());
+        }
+    }
     
     @Test
     public void testUpdateHero() {
