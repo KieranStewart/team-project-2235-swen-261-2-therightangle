@@ -54,22 +54,25 @@ public class CupboardFileDAOTest {
         cupboardFileDAO = new CupboardFileDAO("doesnt_matter.txt",mockObjectMapper);
     }
 
-    // // Uncomment this when Get Need is implemented!
-    // @Test
-    // public void testCreateNeed() {
-    //     // Setup
-    //     Need need = new Need(0, 0, "new name", null, null, null);
+    @Test
+    public void testCreateNeed() {
+        // Setup
+        Need need = new Need(0, 0, "new name", null, null, null);
 
-    //     // Invoke
-    //     boolean result = assertDoesNotThrow(() -> cupboardFileDAO.createNeed(need),
-    //                             "Unexpected exception thrown");
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> cupboardFileDAO.createNeed(need),
+                                "Unexpected exception thrown");
 
-    //     // Analyze
-    //     assertTrue(result);
-    //     Need actual = cupboardFileDAO.getNeed(need.getName());
-    //     assertEquals(actual.getName(), need.getName());
-    //     // TODO: all fields tested
-    // }
+        // Analyze
+        assertTrue(result);
+        Need actual = cupboardFileDAO.getNeed(need.getName());
+        assertEquals(actual.getName(), need.getName());
+        assertEquals(actual.getDeadline(), need.getDeadline());
+        assertEquals(actual.getGoal(), need.getGoal());
+        assertEquals(actual.getDescription(), need.getDescription());
+        assertEquals(actual.getProgress(), need.getProgress());
+        assertEquals(actual.getVolunteerDates(), need.getVolunteerDates());
+    }
 
     @Test
     public void testSaveException() throws IOException{
