@@ -179,11 +179,12 @@ public class CupboardController {
         try {
             if (cupboardDao.deleteNeed(name))
                 return new ResponseEntity<Need>(HttpStatus.OK);
-            return new ResponseEntity<Need>(HttpStatus.NOT_FOUND);
+            else
+                return new ResponseEntity<Need>(HttpStatus.NOT_FOUND);
 
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     /**
