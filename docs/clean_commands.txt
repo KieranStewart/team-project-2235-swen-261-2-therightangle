@@ -2,3 +2,4 @@ cls & echo Get Individual Need: & curl -X GET http://localhost:8080/cupboard/new
 cls & echo Get all Needs: & curl -X GET http://localhost:8080/cupboard -v
 cls & echo Search: & curl -i -X GET http://localhost:8080/cupboard/?name='name' -v
 cls & echo Create a Need: & curl -X POST -H Content-Type:application/json http://localhost:8080/cupboard -d "{\"name\": \"new need\"}" -v
+cls & echo Delete A Need: & curl –i -X DELETE http://localhost:8080/cupboard/new%20test%20need
