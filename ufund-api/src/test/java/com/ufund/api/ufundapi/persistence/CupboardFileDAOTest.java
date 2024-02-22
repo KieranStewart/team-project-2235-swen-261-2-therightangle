@@ -28,7 +28,6 @@ import org.junit.jupiter.api.Test;
  * 
  * Adapted from SWEN Faculty
  */
-@SuppressWarnings("unused")
 @Tag("Persistence-tier")
 public class CupboardFileDAOTest {
     CupboardFileDAO cupboardFileDAO;
