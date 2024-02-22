@@ -1,6 +1,9 @@
-cls & echo Get Individual Need: & curl -X GET http://localhost:8080/cupboard/new%20test%20need -v
+cls & echo Get Individual Need: & curl -X GET http://localhost:8080/cupboard/test%20need -v
 cls & echo Get Individual Need (Failing): & curl -X GET http://localhost:8080/cupboard/fake%20need -v
 cls & echo Get All Needs: & curl -X GET http://localhost:8080/cupboard -v
-cls & echo Search: & curl -i -X GET http://localhost:8080/cupboard/?name='name' -v
+cls & echo Search: & curl -X GET http://localhost:8080/cupboard/?name=test -v
+cls & echo Search (Failing): & curl -i -X GET http://localhost:8080/cupboard/?name='name' -v
 cls & echo Create A Need: & curl -X POST -H Content-Type:application/json http://localhost:8080/cupboard -d "{\"name\": \"new need\"}" -v
+cls & echo Create A Need (Failing): & curl -X POST -H Content-Type:application/json http://localhost:8080/cupboard -d "{\"name\": \"new need\"}" -v
 cls & echo Delete A Need: & curl –i -X DELETE http://localhost:8080/cupboard/new%20need -v
+cls & echo Delete A Need (Failing): & curl –i -X DELETE http://localhost:8080/cupboard/new%20need -v
