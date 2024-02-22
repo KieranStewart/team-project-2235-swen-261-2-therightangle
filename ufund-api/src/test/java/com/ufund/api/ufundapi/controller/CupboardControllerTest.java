@@ -83,6 +83,7 @@ public class CupboardControllerTest {
     }
 
 
+
     @Test
     public void testSearchNeeds() throws IOException{
         // Setup
@@ -130,6 +131,22 @@ public class CupboardControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
+    @Test
+    public void testGetNeeds() throws IOException
+    {
+        // Setup
+        Need[] expectedNeeds = mockCupboardDAO.getNeeds();
+        ResponseEntity<Need[]> expected = new ResponseEntity<Need[]>(expectedNeeds, HttpStatus.OK);
+
+        // Invoke
+        ResponseEntity<Need[]> actual = cupboardController.getNeeds();
+
+        // Check
+        assertEquals(expected, actual);
+    }
+
+
     /**
      * Add other controller tests here
      */

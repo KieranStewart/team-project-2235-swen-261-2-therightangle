@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,6 +63,7 @@ public class CupboardController {
         }
     }
 
+
     /***
      * @param name used to identify searched for need
      * 
@@ -102,6 +104,50 @@ public class CupboardController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+
+        /**
+     * Updates the {@linkplain Need need} with the provided {@linkplain Need need} object, if it exists
+     * 
+     * @param need The {@link Need need} to update
+     * 
+     * @return ResponseEntity with updated {@link Need need} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("")
+    public ResponseEntity<Need> updateNeed(@RequestBody Need need) {
+        LOG.info("PUT /needs " + need);
+
+        try {
+            Need newNeed = cupboardDao.updateNeed(need);
+            if (newNeed != null)
+                return new ResponseEntity<Need>(newNeed,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }    
+    }
+
+    /**
+     * Gets the needs from the Cupboard file DAO and returns them in a ResponseEntity
+     * @return ResponseEntity the needs from the Cupboard file DAO
+     */
+    @GetMapping("")
+    public ResponseEntity<Need[]> getNeeds()
+    {
+        LOG.info("GET /needs");
+        try {
+            Need[] outNeeds = cupboardDao.getNeeds();
+            return new ResponseEntity<Need[]>(outNeeds, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
