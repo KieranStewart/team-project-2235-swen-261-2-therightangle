@@ -3,6 +3,7 @@ package com.ufund.api.ufundapi.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,6 +63,27 @@ public class CupboardController {
         }
     }
 
+    
+    /**
+     * Gets a need given its name
+     * @param name The name of the need to be returned
+     * @return The Need object of the need with that name
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Need> getNeed(@PathVariable String name)
+    {
+        try {
+            Need out = cupboardDao.getNeed(name);
+            if (out != null)
+            {
+                return new ResponseEntity<Need>(out, HttpStatus.OK);
+            }
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<Need>(HttpStatus.NOT_FOUND);
+    }
 
     /***
      * @param name used to identify searched for need
