@@ -117,10 +117,19 @@ public class CupboardFileDAO implements CupboardDAO {
         return false;
     }
 
+    /**
+     * Returns a need from the need database with the given name, and null if there is no such need
+     * @param name the name of the need to be returned
+     * @return A need with the given name from the database or null if no such name exists
+     */
     @Override
     public Need getNeed(String name) {
-        // TODO Auto-generated method stub
-        return null;
+        synchronized(needs)
+        {
+            if (needs.containsKey(name))
+                return needs.get(name);
+            return null;
+        }
     }
 
     @Override
