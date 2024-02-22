@@ -1,5 +1,6 @@
 package com.ufund.api.ufundapi.controller;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -85,19 +86,20 @@ public class CupboardControllerTest {
     @Test
     public void testSearchNeeds() throws IOException{
         // Setup
-        String searchNeed = "Volunteers";
+        String searchNeed = "event";
         Need[] needs = new Need[3];
-        needs[0] = new Need(0, 0, "Money", null, null, null);
-        needs[1] = new Need(0, 0, "Staff", null, null, null);
-        needs[2] = new Need(0, 0, "Volunteers", null, null, null);
+        needs[0] = new Need(0, 0, "eventone", null, null, null);
+        needs[1] = new Need(0, 0, "eventtwo", null, null, null);
+        needs[2] = new Need(0, 0, "volunteers", null, null, null);
     
         when(mockCupboardDAO.getNeeds()).thenReturn(needs);
 
         //Invoke
-        ResponseEntity<Need> response = cupboardController.searchNeeds(searchNeed);
+        ResponseEntity<Need[]> response = cupboardController.searchNeeds(searchNeed);
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
+        //assertArrayEquals(needs,response.getBody());
     }
 
     @Test
@@ -109,7 +111,7 @@ public class CupboardControllerTest {
         when(mockCupboardDAO.getNeeds()).thenReturn(needs);
 
         // Invoke
-        ResponseEntity<Need> response = cupboardController.searchNeeds(searchNeed);
+        ResponseEntity<Need[]> response = cupboardController.searchNeeds(searchNeed);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
@@ -123,7 +125,7 @@ public class CupboardControllerTest {
         doThrow(new IOException()).when(mockCupboardDAO).getNeeds();
 
         // Invoke
-        ResponseEntity<Need> response = cupboardController.searchNeeds(searchNeed);
+        ResponseEntity<Need[]> response = cupboardController.searchNeeds(searchNeed);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
