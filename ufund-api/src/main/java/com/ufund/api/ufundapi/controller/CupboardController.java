@@ -69,7 +69,7 @@ public class CupboardController {
      * @param name The name of the need to be returned
      * @return The Need object of the need with that name
      */
-    @GetMapping("/{id}")
+    @GetMapping("/{name}")
     public ResponseEntity<Need> getNeed(@PathVariable String name)
     {
         try {
