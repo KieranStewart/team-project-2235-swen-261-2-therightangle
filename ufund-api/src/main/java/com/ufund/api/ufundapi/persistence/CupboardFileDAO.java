@@ -114,8 +114,10 @@ public class CupboardFileDAO implements CupboardDAO {
 
     @Override
     public boolean deleteNeed(String name) {
-        needs.remove(name);
-        return true;
+        synchronized(needs)
+        {
+            return needs.remove(name) != null;
+        }
     }
 
     /**
