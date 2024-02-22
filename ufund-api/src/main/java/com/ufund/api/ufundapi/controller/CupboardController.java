@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -82,6 +83,24 @@ public class CupboardController {
         return new ResponseEntity<Need>(HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Deletes the Need with the name name
+     * @param name The name of the Need to be deleted
+     * @return True if the need was deleted and false otherwise
+     */
+    @DeleteMapping("/{name}")
+    public ResponseEntity<Need> deleteNeed(@PathVariable String name)
+    {
+        try {
+            if (cupboardDao.deleteNeed(name))
+                return new ResponseEntity<Need>(HttpStatus.OK);
+            return new ResponseEntity<Need>(HttpStatus.NOT_FOUND);
+
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     /**
      * Other REST methods here
      */
