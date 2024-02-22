@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,7 +71,7 @@ public class CupboardController {
      * @throws IOException 
      */
     @GetMapping("/")
-    public ResponseEntity<Need> searchNeeds(@RequestParam String name) throws IOException {
+    public ResponseEntity<Need[]> searchNeeds(@RequestParam String name) throws IOException {
         try {
             Need[] needs = this.cupboardDao.getNeeds();
             LOG.info("GET /needs/?name="+name);
@@ -79,15 +80,19 @@ public class CupboardController {
             if (needs == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                Need need = null;
+                Need[] allNeeds = new Need[needs.length];
+                Need curneed = null;
+                int counter = -1;
+
                 for(int i = 0; i < needs.length; i++){
-                    need = needs[i];
-                    if(need.getName().equals(name)){
-                        break;
+                    curneed = needs[i];
+                    if(curneed.getName().contains(name)){
+                        counter+=1;
+                        allNeeds[counter] = curneed;
                     }
                 }
-                if (need != null) {
-                    return new ResponseEntity<>(need, HttpStatus.OK);
+                if (counter != -1) {
+                    return new ResponseEntity<>(allNeeds, HttpStatus.OK);
                 } else {
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 }
