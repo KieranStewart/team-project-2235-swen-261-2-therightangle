@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, asyncScheduler, scheduled } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { Need } from './need';
 
 
@@ -33,7 +33,7 @@ export class NeedService {
     return this.http.get<Need[]>(url)
       .pipe(
         map(cupboard => cupboard[0]), // returns a {0|1} element array
-        // tap(h => { // TODO deprecated
+        // tap(h => { // if we choose to log things, this function may need to be replaced (it is deprecated)
         //   const outcome = h ? 'fetched' : 'did not find';
         //   this.log(`${outcome} need name=${name}`);
         // }),
@@ -54,7 +54,7 @@ export class NeedService {
   searchCupboard(term: string): Observable<Need[]> {
     if (!term.trim()) {
       // search not found? return empty need array.
-      return of([]); // TODO: deprecated
+      return scheduled([[]], asyncScheduler); // May not work: original code was return of([]);
     }
     return this.http.get<Need[]>(`${this.cupboardUrl}/?name=${term}`).pipe(
       // tap(x => x.length ?
@@ -109,7 +109,7 @@ export class NeedService {
       // this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
-      return of(result as T); // TODO deprecated and mysterious
+      return scheduled([result as T], asyncScheduler); // May not work: the original code was return of(result as T);
     };
   }
 
