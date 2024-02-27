@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, asyncScheduler, scheduled } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Need } from './need';
 
 
@@ -22,7 +22,7 @@ export class NeedService {
   getCupboard(): Observable<Need[]> {
     return this.http.get<Need[]>(this.cupboardUrl)
       .pipe(
-        //tap(_ => this.log('fetched cupboard')),
+        tap(_ => this.log('fetched cupboard')), // tap is deprecated, maybe replace
         catchError(this.handleError<Need[]>('getCupboard', []))
       );
   }
@@ -105,18 +105,21 @@ export class NeedService {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
-      // TODO: communicate error to the user
-      // this.log(`${operation} failed: ${error.message}`);
+      this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return scheduled([result as T], asyncScheduler); // May not work: the original code was return of(result as T);
     };
   }
 
-  // If we ever want to show system messages to the user
-  // /** Log a NeedService message with the MessageService */
-  // private log(message: string) {
-  //   this.messageService.add(`NeedService: ${message}`);
-  // }
+  /** 
+   * Log a NeedService message.  If we want to communicate this to the user, 
+   * we will want to change this from console logging to a component.
+   * We probably want to communicate with the user somehow if an error occurs.
+   */
+  private log(message: string) {
+    console.log(message);
+    //this.messageService.add(`NeedService: ${message}`);
+  }
   
 }
