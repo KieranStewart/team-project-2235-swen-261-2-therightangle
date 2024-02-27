@@ -7,6 +7,8 @@ import { Need } from '../need';
  * 
  * This component doesn't know anything about the Need Service.
  * It just knows about the Need that it was given.
+ * To use this, go like
+ * <need-button [need]="theNeedVariableIWannaPutHere"></need-button>
 */
 @Component({
   selector: 'need-button',
