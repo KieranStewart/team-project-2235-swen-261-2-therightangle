@@ -33,10 +33,10 @@ export class NeedService {
     return this.http.get<Need[]>(url)
       .pipe(
         map(cupboard => cupboard[0]), // returns a {0|1} element array
-        // tap(h => { // if we choose to log things, this function may need to be replaced (it is deprecated)
-        //   const outcome = h ? 'fetched' : 'did not find';
-        //   this.log(`${outcome} need name=${name}`);
-        // }),
+        tap(h => { // notice: deprecated
+          const outcome = h ? 'fetched' : 'did not find';
+          this.log(`${outcome} need name=${name}`);
+        }),
         catchError(this.handleError<Need>(`getNeed name=${name}`))
       );
   }
@@ -45,7 +45,7 @@ export class NeedService {
   getNeed(name: String): Observable<Need> {
     const url = `${this.cupboardUrl}/${name}`;
     return this.http.get<Need>(url).pipe(
-      //tap(_ => this.log(`fetched need name=${name}`)),
+      tap(_ => this.log(`fetched need name=${name}`)), // notice: deprecated
       catchError(this.handleError<Need>(`getNeed name=${name}`))
     );
   }
@@ -54,12 +54,12 @@ export class NeedService {
   searchCupboard(term: string): Observable<Need[]> {
     if (!term.trim()) {
       // search not found? return empty need array.
-      return scheduled([[]], asyncScheduler); // May not work: original code was return of([]);
+      return scheduled([[]], asyncScheduler);
     }
     return this.http.get<Need[]>(`${this.cupboardUrl}/?name=${term}`).pipe(
-      // tap(x => x.length ?
-      //    this.log(`found needs matching "${term}"`) :
-      //    this.log(`no needs matching "${term}"`)),
+      tap(x => x.length ? // notice: deprecated
+         this.log(`found needs matching "${term}"`) :
+         this.log(`no needs matching "${term}"`)),
       catchError(this.handleError<Need[]>('searchCupboard', []))
     );
   }
@@ -69,7 +69,7 @@ export class NeedService {
   /** POST: add a new need to the server */
   addNeed(need: Need): Observable<Need> {
     return this.http.post<Need>(this.cupboardUrl, need, this.httpOptions).pipe(
-      // tap((newNeed: Need) => this.log(`added need w/ name=${newNeed.name}`)),
+      tap((newNeed: Need) => this.log(`added need w/ name=${newNeed.name}`)), // notice: deprecated
       catchError(this.handleError<Need>('addNeed'))
     );
   }
@@ -79,7 +79,7 @@ export class NeedService {
     const url = `${this.cupboardUrl}/${name}`;
 
     return this.http.delete<Need>(url, this.httpOptions).pipe(
-      // tap(_ => this.log(`deleted need name=${name}`)),
+      tap(_ => this.log(`deleted need name=${name}`)), // notice: deprecated
       catchError(this.handleError<Need>('deleteNeed'))
     );
   }
@@ -87,7 +87,7 @@ export class NeedService {
   /** PUT: update the need on the server */
   updateNeed(need: Need): Observable<any> {
     return this.http.put(this.cupboardUrl, need, this.httpOptions).pipe(
-      // tap(_ => this.log(`updated need name=${need.name}`)),
+      tap(_ => this.log(`updated need name=${need.name}`)), // notice: deprecated
       catchError(this.handleError<any>('updateNeed'))
     );
   }
@@ -108,7 +108,7 @@ export class NeedService {
       this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
-      return scheduled([result as T], asyncScheduler); // May not work: the original code was return of(result as T);
+      return scheduled([result as T], asyncScheduler);
     };
   }
 
