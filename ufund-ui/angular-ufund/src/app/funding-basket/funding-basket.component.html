@@ -1,1 +1,3 @@
-<p>funding-basket works!</p>
+<li *ngFor="let thisNeed of fundingBasket">
+    <need-button [need]="thisNeed"></need-button>
+</li>
