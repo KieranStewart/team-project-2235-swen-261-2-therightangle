@@ -12,4 +12,11 @@ export class BasketService {
     this.contents = [];
   }
 
+  clear(): void {
+    this.contents = [];
+  }
+
+  add(need: Need): void {
+    this.contents.push(need);
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Need } from '../need';
+import { BasketService } from '../basket.service';
 /*
  * This component is NOT a need object (need.ts is kind of that)
  * It is also NOT the thing that communicates needs
@@ -17,6 +18,12 @@ import { Need } from '../need';
 })
 export class NeedComponent {
 
+  constructor(private basketService: BasketService) {}
+
   @Input()
   need!: Need;
+
+  addToFundingBasket(): void {
+    this.basketService.add(this.need);
+  }
 }
