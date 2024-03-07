@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Need } from '../need';
-import { BasketService } from '../basket.service';
+import { NeedCacheService } from '../need-cache.service';
 /*
  * This component is NOT a need object (need.ts is kind of that)
  * It is also NOT the thing that communicates needs
@@ -18,12 +18,12 @@ import { BasketService } from '../basket.service';
 })
 export class NeedComponent {
 
-  constructor(private basketService: BasketService) {}
+  constructor(private cacheService: NeedCacheService) {}
 
   @Input()
   need!: Need;
 
-  addToFundingBasket(): void {
-    this.basketService.add(this.need);
+  showDetails(): void {
+    this.cacheService.selectedNeed = this.need;
   }
 }

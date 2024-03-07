@@ -12,11 +12,23 @@ export class BasketService {
     this.contents = [];
   }
 
-  clear(): void {
-    this.contents = [];
-  }
+  // clear(): void {
+  //   for(let index = 0; index < this.contents.length; index++) {
+  //     const element = this.contents[index];
+  //     element.
+  //   }
+  //   this.contents = [];
+  // }
 
   add(need: Need): void {
     this.contents.push(need);
   }
+
+  remove(need: Need): void {
+    var removeIndex = this.contents.indexOf(need);
+    if(removeIndex != -1) {
+      this.contents.splice(removeIndex, 1);
+    }
+  }
+
 }

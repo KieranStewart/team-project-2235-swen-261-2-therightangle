@@ -1,9 +1,3 @@
-<!-- To attach detail functionality, write something inside the <a> tag 
-    TODO make sure that a need that is in the funding basket CANNOT be added again (and appears different)-->
 <div class="holder">
-    <a> {{need.name}} </a>
-    <div *ngIf="true"> <!-- replace true with whatever means "hmm is this user a helper rn?"-->
-        <button (click)="addToFundingBasket()"> [+] </button>
-    </div>
-    
+    <button (click)="showDetails()"> {{need.name}} </button>
 </div>

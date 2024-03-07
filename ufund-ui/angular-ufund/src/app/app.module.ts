@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { NeedComponent } from './need/need.component';
 import { CupboardComponent } from './cupboard/cupboard.component';
 import { FundingBasketComponent } from './funding-basket/funding-basket.component';
+import { NeedDetailComponent } from './need-detail/need-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NeedComponent,
     CupboardComponent,
-    FundingBasketComponent
+    FundingBasketComponent,
+    NeedDetailComponent
   ],
   imports: [
     BrowserModule,
