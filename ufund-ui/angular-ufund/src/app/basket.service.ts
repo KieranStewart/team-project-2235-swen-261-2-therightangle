@@ -12,13 +12,13 @@ export class BasketService {
     this.contents = [];
   }
 
-  // clear(): void {
-  //   for(let index = 0; index < this.contents.length; index++) {
-  //     const element = this.contents[index];
-  //     element.
-  //   }
-  //   this.contents = [];
-  // }
+  clear(): void {
+    for(let index = 0; index < this.contents.length; index++) {
+      const element = this.contents[index];
+      element.inFundingBasket = false;
+    }
+    this.contents = [];
+  }
 
   add(need: Need): void {
     need.inFundingBasket = true;
