@@ -1,6 +1,12 @@
-<p>need-detail works!</p>
-<!-- Display nothing if displayNeed is not set -->
-<!-- Display need information -->
-<!-- Buttons for adding and removing the need to the funding basket -->
-<button (click)="addToFundingBasket()">[+]</button>
-<button (click)="removeFromFundingBasket()"></button>
+<div class="detail-container">
+    <p>Detail section</p>
+    <div *ngIf="displayNeed != null">
+        <!-- Display need information -->
+        <p> hello dis is {{displayNeed.name}} pls gimme {{displayNeed.goal}} dollas </p>
+        <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">[+]</button>
+        <button *ngIf="displayNeed.inFundingBasket" (click)="removeFromFundingBasket()">[-]</button>
+    </div>
+    <div *ngIf="displayNeed == null">
+        <p><i>Select a need to see its details.</i></p>
+    </div>
+</div>

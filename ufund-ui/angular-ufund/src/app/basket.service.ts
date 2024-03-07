@@ -21,6 +21,7 @@ export class BasketService {
   // }
 
   add(need: Need): void {
+    need.inFundingBasket = true;
     this.contents.push(need);
   }
 
@@ -29,6 +30,7 @@ export class BasketService {
     if(removeIndex != -1) {
       this.contents.splice(removeIndex, 1);
     }
+    need.inFundingBasket = false;
   }
 
 }

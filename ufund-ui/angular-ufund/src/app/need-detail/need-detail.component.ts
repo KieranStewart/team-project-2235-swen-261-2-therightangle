@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { Need } from '../need';
 import { BasketService } from '../basket.service';
 
+/**
+ * Shows the details for the selected need.
+ */
 @Component({
   selector: 'app-need-detail',
   templateUrl: './need-detail.component.html',
