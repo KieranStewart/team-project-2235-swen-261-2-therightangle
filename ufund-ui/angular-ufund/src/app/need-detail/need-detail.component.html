@@ -7,6 +7,7 @@
         <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">[+]</button>
         <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
         <div *ngIf="displayNeed.inFundingBasket">
+            <!-- Starter code for the Donate Time story.  Good luck! -->
             <label for="donation-amount">Donation amount: </label>
             <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0"/>
             <button (click)="removeFromFundingBasket()">[-]</button>
