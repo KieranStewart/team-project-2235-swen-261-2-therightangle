@@ -3,8 +3,15 @@
     <div *ngIf="displayNeed != null">
         <!-- Display need information -->
         <p> hello dis is {{displayNeed.name}} pls gimme {{displayNeed.goal}} dollas </p>
+        <!-- If it isn't in the basket, allow it to be added -->
         <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">[+]</button>
-        <button *ngIf="displayNeed.inFundingBasket" (click)="removeFromFundingBasket()">[-]</button>
+        <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
+        <div *ngIf="displayNeed.inFundingBasket">
+            <label for="donation-amount">Donation amount: </label>
+            <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0"/>
+            <button (click)="removeFromFundingBasket()">[-]</button>
+        </div>
+        
     </div>
     <div *ngIf="displayNeed == null">
         <p><i>Select a need to see its details.</i></p>
