@@ -29,17 +29,17 @@ public class DateTest {
     }
 
     @Test
-    public void testName() {
+    public void testToString() {
         // Setup
-        String name = "Test";
-        Need need = new Need(0, 0, name, null, null, null);
-
-        String expected_name = "Dog throw rock";
+        int expectedDay = 12;
+        int expectedMonth = 3;
+        int expectedYear = 2024;
+        Date date = new Date(expectedDay, expectedMonth, expectedYear);
 
         // Invoke
-        need.setName(expected_name);
+        String actual = String.format("%d/%d/%d", expectedMonth, expectedDay, expectedYear);
 
-        // Analyze
-        assertEquals(expected_name, need.getName());
+        // Analyse
+        assertEquals(date.toString(), actual);
     }
 }
