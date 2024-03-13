@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The unit test suite for the Date class
  * 
- * Logan Nickerson
+ * @author Logan Nickerson
  */
 @Tag("Model-tier")
 public class DateTest {
