@@ -1,0 +1,8 @@
+<div class="need-container">
+    <p>funding basket:</p>
+    <li *ngFor="let thisNeed of fundingBasket">
+        <need-button [need]="thisNeed"></need-button>
+    </li>
+    <p *ngIf="fundingBasket.length == 0"><i>Things you intend to support will appear here</i></p>
+</div>
+
