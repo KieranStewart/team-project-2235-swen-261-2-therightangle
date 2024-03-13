@@ -39,7 +39,7 @@ public class DateTest {
         // Invoke
         String actual = String.format("%d/%d/%d", expectedMonth, expectedDay, expectedYear);
 
-        // Analyse
+        // Analyze
         assertEquals(date.toString(), actual);
     }
 }

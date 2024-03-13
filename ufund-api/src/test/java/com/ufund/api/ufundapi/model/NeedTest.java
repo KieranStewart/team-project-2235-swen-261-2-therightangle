@@ -2,6 +2,8 @@ package com.ufund.api.ufundapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +25,6 @@ public class NeedTest {
         Date[] expectedVolunteerDates = {
             new Date(10, 10, 2030)
         };
-
 
         // Invoke
         Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline);
@@ -65,5 +66,25 @@ public class NeedTest {
         assertEquals(expectedProgress, need.getProgress());
         assertEquals(expectedDeadline, need.getDeadline());
         assertEquals(expectedVolunteerDates, need.getVolunteerDates());
+    }
+
+    @Test
+    public void testToString() {
+        // Setup
+        int expectedGoal = 100;
+        int expectedProgress = 0;
+        String expectedName = "Unlimited Games";
+        String expectedDesc = "but no games";
+        Date expectedDeadline = new Date(1, 1, 2040);
+        Date[] expectedVolunteerDates = {
+            new Date(10, 10, 2030)
+        };
+        Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline);
+
+        // Invoke
+        String expected = String.format(Need.getStringFormat(), expectedGoal, expectedProgress, expectedName, expectedDesc, Arrays.toString(expectedVolunteerDates), expectedDeadline);
+
+        // Analyze
+        assertEquals(expected, need.toString());
     }
 }
