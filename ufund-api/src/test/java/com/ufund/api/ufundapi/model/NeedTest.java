@@ -15,10 +15,10 @@ public class NeedTest {
     @Test
     public void testConstructor() {
         // Setup
-        int expected_goal = 100;
-        int expected_progress = 0;
-        String expected_name = "Unlimited Games";
-        String expected_desc = "but no games";
+        int expectedGoal = 100;
+        int expectedProgress = 0;
+        String expectedName = "Unlimited Games";
+        String expectedDesc = "but no games";
         Date deadline = new Date(1, 1, 2040);
         Date[] volunteerDates = {
             new Date(10, 10, 2030)
@@ -26,13 +26,13 @@ public class NeedTest {
 
 
         // Invoke
-        Need need = new Need(expected_goal, expected_progress, expected_name, expected_desc, volunteerDates, deadline);
+        Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, volunteerDates, deadline);
 
         // Analyze
-        assertEquals(expected_goal, need.getGoal());
-        assertEquals(expected_name, need.getName());
-        assertEquals(expected_desc, need.getDescription());
-        assertEquals(expected_progress, need.getProgress());
+        assertEquals(expectedGoal, need.getGoal());
+        assertEquals(expectedName, need.getName());
+        assertEquals(expectedDesc, need.getDescription());
+        assertEquals(expectedProgress, need.getProgress());
         assertEquals(deadline, need.getDeadline());
         assertEquals(volunteerDates, need.getVolunteerDates());
     }
@@ -43,12 +43,12 @@ public class NeedTest {
         String name = "Test";
         Need need = new Need(0, 0, name, null, null, null);
 
-        String expected_name = "Dog throw rock";
+        String expectedName = "Dog throw rock";
 
         // Invoke
-        need.setName(expected_name);
+        need.setName(expectedName);
 
         // Analyze
-        assertEquals(expected_name, need.getName());
+        assertEquals(expectedName, need.getName());
     }
 }
