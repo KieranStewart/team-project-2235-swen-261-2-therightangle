@@ -19,36 +19,51 @@ public class NeedTest {
         int expectedProgress = 0;
         String expectedName = "Unlimited Games";
         String expectedDesc = "but no games";
-        Date deadline = new Date(1, 1, 2040);
-        Date[] volunteerDates = {
+        Date expectedDeadline = new Date(1, 1, 2040);
+        Date[] expectedVolunteerDates = {
             new Date(10, 10, 2030)
         };
 
 
         // Invoke
-        Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, volunteerDates, deadline);
+        Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline);
 
         // Analyze
         assertEquals(expectedGoal, need.getGoal());
         assertEquals(expectedName, need.getName());
         assertEquals(expectedDesc, need.getDescription());
         assertEquals(expectedProgress, need.getProgress());
-        assertEquals(deadline, need.getDeadline());
-        assertEquals(volunteerDates, need.getVolunteerDates());
+        assertEquals(expectedDeadline, need.getDeadline());
+        assertEquals(expectedVolunteerDates, need.getVolunteerDates());
     }
 
     @Test
-    public void testName() {
+    public void testSetters() {
         // Setup
-        String name = "Test";
-        Need need = new Need(0, 0, name, null, null, null);
-
-        String expectedName = "Dog throw rock";
+        int expectedGoal = 100;
+        int expectedProgress = 0;
+        String expectedName = "test name";
+        String expectedDesc = "test desc";
+        Date expectedDeadline = new Date(1, 1, 2040);
+        Date[] expectedVolunteerDates = {
+            new Date(10, 10, 2030)
+        };
+        Need need = new Need(-1, -1, "old name", "old description", null, null);
 
         // Invoke
         need.setName(expectedName);
+        need.setDeadline(expectedDeadline);
+        need.setDescription(expectedDesc);
+        need.setGoal(expectedGoal);
+        need.setVolunteerDates(expectedVolunteerDates);
+        need.setProgress(expectedProgress);
 
         // Analyze
+        assertEquals(expectedGoal, need.getGoal());
         assertEquals(expectedName, need.getName());
+        assertEquals(expectedDesc, need.getDescription());
+        assertEquals(expectedProgress, need.getProgress());
+        assertEquals(expectedDeadline, need.getDeadline());
+        assertEquals(expectedVolunteerDates, need.getVolunteerDates());
     }
 }
