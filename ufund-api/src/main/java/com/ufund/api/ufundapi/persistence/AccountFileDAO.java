@@ -19,9 +19,8 @@ import com.ufund.api.ufundapi.model.Account;
  * Adapted from Logan Nickerson
  * @author May Jiang
  */
-
 @Component
-public class AccountFileDAO implements AccountDAO{
+public class AccountFileDAO implements AccountDAO {
     
     /**
      * Suppress unused because logger is for debug
@@ -58,15 +57,15 @@ public class AccountFileDAO implements AccountDAO{
      * @return All cupboard accounts in an array
      */
     private Account[] getAccountArray() {
-        ArrayList<Account> AccountArrayList = new ArrayList<>();
+        ArrayList<Account> accountArrayList = new ArrayList<>();
     
-        for(Account Account : accounts.values()) {
-            AccountArrayList.add(Account);
+        for(Account account : accounts.values()) {
+            accountArrayList.add(account);
         }
 
-        Account[] AccountArray = new Account[AccountArrayList.size()];
-        AccountArrayList.toArray(AccountArray);
-        return AccountArray;
+        Account[] accountArray = new Account[accountArrayList.size()];
+        accountArrayList.toArray(accountArray);
+        return accountArray;
     }
 
     /**
@@ -77,10 +76,10 @@ public class AccountFileDAO implements AccountDAO{
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        Account[] AccountArray = getAccountArray();
+        Account[] accountArray = getAccountArray();
 
         // Serializes cache
-        objectMapper.writeValue(new File(filename), AccountArray);
+        objectMapper.writeValue(new File(filename), accountArray);
         return true;
     }
 
@@ -92,10 +91,10 @@ public class AccountFileDAO implements AccountDAO{
     private boolean load() throws IOException {
         accounts = new HashMap<>();
 
-        Account[] AccountArray = objectMapper.readValue(new File(filename), Account[].class);
+        Account[] accountArray = objectMapper.readValue(new File(filename), Account[].class);
 
-        for(Account Account : AccountArray) {
-            accounts.put(Account.getName(), Account);
+        for(Account account : accountArray) {
+            accounts.put(account.getName(), account);
         }
         return true;
     }
@@ -147,15 +146,15 @@ public class AccountFileDAO implements AccountDAO{
     }
 
     @Override
-    public Account updateAccount(Account Account) throws IOException {
+    public Account updateAccount(Account account) throws IOException {
         synchronized(accounts) {
             System.out.println(accounts);
-            if((accounts.containsKey(Account.getName()) == false)) {
+            if((accounts.containsKey(account.getName()) == false)) {
                 return null; // if doesn't exist return null
             }
-            accounts.put(Account.getName(), Account);
+            accounts.put(account.getName(), account);
             save(); //can throw IOException
-            return Account;
+            return account;
         }
     }
 }

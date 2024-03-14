@@ -16,11 +16,11 @@ public interface AccountDAO {
     
     /**
      * Saves a {@linkplain Account Account} to the cupboard
-     * @param Account
+     * @param account
      * @return false if duplicate name
      * @throws IOException
      */
-    boolean createAccount(Account Account) throws IOException;
-    Account updateAccount(Account Account) throws IOException;
+    boolean createAccount(Account account) throws IOException;
+    Account updateAccount(Account account) throws IOException;
     boolean deleteAccount(String name) throws IOException;
 }
