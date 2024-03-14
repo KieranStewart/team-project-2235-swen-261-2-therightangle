@@ -20,7 +20,7 @@ import com.ufund.api.ufundapi.model.Account;
 import com.ufund.api.ufundapi.persistence.AccountDAO;
 
 /**
- * Handles HTTP communication.
+ * Handles HTTP communication for accounts
  * 
  * Adapted from SWEN Faculty
  */
@@ -191,7 +191,4 @@ public class AccountController {
             return new ResponseEntity<Account>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    /**
-     * Other REST methods here
-     */
 }

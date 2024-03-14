@@ -37,7 +37,7 @@ public class CupboardFileDAO implements CupboardDAO {
     /**
      * Provides serialization and deserialization
      */
-    private ObjectMapper objectMapper; 
+    private ObjectMapper objectMapper;  
     private String filename;
 
     /**

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ufund.api.ufundapi.model.Account;
@@ -18,6 +19,8 @@ import com.ufund.api.ufundapi.model.Account;
  * Adapted from Logan Nickerson
  * @author May Jiang
  */
+
+@Component
 public class AccountFileDAO implements AccountDAO{
     
     /**
