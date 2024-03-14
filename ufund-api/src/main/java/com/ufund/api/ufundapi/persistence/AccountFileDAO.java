@@ -54,7 +54,7 @@ public class AccountFileDAO implements AccountDAO{
     /**
      * @return All cupboard accounts in an array
      */
-    private Account[] getaccountArray() {
+    private Account[] getAccountArray() {
         ArrayList<Account> accountArrayList = new ArrayList<>();
     
         for(Account account : accounts.values()) {
@@ -74,7 +74,7 @@ public class AccountFileDAO implements AccountDAO{
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        Account[] accountArray = getaccountArray();
+        Account[] accountArray = getAccountArray();
 
         // Serializes cache
         objectMapper.writeValue(new File(filename), accountArray);
@@ -140,7 +140,7 @@ public class AccountFileDAO implements AccountDAO{
      * @return Account[] Accounts The Accounts in the Cupboard
      */
     public Account[] getAccounts() {
-        return this.getaccountArray();
+        return this.getAccountArray();
     }
 
     @Override

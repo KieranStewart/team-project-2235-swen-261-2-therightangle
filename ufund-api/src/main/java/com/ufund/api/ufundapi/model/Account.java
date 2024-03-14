@@ -23,12 +23,12 @@ public class Account {
     @JsonProperty("name") private String name;
     @JsonProperty("password") private String password;
     @JsonProperty("email") private String email;
-    @JsonProperty("isAdmin") private Boolean isAdmin;
+    @JsonProperty("isAdmin") private boolean isAdmin;
 
     public Account(@JsonProperty("name") String name,
     @JsonProperty("password") String password,
     @JsonProperty("email") String email,
-    @JsonProperty("isAdmin")Boolean isAdmin) {
+    @JsonProperty("isAdmin") boolean isAdmin) {
         this.name = name;
         this.password = password;
         this.email = email;
@@ -63,7 +63,7 @@ public class Account {
         this.email = email;
     }
 
-    public Boolean getIsAdmin(){
+    public boolean getIsAdmin(){
         return this.isAdmin;
     }
 
