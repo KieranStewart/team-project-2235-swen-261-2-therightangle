@@ -5,14 +5,16 @@
     </div>
     <h2>Password: <input type="text" #passwordInput></h2>
     <button type="button" (click)="login(usernameInput.value,passwordInput.value)"><h3>Login</h3></button>
-    <button routerLink="AccountCreation" (click)="goToAccountCreationScreen()">Create An Account</button>
+    <button routerLink="AccountCreation" (click)="toggleAccountCreationScreen()">Create An Account</button>
+
+    <h2> {{message}} </h2>
+
 </div>
 
-Username: {{username}}
-Password: {{password}}
 
 
 <!-- <router-outlet></router-outlet> -->
 <div *ngIf="showAccountCreation" >
 <app-account-creation></app-account-creation>
 </div>
+

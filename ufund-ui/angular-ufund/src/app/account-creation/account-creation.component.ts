@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Account } from '../account';
+import { LoginService } from '../login.service';
+import { LoginComponent } from '../login/login.component';
+
 
 @Component({
   selector: 'app-account-creation',
@@ -9,8 +12,10 @@ import { Account } from '../account';
 })
 export class AccountCreationComponent {
   errorMessage = '';
-  
   submitted = false;
+  newAccount!: Account;
+
+  constructor(private loginService: LoginService,private loginComponent: LoginComponent){}
 
   create(usernameInput:string,passwordInput:string,passwordCheckInput:string,emailInput:string):void{
       if (usernameInput == '' || passwordInput == '' || passwordCheckInput == '' || emailInput == ''){
@@ -22,6 +27,9 @@ export class AccountCreationComponent {
       } else {
         this.submitted = true;
         this.errorMessage = '';
+        this.newAccount = {name: usernameInput, password: passwordInput,email: emailInput,isAdmin:false} as Account;
+        this.loginService.addAccount(this.newAccount).subscribe(newAccount => this.newAccount = newAccount);
+        this.loginComponent.toggleAccountCreationScreen();
       }
   }
 
