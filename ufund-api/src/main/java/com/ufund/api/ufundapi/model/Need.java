@@ -29,7 +29,7 @@ public class Need {
     @JsonProperty("description") private String description;
     @JsonProperty("volunteer dates") private Date[] volunteerDates;
     @JsonProperty("deadline") private Date deadline;
-    @JsonProperty("type") private String type;
+    @JsonProperty("type") private String type; // Should be either "donation" or "volunteer"
 
     public Need(@JsonProperty("goal") int goal, 
     @JsonProperty("progress") int progress, 
@@ -59,7 +59,7 @@ public class Need {
         this.description = description;
         this.volunteerDates = volunteerDates;
         this.deadline = deadline;
-        this.type = type;
+        this.type = "donation";
     }
 
     public void setName(String name) {this.name = name;}
