@@ -136,7 +136,7 @@ public class CupboardFileDAOTest {
     }
     
     @Test
-    public void testUpdateHero() {
+    public void testUpdateNeed() {
         // Setup
         Need need = new Need(0, 0, "update me", "updated", null, null);
 
