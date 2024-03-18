@@ -43,9 +43,9 @@ public class CupboardFileDAOTest {
     public void setupNeedFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testNeeds = new Need[3];
-        testNeeds[0] = new Need(0, 0, "update me", "not update", null, null);
-        testNeeds[1] = new Need(0, 0, "Thing One", null, null, null);
-        testNeeds[2] = new Need(0, 0, "Thing Two", null, null, null);
+        testNeeds[0] = new Need(0, 0, "update me", "not update", null, null, "donation");
+        testNeeds[1] = new Need(0, 0, "Thing One", null, null, null, "donation");
+        testNeeds[2] = new Need(0, 0, "Thing Two", null, null, null, "donation");
 
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the need array above
@@ -58,7 +58,7 @@ public class CupboardFileDAOTest {
     @Test
     public void testCreateNeed() {
         // Setup
-        Need need = new Need(0, 0, "new name", null, null, null);
+        Need need = new Need(0, 0, "new name", null, null, null, "donation");
 
         // Invoke
         boolean result = assertDoesNotThrow(() -> cupboardFileDAO.createNeed(need),
@@ -81,7 +81,7 @@ public class CupboardFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class), any(Need[].class));
 
-        Need need = new Need(0, 0, "New Need", null, null, null);
+        Need need = new Need(0, 0, "New Need", null, null, null, "donation");
 
         assertThrows(IOException.class,
                         () -> cupboardFileDAO.createNeed(need),
@@ -138,7 +138,7 @@ public class CupboardFileDAOTest {
     @Test
     public void testUpdateNeed() {
         // Setup
-        Need need = new Need(0, 0, "update me", "updated", null, null);
+        Need need = new Need(0, 0, "update me", "updated", null, null, "donation");
 
         // Invoke
         Need result = assertDoesNotThrow(() -> cupboardFileDAO.updateNeed(need),
@@ -153,7 +153,7 @@ public class CupboardFileDAOTest {
         @Test
     public void testUpdateHeroNotFound() {
         // Setup
-        Need need = new Need(0, 0, "unavaliable",null , null, null);
+        Need need = new Need(0, 0, "unavaliable",null , null, null, "donation");
 
         // Invoke
         Need result = assertDoesNotThrow(() -> cupboardFileDAO.updateNeed(need),

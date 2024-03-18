@@ -47,20 +47,20 @@ public class Need {
         this.type = type;
     }
 
-    public Need(@JsonProperty("goal") int goal, 
-    @JsonProperty("progress") int progress, 
-    @JsonProperty("name") String name, 
-    @JsonProperty("description") String description, 
-    @JsonProperty("volunteer dates") Date[] volunteerDates, 
-    @JsonProperty("deadline") Date deadline) {
-        this.goal = goal;
-        this.progress = progress;
-        this.name = name;
-        this.description = description;
-        this.volunteerDates = volunteerDates;
-        this.deadline = deadline;
-        this.type = "donation";
-    }
+    // public Need(@JsonProperty("goal") int goal, 
+    // @JsonProperty("progress") int progress, 
+    // @JsonProperty("name") String name, 
+    // @JsonProperty("description") String description, 
+    // @JsonProperty("volunteer dates") Date[] volunteerDates, 
+    // @JsonProperty("deadline") Date deadline) {
+    //     this.goal = goal;
+    //     this.progress = progress;
+    //     this.name = name;
+    //     this.description = description;
+    //     this.volunteerDates = volunteerDates;
+    //     this.deadline = deadline;
+    //     this.type = "donation";
+    // }
 
     public void setName(String name) {this.name = name;}
 

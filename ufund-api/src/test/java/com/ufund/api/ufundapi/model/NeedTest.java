@@ -26,7 +26,7 @@ public class NeedTest {
 
 
         // Invoke
-        Need need = new Need(expected_goal, expected_progress, expected_name, expected_desc, volunteerDates, deadline);
+        Need need = new Need(expected_goal, expected_progress, expected_name, expected_desc, volunteerDates, deadline, "donation");
 
         // Analyze
         assertEquals(expected_goal, need.getGoal());
@@ -41,7 +41,7 @@ public class NeedTest {
     public void testName() {
         // Setup
         String name = "Test";
-        Need need = new Need(0, 0, name, null, null, null);
+        Need need = new Need(0, 0, name, null, null, null, "donation");
 
         String expected_name = "Dog throw rock";
 
