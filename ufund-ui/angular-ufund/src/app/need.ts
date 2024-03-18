@@ -11,6 +11,7 @@ export interface Need {
     progress: number;
     volunteerDates: Date;
     deadline: Date;
+    type: String;
 
     // Client-exclusive state
     inFundingBasket: boolean;
