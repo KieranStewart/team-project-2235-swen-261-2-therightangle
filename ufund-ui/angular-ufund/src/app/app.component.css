@@ -1,0 +1,19 @@
+.header {
+    background-color: black;
+    padding: 1rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.header-link {
+    margin-left: auto;
+    margin-right: auto;
+    padding: .5rem;
+    background-color: blue;
+    color: white;
+    border-radius: 2px;
+}
