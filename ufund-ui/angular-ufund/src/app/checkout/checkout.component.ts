@@ -17,7 +17,7 @@ export class CheckoutComponent implements OnInit{
   getTotal(): void {
     for (const item of this.basketService.contents)
     {
-      this.total += item.donationAmount;
+      this.total = this.total + +item.donationAmount;
     }
   }
 }
