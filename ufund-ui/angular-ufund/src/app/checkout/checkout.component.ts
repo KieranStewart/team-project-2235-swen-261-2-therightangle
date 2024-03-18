@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CupboardComponent } from '../cupboard/cupboard.component';
 import { BasketService } from '../basket.service';
-import { FundingBasketComponent } from '../funding-basket/funding-basket.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -11,7 +11,7 @@ import { FundingBasketComponent } from '../funding-basket/funding-basket.compone
 
 export class CheckoutComponent implements OnInit{
 
-  constructor(private basketService: BasketService) { }
+  constructor(private basketService: BasketService, private router: Router) { }
   
   total: number = 0;
 
@@ -36,6 +36,11 @@ export class CheckoutComponent implements OnInit{
         item.donationAmount = 0;
       }
       this.basketService.clear();
+      this.router.navigate(['/confirmation/success']);
+    }
+    else
+    {
+      this.router.navigate(['/confirmation/fail']);
     }
   }
 

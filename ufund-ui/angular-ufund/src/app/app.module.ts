@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router'; // Same as below comment
 import { AppRoutingModule } from './app-routing.module';
 import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
 import { HomeViewComponent } from './home-view/home-view.component';
+import { ConfirmationViewComponent } from './confirmation-view/confirmation-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { HomeViewComponent } from './home-view/home-view.component';
     NeedDetailComponent,
     CheckoutComponent,
     CheckoutViewComponent,
-    HomeViewComponent
+    HomeViewComponent,
+    ConfirmationViewComponent
   ],
   imports: [
     BrowserModule,

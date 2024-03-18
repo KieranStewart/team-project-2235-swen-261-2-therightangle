@@ -3,11 +3,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
 import { HomeViewComponent } from './home-view/home-view.component';
+import { ConfirmationViewComponent } from './confirmation-view/confirmation-view.component';
 
 const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutViewComponent
+  },
+  {
+    path: 'confirmation/:state',
+    component: ConfirmationViewComponent
   },
   {
     path: '',
