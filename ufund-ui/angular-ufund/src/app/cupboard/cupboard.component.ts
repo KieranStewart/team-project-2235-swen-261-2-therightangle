@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cupboard',
@@ -8,7 +9,7 @@ import { NeedService } from '../need.service';
   styleUrls: ['./cupboard.component.css']
 })
 export class CupboardComponent implements OnInit{
-  cupboard: Need[] = [];
+  cupboard: Need[] = []; 
 
   constructor(private needService: NeedService) { }
 
