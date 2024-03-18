@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { CupboardComponent } from './cupboard/cupboard.component';
+import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
+import { HomeViewComponent } from './home-view/home-view.component';
 
 const routes: Routes = [
   {
     path: 'checkout',
-    component: CheckoutComponent
+    component: CheckoutViewComponent
   },
   {
     path: '',
-    component: CupboardComponent
+    component: HomeViewComponent
   }
 ];
 

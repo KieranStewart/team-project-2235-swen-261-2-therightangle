@@ -11,6 +11,8 @@ import { NeedDetailComponent } from './need-detail/need-detail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { RouterModule, Routes } from '@angular/router'; // Same as below comment
 import { AppRoutingModule } from './app-routing.module';
+import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
+import { HomeViewComponent } from './home-view/home-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,9 @@ import { AppRoutingModule } from './app-routing.module';
     CupboardComponent,
     FundingBasketComponent,
     NeedDetailComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CheckoutViewComponent,
+    HomeViewComponent
   ],
   imports: [
     BrowserModule,
