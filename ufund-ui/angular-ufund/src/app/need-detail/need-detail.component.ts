@@ -11,8 +11,8 @@ import { BasketService } from '../basket.service';
   styleUrls: ['./need-detail.component.css']
 })
 export class NeedDetailComponent {
-
-  constructor(private basketService: BasketService) {}
+  constructor(private basketService: BasketService) {
+  }
 
   @Input()
   displayNeed!: Need;
@@ -23,6 +23,10 @@ export class NeedDetailComponent {
 
   removeFromFundingBasket(): void {
     this.basketService.remove(this.displayNeed);
+  }
+
+  saveNeed(donationAmount:string): void{
+    this.basketService.update(this.displayNeed,donationAmount);
   }
 
   /**

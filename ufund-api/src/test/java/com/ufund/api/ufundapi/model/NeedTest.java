@@ -2,6 +2,8 @@ package com.ufund.api.ufundapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -15,40 +17,67 @@ public class NeedTest {
     @Test
     public void testConstructor() {
         // Setup
-        int expected_goal = 100;
-        int expected_progress = 0;
-        String expected_name = "Unlimited Games";
-        String expected_desc = "but no games";
-        Date deadline = new Date(1, 1, 2040);
-        Date[] volunteerDates = {
+        int expectedGoal = 100;
+        int expectedProgress = 0;
+        String expectedName = "Unlimited Games";
+        String expectedDesc = "but no games";
+        Date expectedDeadline = new Date(1, 1, 2040);
+        Date[] expectedVolunteerDates = {
             new Date(10, 10, 2030)
         };
-
 
         // Invoke
         Need need = new Need(expected_goal, expected_progress, expected_name, expected_desc, volunteerDates, deadline, "donation");
 
         // Analyze
-        assertEquals(expected_goal, need.getGoal());
-        assertEquals(expected_name, need.getName());
-        assertEquals(expected_desc, need.getDescription());
-        assertEquals(expected_progress, need.getProgress());
-        assertEquals(deadline, need.getDeadline());
-        assertEquals(volunteerDates, need.getVolunteerDates());
+        assertEquals(expectedGoal, need.getGoal());
+        assertEquals(expectedName, need.getName());
+        assertEquals(expectedDesc, need.getDescription());
+        assertEquals(expectedProgress, need.getProgress());
+        assertEquals(expectedDeadline, need.getDeadline());
+        assertEquals(expectedVolunteerDates, need.getVolunteerDates());
     }
 
     @Test
-    public void testName() {
+    public void testSetters() {
         // Setup
         String name = "Test";
         Need need = new Need(0, 0, name, null, null, null, "donation");
 
-        String expected_name = "Dog throw rock";
-
         // Invoke
-        need.setName(expected_name);
+        need.setName(expectedName);
+        need.setDeadline(expectedDeadline);
+        need.setDescription(expectedDesc);
+        need.setGoal(expectedGoal);
+        need.setVolunteerDates(expectedVolunteerDates);
+        need.setProgress(expectedProgress);
 
         // Analyze
-        assertEquals(expected_name, need.getName());
+        assertEquals(expectedGoal, need.getGoal());
+        assertEquals(expectedName, need.getName());
+        assertEquals(expectedDesc, need.getDescription());
+        assertEquals(expectedProgress, need.getProgress());
+        assertEquals(expectedDeadline, need.getDeadline());
+        assertEquals(expectedVolunteerDates, need.getVolunteerDates());
+    }
+
+    @Test
+    public void testToString() {
+        // Setup
+        int expectedGoal = 100;
+        int expectedProgress = 0;
+        String expectedName = "Unlimited Games";
+        String expectedDesc = "but no games";
+        Date expectedDeadline = new Date(1, 1, 2040);
+        Date[] expectedVolunteerDates = {
+            new Date(10, 10, 2030)
+        };
+        Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline);
+
+        // Invoke
+        String expected = String.format(Need.getStringFormat(), expectedGoal, expectedProgress, expectedName, expectedDesc, Arrays.toString(expectedVolunteerDates), expectedDeadline);
+
+        // Analyze
+        assertEquals(expected, need.toString());
     }
 }

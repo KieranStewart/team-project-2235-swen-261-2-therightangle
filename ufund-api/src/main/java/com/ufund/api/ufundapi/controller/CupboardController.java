@@ -86,7 +86,7 @@ public class CupboardController {
         return new ResponseEntity<Need>(HttpStatus.NOT_FOUND);
     }
 
-    /***
+    /**
      * @param name used to identify searched for need
      * 
      * @return ResponseEntity with and HTTP status of Success<br>
@@ -129,7 +129,7 @@ public class CupboardController {
     }
 
 
-        /**
+    /**
      * Updates the {@linkplain Need need} with the provided {@linkplain Need need} object, if it exists
      * 
      * @param need The {@link Need need} to update

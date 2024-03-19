@@ -33,4 +33,8 @@ export class BasketService {
     need.inFundingBasket = false;
   }
 
+  update(need:Need, donationAmount: string): void {
+    need.progress += Number(donationAmount)
+  }
+
 }

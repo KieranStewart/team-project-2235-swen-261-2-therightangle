@@ -1,0 +1,23 @@
+<!-- <div class="form-group">
+    <label for="name">Enter Username</label>
+    <input type="text" class="'form-control" id="name" required>
+    <label for="name">Enter Username</label>
+    <input type="text" class="'form-control" id="name" required>
+    <label for="name">Enter Username</label>
+    <input type="text" class="'form-control" id="name" required>
+    <label for="name">Enter Username</label>
+    <input type="text" class="'form-control" id="name" required>
+
+    <form (ngSubmit)="onSubmit()"></form>
+    <button type="submit" (click)="onSubmit()">Submit</button>
+</div> -->
+
+
+<h2>Enter Username: <input type="text" #usernameInput></h2>
+<h2>Enter Password: <input type="text" #passwordInput></h2>
+<h2>Reenter Password: <input type="text" #passwordCheckInput></h2>
+<h2>Enter Email: <input type="text" #emailInput></h2>
+<button type="submit" (click)="create(usernameInput.value,passwordInput.value,passwordCheckInput.value,emailInput.value)"><h3>Create Account</h3></button>
+
+<h2> {{errorMessage}} </h2>
+<div *ngIf="submitted"> submitted </div>
