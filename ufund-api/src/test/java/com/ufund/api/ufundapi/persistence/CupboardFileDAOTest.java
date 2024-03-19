@@ -63,11 +63,11 @@ public class CupboardFileDAOTest {
         Need need = new Need(0, 0, "new name", null, null, null, NeedType.DONATION);
 
         // Invoke
-        boolean result = assertDoesNotThrow(() -> cupboardFileDAO.createNeed(need),
+        boolean createNeedSuccess = assertDoesNotThrow(() -> cupboardFileDAO.createNeed(need),
                                 "Unexpected exception thrown");
-
+        
         // Analyze
-        assertTrue(result);
+        assertTrue(createNeedSuccess);
         Need actual = cupboardFileDAO.getNeed(need.getName());
         assertEquals(actual.getName(), need.getName());
         assertEquals(actual.getDeadline(), need.getDeadline());
@@ -75,6 +75,19 @@ public class CupboardFileDAOTest {
         assertEquals(actual.getDescription(), need.getDescription());
         assertEquals(actual.getProgress(), need.getProgress());
         assertEquals(actual.getVolunteerDates(), need.getVolunteerDates());
+    }
+    
+    @Test 
+    public void testCreateDuplicateNeed() {
+        // Setup
+        Need need = new Need(0, 0, "Thing One", null, null, null, NeedType.DONATION);
+
+        // Invoke
+        boolean createNeedSuccess = assertDoesNotThrow(() -> cupboardFileDAO.createNeed(need),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertFalse(createNeedSuccess);
     }
 
     @Test
@@ -135,6 +148,15 @@ public class CupboardFileDAOTest {
         for(int i = 0; i < actualNeeds.length; i++) {
             assertEquals(testNeeds[i].toString(), actualNeeds[i].toString());
         }
+    }
+
+    @Test
+    public void testGetNeedNotFound() {
+        // Invoke
+        Need need = cupboardFileDAO.getNeed("fake need");
+
+        // Analyze
+        assertNull(need);
     }
     
     @Test
