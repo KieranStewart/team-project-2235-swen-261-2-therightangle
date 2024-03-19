@@ -112,7 +112,24 @@ public class CupboardControllerTest {
         ResponseEntity<Need[]> response = cupboardController.searchNeeds(searchNeed);
 
         // Analyze
-        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testSearchNeedsNotFound() throws IOException {
+        // Setup
+        String searchNeed = "Fund giant panda propaganda to undermine the rat party";
+        Need[] needs = new Need[] {
+            new Need(0, 0, "Help starving children", " ", null, null, null)
+        };
+
+        when(mockCupboardDAO.getNeeds()).thenReturn(needs);
+
+        // Invoke
+        ResponseEntity<Need[]> response = cupboardController.searchNeeds(searchNeed);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     @Test
