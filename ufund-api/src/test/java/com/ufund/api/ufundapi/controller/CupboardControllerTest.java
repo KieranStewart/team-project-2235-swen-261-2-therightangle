@@ -163,7 +163,6 @@ public class CupboardControllerTest {
     public void testGetNeed() throws IOException {  // getNeed may throw IOException
         // Setup
         Need need = new Need(0, 0, "name", null, null, null, null);
-        // When the same id is passed in, our mock Need DAO will return the Need object
         when(mockCupboardDAO.getNeed(need.getName())).thenReturn(need);
 
         // Invoke
@@ -201,6 +200,46 @@ public class CupboardControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
+    @Test
+    public void testDeleteNeed() throws IOException { // deleteNeed may throw IOException
+        // Setup
+        String needName = "need";
+        // pretend: successful deletion
+        when(mockCupboardDAO.deleteNeed(needName)).thenReturn(true);
+
+        // Invoke
+        ResponseEntity<Need> response = cupboardController.deleteNeed(needName);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteNeedNotFound() throws IOException { // deleteNeed may throw IOException
+        // Setup
+        String needName = "need";
+        // pretend: fail to delete
+        when(mockCupboardDAO.deleteNeed(needName)).thenReturn(false);
+
+        // Invoke
+        ResponseEntity<Need> response = cupboardController.deleteNeed(needName);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteNeedHandleException() throws IOException { // deleteNeed may throw IOException
+        // Setup
+        String needName = "need";
+        doThrow(new IOException()).when(mockCupboardDAO).deleteNeed(needName);
+
+        // Invoke
+        ResponseEntity<Need> response = cupboardController.deleteNeed(needName);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
     /**
      * Add other controller tests here
      */
