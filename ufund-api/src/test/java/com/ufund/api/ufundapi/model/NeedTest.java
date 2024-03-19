@@ -27,7 +27,7 @@ public class NeedTest {
         };
 
         // Invoke
-        Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline);
+        Need need = new Need(expected_goal, expected_progress, expected_name, expected_desc, volunteerDates, deadline, "donation");
 
         // Analyze
         assertEquals(expectedGoal, need.getGoal());
@@ -41,15 +41,8 @@ public class NeedTest {
     @Test
     public void testSetters() {
         // Setup
-        int expectedGoal = 100;
-        int expectedProgress = 0;
-        String expectedName = "test name";
-        String expectedDesc = "test desc";
-        Date expectedDeadline = new Date(1, 1, 2040);
-        Date[] expectedVolunteerDates = {
-            new Date(10, 10, 2030)
-        };
-        Need need = new Need(-1, -1, "old name", "old description", null, null);
+        String name = "Test";
+        Need need = new Need(0, 0, name, null, null, null, "donation");
 
         // Invoke
         need.setName(expectedName);
