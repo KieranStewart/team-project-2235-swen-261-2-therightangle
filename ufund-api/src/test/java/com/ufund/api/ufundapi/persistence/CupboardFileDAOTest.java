@@ -152,7 +152,7 @@ public class CupboardFileDAOTest {
     }
 
         @Test
-    public void testUpdateHeroNotFound() {
+    public void testUpdateNeedNotFound() {
         // Setup
         Need need = new Need(0, 0, "unavaliable",null , null, null, NeedType.DONATION);
 
@@ -162,5 +162,20 @@ public class CupboardFileDAOTest {
 
         // Analyze
         assertNull(result);
+    }
+
+    @Test
+    public void testDeleteNeed() {
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> cupboardFileDAO.deleteNeed("Thing One"),
+                            "Unexpected exception thrown");
+
+        // Analzye
+        assertEquals(true, result);
+        // We check the internal hash map size against the length
+        // of the test needs array - 1 (because of the delete)
+        // Because the needs attribute of CupboardFileDAO is package private we can access it directly
+        // I don't know why they are encouraging this inappropriate and violent behavior (this should be private, we should test it a different way)
+        assertEquals(testNeeds.length - 1, cupboardFileDAO.needs.size());
     }
 }
