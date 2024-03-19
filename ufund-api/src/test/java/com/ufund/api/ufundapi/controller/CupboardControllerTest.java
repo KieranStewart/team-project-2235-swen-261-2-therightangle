@@ -145,6 +145,21 @@ public class CupboardControllerTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void testUpdateNeed() throws IOException { // updateNeed may throw IOException
+        // Setup
+        Need need = new Need(0, 0, null, null, null, null, null);
+        when(mockCupboardDAO.updateNeed(need)).thenReturn(need);
+        ResponseEntity<Need> response = cupboardController.updateNeed(need);
+        need.setName("Test");
+
+        // Invoke
+        response = cupboardController.updateNeed(need);
+
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(need, response.getBody());
+    }
 
     /**
      * Add other controller tests here
