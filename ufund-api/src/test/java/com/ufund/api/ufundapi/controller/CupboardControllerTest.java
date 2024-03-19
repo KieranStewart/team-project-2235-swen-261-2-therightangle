@@ -81,8 +81,6 @@ public class CupboardControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
-
-
     @Test
     public void testSearchNeeds() throws IOException{
         // Setup
@@ -159,6 +157,48 @@ public class CupboardControllerTest {
         // Analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(need, response.getBody());
+    }
+
+    @Test
+    public void testGetNeed() throws IOException {  // getNeed may throw IOException
+        // Setup
+        Need need = new Need(0, 0, "name", null, null, null, null);
+        // When the same id is passed in, our mock Need DAO will return the Need object
+        when(mockCupboardDAO.getNeed(need.getName())).thenReturn(need);
+
+        // Invoke
+        ResponseEntity<Need> response = cupboardController.getNeed(need.getName());
+
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(need, response.getBody());
+    }
+
+    @Test
+    public void testGetNeedNotFound() throws Exception { // createNeed may throw IOException
+        // Setup
+        String needName = "name";
+        // Simulate no need found
+        when(mockCupboardDAO.getNeed(needName)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Need> response = cupboardController.getNeed(needName);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetNeedHandleException() throws Exception { // createNeed may throw IOException
+        // Setup
+        String needName = "need";
+        doThrow(new IOException()).when(mockCupboardDAO).getNeed(needName); // throw an IOException
+
+        // Invoke
+        ResponseEntity<Need> response = cupboardController.getNeed(needName);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
     /**
