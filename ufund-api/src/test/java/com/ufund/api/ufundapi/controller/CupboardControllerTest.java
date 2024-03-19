@@ -177,6 +177,32 @@ public class CupboardControllerTest {
     }
 
     @Test
+    public void testUpdateNeedFailed() throws IOException { // updateNeed may throw IOException
+        // Setup
+        Need need = new Need(0, 0, null, null, null, null, null);
+        when(mockCupboardDAO.updateNeed(need)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Need> response = cupboardController.updateNeed(need);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testUpdateNeedHandleException() throws IOException { // updateNeed may throw IOException
+        // Setup
+        Need need = new Need(0, 0, null, null, null, null, null);
+        doThrow(new IOException()).when(mockCupboardDAO).updateNeed(need);
+
+        // Invoke
+        ResponseEntity<Need> response = cupboardController.updateNeed(need);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
     public void testGetNeed() throws IOException {  // getNeed may throw IOException
         // Setup
         Need need = new Need(0, 0, "name", null, null, null, null);
