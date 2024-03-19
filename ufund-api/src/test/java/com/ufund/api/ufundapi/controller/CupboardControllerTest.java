@@ -244,6 +244,18 @@ public class CupboardControllerTest {
     }
 
     @Test
+    public void testGetNeedsHandleException() throws IOException { 
+        // Setup
+        doThrow(new IOException()).when(mockCupboardDAO).getNeeds();
+
+        // Invoke
+        ResponseEntity<Need[]> response = cupboardController.getNeeds();
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
     public void testDeleteNeed() throws IOException { // deleteNeed may throw IOException
         // Setup
         String needName = "need";
