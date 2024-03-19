@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Account } from '../account';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent {
   account!: Account;
   message = "";
 
-  constructor(private loginService: LoginService){}
+  constructor(private loginService: LoginService, private router: Router){}
 
   login(username: string, password: string): void {
     this.message = "loading";
@@ -29,10 +30,13 @@ export class LoginComponent {
         that.message = response;
         // code that concerns the response should go here
         // putting something like "if success then turn green" outside of here will be weird and not work sometimes
+        if (response == 'Login successful')
+        {
+          that.router.navigate(['/']);
+        }
       }
     });
   }
-
   toggleAccountCreationScreen(): void {
     this.showAccountCreation = !this.showAccountCreation;
   }
