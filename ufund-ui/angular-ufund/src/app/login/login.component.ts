@@ -31,12 +31,14 @@ export class LoginComponent {
         // putting something like "if success then turn green" outside of here will be weird and not work sometimes
       }
     });
-    
-    
   }
 
   toggleAccountCreationScreen(): void {
     this.showAccountCreation = !this.showAccountCreation;
+  }
+
+  progressPastLogin(): void {
+    // TODO Dashboard(s) story: make this hide log in and show the rest of the stuff instead
   }
 
 }

@@ -14,26 +14,51 @@ export class AccountCreationComponent {
   errorMessage = '';
   submitted = false;
   newAccount!: Account;
+  private emailExtensions: Array<string> = ["@gmail.com", "@rit.edu", "@g.rit.edu"];
 
-  constructor(private loginService: LoginService,private loginComponent: LoginComponent){}
+  constructor(private loginService: LoginService,private loginComponent: LoginComponent) {}
 
-  create(usernameInput:string,passwordInput:string,passwordCheckInput:string,emailInput:string):void{
-      if (usernameInput == '' || passwordInput == '' || passwordCheckInput == '' || emailInput == ''){
-        this.errorMessage = "Please fill in all the boxes"
+  create(usernameInput: string, passwordInput: string, passwordCheckInput: string, emailInput: string): void {
+      var invalidEmailDomain: boolean;
+      invalidEmailDomain = true;
+      /* Checks all valid email extensions to see if the emailInput is valid */
+      for (let index = 0; index < this.emailExtensions.length; index++) {
+        const element = this.emailExtensions[index];
+        if (emailInput.includes(element)) {
+          invalidEmailDomain = false;
+        }
+      }
+
+      if (usernameInput == '' || passwordInput == '' || passwordCheckInput == '' || emailInput == '') {
+        this.errorMessage = "Please fill in all the boxes";
+      } else if (emailInput[0] == '@') {
+        this.errorMessage = "The email address starts with an @, which is invalid";
       } else if (passwordInput != passwordCheckInput){
         this.errorMessage = "Password doesn't match"
-      } else if (!emailInput.includes("@gmail.com") && !emailInput.includes("rit.edu") && !emailInput.includes("@g.rit.edu") ){
-        this.errorMessage = "Invalid email \n Must be a @gmail.com,@rit.edu, or a @g.rit.edu email address"
+      } else if (invalidEmailDomain) {
+        this.errorMessage = "Invalid email \n Must be a @gmail.com,@rit.edu, or a @g.rit.edu email address";
       } else {
-        this.submitted = true;
-        this.errorMessage = '';
-        this.newAccount = {name: usernameInput, password: passwordInput,email: emailInput,isAdmin:false} as Account;
-        this.loginService.addAccount(this.newAccount).subscribe(newAccount => this.newAccount = newAccount);
-        this.loginComponent.toggleAccountCreationScreen();
+        const that = this;
+        this.newAccount = {name: usernameInput, password: passwordInput, email: emailInput, isAdmin: false} as Account;
+        
+        // make sure the account doesn't already exist
+        this.loginService.addAccount(this.newAccount).subscribe({
+          next(newAccount) {
+            if(newAccount == undefined) {
+              that.errorMessage = "That username is taken already";
+            } else {
+              that.newAccount = newAccount;
+              that.loginComponent.toggleAccountCreationScreen();
+              that.submitted = true;
+              that.errorMessage = '';
+              that.loginComponent.message = "Account created successfully! Log in to begin.";
+            }
+          }
+        });        
       }
   }
 
-  onSubmit(){
+  onSubmit() {
     this.submitted = true;
   }
 }

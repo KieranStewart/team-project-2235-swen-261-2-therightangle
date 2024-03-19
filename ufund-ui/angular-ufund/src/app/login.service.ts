@@ -55,7 +55,7 @@ export class LoginService {
   }
 
   /* GET account whose name contains search term */
-  searchaccount(term: string): Observable<Account[]> {
+  searchAccount(term: string): Observable<Account[]> {
     if (!term.trim()) {
       // search not found? return empty Account array.
       return scheduled([[]], asyncScheduler);
