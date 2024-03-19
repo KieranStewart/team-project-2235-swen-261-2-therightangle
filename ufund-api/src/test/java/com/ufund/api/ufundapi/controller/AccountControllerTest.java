@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Test the Cupboard Controller class
+ * Test the Account Controller class
  * 
  * Adapted from SWEN Faculty
  */
@@ -28,7 +28,7 @@ public class AccountControllerTest {
 
     /**
      * Before each test, create a new AccountController object and inject
-     * a mock Cupboard DAO
+     * a mock Account DAO
      */
     @BeforeEach
     public void setupAccountController() {
@@ -86,7 +86,7 @@ public class AccountControllerTest {
         Account[] accounts = new Account[3];
         accounts[0] = new Account(searchAccount, "a", "a@gmail.com", false);
         accounts[1] = new Account("b", "b", "b@gmail.com", false);
-        accounts[2] = new Account("c", "c", "c@gmail.com", false);;
+        accounts[2] = new Account("c", "c", "c@gmail.com", false);
     
         when(mockAccountDAO.getAccounts()).thenReturn(accounts);
 
@@ -94,7 +94,7 @@ public class AccountControllerTest {
         ResponseEntity<Account[]> response = accountController.searchAccounts(searchAccount);
 
         // Analyze
-        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         //assertArrayEquals(accounts,response.getBody());
     }
 
@@ -128,6 +128,24 @@ public class AccountControllerTest {
     }
 
     @Test
+    public void testSearchAccountsNotFound() throws IOException {
+        // Setup
+        String searchQuery = "Fake User";
+        Account[] accounts = new Account[3];
+        accounts[0] = new Account("a", "a", "a@gmail.com", false);
+        accounts[1] = new Account("b", "b", "b@gmail.com", false);
+        accounts[2] = new Account("c", "c", "c@gmail.com", false);
+
+        when(mockAccountDAO.getAccounts()).thenReturn(accounts);
+
+        // Invoke
+        ResponseEntity<Account[]> response = accountController.searchAccounts(searchQuery);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
     public void testGetAccounts() throws IOException
     {
         // Setup
@@ -142,8 +160,142 @@ public class AccountControllerTest {
     }
 
 
-    /**
-     * Add other controller tests here
-     */
+    
+    @Test
+    public void testUpdateAccount() throws IOException { // updateAccount may throw IOException
+        // Setup
+        Account account = new Account("Real user", null, null, false);
+        when(mockAccountDAO.updateAccount(account)).thenReturn(account);
+        ResponseEntity<Account> response = accountController.updateAccount(account);
+        account.setName("Real User (allegedly)");
+
+        // Invoke
+        response = accountController.updateAccount(account);
+
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(account, response.getBody());
+    }
+
+    @Test
+    public void testUpdateAccountFailed() throws IOException { // updateAccount may throw IOException
+        // Setup
+        Account account = new Account("Real user", null, null, false);
+        when(mockAccountDAO.updateAccount(account)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Account> response = accountController.updateAccount(account);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testUpdateAccountHandleException() throws IOException { // updateAccount may throw IOException
+        // Setup
+        Account account = new Account("Real user", null, null, false);
+        doThrow(new IOException()).when(mockAccountDAO).updateAccount(account);
+
+        // Invoke
+        ResponseEntity<Account> response = accountController.updateAccount(account);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
+    public void testGetAccount() throws IOException {  // getAccount may throw IOException
+        // Setup
+        Account account = new Account("Real user", null, null, false);
+        when(mockAccountDAO.getAccount(account.getName())).thenReturn(account);
+
+        // Invoke
+        ResponseEntity<Account> response = accountController.getAccount(account.getName());
+
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(account, response.getBody());
+    }
+
+    @Test
+    public void testGetAccountNotFound() throws Exception { // createAccount may throw IOException
+        // Setup
+        String accountName = "name";
+        // Simulate no account found
+        when(mockAccountDAO.getAccount(accountName)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Account> response = accountController.getAccount(accountName);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetAccountHandleException() throws Exception { // createAccount may throw IOException
+        // Setup
+        String accountName = "account";
+        doThrow(new IOException()).when(mockAccountDAO).getAccount(accountName); // throw an IOException
+
+        // Invoke
+        ResponseEntity<Account> response = accountController.getAccount(accountName);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
+    public void testGetAccountsHandleException() throws IOException { 
+        // Setup
+        doThrow(new IOException()).when(mockAccountDAO).getAccounts();
+
+        // Invoke
+        ResponseEntity<Account[]> response = accountController.getAccounts();
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteAccount() throws IOException { // deleteAccount may throw IOException
+        // Setup
+        String accountName = "account";
+        // pretend: successful deletion
+        when(mockAccountDAO.deleteAccount(accountName)).thenReturn(true);
+
+        // Invoke
+        ResponseEntity<Account> response = accountController.deleteAccount(accountName);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteAccountNotFound() throws IOException { // deleteAccount may throw IOException
+        // Setup
+        String accountName = "account";
+        // pretend: fail to delete
+        when(mockAccountDAO.deleteAccount(accountName)).thenReturn(false);
+
+        // Invoke
+        ResponseEntity<Account> response = accountController.deleteAccount(accountName);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteAccountHandleException() throws IOException { // deleteAccount may throw IOException
+        // Setup
+        String accountName = "account";
+        doThrow(new IOException()).when(mockAccountDAO).deleteAccount(accountName);
+
+        // Invoke
+        ResponseEntity<Account> response = accountController.deleteAccount(accountName);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
 
 }
