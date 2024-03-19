@@ -23,7 +23,7 @@ This is a summary of the project.
 ### Purpose
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
 > important user group and user goals._
-
+> This is a website for the Hope Center that aims to help the church keep track of donation and volunteering hours. Admins on the site will be able to manage all the needs that church currently have avaliable that users can contribute to. Some needs will ask for monetary donation while other will ask for volunteer hours. 
 ### Glossary and Acronyms
 > _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
 
@@ -39,9 +39,14 @@ This section describes the features of the application.
 > _In this section you do not need to be exhaustive and list every
 > story.  Focus on top-level features from the Vision document and
 > maybe Epics and critical Stories._
+> Account management (create,delete,update,and login accounts)
+> Need management (create,delete,and update needs)
+> Funding Basket management (add,remove,and save needs within the funding basket)
 
 ### Definition of MVP
 > _**[Sprint 2 & 4]** Provide a simple description of the Minimum Viable Product._
+>
+> Admins and users will log into the website portal, where they will be directed to their personal dashboard. Admins on the site will be able to add/delete/update needs to the cupboard, and users will be able to send donation and/or sign up for vounteering hours for needs in their funding basket taken from the cupboard. Users will be able to add the needs to their basket by reviewing the list of avaliable needs the admins has created. Once the user is satisfied with their contribution, they can check out their funding basket which will update the information in the backend for the admin and future users to see. 
 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
@@ -59,6 +64,7 @@ This section describes the application domain.
 > _**[Sprint 2 & 4]** Provide a high-level overview of the domain for this application. You
 > can discuss the more important domain entities and their relationship
 > to each other._
+> There is a cupboard that contains needs. Each needs has it's own property that the manager/admin and edit. The only need property that normal user/helpers can change is progression and volunteer hours, but they can only change these values after they add needs from the cupboard to their funding basket. Changes they make to need will be checkout for it to change any information in the cupboard. Manager and helpers are disguinshed based on their login account. 
 
 
 ## Architecture and Design
