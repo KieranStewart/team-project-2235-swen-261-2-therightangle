@@ -295,8 +295,5 @@ public class CupboardControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
-    /**
-     * Add other controller tests here
-     */
 
 }

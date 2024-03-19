@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -171,11 +172,22 @@ public class CupboardFileDAOTest {
                             "Unexpected exception thrown");
 
         // Analzye
-        assertEquals(true, result);
+        assertTrue(result);
         // We check the internal hash map size against the length
         // of the test needs array - 1 (because of the delete)
         // Because the needs attribute of CupboardFileDAO is package private we can access it directly
         // I don't know why they are encouraging this inappropriate and violent behavior (this should be private, we should test it a different way)
         assertEquals(testNeeds.length - 1, cupboardFileDAO.needs.size());
+    }
+
+    @Test
+    public void testDeleteNeedNotFound() {
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> cupboardFileDAO.deleteNeed("fake need"),
+                                                "Unexpected exception thrown");
+
+        // Analyze
+        assertFalse(result);
+        assertEquals(testNeeds.length, cupboardFileDAO.needs.size());
     }
 }
