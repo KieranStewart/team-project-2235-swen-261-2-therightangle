@@ -1,0 +1,26 @@
+<div class="detail-container">
+    <p>Detail section</p>
+    <div *ngIf="displayNeed != null">
+        <!-- Display need information -->
+        <h3>{{displayNeed.name}}</h3> 
+        <h5>Completion: {{displayNeed.progress}} - {{displayNeed.goal}}</h5>
+        <h4>Description:</h4>
+        <p>
+            {{displayNeed.description}}    
+        </p>
+        <h5>Ends on {{displayNeed.deadline}}</h5>
+        <!-- If it isn't in the basket, allow it to be added -->
+        <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">[+]</button>
+        <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
+        <div *ngIf="displayNeed.inFundingBasket">
+            <!-- Starter code for the Donate Time story.  Good luck! -->
+            <label for="donation-amount">Donation amount: </label>
+            <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0" #donationAmount/>
+            <button (click)="saveNeed(donationAmount.value)"> Save </button>
+            <button (click)="removeFromFundingBasket()">[Remove from funding basket]</button>
+        </div>
+    </div>
+    <div *ngIf="displayNeed == null">
+        <p><i>Select a need to see its details.</i></p>
+    </div>
+</div>

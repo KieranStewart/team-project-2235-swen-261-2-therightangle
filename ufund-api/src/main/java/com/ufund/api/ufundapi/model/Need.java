@@ -13,15 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Need {
 
-    /**
-     * suppressing unused because tests
-     * we will burn OO to the ground if it means we can use a worse testing architecture
-     */
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
-
-    // Package private for tests
-    static final String STRING_FORMAT = "Need [goal = %d, progress = %d, name = %s, description = %s, volunteer dates = %s, deadline = %s]";
+    private static final String STRING_FORMAT = "Need [goal = %d, progress = %d, name = %s, description = %s, volunteer dates = %s, deadline = %s]";
 
     @JsonProperty("goal") private int goal;
     @JsonProperty("progress") private int progress;
@@ -48,7 +42,7 @@ public class Need {
 
     public String getName() {return name;}
 
-    public static String getStringFormat() {
+    protected static String getStringFormat() {
         return STRING_FORMAT;
     }
 

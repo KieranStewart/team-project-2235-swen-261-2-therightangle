@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Need } from '../need';
+import { NeedCacheService } from '../need-cache.service';
 /*
  * This component is NOT a need object (need.ts is kind of that)
  * It is also NOT the thing that communicates needs
@@ -17,6 +18,12 @@ import { Need } from '../need';
 })
 export class NeedComponent {
 
+  constructor(private cacheService: NeedCacheService) {}
+
   @Input()
   need!: Need;
+
+  showDetails(): void {
+    this.cacheService.selectedNeed = this.need;
+  }
 }

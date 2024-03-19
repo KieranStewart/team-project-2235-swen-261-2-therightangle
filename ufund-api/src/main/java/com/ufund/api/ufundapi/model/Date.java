@@ -8,6 +8,8 @@ package com.ufund.api.ufundapi.model;
  */
 public class Date {
 
+    private final static String TO_STRING_FORMAT = "%d/%d/%d";
+
     private final int day;
     private final int month;
     private final int year;
@@ -32,7 +34,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return String.format("%d/%d/%d", month, day, year);
+        return String.format(TO_STRING_FORMAT, month, day, year);
     }
     
 }
