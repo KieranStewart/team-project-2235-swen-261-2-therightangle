@@ -91,7 +91,7 @@ public class CupboardFileDAOTest {
     }
 
     @Test
-    public void testSaveException() throws IOException{
+    public void testSaveException() throws IOException {
         doThrow(new IOException())
             .when(mockObjectMapper)
                 .writeValue(any(File.class), any(Need[].class));
