@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, asyncScheduler, scheduled } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, first, map, tap } from 'rxjs/operators';
 import { Account } from './account';
 
 @Injectable({
@@ -20,16 +20,19 @@ export class LoginService {
     private http: HttpClient) { }
 
   /** GET Accounts from the server */
-  getaccount(): Observable<Account[]> {
+  getAccounts(): Observable<Account[]> {
     return this.http.get<Account[]>(this.accountUrl)
       .pipe(
         tap(_ => this.log('fetched account')), // tap is deprecated, maybe replace
-        catchError(this.handleError<Account[]>('getaccount', []))
+        catchError(this.handleError<Account[]>('getAccounts', []))
       );
   }
 
-  /** GET Account by name. Return `undefined` when name not found */
-  getAccountNo404<Data>(name: String): Observable<Account> {
+  /** 
+   * GET Account by name. Does not return an observable that emits `undefined` when name not found: other methods do that.
+   * When name isn't found, it actually returns a hollow shell of an observable
+   */
+  getAccountNo404<Data>(name: string): Observable<Account> {
     const url = `${this.accountUrl}/?name=${name}`;
     return this.http.get<Account[]>(url)
       .pipe(
@@ -43,7 +46,7 @@ export class LoginService {
   }
 
   /** GET Account by name. Will 404 if name not found */
-  getAccount(name: String): Observable<Account> {
+  getAccount(name: string): Observable<Account> {
     const url = `${this.accountUrl}/${name}`;
     return this.http.get<Account>(url).pipe(
       tap(_ => this.log(`fetched Account name=${name}`)), // notice: deprecated
@@ -76,7 +79,7 @@ export class LoginService {
   }
 
   /** DELETE: delete the Account from the server */
-  deleteAccount(name: String): Observable<Account> {
+  deleteAccount(name: string): Observable<Account> {
     const url = `${this.accountUrl}/${name}`;
 
     return this.http.delete<Account>(url, this.httpOptions).pipe(
@@ -122,5 +125,53 @@ export class LoginService {
     console.log(message);
   }
   
+  /**
+   * Returns whether or not the log in is valid, as an error message.
+   * If TypeScript has enums, replace string with an enum.
+   * @param username 
+   * @param password 
+   */
+  validateLogin(username: string, password: string): Observable<string> {
+    if(username == "") {
+      return new Observable((subscriber) => {
+        subscriber.next("Please enter your username"); 
+      });
+
+    }
+    if(password == "") {
+      return new Observable((subscriber) => {
+        subscriber.next("Please enter your password"); 
+      });
+    }
+
+    const that = this;
+    var response: Observable<string>;
+
+    response = new Observable((subscriber) => {
+      that.getAccount(username) // This probably should be No404 so no errors pop up in console.  However...
+      .subscribe({
+        next(account) {
+          console.log('Server responded to the request for an account with ' + account);
+          if(account == undefined) { // ... see right here?  No404 doesn't return undefined when nothing is found.  When nothing is found, I have no idea what it returns!
+                                    // later, we'll need to figure out what it actually returns and replace "undefined" with whatever that thingie is
+                                    // I did try printing its return, but it is an object, so it didn't actually tell me anything.
+            subscriber.next("Account not found"); 
+            return;
+          }
+          if(password == account.password) {
+            subscriber.next("Login successful"); 
+          } else {
+            subscriber.next("Incorrect password"); 
+          }
+        },
+        error(err) {
+          console.error('something wrong occurred: ' + err);
+          subscriber.next("Internal error"); 
+        }
+      });
+    });
+    return response;
+  }
+
 }
 

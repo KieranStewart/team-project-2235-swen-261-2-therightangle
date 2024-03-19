@@ -7,7 +7,7 @@ import { LoginService } from '../login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
+export class LoginComponent {
   showAccountCreation = false;
   LoginSuccess = false;
   username ="";
@@ -17,27 +17,27 @@ export class LoginComponent{
 
   constructor(private loginService: LoginService){}
 
-login(username:string,password:string): void{
-  this.message = "loading";
-  this.username = username
-  this.password = password
-  this.loginService.getAccount(this.username)
-  .subscribe(account => this.account = account);
-  if (this.account.name == this.username){
-    if (this.account.password == this.password){
-        this.LoginSuccess = true;
-        this.message = "Login Successful";
-    } else {
-      this.message = "Incorrect Password"
-    }
-  } else {
-    this.message = "No user with that username"
-  }
-}
+  login(username: string, password: string): void {
+    this.message = "loading";
+    this.username = username
+    this.password = password
+    const that = this;
 
-toggleAccountCreationScreen(): void{
-  this.showAccountCreation = !this.showAccountCreation;
-}
+    this.loginService.validateLogin(username, password)
+    .subscribe({
+      next(response) {
+        that.message = response;
+        // code that concerns the response should go here
+        // putting something like "if success then turn green" outside of here will be weird and not work sometimes
+      }
+    });
+    
+    
+  }
+
+  toggleAccountCreationScreen(): void {
+    this.showAccountCreation = !this.showAccountCreation;
+  }
 
 }
  
