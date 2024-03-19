@@ -4,6 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
 import { HomeViewComponent } from './home-view/home-view.component';
 import { ConfirmationViewComponent } from './confirmation-view/confirmation-view.component';
+import { AppComponent } from './app.component';
+
+import { LoginComponent } from './login/login.component';
+import { AccountCreationComponent } from './account-creation/account-creation.component';
 
 const routes: Routes = [
   {
@@ -17,20 +21,11 @@ const routes: Routes = [
   {
     path: '',
     component: HomeViewComponent
-  }
-];
-=======
-import { AppComponent } from './app.component';
-
-import { LoginComponent } from './login/login.component';
-import { AccountCreationComponent } from './account-creation/account-creation.component';
-import { RouterModule, Routes } from '@angular/router';
-
-const routes: Routes =[
+  },
   {path: '', component: AppComponent },
   {path: 'Login', component: LoginComponent },
   {path: 'AccountCreation', component: AccountCreationComponent },
-]
+];
 
 @NgModule({
   declarations: [],
@@ -45,9 +40,3 @@ export class AppRoutingModule {
     return routes;
   }
 }
-=======
-    RouterModule.forRoot(routes),
-    CommonModule
-  ]
-})
-export class AppRoutingModule {}
