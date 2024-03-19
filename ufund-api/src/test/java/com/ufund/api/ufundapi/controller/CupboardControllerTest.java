@@ -10,6 +10,7 @@ import java.io.IOException;
 import com.ufund.api.ufundapi.persistence.CupboardDAO;
 import com.ufund.api.ufundapi.model.Date;
 import com.ufund.api.ufundapi.model.Need;
+import com.ufund.api.ufundapi.model.NeedType;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -40,7 +41,7 @@ public class CupboardControllerTest {
     @Test
     public void testCreateNeed() throws IOException {
         // Setup
-        Need need = new Need(0, 0, null, null, null, null, "donation");
+        Need need = new Need(0, 0, null, null, null, null, NeedType.DONATION);
         // simulate success
         when(mockCupboardDAO.createNeed(need)).thenReturn(true);
 
@@ -55,7 +56,7 @@ public class CupboardControllerTest {
     @Test
     public void testCreateNeedFailed() throws IOException {
         // Setup
-        Need need = new Need(100, 0, "buy dog", "pretend this is a duplicate", null, new Date(17, 2, 2023), "donation");
+        Need need = new Need(100, 0, "buy dog", "pretend this is a duplicate", null, new Date(17, 2, 2023), NeedType.DONATION);
         // when createNeed is called, return false simulating failure
         when(mockCupboardDAO.createNeed(need)).thenReturn(false);
 
@@ -69,7 +70,7 @@ public class CupboardControllerTest {
     @Test
     public void testCreateNeedHandleException() throws IOException {
         // Setup
-        Need need = new Need(0, 0, null, null, null, null, "donation");
+        Need need = new Need(0, 0, null, null, null, null, NeedType.DONATION);
 
         doThrow(new IOException()).when(mockCupboardDAO).createNeed(need); // Stimulate an exception
 
@@ -87,9 +88,9 @@ public class CupboardControllerTest {
         // Setup
         String searchNeed = "event";
         Need[] needs = new Need[3];
-        needs[0] = new Need(0, 0, "eventone", null, null, null, "donation");
-        needs[1] = new Need(0, 0, "eventtwo", null, null, null, "donation");
-        needs[2] = new Need(0, 0, "volunteers", null, null, null, "donation");
+        needs[0] = new Need(0, 0, "eventone", null, null, null, NeedType.DONATION);
+        needs[1] = new Need(0, 0, "eventtwo", null, null, null, NeedType.DONATION);
+        needs[2] = new Need(0, 0, "volunteers", null, null, null, NeedType.DONATION);
     
         when(mockCupboardDAO.getNeeds()).thenReturn(needs);
 

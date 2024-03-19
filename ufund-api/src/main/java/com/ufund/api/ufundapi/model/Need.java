@@ -25,7 +25,7 @@ public class Need {
     @JsonProperty("description") private String description;
     @JsonProperty("volunteer dates") private Date[] volunteerDates;
     @JsonProperty("deadline") private Date deadline;
-    @JsonProperty("type") private String type; // Should be either "donation" or "volunteer"
+    @JsonProperty("type") private NeedType type;
 
     public Need(@JsonProperty("goal") int goal, 
     @JsonProperty("progress") int progress, 
@@ -33,7 +33,7 @@ public class Need {
     @JsonProperty("description") String description, 
     @JsonProperty("volunteer dates") Date[] volunteerDates, 
     @JsonProperty("deadline") Date deadline, 
-    @JsonProperty("type") String type) {
+    @JsonProperty("type") NeedType type) {
         this.goal = goal;
         this.progress = progress;
         this.name = name;
@@ -106,12 +106,16 @@ public class Need {
         this.deadline = deadline;
     }
 
-    public String getType() {
+    public NeedType getType() {
         return type;
     }
 
     @Override
     public String toString() {
         return String.format(STRING_FORMAT, goal, progress, name, description, Arrays.toString(volunteerDates), deadline, type);
+    }
+
+    public void setType(NeedType type) {
+        this.type = type;
     }
 }

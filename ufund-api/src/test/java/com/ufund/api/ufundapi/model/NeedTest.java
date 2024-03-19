@@ -25,9 +25,10 @@ public class NeedTest {
         Date[] expectedVolunteerDates = {
             new Date(10, 10, 2030)
         };
+        NeedType expectedType = NeedType.DONATION;
 
         // Invoke
-        Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline, "");
+        Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline, NeedType.DONATION);
 
         // Analyze
         assertEquals(expectedGoal, need.getGoal());
@@ -36,6 +37,7 @@ public class NeedTest {
         assertEquals(expectedProgress, need.getProgress());
         assertEquals(expectedDeadline, need.getDeadline());
         assertEquals(expectedVolunteerDates, need.getVolunteerDates());
+        assertEquals(expectedType, need.getType());
     }
 
     @Test
@@ -49,7 +51,8 @@ public class NeedTest {
         Date[] expectedVolunteerDates = {
             new Date(10, 10, 2030)
         };
-        Need need = new Need(-1, -1, "old name", "old description", null, null, "");
+        NeedType expectedType = NeedType.DONATION;
+        Need need = new Need(-1, -1, "old name", "old description", null, null, NeedType.VOLUNTEER);
 
         // Invoke
         need.setName(expectedName);
@@ -58,6 +61,7 @@ public class NeedTest {
         need.setGoal(expectedGoal);
         need.setVolunteerDates(expectedVolunteerDates);
         need.setProgress(expectedProgress);
+        need.setType(expectedType);
 
         // Analyze
         assertEquals(expectedGoal, need.getGoal());
@@ -66,6 +70,7 @@ public class NeedTest {
         assertEquals(expectedProgress, need.getProgress());
         assertEquals(expectedDeadline, need.getDeadline());
         assertEquals(expectedVolunteerDates, need.getVolunteerDates());
+        assertEquals(expectedType, need.getType());
     }
 
     @Test
@@ -79,10 +84,10 @@ public class NeedTest {
         Date[] expectedVolunteerDates = {
             new Date(10, 10, 2030)
         };
-        Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline, "");
+        Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline, NeedType.DONATION);
 
         // Invoke
-        String expected = String.format(Need.getStringFormat(), expectedGoal, expectedProgress, expectedName, expectedDesc, Arrays.toString(expectedVolunteerDates), expectedDeadline);
+        String expected = String.format(Need.getStringFormat(), expectedGoal, expectedProgress, expectedName, expectedDesc, Arrays.toString(expectedVolunteerDates), expectedDeadline, NeedType.DONATION);
 
         // Analyze
         assertEquals(expected, need.toString());
