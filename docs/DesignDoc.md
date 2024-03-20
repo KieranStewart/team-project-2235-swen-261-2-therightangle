@@ -114,7 +114,12 @@ This section describes the web interface flow; this is how the user views and in
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
 ### ViewModel Tier
-> _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
+* CupboardController: This is the controller class that handles all the HTTP request that handles the Needs object. It's uses the REST API and Spring to handle all the HTTP requests.
+* Need: This is an object that holds all the properties of a need. Those properties are: goal, progress, name, description, volunteer dates, deadline, type.
+* Date: This is an object that hold the year, month, and date information. It is used by the Need class to define the date of which volunteers are needed.
+* NeedType: This is an enum to help seperate the monetary needs from the volunteer needs.
+* AccountController: This is the controller class that  handles all the HTTP request that handles the Account object. It's uses the REST API and Spring to handle all the HTTP requests.
+* Account: This is an object that holds all the properties of an account. These properties are: name, password, email, isAdmin.
 
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
@@ -128,10 +133,12 @@ This section describes the web interface flow; this is how the user views and in
 ### Model Tier
 * Need class which represents a need.
 * Date class which acts as a helper for need and stores a date and time.
-> _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
+> _**[Sprint 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
-
+* CupboardDAO: This is an interface that that defines methods needed to alter data in the cupboard.json. This is also our seam for unit testing.
+* CupboardFileDAO: This is a class that implements CupboardDAO and defines all the methods. This is the class that actually make the changes to the cupboard.json.
+* Cupboard.json: This is the database that hold all the Needs objects in the cupboard.
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 > 
@@ -139,9 +146,11 @@ This section describes the web interface flow; this is how the user views and in
 
 ## OO Design Principles
 
-> _**[Sprint 1]** Name and describe the initial OO Principles that your team has considered in support of your design (and implementation) for this first Sprint._
+> Dependency inversion: When we have to write data to the cupboard.json we used CupboardFileDAO which implements the methods from the interface CupboardDAO. The CupboardDAO make sure that the nesseary methods to handle the data is created before allowing CupboardFileDAO to make any changes to the cupboard.json.
 
-> _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
+> 
+
+> _**[Sprint 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
 > _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
 
