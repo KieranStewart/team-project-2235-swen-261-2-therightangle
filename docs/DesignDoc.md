@@ -131,14 +131,15 @@ This section describes the web interface flow; this is how the user views and in
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
 ### Model Tier
-* Need class which represents a need.
-* Date class which acts as a helper for need and stores a date and time.
 > _**[Sprint 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
 * CupboardDAO: This is an interface that that defines methods needed to alter data in the cupboard.json. This is also our seam for unit testing.
 * CupboardFileDAO: This is a class that implements CupboardDAO and defines all the methods. This is the class that actually make the changes to the cupboard.json.
 * Cupboard.json: This is the database that hold all the Needs objects in the cupboard.
+* AccountDAO: This is an interface that that defines methods needed to alter data in the account.json. This is also our seam for unit testing.
+* AccountFileDAO: This is a class that implements AccountDAO and defines all the methods. This is the class that actually make the changes to the account.json.
+* Account.json: This is the database that hold all the account objects.
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 > 
@@ -146,9 +147,8 @@ This section describes the web interface flow; this is how the user views and in
 
 ## OO Design Principles
 
-> Dependency inversion: When we have to write data to the cupboard.json we used CupboardFileDAO which implements the methods from the interface CupboardDAO. The CupboardDAO make sure that the nesseary methods to handle the data is created before allowing CupboardFileDAO to make any changes to the cupboard.json.
-
-> 
+* Dependency inversion: We are using Spring framework which will creates an CupboardController object. This controller class then insitiate the interface CupboardDAO that has methods needed to alter data in the cupboard.json. When we have to write data to the cupboard.json we used CupboardFileDAO which implements the methods from the interface CupboardDAO. The CupboardDAO make sure that the nesseary methods to handle the data is created before allowing CupboardFileDAO to make any changes to the cupboard.json. If we need to change how to implement how data is writtent to cupboard.json. We can alter CupboardDAO without impacting the functionality of the CupboardController.
+* Single Responsibility: For our UI, we use multiple angular services to help direct the flow of different data between the different components. For example, we have both a NeedService, BasketService, and LoginService. NeedService is specifically used to send the HTTP request to the CupboardController to manipulate data in the cupboard.json. The BasketService allows users to add, remove, update, and clear needs from their funding basket. When a user wants to checkout their funding basket, NeedService is called to send the HTTP request to the CupboardController to make changes to the cupboard.json while the BasketService is called to clear the funding basket. LoginService handles all the HTTP request to the AccountController to manipulate data in the account.json, and to also verify that usernames and passwords match each other when users login.
 
 > _**[Sprint 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
@@ -172,6 +172,7 @@ This section describes the web interface flow; this is how the user views and in
 > criteria tests failing, and the number of user stories that
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
+*All completed stories so far has pass their acceptance testing, however there are some unexpected behavior that occur with some of the stories that implement the UIs. The main issue was that when using a service to verify login, it doesn't always update the page with a success message. It hangs on the loading message even though it got a valid response. There is an issue with the way the subscribe method is used on observable object. A temporary solution was made, but a more permanent soulution need to be implemented.
 
 ### Unit Testing and Code Coverage
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
