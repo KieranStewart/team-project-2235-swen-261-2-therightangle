@@ -128,7 +128,7 @@ This section describes the web interface flow; this is how the user views and in
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 > 
-![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
+![ViewModel Tier class diagram](ViewModel-Class-Diagram.png)
 
 ### Model Tier
 > _**[Sprint 3 & 4]** Provide a summary of this tier of your architecture. This
@@ -143,7 +143,7 @@ This section describes the web interface flow; this is how the user views and in
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 > 
-![Replace with your Model Tier class diagram 1, etc.](model-placeholder.png)
+![Model Tier class diagram](Model-Class-Diagram.png)
 
 ## OO Design Principles
 
@@ -182,6 +182,8 @@ This section describes the web interface flow; this is how the user views and in
 
 >_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
+
+![Code Coverage at End of Sprint 2](Code-Coverage.png)
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
