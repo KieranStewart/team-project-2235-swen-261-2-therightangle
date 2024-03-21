@@ -33,8 +33,7 @@ export class CheckoutComponent implements OnInit{
     {
       for (const item of this.basketService.contents)
       {
-        // item.progress = item.progress + + item.donationAmount;
-        // item.donationAmount = 0;
+        this.basketService.update(item, item.donationAmount.toString());
         this.needService.updateNeed(item) // Causes duplicates and bad things to happen. (adding this comment fixed this (BEAN type error))
       }
       
