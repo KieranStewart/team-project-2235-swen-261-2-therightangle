@@ -175,7 +175,7 @@ This section describes the web interface flow; this is how the user views and in
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
 
-All completed stories so far has pass their acceptance testing, however there are some unexpected behavior that occur with some of the stories that implement the UIs. The main issue was that when using a service to verify login, it doesn't always update the page with a success message. It hangs on the loading message even though it got a valid response. There is an issue with the way the subscribe method is used on observable object. A temporary solution was made, but a more permanent soulution need to be implemented.
+All completed stories pass their acceptance testing, but some UI stories have other issues. A recent release has fixed outstanding log in issues, but a remaining quirk is that when logging in with a username that does not exist, a console error is generated.  This does not impact the functionality of log in.  Admin privileges are successfully loaded, but they do not impact the site yet.
 
 ### Unit Testing and Code Coverage
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
