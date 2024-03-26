@@ -31,7 +31,7 @@ export class CheckoutComponent implements OnInit{
     // Should check that ammount was paid through external payment api thingy then add the ammount donated to each need in the basket
     if (this.payment())
     {
-      for (const item of this.basketService.contents)
+      for (let item of this.basketService.contents)
       {
         this.basketService.update(item, item.donationAmount.toString());
         this.needService.updateNeed(item) // Causes duplicates and bad things to happen. (adding this comment fixed this (BEAN type error))
