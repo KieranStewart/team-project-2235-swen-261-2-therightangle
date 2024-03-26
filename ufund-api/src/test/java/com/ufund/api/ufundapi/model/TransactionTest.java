@@ -1,6 +1,7 @@
 package com.ufund.api.ufundapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -43,5 +44,14 @@ public class TransactionTest {
 
         // Analyze
         assertEquals(expected, transaction.toString());
+    }
+
+    @Test
+    public void testLocalTime() {
+        // Setup & Invoke
+        Transaction transaction = new Transaction(10.1, null);
+
+        // Analyze
+        assertNotNull(transaction.getTimestamp());
     }
 }
