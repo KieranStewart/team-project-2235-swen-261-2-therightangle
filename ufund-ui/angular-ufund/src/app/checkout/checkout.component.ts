@@ -56,6 +56,6 @@ export class CheckoutComponent implements OnInit{
 
   private recordPayment(need: Need): void {
     need.progress += Number(need.donationAmount);
-    this.needService.updateNeed(need); // Causes duplicates and bad things to happen. (adding this comment fixed this (BEAN type error))
+    this.needService.updateNeed(need).subscribe();
   }
 }
