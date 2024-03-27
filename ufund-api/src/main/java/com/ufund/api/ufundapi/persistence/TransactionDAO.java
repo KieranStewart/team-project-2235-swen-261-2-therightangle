@@ -12,6 +12,12 @@ import com.ufund.api.ufundapi.model.Transaction;
 public interface TransactionDAO {
 
     Transaction[] getAllTransactions() throws IOException;
+    /**
+     * null if this need has no transactions
+     * @param need
+     * @return records for this need
+     * @throws IOException
+     */
     Transaction[] getTransactions(String need) throws IOException;
 
     /**

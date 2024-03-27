@@ -119,7 +119,6 @@ public class TransactionFileDAO implements TransactionDAO {
             // TODO: If the cupboard can be accessed here, make sure Need is in the cupboard
             
 
-            transaction.setNeedName(need);
             if(ledger.containsKey(need)) {
                 ledger.get(need).add(transaction);
             } else {
@@ -145,9 +144,13 @@ public class TransactionFileDAO implements TransactionDAO {
 
     @Override
     public Transaction[] getTransactions(String need) throws IOException {
-        Transaction[] transactions = new Transaction[ledger.get(need).size()];
-        ledger.get(need).toArray(transactions);
-        return transactions;
+        if(ledger.containsKey(need)) {
+            Transaction[] transactions = new Transaction[ledger.get(need).size()];
+            ledger.get(need).toArray(transactions);
+            return transactions;
+        } else {
+            return null;
+        }
     }
 
     @Override
