@@ -40,13 +40,13 @@ public class TransactionController {
     }
 
     /**
-     * Saves the {@linkplain Transaction need} to persistent storage
+     * Puts the {@linkplain Transaction transaction} on the list for its need
      * 
-     * @param need Saves this
+     * @param need Adds this
      * 
-     * @return ResponseEntity with created {@link Transaction need} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Transaction need} object already exists<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @return ResponseEntity with created {@link Transaction transaction} object and HTTP status of CREATED.<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if {@link Transaction transaction} is for a non-existant need (not implemented yet).<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise.
      */
     @PostMapping("")
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
@@ -56,7 +56,7 @@ public class TransactionController {
             if(success) {
                 return new ResponseEntity<Transaction>(transaction, HttpStatus.CREATED);
             } else {
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
