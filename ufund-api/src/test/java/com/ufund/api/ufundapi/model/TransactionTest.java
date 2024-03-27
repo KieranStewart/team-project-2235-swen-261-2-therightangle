@@ -18,13 +18,15 @@ public class TransactionTest {
         // Setup
         double expectedAmount = 110.99;
         Date expectedTimestamp = new Date(1, 1, 2024);
+        String expectedNeedName = "hi";
 
         // Invoke
-        Transaction transaction = new Transaction(expectedAmount, expectedTimestamp);
+        Transaction transaction = new Transaction(expectedAmount, expectedTimestamp, expectedNeedName);
 
         // Analyze
         assertEquals(expectedAmount, transaction.getAmount());
         assertEquals(expectedTimestamp, transaction.getTimestamp());
+        assertEquals(expectedNeedName, transaction.getNeedName());
     }
 
     // @Test
@@ -37,10 +39,11 @@ public class TransactionTest {
         // Setup
         double expectedAmount = 110.99;
         Date expectedTimestamp = new Date(1, 1, 2024);
-        Transaction transaction = new Transaction(expectedAmount, expectedTimestamp);
+        String expectedNeedName = "hi";
+        Transaction transaction = new Transaction(expectedAmount, expectedTimestamp, expectedNeedName);
 
         // Invoke
-        String expected = String.format(Transaction.getStringFormat(), expectedAmount, expectedTimestamp.toString());
+        String expected = String.format(Transaction.getStringFormat(), expectedAmount, expectedTimestamp.toString(), expectedNeedName);
 
         // Analyze
         assertEquals(expected, transaction.toString());
@@ -49,7 +52,7 @@ public class TransactionTest {
     @Test
     public void testLocalTime() {
         // Setup & Invoke
-        Transaction transaction = new Transaction(10.1, null);
+        Transaction transaction = new Transaction(10.1, null, "");
 
         // Analyze
         assertNotNull(transaction.getTimestamp());

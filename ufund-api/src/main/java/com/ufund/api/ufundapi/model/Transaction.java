@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Transaction {
 
-    private static final String STRING_FORMAT = "Transaction of %f at %s";
+    private static final String STRING_FORMAT = "Transaction of %f at %s for %s";
     @JsonProperty("amount") private double amount;
     @JsonProperty("timestamp") private Date timestamp;
     @JsonProperty("needName") String needName;
@@ -44,7 +44,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, amount, timestamp.toString());
+        return String.format(STRING_FORMAT, amount, timestamp.toString(), needName);
     }
 
     public void setNeedName(String name) {

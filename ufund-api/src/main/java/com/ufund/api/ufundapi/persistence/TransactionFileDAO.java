@@ -114,18 +114,18 @@ public class TransactionFileDAO implements TransactionDAO {
     }
 
     @Override
-    public boolean createTransaction(Transaction transaction, Need need) throws IOException {
+    public boolean createTransaction(Transaction transaction, String need) throws IOException {
         synchronized(ledger) {
             // TODO: If the cupboard can be accessed here, make sure Need is in the cupboard
             
 
-            transaction.setNeedName(need.getName());
-            if(ledger.containsKey(need.getName())) {
-                ledger.get(need.getName()).add(transaction);
+            transaction.setNeedName(need);
+            if(ledger.containsKey(need)) {
+                ledger.get(need).add(transaction);
             } else {
                 ArrayList<Transaction> record = new ArrayList<>();
                 record.add(transaction);
-                ledger.put(need.getName(), record);
+                ledger.put(need, record);
             }
             save();
             return true;
@@ -133,9 +133,9 @@ public class TransactionFileDAO implements TransactionDAO {
     }
 
     @Override
-    public boolean deleteTransactionHistory(Need need) throws IOException {
-        if(ledger.containsKey(need.getName())) {
-            ledger.remove(need.getName());
+    public boolean deleteTransactionHistory(String need) throws IOException {
+        if(ledger.containsKey(need)) {
+            ledger.remove(need);
             save();
             return true;
         } else {
@@ -144,9 +144,9 @@ public class TransactionFileDAO implements TransactionDAO {
     }
 
     @Override
-    public Transaction[] getTransactions(Need need) throws IOException {
-        Transaction[] transactions = new Transaction[ledger.get(need.getName()).size()];
-        ledger.get(need.getName()).toArray(transactions);
+    public Transaction[] getTransactions(String need) throws IOException {
+        Transaction[] transactions = new Transaction[ledger.get(need).size()];
+        ledger.get(need).toArray(transactions);
         return transactions;
     }
 

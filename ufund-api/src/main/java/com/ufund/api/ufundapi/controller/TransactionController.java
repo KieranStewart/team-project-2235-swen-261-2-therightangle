@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ufund.api.ufundapi.model.Transaction;
-import com.ufund.api.ufundapi.persistence.CupboardDAO;
+import com.ufund.api.ufundapi.persistence.TransactionDAO;
 
 /**
  * Handles HTTP communication of transactions
@@ -29,14 +29,14 @@ import com.ufund.api.ufundapi.persistence.CupboardDAO;
 public class TransactionController {
 
     private static final Logger LOG = Logger.getLogger(CupboardController.class.getName());
-    private CupboardDAO cupboardDao;
+    private TransactionDAO transactionDAO;
 
     /**
      * Creates a REST API controller to repond to requests
-     * @param cupboardDao Injected data access object
+     * @param transactionDAO Injected data access object
      */
-    public CupboardController(CupboardDAO cupboardDao) {
-        this.cupboardDao = cupboardDao;
+    public TransactionController(TransactionDAO transactionDAO) {
+        this.transactionDAO = transactionDAO;
     }
 
     /**
@@ -49,10 +49,10 @@ public class TransactionController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction need) {
+    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
         LOG.info("POST /needs " + need);
         try {
-            boolean success = cupboardDao.createTransaction(need);
+            boolean success = transactionDAO.createTransaction(transaction);
             if(success) {
                 return new ResponseEntity<Transaction>(need, HttpStatus.CREATED);
             } else {
@@ -74,7 +74,7 @@ public class TransactionController {
     public ResponseEntity<Transaction> getTransaction(@PathVariable String name)
     {
         try {
-            Transaction out = cupboardDao.getTransaction(name);
+            Transaction out = transactionDAO.getTransaction(name);
             if (out != null)
             {
                 return new ResponseEntity<Transaction>(out, HttpStatus.OK);
@@ -97,7 +97,7 @@ public class TransactionController {
     @GetMapping("/")
     public ResponseEntity<Transaction[]> searchTransactions(@RequestParam String name) throws IOException {
         try {
-            Transaction[] needs = this.cupboardDao.getTransactions();
+            Transaction[] needs = this.transactionDAO.getTransactions();
             LOG.info("GET /needs/?name="+name);
     
             // Check if any needs are found
@@ -143,7 +143,7 @@ public class TransactionController {
         LOG.info("PUT /needs " + need);
 
         try {
-            Transaction newTransaction = cupboardDao.updateTransaction(need);
+            Transaction newTransaction = transactionDAO.updateTransaction(need);
             if (newTransaction != null)
                 return new ResponseEntity<Transaction>(newTransaction,HttpStatus.OK);
             else
@@ -164,7 +164,7 @@ public class TransactionController {
     {
         LOG.info("GET /needs");
         try {
-            Transaction[] outTransactions = cupboardDao.getTransactions();
+            Transaction[] outTransactions = transactionDAO.getTransactions();
             return new ResponseEntity<Transaction[]>(outTransactions, HttpStatus.OK);
         } catch (Exception e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
@@ -181,7 +181,7 @@ public class TransactionController {
     public ResponseEntity<Transaction> deleteTransaction(@PathVariable String name)
     {
         try {
-            if (cupboardDao.deleteTransaction(name))
+            if (transactionDAO.deleteTransaction(name))
                 return new ResponseEntity<Transaction>(HttpStatus.OK);
             else
                 return new ResponseEntity<Transaction>(HttpStatus.NOT_FOUND);
