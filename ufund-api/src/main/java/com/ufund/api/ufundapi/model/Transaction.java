@@ -13,11 +13,14 @@ public class Transaction {
     private static final String STRING_FORMAT = "Transaction of %f at %s";
     @JsonProperty("amount") private double amount;
     @JsonProperty("timestamp") private Date timestamp;
+    @JsonProperty("needName") String needName;
 
     public Transaction(@JsonProperty("amount") double amount, 
-    @JsonProperty("timestamp") Date timestamp) {
+    @JsonProperty("timestamp") Date timestamp,
+    @JsonProperty("needName") String needName) {
         this.amount = amount;
         this.timestamp = timestamp;
+        this.needName = needName;
         if(this.timestamp == null) {
             this.timestamp = new Date(LocalDate.now().getDayOfMonth(), LocalDate.now().getMonthValue(), LocalDate.now().getYear());
         }
@@ -31,6 +34,10 @@ public class Transaction {
         return timestamp;
     }
 
+    public String getNeedName() {
+        return needName;
+    }
+
     protected static String getStringFormat() {
         return STRING_FORMAT;
     }
@@ -38,6 +45,10 @@ public class Transaction {
     @Override
     public String toString() {
         return String.format(STRING_FORMAT, amount, timestamp.toString());
+    }
+
+    public void setNeedName(String name) {
+        this.needName = name;
     }
 
 }
