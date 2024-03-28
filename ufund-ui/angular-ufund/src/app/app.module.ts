@@ -16,6 +16,7 @@ import { RouterModule, Routes } from '@angular/router'; // Same as below comment
 import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
 import { HomeViewComponent } from './home-view/home-view.component';
 import { ConfirmationViewComponent } from './confirmation-view/confirmation-view.component';
+import { TransactionHistoryDisplayComponent } from './transaction-history-display/transaction-history-display.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { ConfirmationViewComponent } from './confirmation-view/confirmation-view
     CheckoutComponent,
     CheckoutViewComponent,
     HomeViewComponent,
-    ConfirmationViewComponent
+    ConfirmationViewComponent,
+    TransactionHistoryDisplayComponent
   ],
   imports: [
     BrowserModule,
