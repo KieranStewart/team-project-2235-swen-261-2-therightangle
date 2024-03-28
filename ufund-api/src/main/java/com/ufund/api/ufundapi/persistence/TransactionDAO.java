@@ -23,9 +23,9 @@ public interface TransactionDAO {
     /**
      * Saves a {@linkplain Transaction transaction} to storage
      * @param transaction
-     * @return false if no Need is found to put this transaction under
+     * @return false if the transaction specifies an invalid need
      * @throws IOException
      */
-    boolean createTransaction(Transaction transaction, String need) throws IOException;
+    boolean createTransaction(Transaction transaction) throws IOException;
     boolean deleteTransactionHistory(String need) throws IOException;
 }

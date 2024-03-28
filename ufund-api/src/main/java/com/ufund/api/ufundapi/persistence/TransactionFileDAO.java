@@ -104,31 +104,38 @@ public class TransactionFileDAO implements TransactionDAO {
             if(ledger.containsKey(t.getNeedName())) {
                 ledger.get(t.getNeedName()).add(t);
             } else {
-                ArrayList<Transaction> record = new ArrayList<>();
-                record.add(t);
-                ledger.put(t.getNeedName(), record);
+                ArrayList<Transaction> transactionRecord = new ArrayList<>();
+                transactionRecord.add(t);
+                ledger.put(t.getNeedName(), transactionRecord);
             }
         }
 
         return true;
     }
 
-    @Override
-    public boolean createTransaction(Transaction transaction, String need) throws IOException {
+    private boolean createTransaction(Transaction transaction, String need) throws IOException {
         synchronized(ledger) {
             // TODO: If the cupboard can be accessed here, make sure Need is in the cupboard
-            
+            // Right now, only an empty string is invalid
+            if(need.equals("")) {
+                return false;
+            }
 
             if(ledger.containsKey(need)) {
                 ledger.get(need).add(transaction);
             } else {
-                ArrayList<Transaction> record = new ArrayList<>();
-                record.add(transaction);
-                ledger.put(need, record);
+                ArrayList<Transaction> transactionRecord = new ArrayList<>();
+                transactionRecord.add(transaction);
+                ledger.put(need, transactionRecord);
             }
             save();
             return true;
         }
+    }
+
+    @Override
+    public boolean createTransaction(Transaction transaction) throws IOException {
+        return createTransaction(transaction, transaction.getNeedName());
     }
 
     @Override
@@ -149,7 +156,7 @@ public class TransactionFileDAO implements TransactionDAO {
             ledger.get(need).toArray(transactions);
             return transactions;
         } else {
-            return null;
+            return new Transaction[0];
         }
     }
 

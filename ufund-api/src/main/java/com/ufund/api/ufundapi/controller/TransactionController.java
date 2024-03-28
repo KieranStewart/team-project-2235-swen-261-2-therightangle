@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -52,7 +50,7 @@ public class TransactionController {
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
         LOG.info("POST /transactions " + transaction);
         try {
-            boolean success = transactionDAO.createTransaction(transaction, transaction.getNeedName());
+            boolean success = transactionDAO.createTransaction(transaction);
             if(success) {
                 return new ResponseEntity<Transaction>(transaction, HttpStatus.CREATED);
             } else {
@@ -75,7 +73,7 @@ public class TransactionController {
     {
         try {
             Transaction[] transactions = transactionDAO.getTransactions(name);
-            if (transactions == null) {
+            if (transactions.length == 0) {
                 return new ResponseEntity<Transaction[]>(HttpStatus.NOT_FOUND);
             } else {
                 return new ResponseEntity<Transaction[]>(transactions, HttpStatus.OK);
@@ -86,83 +84,14 @@ public class TransactionController {
         }
     }
 
-    // /**
-    //  * @param name used to identify searched for need
-    //  * 
-    //  * @return ResponseEntity with and HTTP status of Success<br>
-    //  * ResponseEntity with HTTP satus if {@link Transaction need} object doesn't exist
-    //  * ResponseEntity with HTTP satus status of INTERNAL_SERVER_ERROR otherwise
-    //  * @throws IOException 
-    //  */
-    // @GetMapping("/")
-    // public ResponseEntity<Transaction[]> searchTransactions(@RequestParam String name) throws IOException {
-    //     try {
-    //         Transaction[] needs = this.transactionDAO.getTransactions();
-    //         LOG.info("GET /needs/?name="+name);
-    
-    //         // Check if any needs are found
-    //         if (needs == null) {
-    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //         } else {
-    //             Transaction[] allTransactions = new Transaction[needs.length];
-    //             Transaction curneed = null;
-    //             int counter = -1;
-
-    //             for(int i = 0; i < needs.length; i++){
-    //                 curneed = needs[i];
-    //                 if(curneed.getName().contains(name)){
-    //                     counter+=1;
-    //                     allTransactions[counter] = curneed;
-    //                 }
-    //             }
-    //             if (counter != -1) {
-    //                 return new ResponseEntity<>(allTransactions, HttpStatus.OK);
-    //             } else {
-    //                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //             }
-    //         }
-    //     } catch (IOException e) {
-    //         LOG.warning("Error occurred while searching through needs: " + e.getMessage());
-    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-
-    // }
-
-
-    // /**
-    //  * Updates the {@linkplain Transaction need} with the provided {@linkplain Transaction need} object, if it exists
-    //  * 
-    //  * @param need The {@link Transaction need} to update
-    //  * 
-    //  * @return ResponseEntity with updated {@link Transaction need} object and HTTP status of OK if updated<br>
-    //  * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
-    //  * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-    //  */
-    // @PutMapping("")
-    // public ResponseEntity<Transaction> updateTransaction(@RequestBody Transaction need) {
-    //     LOG.info("PUT /needs " + need);
-
-    //     try {
-    //         Transaction newTransaction = transactionDAO.updateTransaction(need);
-    //         if (newTransaction != null)
-    //             return new ResponseEntity<Transaction>(newTransaction,HttpStatus.OK);
-    //         else
-    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-    //     catch(IOException e) {
-    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
-    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }    
-    // }
-
     /**
      * Gets all transactions
      * @return ResponseEntity with all transactions
      */
     @GetMapping("")
-    public ResponseEntity<Transaction[]> getTransactions()
+    public ResponseEntity<Transaction[]> getAllTransactions()
     {
-        LOG.info("GET /needs");
+        LOG.info("GET /transactions");
         try {
             Transaction[] outTransactions = transactionDAO.getAllTransactions();
             return new ResponseEntity<Transaction[]>(outTransactions, HttpStatus.OK);
@@ -173,12 +102,12 @@ public class TransactionController {
     }
 
     /**
-     * Deletes the records for this need
+     * Deletes all the transactions made for this need
      * @param name The name of the Need
      * @return True if the history was deleted and false otherwise
      */
     @DeleteMapping("/{name}")
-    public ResponseEntity<Transaction> deleteTransaction(@PathVariable String name)
+    public ResponseEntity<Transaction> deleteTransactionHistory(@PathVariable String name)
     {
         try {
             if (transactionDAO.deleteTransactionHistory(name))
