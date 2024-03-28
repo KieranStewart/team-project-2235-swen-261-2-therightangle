@@ -5,13 +5,13 @@ import { Date } from "./date";
  */
 export interface Need {
     // Core information
-    name: String;
-    description: String;
+    name: string;
+    description: string;
     goal: number;
     progress: number;
     volunteerDates: Date;
     deadline: Date;
-    type: String;
+    type: string;
 
     // Client-exclusive state
     inFundingBasket: boolean;
