@@ -110,13 +110,13 @@ public class Transaction implements Comparable<Transaction> {
     /**
      * Checks which Transaction is newest
      * @param other
-     * @return Negative if the other is newer
-     * Positive if this is newer
+     * @return Positive if the other is newer
+     * Negative if this is newer
      * 0 if the Transactions have the same ID (same Transaction)
      */
     @Override
     public int compareTo(Transaction other) {
-        return this.id - other.id;
+        return other.id - this.id;
     }
 
 }

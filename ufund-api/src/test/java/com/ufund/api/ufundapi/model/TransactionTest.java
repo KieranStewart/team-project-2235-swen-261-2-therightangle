@@ -64,8 +64,8 @@ public class TransactionTest {
         Transaction t3 = new Transaction(10.1, "");
 
         // Invoke
-        boolean firstIsFirst = t1.compareTo(t2) < 0;
-        boolean lastIsNewest = t3.compareTo(t2) == 1;
+        boolean firstIsFirst = t1.compareTo(t2) > 0;
+        boolean lastIsNewest = t3.compareTo(t2) == -1;
 
         // Analyze
         assertTrue(firstIsFirst);

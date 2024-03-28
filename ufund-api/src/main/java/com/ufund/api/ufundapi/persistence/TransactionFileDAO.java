@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.persistence;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class TransactionFileDAO implements TransactionDAO {
      * Suppress unused because logger is for debug
      */
     @SuppressWarnings("unused")
-    private static final Logger LOG = Logger.getLogger(CupboardFileDAO.class.getName());
+    private static final Logger LOG = Logger.getLogger(TransactionFileDAO.class.getName());
     
     /**
      * Holds local cache of file
@@ -98,6 +99,7 @@ public class TransactionFileDAO implements TransactionDAO {
         ledger = new HashMap<>();
 
         Transaction[] transactions = objectMapper.readValue(new File(filename), Transaction[].class);
+        Arrays.sort(transactions);
 
         // Populate map based on transaction's need name
         for(Transaction t : transactions) {
@@ -124,7 +126,7 @@ public class TransactionFileDAO implements TransactionDAO {
     private void storeTransaction(Transaction transaction, String need) throws IOException {
         synchronized(ledger) {
             if(ledger.containsKey(need)) {
-                ledger.get(need).add(transaction);
+                ledger.get(need).add(0, transaction);
             } else {
                 ArrayList<Transaction> transactionRecord = new ArrayList<>();
                 transactionRecord.add(transaction);
@@ -166,8 +168,9 @@ public class TransactionFileDAO implements TransactionDAO {
     }
 
     @Override
-    public Transaction[] getTransactions(String need) throws IOException {
+    public Transaction[] getTransactions(String need) {
         if(ledger.containsKey(need)) {
+            // Put all transactions for this need into an array
             Transaction[] transactions = new Transaction[ledger.get(need).size()];
             ledger.get(need).toArray(transactions);
             return transactions;
@@ -177,7 +180,7 @@ public class TransactionFileDAO implements TransactionDAO {
     }
 
     @Override
-    public Transaction[] getAllTransactions() throws IOException {
+    public Transaction[] getAllTransactions() {
         return getTransactionArray();
     }
     
