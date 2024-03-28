@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Stores a transaction from a donator to some need
  * @author Logan Nickerson
  */
-public class Transaction {
+public class Transaction implements Comparable<Transaction> {
 
     private static final String STRING_FORMAT = "Transaction of %f at %s for %s";
     @JsonProperty("amount") private double amount;
@@ -49,6 +49,11 @@ public class Transaction {
 
     public void setNeedName(String name) {
         this.needName = name;
+    }
+
+    @Override
+    public int compareTo(Transaction o) {
+        return this.timestamp.compareTo(o.timestamp);
     }
 
 }
