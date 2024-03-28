@@ -21,7 +21,7 @@
         </div>
         <!-- If I'm an admin, I see transactions -->
         <div *ngIf="transactionListVisible()">
-            <app-transaction-history-display></app-transaction-history-display>
+            <app-transaction-history-display [displayNeed]="displayNeed"></app-transaction-history-display>
         </div>
     </div>
     <div *ngIf="displayNeed == null">

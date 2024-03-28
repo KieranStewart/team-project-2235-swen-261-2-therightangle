@@ -17,7 +17,7 @@ export class TransactionService {
   constructor(
     private http: HttpClient) { }
 
-  /** GET needs from the server */
+  /** GET transactions from the server */
   getAllTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.transactionUrl)
       .pipe(
@@ -44,14 +44,14 @@ export class TransactionService {
   getTransactions(name: string): Observable<Transaction[]> {
     const url = `${this.transactionUrl}/${name}`;
     return this.http.get<Transaction[]>(url).pipe(
-      tap(_ => this.log(`fetched need name=${name}`)), // notice: deprecated
+      tap(_ => this.log(`fetched transactions for need name=${name}`)), // notice: deprecated
       catchError(this.handleError<Transaction[]>(`getTransactions name=${name}`))
     );
   }
 
   //////// Save methods //////////
 
-  /** POST: add a new need to the server */
+  /** POST: add a new transaction to the server */
   addTransaction(transaction: Transaction): Observable<Transaction> {
     return this.http.post<Transaction>(this.transactionUrl, transaction, this.httpOptions).pipe(
       tap((newTransaction: Transaction) => this.log(`added transaction w/ needName=${newTransaction.needName}`)), // notice: deprecated
