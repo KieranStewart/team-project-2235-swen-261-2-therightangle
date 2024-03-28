@@ -43,13 +43,13 @@ public class Transaction implements Comparable<Transaction> {
 
     /**
      * Constructor for new Transactions coming from the client.
-     * The client does not get to choose the timestamp or id.
+     * The client does not get to choose the timestamp or id,
+     * even if they try to put them in the request.
      * 
      * @param amount
      * @param needName
      */
-    public Transaction(@JsonProperty("amount") double amount,
-    @JsonProperty("needName") String needName) {
+    public Transaction(double amount, String needName) {
         this.amount = amount;
         this.needName = needName;
         this.timestamp = new Date(LocalDate.now().getDayOfMonth(), LocalDate.now().getMonthValue(), LocalDate.now().getYear());
@@ -101,6 +101,13 @@ public class Transaction implements Comparable<Transaction> {
 
     public void setNeedName(String name) {
         this.needName = name;
+    }
+
+    /**
+     * @return If this transaction has its internal order set
+     */
+    public boolean isInitialized() {
+        return id != 0;
     }
 
     /**

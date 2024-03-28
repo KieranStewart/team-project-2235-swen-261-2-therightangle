@@ -50,9 +50,13 @@ public class TransactionController {
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
         LOG.info("POST /transactions " + transaction);
         try {
-            boolean success = transactionDAO.createTransaction(transaction);
+            if(transaction.isInitialized()) {
+                LOG.log(Level.WARNING, "The client is trying to send a Transaction with an ID set.  Don't do this.");
+            }
+            Transaction storeThisTransaction = new Transaction(transaction.getAmount(), transaction.getNeedName());
+            boolean success = transactionDAO.createTransaction(storeThisTransaction);
             if(success) {
-                return new ResponseEntity<Transaction>(transaction, HttpStatus.CREATED);
+                return new ResponseEntity<Transaction>(storeThisTransaction, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

@@ -68,7 +68,7 @@ public class TransactionControllerTest {
     @Test
     public void testCreateTransactionHandleException() throws IOException {
         // Setup
-        Transaction transaction = new Transaction(0, null);
+        Transaction transaction = new Transaction(0, "doesn't matter");
 
         doThrow(new IOException()).when(mockTransactionDAO).createTransaction(transaction); // Stimulate an exception
 
