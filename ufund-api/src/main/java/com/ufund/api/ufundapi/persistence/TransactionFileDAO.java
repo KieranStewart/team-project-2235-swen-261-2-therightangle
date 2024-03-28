@@ -72,6 +72,7 @@ public class TransactionFileDAO implements TransactionDAO {
 
         Transaction[] allTransactions = new Transaction[transactionArrayList.size()];
         transactionArrayList.toArray(allTransactions);
+        Arrays.sort(allTransactions);
         return allTransactions;
     }
 

@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ufund.api.ufundapi.model.Date;
@@ -48,6 +49,9 @@ public class TransactionFileDAOTest {
         testTransactions[0] = new Transaction(1, new Date(1, 1, 2000), "real need", 1);
         testTransactions[1] = new Transaction(2, new Date(1, 1, 2001), "real need", 2);
         testTransactions[2] = new Transaction(3, new Date(1, 2, 2001), "other need", 3);;
+
+        // Array is usually sorted on load
+        Arrays.sort(testTransactions);
 
         // Pretend that the file gives this array when read
         when(mockObjectMapper
@@ -110,7 +114,7 @@ public class TransactionFileDAOTest {
             .when(mockObjectMapper)
                 .writeValue(any(File.class), any(Transaction[].class));
 
-        Transaction transaction = new Transaction(0, null, null, 0);
+        Transaction transaction = new Transaction(0, null, "doesn't matter", 0);
 
         assertThrows(IOException.class,
                         () -> transactionFileDAO.createTransaction(transaction),
@@ -157,6 +161,16 @@ public class TransactionFileDAOTest {
     }
 
     @Test
+    public void testGetTransactionsNeedIsFound() {
+        // Invoke
+        Transaction[] actualTransactions = transactionFileDAO.getTransactions("real need");
+
+        // Analyze
+        assertEquals(2, actualTransactions.length);
+        assertEquals(testTransactions[1], actualTransactions[0]);
+    }
+
+    @Test
     public void testDeleteTransactions() {
         // Invoke
         boolean result = assertDoesNotThrow(() -> transactionFileDAO.deleteTransactionHistory("other need"),
@@ -177,7 +191,7 @@ public class TransactionFileDAOTest {
 
         // Analyze
         assertFalse(result);
-        assertEquals(testTransactions.length, actualTransactions);
+        assertEquals(testTransactions.length, actualTransactions.length);
     }
     
 }
