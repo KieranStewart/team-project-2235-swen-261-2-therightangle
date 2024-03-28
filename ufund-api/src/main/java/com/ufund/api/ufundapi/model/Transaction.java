@@ -22,9 +22,7 @@ public class Transaction implements Comparable<Transaction> {
     @JsonProperty("id") private int id;
 
     /**
-     * This constructor should be used to construct Transactions from
-     * storage into the cache.  All Transactions must be loaded
-     * before trying to save any more Transactions.
+     * This constructor is used in deserialization.
      * @param amount
      * @param timestamp
      * @param needName
@@ -42,9 +40,8 @@ public class Transaction implements Comparable<Transaction> {
     }
 
     /**
-     * Constructor for new Transactions coming from the client.
-     * The client does not get to choose the timestamp or id,
-     * even if they try to put them in the request.
+     * Constructs a transaction with a
+     * valid, new id and the current date.
      * 
      * @param amount
      * @param needName
@@ -96,7 +93,7 @@ public class Transaction implements Comparable<Transaction> {
 
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, amount, timestamp.toString(), needName);
+        return String.format(STRING_FORMAT, amount, timestamp, needName);
     }
 
     public void setNeedName(String name) {

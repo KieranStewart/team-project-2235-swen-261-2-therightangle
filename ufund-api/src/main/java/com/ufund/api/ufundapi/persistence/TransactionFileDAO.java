@@ -113,14 +113,16 @@ public class TransactionFileDAO implements TransactionDAO {
         return true;
     }
 
-    private boolean createTransaction(Transaction transaction, String need) throws IOException {
+    /**
+     * Stores this transaction under this need name.
+     * Does not check if transaction has the right need name.
+     * Does not check if transaction is valid in any way.
+     * @param transaction
+     * @param need
+     * @throws IOException
+     */
+    private void storeTransaction(Transaction transaction, String need) throws IOException {
         synchronized(ledger) {
-            // TODO: If the cupboard can be accessed here, make sure Need is in the cupboard
-            // Right now, only an empty string is invalid
-            if(need.equals("")) {
-                return false;
-            }
-
             if(ledger.containsKey(need)) {
                 ledger.get(need).add(transaction);
             } else {
@@ -129,14 +131,28 @@ public class TransactionFileDAO implements TransactionDAO {
                 ledger.put(need, transactionRecord);
             }
             save();
-            return true;
         }
     }
 
     @Override
-    public boolean createTransaction(Transaction transaction) throws IOException {
-        return createTransaction(transaction, transaction.getNeedName());
+    public Transaction createTransaction(Transaction transaction) throws IOException {
+        String needName = transaction.getNeedName();
+        if(isValidNeedName(needName)) {
+            Transaction storeThis = new Transaction(transaction.getAmount(), needName);
+            storeTransaction(storeThis, needName);
+            return storeThis;
+        }
+        return null;
     }
+
+    /**
+     * TODO: if possible, check that a Need with this name is in the cupboard
+     * @param name Check if this name is valid for a need
+     * @return if it is valid
+     */
+    private boolean isValidNeedName(String name) {
+        return !name.equals("");
+    } 
 
     @Override
     public boolean deleteTransactionHistory(String need) throws IOException {

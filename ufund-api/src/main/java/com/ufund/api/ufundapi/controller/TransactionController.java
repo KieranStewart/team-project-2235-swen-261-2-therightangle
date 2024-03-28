@@ -48,17 +48,16 @@ public class TransactionController {
      */
     @PostMapping("")
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
-        LOG.info("POST /transactions " + transaction);
+        LOG.info(() -> "POST /transactions " + transaction);
         try {
             if(transaction.isInitialized()) {
                 LOG.log(Level.WARNING, "The client is trying to send a Transaction with an ID set.  Don't do this.");
             }
-            Transaction storeThisTransaction = new Transaction(transaction.getAmount(), transaction.getNeedName());
-            boolean success = transactionDAO.createTransaction(storeThisTransaction);
-            if(success) {
-                return new ResponseEntity<Transaction>(storeThisTransaction, HttpStatus.CREATED);
-            } else {
+            Transaction storedTransaction = transactionDAO.createTransaction(transaction);
+            if(storedTransaction == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<Transaction>(storedTransaction, HttpStatus.CREATED);
             }
         } catch (Exception e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());

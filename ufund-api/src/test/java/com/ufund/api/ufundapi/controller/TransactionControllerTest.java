@@ -1,6 +1,7 @@
 package com.ufund.api.ufundapi.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -39,24 +40,28 @@ public class TransactionControllerTest {
     @Test
     public void testCreateTransaction() throws IOException {
         // Setup
-        Transaction transaction = new Transaction(0, "valid need");
+        Transaction transactionFromClient = new Transaction(0, null, "valid need", 0);
         // simulate success
-        when(mockTransactionDAO.createTransaction(transaction)).thenReturn(true);
+        when(mockTransactionDAO.createTransaction(transactionFromClient)).thenReturn(new Transaction(0, "valid need"));
+        Transaction transactionStored;
 
         // Invoke
-        ResponseEntity<Transaction> response = transactionController.createTransaction(transaction);
+        ResponseEntity<Transaction> response = transactionController.createTransaction(transactionFromClient);
+        transactionStored = response.getBody();
 
         // Analyze
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(transaction, response.getBody());
+        assertNotNull(transactionStored);
+        assertEquals(transactionFromClient.getAmount(), transactionStored.getAmount());
+        assertEquals(transactionFromClient.getNeedName(), transactionStored.getNeedName());
     }
 
     @Test
     public void testCreateTransactionFailed() throws IOException {
         // Setup
         Transaction transaction = new Transaction(0, "");
-        // when createTransaction is called, return false simulating failure
-        when(mockTransactionDAO.createTransaction(transaction)).thenReturn(false);
+        // when createTransaction is called, return null simulating failure
+        when(mockTransactionDAO.createTransaction(transaction)).thenReturn(null);
 
         // Invoke
         ResponseEntity<Transaction> response = transactionController.createTransaction(transaction);
@@ -68,7 +73,7 @@ public class TransactionControllerTest {
     @Test
     public void testCreateTransactionHandleException() throws IOException {
         // Setup
-        Transaction transaction = new Transaction(0, "doesn't matter");
+        Transaction transaction = new Transaction(0, null, "doesn't matter", 0);
 
         doThrow(new IOException()).when(mockTransactionDAO).createTransaction(transaction); // Stimulate an exception
 
@@ -181,7 +186,7 @@ public class TransactionControllerTest {
     @Test
     public void testDeleteTransactionHistoryHandleException() throws IOException { // deleteTransaction may throw IOException
         // Setup
-        String needName = "transaction";
+        String needName = "test";
         doThrow(new IOException()).when(mockTransactionDAO).deleteTransactionHistory(needName);
 
         // Invoke
