@@ -149,7 +149,7 @@ public class TransactionFileDAO implements TransactionDAO {
     }
 
     /**
-     * TODO: if possible, check that a Need with this name is in the cupboard
+     * Does not check if name is in the cupboard per design choice.
      * @param name Check if this name is valid for a need
      * @return if it is valid
      */
