@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Need } from '../need';
 import { BasketService } from '../basket.service';
+import { LoginService } from '../login.service';
 
 /**
  * Shows the details for the selected need.
@@ -23,6 +24,14 @@ export class NeedDetailComponent {
 
   removeFromFundingBasket(): void {
     this.basketService.remove(this.displayNeed);
+  }
+
+  /**
+   * Checks if the transactions should be visible.
+   * @returns true if admin, false otherwise
+   */
+  transactionListVisible(): boolean {
+    return true;
   }
 
   // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.
