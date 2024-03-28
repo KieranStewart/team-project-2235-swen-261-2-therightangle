@@ -25,7 +25,7 @@ import com.ufund.api.ufundapi.persistence.TransactionDAO;
  * @author Logan Nickerson
  */
 @RestController
-@RequestMapping("cupboard")
+@RequestMapping("transaction")
 public class TransactionController {
 
     private static final Logger LOG = Logger.getLogger(CupboardController.class.getName());
