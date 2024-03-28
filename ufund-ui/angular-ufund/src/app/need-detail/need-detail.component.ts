@@ -25,9 +25,11 @@ export class NeedDetailComponent {
     this.basketService.remove(this.displayNeed);
   }
 
-  saveNeed(donationAmount:string): void{
-    this.basketService.update(this.displayNeed,donationAmount);
-  }
+  // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.
+  // You can use this if you want a save button instead of automatically linking to the input field.
+  // saveNeed(donationAmount: number): void{
+  //   this.displayNeed.donationAmount = donationAmount;
+  // }
 
   /**
    * additional logic as necessary
