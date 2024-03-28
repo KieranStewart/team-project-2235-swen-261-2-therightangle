@@ -39,7 +39,7 @@ public class TransactionControllerTest {
     @Test
     public void testCreateTransaction() throws IOException {
         // Setup
-        Transaction transaction = new Transaction(0, null, "valid need");
+        Transaction transaction = new Transaction(0, "valid need");
         // simulate success
         when(mockTransactionDAO.createTransaction(transaction)).thenReturn(true);
 
@@ -54,7 +54,7 @@ public class TransactionControllerTest {
     @Test
     public void testCreateTransactionFailed() throws IOException {
         // Setup
-        Transaction transaction = new Transaction(0, null, "");
+        Transaction transaction = new Transaction(0, "");
         // when createTransaction is called, return false simulating failure
         when(mockTransactionDAO.createTransaction(transaction)).thenReturn(false);
 
@@ -68,7 +68,7 @@ public class TransactionControllerTest {
     @Test
     public void testCreateTransactionHandleException() throws IOException {
         // Setup
-        Transaction transaction = new Transaction(0, null, null);
+        Transaction transaction = new Transaction(0, null);
 
         doThrow(new IOException()).when(mockTransactionDAO).createTransaction(transaction); // Stimulate an exception
 
@@ -98,8 +98,8 @@ public class TransactionControllerTest {
         // Setup
         String testNeedName = "test";
         Transaction[] transactionsForTestNeed = new Transaction[] {
-            new Transaction(0, null, testNeedName),
-            new Transaction(0, null, testNeedName)
+            new Transaction(0, testNeedName),
+            new Transaction(0, testNeedName)
         };
         when(mockTransactionDAO.getTransactions(testNeedName)).thenReturn(transactionsForTestNeed);
 
