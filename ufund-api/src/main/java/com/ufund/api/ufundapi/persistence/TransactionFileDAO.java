@@ -43,6 +43,7 @@ public class TransactionFileDAO implements TransactionDAO {
      */
     private ObjectMapper objectMapper;  
     private String filename;
+    private CupboardDAO cupboardDAO;
 
     /**
      * Creates a Transaction File Data Access Object
@@ -52,9 +53,10 @@ public class TransactionFileDAO implements TransactionDAO {
      * 
      * @throws IOException when file cannot be accessed
      */
-    public TransactionFileDAO(@Value("${ledger.file}") String filename, ObjectMapper objectMapper) throws IOException {
+    public TransactionFileDAO(@Value("${ledger.file}") String filename, ObjectMapper objectMapper, CupboardDAO cupboardDAO) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
+        this.cupboardDAO = cupboardDAO;
         load();
     }
 
@@ -149,12 +151,22 @@ public class TransactionFileDAO implements TransactionDAO {
     }
 
     /**
-     * Does not check if name is in the cupboard per design choice.
-     * @param name Check if this name is valid for a need
+     * Checks if need is in the cupboard.
+     * @param name Check if this is an actual need name
      * @return if it is valid
      */
     private boolean isValidNeedName(String name) {
-        return !name.equals("");
+        // Can throw null pointer exception if name is null
+        // CupboardDAO specifies IOException, but that's kind of actually not true.
+        try {
+            Need targetNeed = cupboardDAO.getNeed(name);
+            if(targetNeed == null) {
+                return false;
+            }
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
     } 
 
     @Override

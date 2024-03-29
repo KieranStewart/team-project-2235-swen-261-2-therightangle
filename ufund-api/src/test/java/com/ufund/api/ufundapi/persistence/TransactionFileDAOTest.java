@@ -36,6 +36,7 @@ public class TransactionFileDAOTest {
     TransactionFileDAO transactionFileDAO;
     Transaction[] testTransactions;
     ObjectMapper mockObjectMapper;
+    CupboardDAO mockCupboardDAO;
 
     /**
      * Before each test, we will create and inject a Mock Object Mapper to
@@ -45,6 +46,7 @@ public class TransactionFileDAOTest {
     @BeforeEach
     public void setupTransactionFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
+        mockCupboardDAO = mock(CupboardDAO.class);
         testTransactions = new Transaction[3];
         testTransactions[0] = new Transaction(1, new Date(1, 1, 2000), "real need", 1);
         testTransactions[1] = new Transaction(2, new Date(1, 1, 2001), "real need", 2);
@@ -57,7 +59,7 @@ public class TransactionFileDAOTest {
         when(mockObjectMapper
             .readValue(new File("doesnt_matter.txt"), Transaction[].class))
                 .thenReturn(testTransactions);
-        transactionFileDAO = new TransactionFileDAO("doesnt_matter.txt", mockObjectMapper);
+        transactionFileDAO = new TransactionFileDAO("doesnt_matter.txt", mockObjectMapper, mockCupboardDAO);
     }
 
     @Test
@@ -132,7 +134,7 @@ public class TransactionFileDAOTest {
 
         // Invoke & Analyze
         assertThrows(IOException.class,
-                        () -> new TransactionFileDAO("doesnt_matter.txt", mockObjectMapper),
+                        () -> new TransactionFileDAO("doesnt_matter.txt", mockObjectMapper, mockCupboardDAO),
                         "IOException not thrown");
     }
 
