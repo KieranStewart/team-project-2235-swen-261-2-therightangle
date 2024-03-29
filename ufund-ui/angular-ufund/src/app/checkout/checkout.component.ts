@@ -64,6 +64,7 @@ export class CheckoutComponent implements OnInit{
       amount: need.donationAmount,
       needName: need.name
     };
-    this.transactionService.addTransaction(transaction);
+    // If you don't like and subscribe, it won't get any views (TypeScript moment)
+    this.transactionService.addTransaction(transaction).subscribe().unsubscribe();
   }
 }
