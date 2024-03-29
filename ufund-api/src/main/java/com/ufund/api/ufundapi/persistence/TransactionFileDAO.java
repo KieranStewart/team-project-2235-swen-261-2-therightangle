@@ -156,14 +156,8 @@ public class TransactionFileDAO implements TransactionDAO {
      * @return if it is valid
      */
     private boolean isValidNeedName(String name) {
-        // Can throw null pointer exception if name is null
-        // CupboardDAO specifies IOException, but that's kind of actually not true.
-        try {
-            Need targetNeed = cupboardDAO.getNeed(name);
-            if(targetNeed == null) {
-                return false;
-            }
-        } catch (IOException e) {
+        Need targetNeed = cupboardDAO.getNeed(name);
+        if(targetNeed == null) {
             return false;
         }
         return true;

@@ -18,6 +18,7 @@ import java.util.Arrays;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ufund.api.ufundapi.model.Date;
+import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.model.Transaction;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -67,6 +68,7 @@ public class TransactionFileDAOTest {
         // Setup
         String newNeedName = "new need";
         Transaction transactionFromClient = new Transaction(10, null, newNeedName, 0);
+        when(mockCupboardDAO.getNeed(newNeedName)).thenReturn(new Need(0, 0, newNeedName, newNeedName, null, null, null));
 
         // Invoke
         Transaction createdTransaction = assertDoesNotThrow(() -> transactionFileDAO.createTransaction(transactionFromClient),
@@ -84,6 +86,7 @@ public class TransactionFileDAOTest {
         // Setup
         String validNeedName = "real need";
         Transaction transactionFromClient = new Transaction(10, null, validNeedName, 0);
+        when(mockCupboardDAO.getNeed(validNeedName)).thenReturn(new Need(0, 0, validNeedName, validNeedName, null, null, null));
 
         // Invoke
         Transaction createdTransaction = assertDoesNotThrow(() -> transactionFileDAO.createTransaction(transactionFromClient),
@@ -112,12 +115,15 @@ public class TransactionFileDAOTest {
 
     @Test
     public void testSaveException() throws IOException {
+        // Setup
+        String needName = "valid need";
         doThrow(new IOException())
             .when(mockObjectMapper)
                 .writeValue(any(File.class), any(Transaction[].class));
-
-        Transaction transaction = new Transaction(0, null, "doesn't matter", 0);
-
+        when(mockCupboardDAO.getNeed(needName)).thenReturn(new Need(0, 0, needName, needName, null, null, null));
+        Transaction transaction = new Transaction(0, null, needName, 0);
+        
+        // Invoke and Analyze
         assertThrows(IOException.class,
                         () -> transactionFileDAO.createTransaction(transaction),
                         "IOException not thrown");
