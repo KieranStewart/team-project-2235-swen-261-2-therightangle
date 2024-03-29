@@ -5,7 +5,10 @@ import { Observable, asyncScheduler, scheduled } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Need } from './need';
 
-
+/**
+ * Any method that sends an HTTP request must have its return value
+ * subscribed to for that method to actually execute!
+ */
 @Injectable({ providedIn: 'root' })
 export class NeedService {
 

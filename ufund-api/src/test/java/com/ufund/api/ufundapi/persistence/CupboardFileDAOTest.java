@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -18,6 +19,7 @@ import java.util.Comparator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ufund.api.ufundapi.model.Need;
+import com.ufund.api.ufundapi.model.NeedType;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -43,9 +45,9 @@ public class CupboardFileDAOTest {
     public void setupNeedFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testNeeds = new Need[3];
-        testNeeds[0] = new Need(0, 0, "update me", "not update", null, null, "donation");
-        testNeeds[1] = new Need(0, 0, "Thing One", null, null, null, "donation");
-        testNeeds[2] = new Need(0, 0, "Thing Two", null, null, null, "donation");
+        testNeeds[0] = new Need(0, 0, "update me", "not update", null, null, NeedType.DONATION);
+        testNeeds[1] = new Need(0, 0, "Thing One", null, null, null, NeedType.DONATION);
+        testNeeds[2] = new Need(0, 0, "Thing Two", null, null, null, NeedType.DONATION);
 
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the need array above
@@ -58,14 +60,14 @@ public class CupboardFileDAOTest {
     @Test
     public void testCreateNeed() {
         // Setup
-        Need need = new Need(0, 0, "new name", null, null, null, "donation");
+        Need need = new Need(0, 0, "new name", null, null, null, NeedType.DONATION);
 
         // Invoke
-        boolean result = assertDoesNotThrow(() -> cupboardFileDAO.createNeed(need),
+        boolean createNeedSuccess = assertDoesNotThrow(() -> cupboardFileDAO.createNeed(need),
                                 "Unexpected exception thrown");
-
+        
         // Analyze
-        assertTrue(result);
+        assertTrue(createNeedSuccess);
         Need actual = cupboardFileDAO.getNeed(need.getName());
         assertEquals(actual.getName(), need.getName());
         assertEquals(actual.getDeadline(), need.getDeadline());
@@ -74,14 +76,27 @@ public class CupboardFileDAOTest {
         assertEquals(actual.getProgress(), need.getProgress());
         assertEquals(actual.getVolunteerDates(), need.getVolunteerDates());
     }
+    
+    @Test 
+    public void testCreateDuplicateNeed() {
+        // Setup
+        Need need = new Need(0, 0, "Thing One", null, null, null, NeedType.DONATION);
+
+        // Invoke
+        boolean createNeedSuccess = assertDoesNotThrow(() -> cupboardFileDAO.createNeed(need),
+                                "Unexpected exception thrown");
+
+        // Analyze
+        assertFalse(createNeedSuccess);
+    }
 
     @Test
-    public void testSaveException() throws IOException{
+    public void testSaveException() throws IOException {
         doThrow(new IOException())
             .when(mockObjectMapper)
                 .writeValue(any(File.class), any(Need[].class));
 
-        Need need = new Need(0, 0, "New Need", null, null, null, "donation");
+        Need need = new Need(0, 0, "New Need", null, null, null, NeedType.DONATION);
 
         assertThrows(IOException.class,
                         () -> cupboardFileDAO.createNeed(need),
@@ -134,11 +149,20 @@ public class CupboardFileDAOTest {
             assertEquals(testNeeds[i].toString(), actualNeeds[i].toString());
         }
     }
+
+    @Test
+    public void testGetNeedNotFound() {
+        // Invoke
+        Need need = cupboardFileDAO.getNeed("fake need");
+
+        // Analyze
+        assertNull(need);
+    }
     
     @Test
     public void testUpdateNeed() {
         // Setup
-        Need need = new Need(0, 0, "update me", "updated", null, null, "donation");
+        Need need = new Need(0, 0, "update me", "updated", null, null, NeedType.DONATION);
 
         // Invoke
         Need result = assertDoesNotThrow(() -> cupboardFileDAO.updateNeed(need),
@@ -151,9 +175,9 @@ public class CupboardFileDAOTest {
     }
 
         @Test
-    public void testUpdateHeroNotFound() {
+    public void testUpdateNeedNotFound() {
         // Setup
-        Need need = new Need(0, 0, "unavaliable",null , null, null, "donation");
+        Need need = new Need(0, 0, "unavaliable",null , null, null, NeedType.DONATION);
 
         // Invoke
         Need result = assertDoesNotThrow(() -> cupboardFileDAO.updateNeed(need),
@@ -161,5 +185,31 @@ public class CupboardFileDAOTest {
 
         // Analyze
         assertNull(result);
+    }
+
+    @Test
+    public void testDeleteNeed() {
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> cupboardFileDAO.deleteNeed("Thing One"),
+                            "Unexpected exception thrown");
+
+        // Analzye
+        assertTrue(result);
+        // We check the internal hash map size against the length
+        // of the test needs array - 1 (because of the delete)
+        // Because the needs attribute of CupboardFileDAO is package private we can access it directly
+        // I don't know why they are encouraging this inappropriate and violent behavior (this should be private, we should test it a different way)
+        assertEquals(testNeeds.length - 1, cupboardFileDAO.needs.size());
+    }
+
+    @Test
+    public void testDeleteNeedNotFound() {
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> cupboardFileDAO.deleteNeed("fake need"),
+                                                "Unexpected exception thrown");
+
+        // Analyze
+        assertFalse(result);
+        assertEquals(testNeeds.length, cupboardFileDAO.needs.size());
     }
 }

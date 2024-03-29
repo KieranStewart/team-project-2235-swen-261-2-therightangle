@@ -114,11 +114,15 @@ public class CupboardFileDAO implements CupboardDAO {
 
     @Override
     public boolean deleteNeed(String name) throws IOException {
-        synchronized(needs)
-        {
-            Need out = needs.remove(name);
+        synchronized(needs) {
+            Need deletedNeed = needs.remove(name);
             save();
-            return !(out == null);
+            if(deletedNeed == null) {
+                return false; // deletedNeed == null means nothing was found
+            } else {
+                return true;
+            }
+            
         }
     }
 
