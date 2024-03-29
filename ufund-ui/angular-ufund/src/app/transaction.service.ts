@@ -28,15 +28,16 @@ export class TransactionService {
 
   /** GET transactions by need name. Return `undefined` when name not found */
   getTransactionsNo404<Data>(name: string): Observable<Transaction[]> {
-    const url = `${this.transactionUrl}/?name=${name}`;
+    const url = `${this.transactionUrl}/${name}`;
+    console.log(url);
     return this.http.get<Transaction[]>(url)
       .pipe(
-        map(transactions => transactions), // returns ????????
+        map(transactions => transactions), // The right side is the actual returned thing. The left side is... all Transactions???
         tap(h => { // notice: deprecated
           const outcome = h ? 'fetched' : 'did not find';
           this.log(`${outcome} transactions for need name=${name}`);
         }),
-        catchError(this.handleError<Transaction[]>(`getTransactions name=${name}`))
+        catchError(this.handleErrorPolitely<Transaction[]>(`getTransactions name=${name}`))
       );
   }
 
@@ -88,6 +89,24 @@ export class TransactionService {
       return scheduled([result as T], asyncScheduler);
     };
   }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   *
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleErrorPolitely<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.log("The following response was received, but it was intentional.  Operation: " + operation);
+      console.log(error);
+
+      // Let the app keep running by returning an empty result.
+      return scheduled([result as T], asyncScheduler);
+    };
+  }
+
 
   /** 
    * Log message to console

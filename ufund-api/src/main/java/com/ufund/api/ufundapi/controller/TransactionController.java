@@ -74,6 +74,7 @@ public class TransactionController {
     @GetMapping("/{name}")
     public ResponseEntity<Transaction[]> getTransactions(@PathVariable String name)
     {
+        LOG.log(Level.INFO, "Using the right method to get " + name);
         try {
             Transaction[] transactions = transactionDAO.getTransactions(name);
             if (transactions.length == 0) {

@@ -13,9 +13,9 @@ export class TransactionHistoryDisplayComponent {
   constructor(private transactionService: TransactionService) {
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     const that = this;
-    this.transactionService.getTransactions(this.displayNeed.name).subscribe({
+    this.transactionService.getTransactionsNo404(this.displayNeed.name).subscribe({
       next(transactionArray) {
         that.transactions = transactionArray;
       }

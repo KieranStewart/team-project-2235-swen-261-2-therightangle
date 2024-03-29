@@ -1,2 +1,4 @@
 <h1>Transactions:</h1>
-<li *ngFor="let transaction of transactions">hi</li>
+<li *ngFor="let transaction of transactions"> 
+    ${{transaction.amount}} at {{transaction.timestamp?.month}}/{{transaction.timestamp?.day}}/{{transaction.timestamp?.year}} (for {{transaction.needName}})
+</li>
