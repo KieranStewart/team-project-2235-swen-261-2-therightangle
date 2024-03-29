@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { TransactionService } from '../transaction.service';
 import { Transaction } from '../transaction';
 import { Need } from '../need';
-import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-transaction-history-display',

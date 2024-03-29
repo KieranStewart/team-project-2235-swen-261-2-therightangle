@@ -9,6 +9,6 @@ export interface Transaction {
     needName: string;
 
     // Information set by the backend only
-    id: number;
-    timestamp: Date;
+    id?: number;
+    timestamp?: Date;
 }

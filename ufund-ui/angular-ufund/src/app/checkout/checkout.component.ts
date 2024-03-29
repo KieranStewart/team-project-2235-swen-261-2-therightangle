@@ -5,6 +5,8 @@ import { BasketService } from '../basket.service';
 import { Router } from '@angular/router';
 import { NeedService } from '../need.service';
 import { Need } from '../need';
+import { TransactionService } from '../transaction.service';
+import { Transaction } from '../transaction';
 
 @Component({
   selector: 'app-checkout',
@@ -14,7 +16,7 @@ import { Need } from '../need';
 
 export class CheckoutComponent implements OnInit{
 
-  constructor(private basketService: BasketService, private router: Router, private needService: NeedService) { }
+  constructor(private basketService: BasketService, private router: Router, private needService: NeedService, private transactionService: TransactionService) { }
   
   total: number = 0;
 
@@ -57,5 +59,11 @@ export class CheckoutComponent implements OnInit{
   private recordPayment(need: Need): void {
     need.progress += Number(need.donationAmount);
     this.needService.updateNeed(need).subscribe();
+    let transaction: Transaction;
+    transaction = {
+      amount: need.donationAmount,
+      needName: need.name
+    };
+    this.transactionService.addTransaction(transaction);
   }
 }
