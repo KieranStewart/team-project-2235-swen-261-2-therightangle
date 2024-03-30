@@ -13,11 +13,12 @@ export class TagCreationComponent {
   submitted = false;
   newTag!: Tag;
   applyable = false;
+  TagInstruction: String = '';
 
 constructor(private tagService: TagService) {}
 
 
-createTag(nameInput: string, tagDescriptionInput: string, tagInstructionInput: string): void{
+createTag(nameInput: string, tagDescriptionInput: string,tagInstructionInput: string): void{
   const that = this;
   this.newTag = {name: nameInput, tagDetail: tagDescriptionInput, tagInstruction: tagInstructionInput, applyable: this.applyable} as Tag;
   this.tagService.addTag(this.newTag).subscribe({
