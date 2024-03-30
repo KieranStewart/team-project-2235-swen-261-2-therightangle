@@ -1,0 +1,10 @@
+<h2>Tag Name: <input type="text" #nameInput></h2>
+<h2>Tag Description: <input type="text" #tagDescriptionInput></h2>
+<h2>Tag Instruction: <input type="text" #tagInstructionInput></h2>
+<input type="checkbox" (click)="toggleApplyable()">
+Applyable
+
+<button type="submit" (click)="createTag(nameInput.value,tagDescriptionInput.value,tagInstructionInput.value)"><h3>Create new Tag</h3></button>
+
+<h2> {{errorMessage}} </h2>
+<div *ngIf="submitted"> submitted </div>

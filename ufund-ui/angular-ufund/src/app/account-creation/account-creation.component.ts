@@ -18,7 +18,7 @@ export class AccountCreationComponent {
 
   constructor(private loginService: LoginService,private loginComponent: LoginComponent) {}
 
-  create(usernameInput: string, passwordInput: string, passwordCheckInput: string, emailInput: string): void {
+  createAccount(usernameInput: string, passwordInput: string, passwordCheckInput: string, emailInput: string): void {
       var invalidEmailDomain: boolean;
       invalidEmailDomain = true;
       /* Checks all valid email extensions to see if the emailInput is valid */
