@@ -25,20 +25,24 @@ export class CheckoutComponent implements OnInit{
 
   displayCheckout(): boolean {
     this.getTotal();
-    for (let item of this.basketService.contents)
-    {
-      if (item.type == "VOLUNTEER")
-        this.total_h = this.total_h + +item.deadline
-      if (item.type == "DONATION")
-        this.total = this.total + +item.donationAmount;
-    }
-    return true;
+    return this.total + this.total_h > 0;
   }
 
   getTotal(): void {
-    for (const item of this.basketService.contents)
+    this.total = 0;
+    this.total_h = 0;
+    for (let item of this.basketService.contents)
     {
-      this.total = this.total + +item.donationAmount;
+      if (item.type == "VOLUNTEER") {
+        this.total_h = this.total_h + +this.getVolunteerHours(item);
+      }
+      else if (item.type == "DONATION"){
+        this.total = this.total + parseFloat(item.donationAmount.toString());
+      }
+      else
+      {
+        console.log("One of the items in the cart has no type!");
+      }
     }
   }
   
@@ -65,6 +69,18 @@ export class CheckoutComponent implements OnInit{
    */
   makePayment(): boolean {
     return true;
+  }
+
+  private getVolunteerHours(item: Need): number {
+    let out:number = 0;
+    for (let date_item of item.volunteerDates)
+      {
+        if (date_item.filled)
+        {
+          out ++;
+        }
+      }
+    return out;
   }
 
   private recordPayment(need: Need): void {
