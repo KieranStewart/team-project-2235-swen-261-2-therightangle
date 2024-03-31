@@ -11,4 +11,16 @@ public class VolunteerDate extends Date {
     public boolean getFilled() {
         return this.filled;
     }
+
+    public void setFilled(boolean filled) {
+        this.filled = filled;
+    }
+
+    @Override
+    public String toString() {
+        String out = super.toString();
+        if (this.filled)
+            return out + ":filled";
+        return out + ":empty";
+    }
 }
