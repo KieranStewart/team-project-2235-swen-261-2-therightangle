@@ -17,4 +17,5 @@ export interface Need {
     // Client-exclusive state
     inFundingBasket: boolean;
     donationAmount: number;
+    selectedVolunteerDates: VolunteerDate[];
 }
