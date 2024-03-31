@@ -17,9 +17,22 @@ export class CheckoutComponent implements OnInit{
   constructor(private basketService: BasketService, private router: Router, private needService: NeedService) { }
   
   total: number = 0;
+  total_h: number = 0;
 
   ngOnInit(): void {
     this.getTotal();
+  }
+
+  displayCheckout(): boolean {
+    this.getTotal();
+    for (let item of this.basketService.contents)
+    {
+      if (item.type == "VOLUNTEER")
+        this.total_h = this.total_h + +item.deadline
+      if (item.type == "DONATION")
+        this.total = this.total + +item.donationAmount;
+    }
+    return true;
   }
 
   getTotal(): void {

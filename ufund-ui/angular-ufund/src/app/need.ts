@@ -1,4 +1,5 @@
 import { Date } from "./date";
+import { VolunteerDate } from "./volunteer-date";
 
 /**
  * A way to store information about a need
@@ -9,7 +10,7 @@ export interface Need {
     description: String;
     goal: number;
     progress: number;
-    volunteerDates: Date;
+    volunteerDates: VolunteerDate;
     deadline: Date;
     type: String;
 
