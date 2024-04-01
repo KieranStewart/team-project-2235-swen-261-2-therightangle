@@ -38,6 +38,17 @@ public class Account {
         this.isAdmin = isAdmin;
     }
 
+    public Account(@JsonProperty("name") String name,
+    @JsonProperty("password") String password,
+    @JsonProperty("email") String email,
+    @JsonProperty("isAdmin") boolean isAdmin) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.tags = new Tag[0];
+        this.isAdmin = isAdmin;
+    }
+
     public static String getStringFormat() {
         return STRING_FORMAT;
     }

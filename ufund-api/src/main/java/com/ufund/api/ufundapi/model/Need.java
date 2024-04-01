@@ -46,6 +46,23 @@ public class Need {
         this.tags = tags;
     }
 
+    public Need(@JsonProperty("goal") int goal, 
+    @JsonProperty("progress") int progress, 
+    @JsonProperty("name") String name, 
+    @JsonProperty("description") String description, 
+    @JsonProperty("volunteer dates") Date[] volunteerDates, 
+    @JsonProperty("deadline") Date deadline, 
+    @JsonProperty("type") NeedType type) {
+        this.goal = goal;
+        this.progress = progress;
+        this.name = name;
+        this.description = description;
+        this.volunteerDates = volunteerDates;
+        this.deadline = deadline;
+        this.type = type;
+        this.tags = new Tag[0];
+    }
+
     public void setName(String name) {this.name = name;}
 
     public String getName() {return name;}
