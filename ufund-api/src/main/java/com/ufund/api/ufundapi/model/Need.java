@@ -53,14 +53,7 @@ public class Need {
     @JsonProperty("volunteer dates") Date[] volunteerDates, 
     @JsonProperty("deadline") Date deadline, 
     @JsonProperty("type") NeedType type) {
-        this.goal = goal;
-        this.progress = progress;
-        this.name = name;
-        this.description = description;
-        this.volunteerDates = volunteerDates;
-        this.deadline = deadline;
-        this.type = type;
-        this.tags = new Tag[0];
+        this(goal, progress, name, description, volunteerDates, deadline, type, new Tag[0]);
     }
 
     public void setName(String name) {this.name = name;}

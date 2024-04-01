@@ -42,11 +42,7 @@ public class Account {
     @JsonProperty("password") String password,
     @JsonProperty("email") String email,
     @JsonProperty("isAdmin") boolean isAdmin) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.tags = new Tag[0];
-        this.isAdmin = isAdmin;
+        this(name, password, email, new Tag[0], isAdmin);
     }
 
     public static String getStringFormat() {
