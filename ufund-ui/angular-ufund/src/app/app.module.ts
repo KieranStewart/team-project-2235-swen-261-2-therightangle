@@ -17,6 +17,8 @@ import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
 import { HomeViewComponent } from './home-view/home-view.component';
 import { ConfirmationViewComponent } from './confirmation-view/confirmation-view.component';
 import { TagCreationComponent } from './tag-creation/tag-creation.component';
+import { UserComponent } from './user/user.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,9 @@ import { TagCreationComponent } from './tag-creation/tag-creation.component';
     CheckoutViewComponent,
     HomeViewComponent,
     ConfirmationViewComponent,
-    TagCreationComponent
+    TagCreationComponent,
+    UserComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

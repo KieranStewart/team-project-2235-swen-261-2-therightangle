@@ -15,7 +15,9 @@
 </div>
     <textarea [disabled]="!applyable" type="text" cols="40" rows="10" #tagInstructionInput></textarea>
 
+<div>
 <button type="submit" (click)="createTag(nameInput.value,tagDescriptionInput.value, tagInstructionInput.value)"><h3>Create new Tag</h3></button>
+</div>
 
 <h2> {{errorMessage}} </h2>
 <div *ngIf="submitted"> submitted </div>
