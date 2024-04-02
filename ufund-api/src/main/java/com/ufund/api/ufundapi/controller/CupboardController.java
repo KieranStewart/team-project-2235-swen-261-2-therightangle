@@ -180,6 +180,7 @@ public class CupboardController {
     @DeleteMapping("/{name}")
     public ResponseEntity<Need> deleteNeed(@PathVariable String name)
     {
+        if(name != null) LOG.info("DELETE /" + name);
         try {
             if (cupboardDao.deleteNeed(name))
                 return new ResponseEntity<Need>(HttpStatus.OK);
