@@ -2,22 +2,43 @@
     <p>Detail section</p>
     <div *ngIf="displayNeed != null">
         <!-- Display need information -->
-        <h3>{{displayNeed.name}}</h3> 
+        <h3>{{displayNeed.name}}</h3>
         <h5>Completion: {{displayNeed.progress}} - {{displayNeed.goal}}</h5>
+
+        <h4>Need's Tags:</h4>
+        <div class="btn-group">
+            <div *ngFor="let item of displayNeed.tags">
+                <button (click)="removeTag(item)">{{item}}</button>
+            </div>
+        </div>
+
+        <button *ngIf="!displayNeed.inFundingBasket" (click)="showTagList()">Add new Tag</button>
+
+        <div *ngIf="showTags != false">
+            <h4>All tags avaliable to be added to this need:</h4>
+            <div class="btn-group">
+                <div *ngFor="let item of tagManagerContent">
+                    <button (click)="addTag(item)">{{item}}</button>
+                </div>
+            </div>
+        </div>
+
+        <h4>{{tagMessage}}</h4>
+
         <h4>Description:</h4>
         <p>
-            {{displayNeed.description}}    
+            {{displayNeed.description}}
         </p>
         <h5>Ends on {{displayNeed.deadline}}</h5>
         <!-- If it isn't in the basket, allow it to be added -->
-        <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">[+]</button>
+        <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">Add to funding basket</button>
         <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
         <div *ngIf="displayNeed.inFundingBasket">
             <!-- Starter code for the Donate Time story.  Good luck! -->
             <label for="donation-amount">Donation amount: </label>
-            <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0" #donationAmount/>
+            <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0" #donationAmount />
             <!-- <button (click)="saveNeed(donationAmount.value)"> Save </button> -->
-            <button (click)="removeFromFundingBasket()">[Remove from funding basket]</button>
+            <button (click)="removeFromFundingBasket()">Remove from funding basket</button>
         </div>
     </div>
     <div *ngIf="displayNeed == null">

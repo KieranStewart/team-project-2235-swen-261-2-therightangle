@@ -1,62 +1,26 @@
 [
     {
-        "name": "test tag",
-        "tagDetail": "asdf",
-        "tagInstruction": "asdf",
+        "name": "temp 1",
+        "tagDetail": "test of the tags",
+        "tagInstruction": "asdfasdf",
         "applyable": true
     },
     {
-        "name": "test 4",
-        "tagDetail": "asdfasdf",
-        "tagInstruction": "",
-        "applyable": true
-    },
-    {
-        "name": "test 3",
-        "tagDetail": "asdfasdfadsf",
-        "tagInstruction": "",
-        "applyable": true
-    },
-    {
-        "name": "asdfasdfasdf",
-        "tagDetail": "asdfasdfadf",
+        "name": "temp",
+        "tagDetail": "test of the tags",
         "tagInstruction": "",
         "applyable": false
-    },
-    {
-        "name": "test 2",
-        "tagDetail": "asdfasdf",
-        "tagInstruction": "",
-        "applyable": true
     },
     {
         "name": "public",
-        "tagDetail": "Thia tag is for needs that are public for all users to see.",
+        "tagDetail": "This tag is for needs that are public for all users to see.",
         "tagInstruction": "",
         "applyable": false
     },
     {
-        "name": "asdfadsf",
-        "tagDetail": "asdfasdf",
+        "name": "admin",
+        "tagDetail": "This tag is for the admin to see all of the needs.",
         "tagInstruction": "",
-        "applyable": false
-    },
-    {
-        "name": "asdfadf",
-        "tagDetail": "asdfadsf",
-        "tagInstruction": "",
-        "applyable": false
-    },
-    {
-        "name": "INSTRUCTION TEST",
-        "tagDetail": "asdfasdfadf",
-        "tagInstruction": "",
-        "applyable": true
-    },
-    {
-        "name": "test need",
-        "tagDetail": null,
-        "tagInstruction": null,
         "applyable": false
     }
 ]

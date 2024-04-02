@@ -13,7 +13,7 @@ export interface Need {
     volunteerDates: Date;
     deadline: Date;
     type: String;
-    tags: Tag;
+    tags: String[];
 
     // Client-exclusive state
     inFundingBasket: boolean;
