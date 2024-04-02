@@ -5,6 +5,5 @@
     using the need component.  It is up to the cupboard story person
     to go on from here.
 -->
-<need-button 
-*ngFor="let thisNeed of cupboard"
-[need]="thisNeed"></need-button>
+<need-button *ngFor="let thisNeed of cupboard" [need]="thisNeed"></need-button>
+<app-need-detail [displayNeed]="needCacheService.selectedNeed"></app-need-detail>
