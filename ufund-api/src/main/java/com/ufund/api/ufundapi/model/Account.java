@@ -73,11 +73,11 @@ public class Account {
         this.email = email;
     }
 
-    public String[] getTags() {
+    public Tag[] getTags() {
         return this.tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(Tag[] tags) {
         this.tags = tags;
     }
 
