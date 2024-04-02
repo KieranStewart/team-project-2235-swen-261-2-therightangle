@@ -5,6 +5,6 @@
         <button (click)="showDetails(account)">{{account.name}} </button>
     </div>
 </div>
-<div>
+<div *ngIf="accountCasheService.selectedAccount != null">
     <app-user-detail [displayAccount]="accountCasheService.selectedAccount"></app-user-detail>
 </div>
