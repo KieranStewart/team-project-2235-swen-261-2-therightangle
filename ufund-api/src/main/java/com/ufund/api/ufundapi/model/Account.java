@@ -23,13 +23,13 @@ public class Account {
     @JsonProperty("name") private String name;
     @JsonProperty("password") private String password;
     @JsonProperty("email") private String email;
-    @JsonProperty("tags") private String[] tags;
+    @JsonProperty("tags") private Tag[] tags;
     @JsonProperty("isAdmin") private boolean isAdmin;
 
     public Account(@JsonProperty("name") String name,
     @JsonProperty("password") String password,
     @JsonProperty("email") String email,
-    @JsonProperty("tags") String[] tags,
+    @JsonProperty("tags") Tag[] tags,
     @JsonProperty("isAdmin") boolean isAdmin) {
         this.name = name;
         this.password = password;
