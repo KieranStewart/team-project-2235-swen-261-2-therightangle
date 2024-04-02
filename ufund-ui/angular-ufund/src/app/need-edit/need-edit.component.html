@@ -8,8 +8,10 @@
     <div class="date-edit"> 
         <label for="deadline-day">Day: </label>
         <input id="deadline-day" type="text" [(ngModel)]="currentNeed.deadline.day" placeholder="{{currentNeed.deadline.day}}"/>
+        <br>
         <label for="deadline-month">Month: </label>
         <input id="deadline-month" type="text" [(ngModel)]="currentNeed.deadline.month" placeholder="{{currentNeed.deadline.month}}"/>
+        <br>
         <label for="deadline-year">Year: </label>
         <input id="deadline-year" type="text" [(ngModel)]="currentNeed.deadline.year" placeholder="{{currentNeed.deadline.year}}"/>
     </div>
@@ -17,9 +19,30 @@
     <label for="description">Description: </label>
     <textarea type="text" id="description" cols="40" rows="10" [(ngModel)]="currentNeed.description" placeholder="{{currentNeed.description}}"></textarea>
     
-    
+    <div *ngIf="currentNeed.type == validTypes[0]"> <!-- donation -->
+        <label for="goal">Funding Goal: </label>
+        <input id="goal" type="text" [(ngModel)]="currentNeed.goal" placeholder="{{currentNeed.goal}}"/>
+    </div>
 
-    <h3>Volunteer Dates</h3>
+    <div *ngIf="currentNeed.type == validTypes[1]"> <!-- volunteer -->
+        <h3>Volunteer Dates</h3>
+
+        <div *ngFor="let date of currentNeed.volunteerDates" class="date-edit">
+            <label for="day">Day: </label>
+            <input id="day" type="text" [(ngModel)]="date.day" placeholder="{{date.day}}"/>
+            <br>
+            <label for="month">Month: </label>
+            <input id="month" type="text" [(ngModel)]="date.month" placeholder="{{date.month}}"/>
+            <br>
+            <label for="year">Year: </label>
+            <input id="year" type="text" [(ngModel)]="date.year" placeholder="{{date.year}}"/>
+        </div>
+
+        <button type="button" (click)="addNewVolunteerDate()">Add date</button>
+        <button type="button" (click)="removeVolunteerDate()">Remove last date</button>
+    </div>
+
+    
 
     <button type=button id="enterButton" (input)="updateNeed()">Update</button>
     

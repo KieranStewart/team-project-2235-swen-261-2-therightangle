@@ -14,10 +14,12 @@ import { take } from "rxjs";
 export class NeedEditComponent implements OnInit {
 
     validTypes: String[] = ["donation", "volunteer"];
+    private rollbackNeed!: Need;
 
     constructor(private needService: NeedService) {}
 
     ngOnInit(): void {
+        this.rollbackNeed = JSON.parse(JSON.stringify(this.currentNeed));
         // Fallback code for if something is null in the backend
         if(this.currentNeed != null) {
             if(this.currentNeed.deadline == null) {
@@ -110,7 +112,15 @@ export class NeedEditComponent implements OnInit {
             }
         }
 
-        return false;
+        return true;
+    }
+
+    addNewVolunteerDate(): void {
+        this.currentNeed.volunteerDates.push({day: 0, month: 0, year: 0});
+    }
+
+    removeVolunteerDate(): void {
+        this.currentNeed.volunteerDates.pop();
     }
 
 }
