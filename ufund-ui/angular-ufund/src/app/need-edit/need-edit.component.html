@@ -14,9 +14,12 @@
         <input id="deadline-year" type="text" [(ngModel)]="currentNeed.deadline.year" placeholder="{{currentNeed.deadline.year}}"/>
     </div>
 
+    <label for="description">Description: </label>
     <textarea type="text" id="description" cols="40" rows="10" [(ngModel)]="currentNeed.description" placeholder="{{currentNeed.description}}"></textarea>
     
+    
 
+    <h3>Volunteer Dates</h3>
 
     <button type=button id="enterButton" (input)="updateNeed()">Update</button>
     
