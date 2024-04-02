@@ -13,6 +13,11 @@ import { NeedService } from '../need.service';
   styleUrls: ['./need-detail.component.css']
 })
 export class NeedDetailComponent {
+
+  constructor(
+    private basketService: BasketService,
+    private needService: NeedService) {}
+  
   @Input()
   displayNeed!: Need;
   tagManagerContent: String[];
@@ -61,6 +66,9 @@ export class NeedDetailComponent {
     }
   }
 
+  removeFromCupboard(): void {
+    this.needService.deleteNeed(this.displayNeed.name);
+  }
   // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.
   // You can use this if you want a save button instead of automatically linking to the input field.
   // saveNeed(donationAmount: number): void{
