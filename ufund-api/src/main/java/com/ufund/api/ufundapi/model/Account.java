@@ -1,10 +1,7 @@
 package com.ufund.api.ufundapi.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ufund.api.ufundapi.controller.TagController;
-import com.ufund.api.ufundapi.persistence.TagDAO;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 /**
@@ -43,12 +40,9 @@ public class Account {
         this.isAdmin = isAdmin;
     }
 
-    // public Account(@JsonProperty("name") String name,
-    // @JsonProperty("password") String password,
-    // @JsonProperty("email") String email,
-    // @JsonProperty("isAdmin") boolean isAdmin) {
-    //     this(name, password, email, new Tag[0], isAdmin);
-    // }
+    public Account(String name, String password, String email, boolean isAdmin) {
+        this(name, password, email, new ArrayList<String>(), isAdmin);
+    }
 
     public static String getStringFormat() {
         return STRING_FORMAT;
