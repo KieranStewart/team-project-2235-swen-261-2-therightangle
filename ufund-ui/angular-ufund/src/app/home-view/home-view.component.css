@@ -9,6 +9,7 @@
     box-sizing: border-box; /* Include padding in the width calculation */
 }
 
+/* Used for clear search results */
 .red-button {
     background-color: #a00b00; /* Red */
     color: white;
