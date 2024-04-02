@@ -1,7 +1,6 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Need } from "../need";
 import { NeedService } from "../need.service";
-import { LoginService } from "../login.service";
 
 /**
  * Manager is able to make changes to need
@@ -11,8 +10,27 @@ import { LoginService } from "../login.service";
     templateUrl: './need-edit.component.html',
     styleUrls: ['./need-edit.component.css']
 })
-export class NeedEditComponent {
-    constructor(private needService: NeedService, public loginService: LoginService) {}
+export class NeedEditComponent implements OnInit {
+
+    constructor(private needService: NeedService) {}
+
+    ngOnInit(): void {
+        // Fallback code for if something is null in the backend
+        if(this.currentNeed != null) {
+            if(this.currentNeed.deadline == null) {
+                this.currentNeed.deadline = {day: 0, month: 0, year: 0};
+            }
+            if(this.currentNeed.description == null) {
+                this.currentNeed.description = "";
+            }
+            if(this.currentNeed.volunteerDates == null) {
+                this.currentNeed.volunteerDates = [];
+            }
+            if(this.currentNeed.type == null) {
+                this.currentNeed.type = "donation";
+            }
+        }
+    }
 
     @Input() currentNeed!: Need;
     errorText: string = "";

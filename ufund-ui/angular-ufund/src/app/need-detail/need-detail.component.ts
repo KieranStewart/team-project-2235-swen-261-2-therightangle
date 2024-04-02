@@ -19,7 +19,7 @@ export class NeedDetailComponent {
 
   tagManagerContent: String[];
   showTags = false;
-  tagMessage = ""
+  tagMessage = "";
 
   constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService, public loginService: LoginService) {
     this.tagManagerContent = []

@@ -2,8 +2,20 @@
     <p>Edit Need</p>
 
     <!---- Display editing options -->
-    <input type="text" [(ngModel)]="currentNeed.name" placeholder="{{currentNeed.name}}"/>
-    <input type="text" id="textInput" placeholder="{{currentNeed.name}}">
+    <label for="name">Name: </label>
+    <input id="name" type="text" [(ngModel)]="currentNeed.name" placeholder="{{currentNeed.name}}"/>
+    <h3>Deadline</h3>
+    <div class="date-edit"> 
+        <label for="deadline-day">Day: </label>
+        <input id="deadline-day" type="text" [(ngModel)]="currentNeed.deadline.day" placeholder="{{currentNeed.deadline.day}}"/>
+        <label for="deadline-month">Month: </label>
+        <input id="deadline-month" type="text" [(ngModel)]="currentNeed.deadline.month" placeholder="{{currentNeed.deadline.month}}"/>
+        <label for="deadline-year">Year: </label>
+        <input id="deadline-year" type="text" [(ngModel)]="currentNeed.deadline.year" placeholder="{{currentNeed.deadline.year}}"/>
+    </div>
+
+    <textarea type="text" id="description" cols="40" rows="10" [(ngModel)]="currentNeed.description" placeholder="{{currentNeed.description}}"></textarea>
+    
 
 
     <button type=button id="enterButton" (input)="updateNeed()">Update</button>
