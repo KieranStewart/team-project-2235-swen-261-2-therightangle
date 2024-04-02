@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Tag } from '../tag';
 import { TagService } from '../tags.service'
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tag-creation',
@@ -14,7 +14,7 @@ export class TagCreationComponent {
   newTag!: Tag;
   applyable = false;
 
-constructor(private tagService: TagService) {}
+constructor(private tagService: TagService, private router: Router) {}
 
 
 createTag(nameInput: string, tagDescriptionInput: string,tagInstructionInput: string): void{
@@ -33,8 +33,10 @@ createTag(nameInput: string, tagDescriptionInput: string,tagInstructionInput: st
         that.newTag = newTag;
         that.submitted = true;
         that.errorMessage = '';
+        that.router.navigate(['/']);
       }
     }
+    
   })
 }
 }

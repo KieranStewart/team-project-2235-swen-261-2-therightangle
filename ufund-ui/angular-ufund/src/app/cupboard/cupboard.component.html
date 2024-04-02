@@ -8,3 +8,4 @@
 <need-button 
 *ngFor="let thisNeed of cupboard"
 [need]="thisNeed"></need-button>
+<app-need-detail [displayNeed]="needCacheService.selectedNeed"></app-need-detail>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Tag } from "./tag"
 import { TagService } from './tags.service';
+import { Observable, Subscriber } from 'rxjs';
 
 /**
  * This service handles tags relative to user accounts and needs
@@ -9,17 +10,19 @@ import { TagService } from './tags.service';
   providedIn: 'root'
 })
 export class TagManagerService {
-  publicTag = "public";
+  publicTag!: Tag;
 
   constructor(private tagService: TagService) { }
 
-  // getPublicTag(): String{
-  //   const that = this;
-  //   this.tagService.getTag("public").subscribe({
-  //     next(publicTag) {
-  //       that.publicTag = publicTag.name
-  //     }
-  //   })
-  //   return this.publicTag;
-  // }
+//   getPublicTag(): Tag{
+//     const that = this;
+//     var response: Observable<string>;
+
+//     this.tagService.getTag("public").subscribe({
+//       next(publicTag) {
+//         that.publicTag = publicTag;
+//       }
+//     })
+//     return this.publicTag;
+// }
 }

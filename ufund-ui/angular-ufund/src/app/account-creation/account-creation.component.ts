@@ -45,7 +45,7 @@ export class AccountCreationComponent {
       } else {
         const that = this;
         this.publicTag = this.tagManager.publicTag;
-        this.newAccount = {name: usernameInput, password: passwordInput, email: emailInput,tags: this.publicTag, isAdmin: false} as Account;
+        this.newAccount = {name: usernameInput, password: passwordInput, email: emailInput,tags: ["public"], isAdmin: false} as Account;
         this.loginService.searchAccount(usernameInput).subscribe({
           next(tempAccount) {
             if (tempAccount.toString() == ""){
