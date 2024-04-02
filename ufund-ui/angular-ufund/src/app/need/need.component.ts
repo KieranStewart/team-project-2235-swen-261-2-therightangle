@@ -18,7 +18,7 @@ import { NeedCacheService } from '../need-cache.service';
 })
 export class NeedComponent {
 
-  constructor(private cacheService: NeedCacheService) {}
+  constructor(private cacheService: NeedCacheService) { }
 
   @Input()
   need!: Need;

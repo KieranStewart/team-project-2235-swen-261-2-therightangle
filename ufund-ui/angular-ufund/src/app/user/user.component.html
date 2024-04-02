@@ -1,0 +1,10 @@
+<h1>User Accounts:</h1>
+
+<div class="btn-group">
+    <div *ngFor="let account of accountList">
+        <button (click)="showDetails(account)">{{account.name}} </button>
+    </div>
+</div>
+<div>
+    <app-user-detail [displayAccount]="accountCasheService.selectedAccount"></app-user-detail>
+</div>

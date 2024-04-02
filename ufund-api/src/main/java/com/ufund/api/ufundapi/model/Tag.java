@@ -73,6 +73,6 @@ public class Tag {
 
         @Override
     public String toString() {
-        return String.format(STRING_FORMAT, name, tagDetail, tagInstruction,applyable);
+        return String.format(STRING_FORMAT, name, tagDetail, tagInstruction, applyable);
     }
 }

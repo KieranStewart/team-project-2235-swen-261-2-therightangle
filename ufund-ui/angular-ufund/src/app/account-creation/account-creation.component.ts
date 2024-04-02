@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Account } from '../account';
+import { Tag } from '../tag';
 import { LoginService } from '../login.service';
 import { LoginComponent } from '../login/login.component';
+import { TagManagerService } from '../tag-manager.service';
+import { TagService } from '../tags.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -14,9 +18,10 @@ export class AccountCreationComponent {
   errorMessage = '';
   submitted = false;
   newAccount!: Account;
+  publicTag = this.tagManager.publicTag;
   private emailExtensions: Array<string> = ["@gmail.com", "@rit.edu", "@g.rit.edu"];
 
-  constructor(private loginService: LoginService,private loginComponent: LoginComponent) {}
+  constructor(private loginService: LoginService,private loginComponent: LoginComponent,private tagManager: TagManagerService) {}
 
   createAccount(usernameInput: string, passwordInput: string, passwordCheckInput: string, emailInput: string): void {
       var invalidEmailDomain: boolean;
@@ -39,8 +44,17 @@ export class AccountCreationComponent {
         this.errorMessage = "Invalid email \n Must be a @gmail.com,@rit.edu, or a @g.rit.edu email address";
       } else {
         const that = this;
-        this.newAccount = {name: usernameInput, password: passwordInput, email: emailInput, isAdmin: false} as Account;
-        
+        this.publicTag = this.tagManager.publicTag;
+        this.newAccount = {name: usernameInput, password: passwordInput, email: emailInput,tags: ["public"], isAdmin: false} as Account;
+        this.loginService.searchAccount(usernameInput).subscribe({
+          next(tempAccount) {
+            if (tempAccount.toString() == ""){
+              "That username is taken already serach method"
+            }
+          }
+        })
+
+
         // make sure the account doesn't already exist
         this.loginService.addAccount(this.newAccount).subscribe({
           next(newAccount) {

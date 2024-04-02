@@ -1,5 +1,10 @@
 package com.ufund.api.ufundapi.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ufund.api.ufundapi.controller.TagController;
+import com.ufund.api.ufundapi.persistence.TagDAO;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 /**
@@ -23,13 +28,13 @@ public class Account {
     @JsonProperty("name") private String name;
     @JsonProperty("password") private String password;
     @JsonProperty("email") private String email;
-    @JsonProperty("tags") private Tag[] tags;
+    @JsonProperty("tags") ArrayList<String> tags;
     @JsonProperty("isAdmin") private boolean isAdmin;
 
     public Account(@JsonProperty("name") String name,
     @JsonProperty("password") String password,
     @JsonProperty("email") String email,
-    @JsonProperty("tags") Tag[] tags,
+    @JsonProperty("tags") ArrayList<String> tags,
     @JsonProperty("isAdmin") boolean isAdmin) {
         this.name = name;
         this.password = password;
@@ -38,12 +43,12 @@ public class Account {
         this.isAdmin = isAdmin;
     }
 
-    public Account(@JsonProperty("name") String name,
-    @JsonProperty("password") String password,
-    @JsonProperty("email") String email,
-    @JsonProperty("isAdmin") boolean isAdmin) {
-        this(name, password, email, new Tag[0], isAdmin);
-    }
+    // public Account(@JsonProperty("name") String name,
+    // @JsonProperty("password") String password,
+    // @JsonProperty("email") String email,
+    // @JsonProperty("isAdmin") boolean isAdmin) {
+    //     this(name, password, email, new Tag[0], isAdmin);
+    // }
 
     public static String getStringFormat() {
         return STRING_FORMAT;
@@ -73,11 +78,11 @@ public class Account {
         this.email = email;
     }
 
-    public Tag[] getTags() {
+    public ArrayList<String> getTags() {
         return this.tags;
     }
 
-    public void setTags(Tag[] tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
 
@@ -91,6 +96,6 @@ public class Account {
 
         @Override
     public String toString() {
-        return String.format(STRING_FORMAT, name, password, email, isAdmin);
+        return String.format(STRING_FORMAT, name, password, email, tags, isAdmin);
     }
 }

@@ -1,4 +1,5 @@
 import { Date } from "./date";
+import { Tag } from "./tag"
 
 /**
  * A way to store information about a need
@@ -12,6 +13,7 @@ export interface Need {
     volunteerDates: Date;
     deadline: Date;
     type: String;
+    tags: String[];
 
     // Client-exclusive state
     inFundingBasket: boolean;

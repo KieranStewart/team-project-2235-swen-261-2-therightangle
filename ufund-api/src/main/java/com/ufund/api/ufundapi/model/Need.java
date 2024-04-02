@@ -1,4 +1,5 @@
 package com.ufund.api.ufundapi.model;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -26,7 +27,7 @@ public class Need {
     @JsonProperty("volunteer dates") private Date[] volunteerDates;
     @JsonProperty("deadline") private Date deadline;
     @JsonProperty("type") private NeedType type;
-    @JsonProperty("tags") private Tag[] tags;
+    @JsonProperty("tags") ArrayList<String> tags;
 
     public Need(@JsonProperty("goal") int goal, 
     @JsonProperty("progress") int progress, 
@@ -35,7 +36,7 @@ public class Need {
     @JsonProperty("volunteer dates") Date[] volunteerDates, 
     @JsonProperty("deadline") Date deadline, 
     @JsonProperty("type") NeedType type,
-    @JsonProperty("tags") Tag[] tags) {
+    @JsonProperty("tags") ArrayList<String> tags) {
         this.goal = goal;
         this.progress = progress;
         this.name = name;
@@ -46,15 +47,15 @@ public class Need {
         this.tags = tags;
     }
 
-    public Need(@JsonProperty("goal") int goal, 
-    @JsonProperty("progress") int progress, 
-    @JsonProperty("name") String name, 
-    @JsonProperty("description") String description, 
-    @JsonProperty("volunteer dates") Date[] volunteerDates, 
-    @JsonProperty("deadline") Date deadline, 
-    @JsonProperty("type") NeedType type) {
-        this(goal, progress, name, description, volunteerDates, deadline, type, new Tag[0]);
-    }
+    // public Need(@JsonProperty("goal") int goal, 
+    // @JsonProperty("progress") int progress, 
+    // @JsonProperty("name") String name, 
+    // @JsonProperty("description") String description, 
+    // @JsonProperty("volunteer dates") Date[] volunteerDates, 
+    // @JsonProperty("deadline") Date deadline, 
+    // @JsonProperty("type") NeedType type) {
+    //     this(goal, progress, name, description, volunteerDates, deadline, type, new Tag[0]);
+    // }
 
     public void setName(String name) {this.name = name;}
 
@@ -112,17 +113,17 @@ public class Need {
         this.type = type;
     }
 
-    public Tag[] getTags() {
+    public ArrayList<String> getTags() {
         return this.tags;
     }
 
-    public void setTags(Tag[] tags) {
+    public void setTags(ArrayList<String> tags) {
         this.tags = tags;
     }
 
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, goal, progress, name, description, Arrays.toString(volunteerDates), deadline, type);
+        return String.format(STRING_FORMAT, goal, progress, name, description, Arrays.toString(volunteerDates), deadline, type, tags);
     }
 
 }
