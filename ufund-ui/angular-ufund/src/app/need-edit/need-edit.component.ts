@@ -11,7 +11,7 @@ import { take } from "rxjs";
     templateUrl: './need-edit.component.html',
     styleUrls: ['./need-edit.component.css']
 })
-export class NeedEditComponent implements OnInit {
+export class NeedEditComponent {
 
     validTypes: String[] = ["donation", "volunteer"];
     private rollbackNeed!: Need;
@@ -20,7 +20,7 @@ export class NeedEditComponent implements OnInit {
 
     constructor(private needService: NeedService) {}
 
-    ngOnInit(): void {
+    ngOnChanges() {
         this.rollbackNeed = JSON.parse(JSON.stringify(this.currentNeed));
         // Fallback code for if something is null in the backend
         if(this.currentNeed != null) {
@@ -40,7 +40,6 @@ export class NeedEditComponent implements OnInit {
     }
 
     updateNeed(): void {
-        console.log("update need");
         const that = this;
         this.errorText = "Loading...";
         if(this.validateNeed()) {
