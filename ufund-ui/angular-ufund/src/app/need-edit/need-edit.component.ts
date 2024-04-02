@@ -15,6 +15,8 @@ export class NeedEditComponent implements OnInit {
 
     validTypes: String[] = ["donation", "volunteer"];
     private rollbackNeed!: Need;
+    @Input() currentNeed!: Need;
+    errorText: string = "";
 
     constructor(private needService: NeedService) {}
 
@@ -36,9 +38,6 @@ export class NeedEditComponent implements OnInit {
             }
         }
     }
-
-    @Input() currentNeed!: Need;
-    errorText: string = "";
 
     updateNeed(): void {
         const that = this;
