@@ -19,7 +19,7 @@
     },
     {
         "name": "admin",
-        "tagDetail": "This tag is for the admin to see all of the needs.",
+        "tagDetail": "This tag is for admins to see all of the needs. It can be added to normal user accounts, so that they can see all the needs without having admin functionality.",
         "tagInstruction": "",
         "applyable": false
     }

@@ -13,17 +13,15 @@ import { NeedService } from '../need.service';
   styleUrls: ['./need-detail.component.css']
 })
 export class NeedDetailComponent {
+  @Input()
+  displayNeed!: Need;
   tagManagerContent: String[];
   showTags = false;
   tagMessage = ""
 
-
   constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService) {
     this.tagManagerContent = []
   }
-
-  @Input()
-  displayNeed!: Need;
 
   addToFundingBasket(): void {
     this.basketService.add(this.displayNeed);

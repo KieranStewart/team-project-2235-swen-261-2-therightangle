@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <button *ngIf="!displayNeed.inFundingBasket" (click)="showTagList()">Add new Tag</button>
+        <button (click)="showTagList()">Toggle avaliable tags</button>
 
         <div *ngIf="showTags != false">
             <h4>All tags avaliable to be added to this need:</h4>
