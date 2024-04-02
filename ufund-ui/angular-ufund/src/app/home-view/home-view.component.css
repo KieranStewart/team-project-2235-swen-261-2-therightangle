@@ -8,4 +8,14 @@
     padding: 10px;
     box-sizing: border-box; /* Include padding in the width calculation */
 }
+
+.red-button {
+    background-color: #a00b00; /* Red */
+    color: white;
+    padding: 2px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
   

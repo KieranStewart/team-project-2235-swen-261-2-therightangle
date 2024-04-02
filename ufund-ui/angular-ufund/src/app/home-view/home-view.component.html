@@ -1,8 +1,9 @@
 <div>
     <!-- Search bar -->
     <input type="text" [(ngModel)]="searchTerm" placeholder="Search Needs!">
-    <button (click)="search(searchTerm)">Search</button>
-    <div *ngIf="searchResults != null && searchResults.length != 0" class=".search-results">
+    <button type=button (click)="search(searchTerm)">Search</button>
+    <button type=button *ngIf="searchResults.length != 0" (click)="clearSearch()" class="red-button">X</button>
+    <div *ngIf="searchResults != null && searchResults.length != 0" class="search-results">
         <div *ngFor="let thisNeed of searchResults">
             <need-button *ngIf="thisNeed != null" [need]="thisNeed"></need-button>
         </div>
