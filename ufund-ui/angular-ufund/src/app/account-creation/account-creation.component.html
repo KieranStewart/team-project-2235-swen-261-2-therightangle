@@ -17,7 +17,7 @@
 <h2>Enter Password: <input type="text" #passwordInput></h2>
 <h2>Reenter Password: <input type="text" #passwordCheckInput></h2>
 <h2>Enter Email: <input type="text" #emailInput></h2>
-<button type="submit" (click)="create(usernameInput.value,passwordInput.value,passwordCheckInput.value,emailInput.value)"><h3>Create Account</h3></button>
+<button type="submit" (click)="createAccount(usernameInput.value,passwordInput.value,passwordCheckInput.value,emailInput.value)"><h3>Create Account</h3></button>
 
 <h2> {{errorMessage}} </h2>
 <div *ngIf="submitted"> submitted </div>

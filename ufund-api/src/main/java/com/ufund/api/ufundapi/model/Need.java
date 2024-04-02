@@ -17,7 +17,7 @@ public class Need {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Need [goal = %d, progress = %d, name = %s, description = %s, volunteer dates = %s, deadline = %s, type = %s]";
+    static final String STRING_FORMAT = "Need [goal = %d, progress = %d, name = %s, description = %s, volunteer dates = %s, deadline = %s, type = %s, tags = %s]";
 
     @JsonProperty("goal") private int goal;
     @JsonProperty("progress") private int progress;
@@ -26,6 +26,25 @@ public class Need {
     @JsonProperty("volunteer dates") private Date[] volunteerDates;
     @JsonProperty("deadline") private Date deadline;
     @JsonProperty("type") private NeedType type;
+    @JsonProperty("tags") private Tag[] tags;
+
+    public Need(@JsonProperty("goal") int goal, 
+    @JsonProperty("progress") int progress, 
+    @JsonProperty("name") String name, 
+    @JsonProperty("description") String description, 
+    @JsonProperty("volunteer dates") Date[] volunteerDates, 
+    @JsonProperty("deadline") Date deadline, 
+    @JsonProperty("type") NeedType type,
+    @JsonProperty("tags") Tag[] tags) {
+        this.goal = goal;
+        this.progress = progress;
+        this.name = name;
+        this.description = description;
+        this.volunteerDates = volunteerDates;
+        this.deadline = deadline;
+        this.type = type;
+        this.tags = tags;
+    }
 
     public Need(@JsonProperty("goal") int goal, 
     @JsonProperty("progress") int progress, 
@@ -34,29 +53,8 @@ public class Need {
     @JsonProperty("volunteer dates") Date[] volunteerDates, 
     @JsonProperty("deadline") Date deadline, 
     @JsonProperty("type") NeedType type) {
-        this.goal = goal;
-        this.progress = progress;
-        this.name = name;
-        this.description = description;
-        this.volunteerDates = volunteerDates;
-        this.deadline = deadline;
-        this.type = type;
+        this(goal, progress, name, description, volunteerDates, deadline, type, new Tag[0]);
     }
-
-    // public Need(@JsonProperty("goal") int goal, 
-    // @JsonProperty("progress") int progress, 
-    // @JsonProperty("name") String name, 
-    // @JsonProperty("description") String description, 
-    // @JsonProperty("volunteer dates") Date[] volunteerDates, 
-    // @JsonProperty("deadline") Date deadline) {
-    //     this.goal = goal;
-    //     this.progress = progress;
-    //     this.name = name;
-    //     this.description = description;
-    //     this.volunteerDates = volunteerDates;
-    //     this.deadline = deadline;
-    //     this.type = "donation";
-    // }
 
     public void setName(String name) {this.name = name;}
 
@@ -109,13 +107,22 @@ public class Need {
     public NeedType getType() {
         return type;
     }
+    
+    public void setType(NeedType type) {
+        this.type = type;
+    }
+
+    public Tag[] getTags() {
+        return this.tags;
+    }
+
+    public void setTags(Tag[] tags) {
+        this.tags = tags;
+    }
 
     @Override
     public String toString() {
         return String.format(STRING_FORMAT, goal, progress, name, description, Arrays.toString(volunteerDates), deadline, type);
     }
 
-    public void setType(NeedType type) {
-        this.type = type;
-    }
 }
