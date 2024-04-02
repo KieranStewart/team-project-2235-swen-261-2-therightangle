@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
-import { NeedEditComponent } from './need-edit.compononet';
+import { NeedEditComponent } from './need-edit.component';
 
 describe('NeedEditComponent', () => {
   let component: NeedEditComponent;

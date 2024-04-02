@@ -3,6 +3,7 @@ import { Need } from '../need';
 import { BasketService } from '../basket.service';
 import { TagManagerService } from '../tag-manager.service';
 import { NeedService } from '../need.service';
+import { LoginService } from '../login.service';
 
 /**
  * Shows the details for the selected need.
@@ -20,7 +21,7 @@ export class NeedDetailComponent {
   showTags = false;
   tagMessage = ""
 
-  constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService) {
+  constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService, public loginService: LoginService) {
     this.tagManagerContent = []
   }
 

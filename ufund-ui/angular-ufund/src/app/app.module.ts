@@ -19,6 +19,8 @@ import { ConfirmationViewComponent } from './confirmation-view/confirmation-view
 import { TagCreationComponent } from './tag-creation/tag-creation.component';
 import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { NeedEditComponent } from './need-edit/need-edit.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     ConfirmationViewComponent,
     TagCreationComponent,
     UserComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    NeedEditComponent
   ],
   imports: [
     BrowserModule,
