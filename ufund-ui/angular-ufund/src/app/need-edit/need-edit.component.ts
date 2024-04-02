@@ -80,10 +80,17 @@ export class NeedEditComponent implements OnInit {
             this.errorText = "There are volunteer dates for a donation-only need";
             return false;
         }
-        
+        if(this.currentNeed.goal != 0 && this.currentNeed.type == this.validTypes[1]) {
+            this.errorText = "There is a goal set for a volunteer-only need"
+            return false;
+        }
+        if(this.currentNeed.volunteerDates.length == 0 && this.currentNeed.type == this.validTypes[1]) {
+            this.errorText = "There are no volunteer dates for a volunteer based need";
+            return false;
+        }
 
         if(this.currentNeed.goal < this.currentNeed.progress) {
-            this.errorText = "Goal is less than the amount collected";
+            this.errorText = "Goal is less than the amount already collected";
             return false;
         }
 
