@@ -1,0 +1,13 @@
+<div class= "edit-container">
+    <p>Edit Need</p>
+    <div *ngIf ="isadmin == true">
+        <!---- Display editing options -->
+        <input type = "text" id="textInput" placeholder="Type New Name">
+        <button id="enterButton" (input)="changeName(textInput)">Enter</button>
+
+        
+    </div>
+    <div *ngIf = "isadmin == false">
+        <p><i>(editing only availble to admin!)</i></p>
+    </div>
+</div>

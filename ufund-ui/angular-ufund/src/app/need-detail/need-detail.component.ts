@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Need } from '../need';
 import { BasketService } from '../basket.service';
+import { NeedService } from '../need.service';
 
 /**
  * Shows the details for the selected need.
@@ -11,8 +12,9 @@ import { BasketService } from '../basket.service';
   styleUrls: ['./need-detail.component.css']
 })
 export class NeedDetailComponent {
-  constructor(private basketService: BasketService) {
-  }
+  constructor(
+    private basketService: BasketService,
+    private needService: NeedService) {}
 
   @Input()
   displayNeed!: Need;
@@ -25,6 +27,10 @@ export class NeedDetailComponent {
     this.basketService.remove(this.displayNeed);
   }
 
+  removeFromCupboard(): void {
+    this.needService.deleteNeed(this.displayNeed.name);
+  }
+  
   // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.
   // You can use this if you want a save button instead of automatically linking to the input field.
   // saveNeed(donationAmount: number): void{
