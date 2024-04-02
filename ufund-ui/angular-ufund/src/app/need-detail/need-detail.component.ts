@@ -14,8 +14,8 @@ import { NeedService } from '../need.service';
 })
 export class NeedDetailComponent {
   
-  @Input()
-  displayNeed!: Need;
+  @Input() displayNeed!: Need;
+
   tagManagerContent: String[];
   showTags = false;
   tagMessage = ""

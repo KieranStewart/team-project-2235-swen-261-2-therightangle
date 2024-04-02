@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 
 export class HomeViewComponent {
-  searchResults$: Observable<Need[]> | null = null; //stores search results
+  searchResults$!: Observable<Need[]>; //stores search results
   searchTerm: string = ''; //declares term searched 
 
   constructor(private needService: NeedService) {}
