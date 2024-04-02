@@ -79,12 +79,10 @@ export class NeedEditComponent implements OnInit {
         }
 
         if(this.currentNeed.volunteerDates.length > 0 && this.currentNeed.type == this.validTypes[0]) {
-            this.errorText = "There are volunteer dates for a donation-only need";
-            return false;
+            this.currentNeed.volunteerDates = [];
         }
         if(this.currentNeed.goal != 0 && this.currentNeed.type == this.validTypes[1]) {
-            this.errorText = "There is a goal set for a volunteer-only need"
-            return false;
+            this.currentNeed.goal = 0;
         }
         if(this.currentNeed.volunteerDates.length == 0 && this.currentNeed.type == this.validTypes[1]) {
             this.errorText = "There are no volunteer dates for a volunteer based need";
@@ -121,6 +119,16 @@ export class NeedEditComponent implements OnInit {
 
     removeVolunteerDate(): void {
         this.currentNeed.volunteerDates.pop();
+    }
+
+    discardChanges(): void {
+        this.currentNeed.deadline = this.rollbackNeed.deadline;
+        this.currentNeed.description = this.rollbackNeed.description;
+        this.currentNeed.donationAmount = this.rollbackNeed.donationAmount;
+        this.currentNeed.goal = this.rollbackNeed.goal;
+        this.currentNeed.name = this.rollbackNeed.name;
+        this.currentNeed.type = this.rollbackNeed.type;
+        this.currentNeed.volunteerDates = this.rollbackNeed.volunteerDates;
     }
 
 }
