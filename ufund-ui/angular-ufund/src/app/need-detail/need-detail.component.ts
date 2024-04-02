@@ -13,10 +13,6 @@ import { NeedService } from '../need.service';
   styleUrls: ['./need-detail.component.css']
 })
 export class NeedDetailComponent {
-
-  constructor(
-    private basketService: BasketService,
-    private needService: NeedService) {}
   
   @Input()
   displayNeed!: Need;
