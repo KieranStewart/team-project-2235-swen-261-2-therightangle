@@ -74,8 +74,8 @@ export class LoginService {
   addAccount(Account: Account): Observable<Account> {
     return this.http.post<Account>(this.accountUrl, Account, this.httpOptions).pipe(
       tap((newAccount: Account) => this.log(`added Account w/ name=${newAccount.name}`)), // notice: deprecated
-      catchError(this.handleError<Account>('addAccount'))
-    );
+      catchError((this.handleError<Account>('addAccount')))
+      )
   }
 
   /** DELETE: delete the Account from the server */
@@ -137,8 +137,7 @@ export class LoginService {
         subscriber.next("Please enter your username"); 
       });
 
-    }
-    if(password == "") {
+    }    if(password == "") {
       return new Observable((subscriber) => {
         subscriber.next("Please enter your password"); 
       });
@@ -172,6 +171,7 @@ export class LoginService {
     });
     return response;
   }
+
 
 }
 

@@ -91,6 +91,6 @@ public class Account {
 
         @Override
     public String toString() {
-        return String.format(STRING_FORMAT, name, password, email, isAdmin);
+        return String.format(STRING_FORMAT, name, password, email, tags, isAdmin);
     }
 }
