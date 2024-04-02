@@ -40,6 +40,7 @@ export class NeedEditComponent implements OnInit {
     }
 
     updateNeed(): void {
+        console.log("update need");
         const that = this;
         this.errorText = "Loading...";
         if(this.validateNeed()) {
