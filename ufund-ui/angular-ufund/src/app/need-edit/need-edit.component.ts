@@ -121,7 +121,12 @@ export class NeedEditComponent implements OnInit {
         this.currentNeed.volunteerDates.pop();
     }
 
-    discardChanges(): void {
+    discardChanges(askForConfirmation: boolean): void {
+        if(askForConfirmation) {
+            if(!confirm("Are you sure you want to discard all changes to this need?")) {
+                return;
+            }
+        }
         this.currentNeed.deadline = this.rollbackNeed.deadline;
         this.currentNeed.description = this.rollbackNeed.description;
         this.currentNeed.donationAmount = this.rollbackNeed.donationAmount;
@@ -129,6 +134,19 @@ export class NeedEditComponent implements OnInit {
         this.currentNeed.name = this.rollbackNeed.name;
         this.currentNeed.type = this.rollbackNeed.type;
         this.currentNeed.volunteerDates = this.rollbackNeed.volunteerDates;
+    }
+
+    deleteNeed(): void {
+        if(this.rollbackNeed.name == this.currentNeed.name) {
+            if(confirm("Are you sure you want to first discard changes to this need, then delete this need (cannot be undone)?")) {
+                this.discardChanges(false);
+                this.needService.deleteNeed(this.currentNeed.name);
+            }
+        } else {
+            if(confirm("Are you sure you want to delete this need (cannot be undone)?")) {
+                this.needService.deleteNeed(this.currentNeed.name);
+            }
+        }
     }
 
 }
