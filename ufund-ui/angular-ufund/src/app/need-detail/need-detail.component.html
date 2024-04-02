@@ -40,9 +40,9 @@
             <!-- <button (click)="saveNeed(donationAmount.value)"> Save </button> -->
             <button (click)="removeFromFundingBasket()">Remove from funding basket</button>
         </div>
-        <app-need-edit *ngIf="loginService.userAccount.isAdmin" [currentNeed]="displayNeed"></app-need-edit>
     </div>
     <div *ngIf="displayNeed == null">
         <p><i>Select a need to see its details.</i></p>
     </div>
+    <app-need-edit *ngIf="loginService.userAccount.isAdmin" [currentNeed]="displayNeed"></app-need-edit>
 </div>

@@ -1,9 +1,8 @@
-<div class= "edit-container">
+<div class= "edit-container" *ngIf="currentNeed != null">
     <p>Edit Need</p>
 
     <!---- Display editing options -->
-    <label for="name">Name: </label>
-    <input id="name" type="text" [(ngModel)]="currentNeed.name" placeholder="{{currentNeed.name}}"/>
+    <h2>Editing {{currentNeed.name}}</h2>
     <p>Deadline</p>
     <div class="date-edit"> 
         <label for="deadline-day">Day: </label>
@@ -46,9 +45,17 @@
         <button type="button" (click)="removeVolunteerDate()">Remove last date</button>
     </div>
     
+    <!-- Buttons -->
     <br>
     <button type=button id="enterButton" (click)="updateNeed()">Update</button>
     <button type=button id="discardButton" (click)="discardChanges(true)">Discard changes</button>
     <button type=button id="deleteButton" (click)="deleteNeed()">Delete need</button>
     <p>{{errorText}}</p>
+</div>
+<div class="create">
+    <h2>Create Need</h2>
+    <label for="name">New need name (cannot be changed): </label>
+    <input id="name" type="text" [(ngModel)]="newNeedName" placeholder="Consider a unique name"/>
+    <button type=button id="createButton" (click)="createNeed(newNeedName)">Create new need</button>
+    <p>{{createErrorText}}</p>
 </div>

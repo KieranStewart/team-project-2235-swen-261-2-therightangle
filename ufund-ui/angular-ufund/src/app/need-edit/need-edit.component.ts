@@ -15,15 +15,17 @@ export class NeedEditComponent {
 
     validTypes: String[] = ["donation", "volunteer"];
     private rollbackNeed!: Need;
+    newNeedName: string = "";
     @Input() currentNeed!: Need;
     errorText: string = "";
+    createErrorText: string = "";
 
     constructor(private needService: NeedService) {}
 
     ngOnChanges() {
-        this.rollbackNeed = JSON.parse(JSON.stringify(this.currentNeed));
         // Fallback code for if something is null in the backend
         if(this.currentNeed != null) {
+            this.rollbackNeed = JSON.parse(JSON.stringify(this.currentNeed));
             if(this.currentNeed.deadline == null) {
                 this.currentNeed.deadline = {day: 0, month: 0, year: 0};
             }
@@ -146,6 +148,41 @@ export class NeedEditComponent {
                 this.needService.deleteNeed(this.currentNeed.name).subscribe().unsubscribe();
             }
         }
+    }
+
+    createNeed(newName: string): void {
+        if(newName == null || newName == "") {
+            this.createErrorText = "Please enter a name for the new need."
+            return;
+        }
+        let need: Need = {
+            name: newName,
+            description: "",
+            goal: 0,
+            progress: 0,
+            volunteerDates: [],
+            deadline: {
+                month: 0,
+                day: 0,
+                year: 0
+            },
+            type: "donation",
+            tags: ["admin"],
+            inFundingBasket: false,
+            donationAmount: 0
+        };
+
+        const that = this;
+        this.needService.addNeed(need).pipe(take(1)).subscribe({
+            next(value) {
+                that.newNeedName = "";
+                if(value == null) {
+                    that.createErrorText = "Need creation failure: that name is already taken";
+                } else {
+                    that.createErrorText = "Need created successfully! You can find and edit it in the cupboard";
+                }
+            },
+        });
     }
 
 }
