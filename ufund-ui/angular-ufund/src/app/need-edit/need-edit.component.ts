@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { Need } from "../need";
 import { NeedService } from "../need.service";
 import { take } from "rxjs";
+import { CupboardComponent } from "../cupboard/cupboard.component";
 
 /**
  * Manager is able to make changes to need
@@ -20,7 +21,7 @@ export class NeedEditComponent {
     errorText: string = "";
     createErrorText: string = "";
 
-    constructor(private needService: NeedService) {}
+    constructor(private needService: NeedService, private cupboardComponent: CupboardComponent) {}
 
     ngOnChanges() {
         // Fallback code for if something is null in the backend
@@ -180,6 +181,7 @@ export class NeedEditComponent {
                     that.createErrorText = "Need creation failure: that name is already taken";
                 } else {
                     that.createErrorText = "Need created successfully! You can find and edit it in the cupboard";
+                    that.cupboardComponent.getCupboard();
                 }
             },
         });
