@@ -1,0 +1,11 @@
+/* 
+    Placeholder style for the container div
+    Replace since Bing AI probably stole this from someone
+ */
+.search-results {
+    width: 33.33%; /* 1/3 of the screen width */
+    background-color: #f0f0f0;
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+  

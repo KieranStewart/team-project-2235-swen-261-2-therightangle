@@ -1,6 +1,12 @@
 <div>
     <!-- Search bar -->
-    <input type="text" [(ngModel)]="searchTerm" placeholder="Search Needs!" (input)="search(searchTerm)">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search Needs!">
+    <button (click)="search(searchTerm)">Search</button>
+    <div *ngIf="searchResults != null && searchResults.length != 0" class=".search-results">
+        <div *ngFor="let thisNeed of searchResults">
+            <need-button *ngIf="thisNeed != null" [need]="thisNeed"></need-button>
+        </div>
+    </div>
 </div>
 <app-cupboard></app-cupboard>
 <app-funding-basket></app-funding-basket>
