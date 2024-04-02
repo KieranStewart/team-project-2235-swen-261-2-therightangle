@@ -3,6 +3,7 @@ import { Need } from '../need';
 import { NeedService } from '../need.service';
 import { ActivatedRoute } from '@angular/router';
 import { NeedCacheService } from '../need-cache.service';
+import { take } from 'rxjs';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class CupboardComponent implements OnInit{
   }
 
   getCupboard(): void {
-    this.needService.getCupboard()
+    this.needService.getCupboard().pipe(take(1))
     .subscribe(cupboard => this.cupboard = cupboard);
   }
 }
