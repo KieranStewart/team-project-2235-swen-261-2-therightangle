@@ -12,6 +12,7 @@ import { Observable, take } from 'rxjs';
 export class HomeViewComponent {
   searchResults: Need[] = []; //stores search results
   searchTerm: string = ''; //declares term searched 
+  lastTermSearched: string = ''; // stores the last term that we actually searched the cupboard with
 
   constructor(private needService: NeedService) {}
 
@@ -31,6 +32,7 @@ export class HomeViewComponent {
         next(value) {
             if(value.length == 0) {
               that.clearSearch();
+              that.lastTermSearched = thisSearchTerm;
             } else {
               that.searchResults = value;
             }
@@ -40,6 +42,7 @@ export class HomeViewComponent {
   }
 
   clearSearch(): void {
+    this.lastTermSearched = "";
     this.searchResults = [];
   }
 }
