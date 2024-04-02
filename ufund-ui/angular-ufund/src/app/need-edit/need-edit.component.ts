@@ -140,11 +140,11 @@ export class NeedEditComponent implements OnInit {
         if(this.rollbackNeed.name == this.currentNeed.name) {
             if(confirm("Are you sure you want to first discard changes to this need, then delete this need (cannot be undone)?")) {
                 this.discardChanges(false);
-                this.needService.deleteNeed(this.currentNeed.name);
+                this.needService.deleteNeed(this.currentNeed.name).subscribe().unsubscribe();
             }
         } else {
             if(confirm("Are you sure you want to delete this need (cannot be undone)?")) {
-                this.needService.deleteNeed(this.currentNeed.name);
+                this.needService.deleteNeed(this.currentNeed.name).subscribe().unsubscribe();
             }
         }
     }
