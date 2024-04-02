@@ -15,7 +15,7 @@ import { LoginService } from '../login.service';
 })
 export class NeedDetailComponent {
   
-  @Input() displayNeed!: Need;
+  @Input() displayNeed!: Need | null;
 
   tagManagerContent: String[];
   showTags = false;
@@ -26,10 +26,16 @@ export class NeedDetailComponent {
   }
 
   addToFundingBasket(): void {
+    if(this.displayNeed == null) {
+      return;
+    }
     this.basketService.add(this.displayNeed);
   }
 
   removeFromFundingBasket(): void {
+    if(this.displayNeed == null) {
+      return;
+    }
     this.basketService.remove(this.displayNeed);
   }
 
@@ -43,6 +49,9 @@ export class NeedDetailComponent {
   }
 
   addTag(name: String): void {
+    if(this.displayNeed == null) {
+      return;
+    }
     if (this.displayNeed.tags.indexOf(name) == -1) {
       this.tagMessage = ""
       this.displayNeed.tags.push(name)
@@ -53,6 +62,9 @@ export class NeedDetailComponent {
   }
 
   removeTag(name: String): void {
+    if(this.displayNeed == null) {
+      return;
+    }
     if (name == "admin" || name == "public") {
       this.tagMessage = "can't remove tag " + name + " from this need because it's a permanent variable"
     } else {
@@ -64,6 +76,9 @@ export class NeedDetailComponent {
   }
 
   removeFromCupboard(): void {
+    if(this.displayNeed == null) {
+      return;
+    }
     this.needService.deleteNeed(this.displayNeed.name);
   }
   // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.

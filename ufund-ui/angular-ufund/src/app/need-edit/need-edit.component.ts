@@ -3,6 +3,7 @@ import { Need } from "../need";
 import { NeedService } from "../need.service";
 import { take } from "rxjs";
 import { CupboardComponent } from "../cupboard/cupboard.component";
+import { NeedCacheService } from "../need-cache.service";
 
 /**
  * Manager is able to make changes to need
@@ -17,11 +18,11 @@ export class NeedEditComponent {
     validTypes: String[] = ["donation", "volunteer"];
     private rollbackNeed!: Need;
     newNeedName: string = "";
-    @Input() currentNeed!: Need;
+    @Input() currentNeed!: Need | null;
     errorText: string = "";
     createErrorText: string = "";
 
-    constructor(private needService: NeedService, private cupboardComponent: CupboardComponent) {}
+    constructor(private needService: NeedService, private cupboardComponent: CupboardComponent, private needCacheService: NeedCacheService) {}
 
     ngOnChanges() {
         // Fallback code for if something is null in the backend
@@ -43,6 +44,10 @@ export class NeedEditComponent {
     }
 
     updateNeed(): void {
+        if(this.currentNeed == null) {
+            this.errorText = "An error occurred, try reselecting your need."
+            return;
+        }
         const that = this;
         this.errorText = "Loading...";
         if(this.validateNeed()) {
@@ -59,6 +64,9 @@ export class NeedEditComponent {
     }
 
     private validateNeed(): boolean {
+        if(this.currentNeed == null) {
+            return false;
+        }
         if(this.currentNeed.name.length == 0) {
             this.errorText = "Please enter a name";
             return false;
@@ -116,14 +124,26 @@ export class NeedEditComponent {
     }
 
     addNewVolunteerDate(): void {
+        if(this.currentNeed == null) {
+            this.errorText = "An error occurred";
+            return;
+        }
         this.currentNeed.volunteerDates.push({day: 0, month: 0, year: 0});
     }
 
     removeVolunteerDate(): void {
+        if(this.currentNeed == null) {
+            this.errorText = "An error occurred";
+            return;
+        }
         this.currentNeed.volunteerDates.pop();
     }
 
     discardChanges(askForConfirmation: boolean): void {
+        if(this.currentNeed == null) {
+            this.errorText = "An error occurred";
+            return;
+        }
         if(askForConfirmation) {
             if(!confirm("Are you sure you want to discard all changes to this need?")) {
                 return;
@@ -139,25 +159,29 @@ export class NeedEditComponent {
     }
 
     deleteNeed(): void {
+        if(this.currentNeed == null) {
+            this.errorText = "An error occurred";
+            return;
+        }
+        
         const that = this;
         if(this.rollbackNeed.name == this.currentNeed.name) {
-            if(confirm("Are you sure you want to first discard changes to this need, then delete this need (cannot be undone)?")) {
-                this.discardChanges(false);
-                this.needService.deleteNeed(this.currentNeed.name).pipe(take(1)).subscribe({
-                    next(value) {
-                        that.cupboardComponent.getCupboard();
-                    },
-                });
+            if(!confirm("Are you sure you want to first discard changes to this need, then delete this need (cannot be undone)?")) {
+                return;
             }
+            this.discardChanges(false);
         } else {
-            if(confirm("Are you sure you want to delete this need (cannot be undone)?")) {
-                this.needService.deleteNeed(this.currentNeed.name).pipe(take(1)).subscribe({
-                    next(value) {
-                        that.cupboardComponent.getCupboard();
-                    },
-                });
+            if(!confirm("Are you sure you want to delete this need (cannot be undone)?")) {
+                return;
             }
         }
+
+        this.needService.deleteNeed(this.currentNeed.name).pipe(take(1)).subscribe({
+            next(value) {
+                that.cupboardComponent.getCupboard();
+                that.needCacheService.selectedNeed = null;
+            },
+        });
     }
 
     createNeed(newName: string): void {
