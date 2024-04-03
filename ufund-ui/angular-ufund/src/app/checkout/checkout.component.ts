@@ -61,7 +61,7 @@ export class CheckoutComponent implements OnInit{
   private recordPayment(need: Need): void {
     const that = this;
     need.progress += Number(need.donationAmount);
-    this.needService.updateNeed(need).subscribe();
+    this.needService.updateNeed(need).pipe(take(1)).subscribe();
     let transaction: Transaction;
     transaction = {
       amount: need.donationAmount,
@@ -71,7 +71,7 @@ export class CheckoutComponent implements OnInit{
     this.transactionService.addTransaction(transaction).pipe(take(1)).subscribe({
       next(value) {
           that.cupboardComponent.getCupboard(); // update cupboard view
-          // that.needCacheService.selectedNeed = null; // Will work when the null code is merged to this.
+          that.needCacheService.selectedNeed = need;
       },
     });
   }
