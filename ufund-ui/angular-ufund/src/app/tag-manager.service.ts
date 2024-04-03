@@ -10,7 +10,8 @@ import { Observable, Subscriber } from 'rxjs';
   providedIn: 'root'
 })
 export class TagManagerService {
-  publicTag!: Tag;
+  // publicTag!: Tag;
+  currentTag!: Tag;
   contents: Tag[];
   tagStringList: String[];
 
@@ -36,15 +37,12 @@ export class TagManagerService {
     return this.tagStringList
   }
 
-  //   getPublicTag(): Tag{
-  //     const that = this;
-  //     var response: Observable<string>;
-
-  //     this.tagService.getTag("public").subscribe({
-  //       next(publicTag) {
-  //         that.publicTag = publicTag;
-  //       }
-  //     })
-  //     return this.publicTag;
-  // }
+  getTag(name: String): Tag {
+    this.contents.forEach(tag => {
+      if (tag.name == name) {
+        this.currentTag = tag;
+      }
+    });
+    return this.currentTag;
+  }
 }

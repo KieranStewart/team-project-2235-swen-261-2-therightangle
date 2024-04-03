@@ -8,22 +8,21 @@
         <h4>Need's Tags:</h4>
         <div class="btn-group">
             <div *ngFor="let item of displayNeed.tags">
-                <button (click)="removeTag(item)">{{item}}</button>
+                <button (click)="removeTag(item)" (mouseover)="changeHoverTag(item)">{{item}}</button>
             </div>
         </div>
 
         <button (click)="showTagList()">Toggle avaliable tags</button>
 
         <div *ngIf="showTags != false">
-            <h4>All tags avaliable to be added to this need:</h4>
+            <h4>{{tagMessage}}</h4>
             <div class="btn-group">
                 <div *ngFor="let item of tagManagerContent">
-                    <button (click)="addTag(item)">{{item}}</button>
+                    <button (click)="addTag(item)" (mouseover)="changeHoverTag(item)">{{item}}</button>
                 </div>
             </div>
+            <h4 *ngIf="hoverTag != null">Tag Details: {{hoverTag.tagDetail}}</h4>
         </div>
-
-        <h4>{{tagMessage}}</h4>
 
         <h4>Description:</h4>
         <p>
@@ -31,7 +30,7 @@
         </p>
         <h5>Ends on {{displayNeed.deadline}}</h5>
         <!-- If it isn't in the basket, allow it to be added -->
-        <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">Add to funding basket</button>
+        <button *ngIf=" !displayNeed.inFundingBasket" (click)="addToFundingBasket()">Add to funding basket</button>
         <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
         <div *ngIf="displayNeed.inFundingBasket">
             <!-- Starter code for the Donate Time story.  Good luck! -->
