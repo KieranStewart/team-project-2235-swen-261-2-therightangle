@@ -48,7 +48,7 @@ import { NeedEditComponent } from './need-edit/need-edit.component';
     RouterModule,
     RouterModule.forRoot(AppRoutingModule.getRoutes())
   ],
-  providers: [CupboardComponent],
+  providers: [CupboardComponent, TransactionHistoryDisplayComponent],
   bootstrap: [AppComponent]
   
 })

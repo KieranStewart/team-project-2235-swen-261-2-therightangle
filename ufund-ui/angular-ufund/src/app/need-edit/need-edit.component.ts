@@ -5,6 +5,7 @@ import { take } from "rxjs";
 import { CupboardComponent } from "../cupboard/cupboard.component";
 import { NeedCacheService } from "../need-cache.service";
 import { TransactionService } from "../transaction.service";
+import { TransactionHistoryDisplayComponent } from "../transaction-history-display/transaction-history-display.component";
 
 /**
  * Manager is able to make changes to need
@@ -23,7 +24,11 @@ export class NeedEditComponent {
     errorText: string = "";
     createErrorText: string = "";
 
-    constructor(private needService: NeedService, private cupboardComponent: CupboardComponent, private needCacheService: NeedCacheService, private transactionService: TransactionService) {}
+    constructor(private needService: NeedService, 
+        private cupboardComponent: CupboardComponent, 
+        private needCacheService: NeedCacheService, 
+        private transactionService: TransactionService, 
+        private transactionComponent: TransactionHistoryDisplayComponent) {}
 
     ngOnChanges() {
         // Fallback code for if something is null in the backend
@@ -227,12 +232,23 @@ export class NeedEditComponent {
         }
         if(confirm("Are you sure you want to delete the transaction history for this need (cannot be undone)?")) {
             const that = this;
-            this.transactionService.deleteTransactionsFor(this.currentNeed.name).pipe(take(1)).subscribe({
+            this.transactionService.getTransactionsNo404(this.currentNeed.name).pipe(take(1)).subscribe({
                 next(value) {
-                    that.cupboardComponent.getCupboard();
-                    that.errorText = "Successfully deleted transactions";
+                    if(value == null || value.length == 0) {
+                        that.errorText = "No transactions to delete!";
+                    } else {
+                        if(that.currentNeed == null) return;
+                        that.transactionService.deleteTransactionsFor(that.currentNeed.name).pipe(take(1)).subscribe({
+                            next(_) {
+                                that.cupboardComponent.getCupboard();
+                                that.transactionComponent.update();
+                                that.errorText = "Successfully deleted transactions";
+                            },
+                        });
+                    }
                 },
-            });
+            })
+            
         }
     }
 

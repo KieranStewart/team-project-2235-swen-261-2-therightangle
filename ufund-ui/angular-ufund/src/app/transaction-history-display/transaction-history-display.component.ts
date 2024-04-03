@@ -15,6 +15,14 @@ export class TransactionHistoryDisplayComponent {
   }
 
   ngOnChanges() {
+    this.update();
+  }
+
+  update(): void {
+    if(this.displayNeed == null || this.displayNeed == undefined) {
+      this.transactions = [];
+      return;
+    }
     const that = this;
     this.transactionService.getTransactionsNo404(this.displayNeed.name).pipe(take(1)).subscribe({
       next(transactionArray) {
@@ -23,7 +31,7 @@ export class TransactionHistoryDisplayComponent {
     });
   }
 
-  @Input() displayNeed!: Need;
+  @Input() displayNeed!: Need | null;
 
   transactions!: Transaction[];
 
