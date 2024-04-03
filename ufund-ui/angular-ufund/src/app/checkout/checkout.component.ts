@@ -7,6 +7,7 @@ import { NeedService } from '../need.service';
 import { Need } from '../need';
 import { TransactionService } from '../transaction.service';
 import { Transaction } from '../transaction';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -16,7 +17,7 @@ import { Transaction } from '../transaction';
 
 export class CheckoutComponent implements OnInit{
 
-  constructor(private basketService: BasketService, private router: Router, private needService: NeedService, private transactionService: TransactionService) { }
+  constructor(private basketService: BasketService, private router: Router, private needService: NeedService, private transactionService: TransactionService, private cupboardComponent: CupboardComponent) { }
   
   total: number = 0;
 
@@ -57,6 +58,7 @@ export class CheckoutComponent implements OnInit{
   }
 
   private recordPayment(need: Need): void {
+    const that = this;
     need.progress += Number(need.donationAmount);
     this.needService.updateNeed(need).subscribe();
     let transaction: Transaction;
@@ -65,6 +67,10 @@ export class CheckoutComponent implements OnInit{
       needName: need.name
     };
     // If you don't like and subscribe, it won't get any views (TypeScript moment)
-    this.transactionService.addTransaction(transaction).subscribe().unsubscribe();
+    this.transactionService.addTransaction(transaction).pipe(take(1)).subscribe({
+      next(value) {
+          that.cupboardComponent.getCupboard(); // update cupboard view
+      },
+    });
   }
 }
