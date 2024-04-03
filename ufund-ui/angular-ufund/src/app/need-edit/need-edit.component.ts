@@ -229,6 +229,7 @@ export class NeedEditComponent {
             const that = this;
             this.transactionService.deleteTransactionsFor(this.currentNeed.name).pipe(take(1)).subscribe({
                 next(value) {
+                    that.cupboardComponent.getCupboard();
                     that.errorText = "Successfully deleted transactions";
                 },
             });
