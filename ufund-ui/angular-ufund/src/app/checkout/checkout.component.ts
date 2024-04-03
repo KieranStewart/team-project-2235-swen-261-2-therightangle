@@ -8,6 +8,7 @@ import { Need } from '../need';
 import { TransactionService } from '../transaction.service';
 import { Transaction } from '../transaction';
 import { take } from 'rxjs';
+import { NeedCacheService } from '../need-cache.service';
 
 @Component({
   selector: 'app-checkout',
@@ -17,7 +18,7 @@ import { take } from 'rxjs';
 
 export class CheckoutComponent implements OnInit{
 
-  constructor(private basketService: BasketService, private router: Router, private needService: NeedService, private transactionService: TransactionService, private cupboardComponent: CupboardComponent) { }
+  constructor(private basketService: BasketService, private router: Router, private needService: NeedService, private transactionService: TransactionService, private cupboardComponent: CupboardComponent, private needCacheService: NeedCacheService) { }
   
   total: number = 0;
 
@@ -70,6 +71,7 @@ export class CheckoutComponent implements OnInit{
     this.transactionService.addTransaction(transaction).pipe(take(1)).subscribe({
       next(value) {
           that.cupboardComponent.getCupboard(); // update cupboard view
+          // that.needCacheService.selectedNeed = null; // Will work when the null code is merged to this.
       },
     });
   }

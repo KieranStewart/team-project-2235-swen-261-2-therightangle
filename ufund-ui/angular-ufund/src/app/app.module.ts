@@ -39,7 +39,7 @@ import { TransactionHistoryDisplayComponent } from './transaction-history-displa
     RouterModule,
     RouterModule.forRoot(AppRoutingModule.getRoutes())
   ],
-  providers: [],
+  providers: [CupboardComponent],
   bootstrap: [AppComponent]
   
 })
