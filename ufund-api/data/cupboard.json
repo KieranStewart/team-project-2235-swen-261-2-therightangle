@@ -4,7 +4,7 @@
         "progress": 10,
         "name": "new new test need",
         "description": null,
-        "volunteer dates": null,
+        "volunteerDates": null,
         "deadline": null,
         "type": "DONATION"
     },
@@ -13,7 +13,7 @@
         "progress": 39,
         "name": "Donation",
         "description": "A basic need for a donation to a specific cause. \n Money could be donated to this cause.",
-        "volunteer dates": null,
+        "volunteerDates": null,
         "deadline": null,
         "type": "DONATION"
     },
@@ -22,7 +22,7 @@
         "progress": 14,
         "name": "test need",
         "description": null,
-        "volunteer dates": null,
+        "volunteerDates": null,
         "deadline": null,
         "type": "DONATION"
     },
@@ -31,7 +31,7 @@
         "progress": 2,
         "name": "Volunteer Need",
         "description": null,
-        "volunteer dates": [
+        "volunteerDates": [
             {
                 "day": 12,
                 "month": 1,
@@ -59,24 +59,24 @@
         "progress": 2,
         "name": "Volunteering Need",
         "description": null,
-        "volunteer dates": [
+        "volunteerDates": [
             {
                 "day": 12,
                 "month": 3,
                 "year": 2025,
-                "filled": true
+                "filled": "true"
             },
             {
                 "day": 12,
                 "month": 1,
                 "year": 2025,
-                "filled": false
+                "filled": "false"
             },
             {
                 "day": 10,
                 "month": 2,
                 "year": 2025,
-                "filled": false
+                "filled": "false"
             }
         ],
         "deadline": null,

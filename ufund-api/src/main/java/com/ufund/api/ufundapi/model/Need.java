@@ -23,7 +23,7 @@ public class Need {
     @JsonProperty("progress") private int progress;
     @JsonProperty("name") private String name;
     @JsonProperty("description") private String description;
-    @JsonProperty("volunteer dates") private VolunteerDate[] volunteerDates;
+    @JsonProperty("volunteerDates") private VolunteerDate[] volunteerDates;
     @JsonProperty("deadline") private Date deadline;
     @JsonProperty("type") private NeedType type;
 
@@ -31,7 +31,7 @@ public class Need {
     @JsonProperty("progress") int progress, 
     @JsonProperty("name") String name, 
     @JsonProperty("description") String description, 
-    @JsonProperty("volunteer dates") VolunteerDate[] volunteerDates, 
+    @JsonProperty("volunteerDates") VolunteerDate[] volunteerDates, 
     @JsonProperty("deadline") Date deadline, 
     @JsonProperty("type") NeedType type) {
         this.goal = goal;
