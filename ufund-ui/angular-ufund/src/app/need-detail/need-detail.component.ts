@@ -4,7 +4,6 @@ import { BasketService } from '../basket.service';
 import { LoginService } from '../login.service';
 import { TagManagerService } from '../tag-manager.service';
 import { NeedService } from '../need.service';
-import { LoginService } from '../login.service';
 
 /**
  * Shows the details for the selected need.
