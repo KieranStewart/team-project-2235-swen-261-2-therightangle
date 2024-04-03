@@ -63,6 +63,7 @@ export class NeedEditComponent {
                         that.errorText = "There was an error updating this need.";
                     } else {
                         that.errorText = "Successfully updated!";
+                        that.cupboardComponent.getCupboard();
                     }
                 }
             });
