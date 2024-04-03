@@ -71,6 +71,7 @@ export class NeedEditComponent {
     }
 
     private validateNeed(): boolean {
+        console.log(this.currentNeed);
         if(this.currentNeed == null) {
             return false;
         }

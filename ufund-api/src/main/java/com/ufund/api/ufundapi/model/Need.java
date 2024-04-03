@@ -18,13 +18,13 @@ public class Need {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Need [goal = %d, progress = %d, name = %s, description = %s, volunteer dates = %s, deadline = %s, type = %s, tags = %s]";
+    static final String STRING_FORMAT = "Need [goal = %d, progress = %d, name = %s, description = %s, volunteerDates = %s, deadline = %s, type = %s, tags = %s]";
 
     @JsonProperty("goal") private int goal;
     @JsonProperty("progress") private int progress;
     @JsonProperty("name") private String name;
     @JsonProperty("description") private String description;
-    @JsonProperty("volunteer dates") private Date[] volunteerDates;
+    @JsonProperty("volunteerDates") private Date[] volunteerDates;
     @JsonProperty("deadline") private Date deadline;
     @JsonProperty("type") private NeedType type;
     @JsonProperty("tags") ArrayList<String> tags;
@@ -33,7 +33,7 @@ public class Need {
     @JsonProperty("progress") int progress, 
     @JsonProperty("name") String name, 
     @JsonProperty("description") String description, 
-    @JsonProperty("volunteer dates") Date[] volunteerDates, 
+    @JsonProperty("volunteerDates") Date[] volunteerDates, 
     @JsonProperty("deadline") Date deadline, 
     @JsonProperty("type") NeedType type,
     @JsonProperty("tags") ArrayList<String> tags) {
