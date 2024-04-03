@@ -37,26 +37,12 @@ export class NeedComponent {
     this.cacheService.selectedNeed = this.need;
   }
 
-  adminTag(): boolean{ //admin tag is present and it's the only one
-    if(this.tagList.length==1 && this.tagList[0] == 'admin'){
-      return true;
-    }
-    return false;
-  }
-
-  userIsAdmin(): boolean {//check user status (admin or not)
-    return this.currentUser.isAdmin;
-  }
-
-  tagAndUser(): boolean{
-    if(this.adminTag() && this.userIsAdmin()){
-      return true;
-    } if(!this.adminTag() && this.userIsAdmin()){
-      return true;
-    } if(!this.adminTag() && !this.userIsAdmin()){
-      return true;
-    } if(this.adminTag() && !this.userIsAdmin){
-      return false;
+  canUserSeeNeed(): boolean {
+    for (let index = 0; index < this.need.tags.length; index++) {
+      const element = this.need.tags[index];
+      if(this.loginService.userAccount.tags.includes(element)) {
+        return true;
+      }
     }
     return false;
   }
