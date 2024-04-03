@@ -13,7 +13,7 @@ import com.ufund.api.ufundapi.model.Need;
 public interface CupboardDAO {
 
     Need[] getNeeds() throws IOException;
-    Need getNeed(String name) throws IOException;
+    Need getNeed(String name);
 
     /**
      * Saves a {@linkplain Need Need} to the cupboard

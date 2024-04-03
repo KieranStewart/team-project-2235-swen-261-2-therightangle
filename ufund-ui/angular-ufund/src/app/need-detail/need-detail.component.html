@@ -43,6 +43,10 @@
             <!-- <button (click)="saveNeed(donationAmount.value)"> Save </button> -->
             <button (click)="removeFromFundingBasket()">Remove from funding basket</button>
         </div>
+        <!-- If I'm an admin, I see transactions -->
+        <div *ngIf="transactionListVisible()">
+            <app-transaction-history-display [displayNeed]="displayNeed"></app-transaction-history-display>
+        </div>
     </div>
     <div *ngIf="displayNeed == null">
         <p><i>Select a need to see its details.</i></p>

@@ -1,0 +1,11 @@
+<h1>Transactions:</h1>
+<table>
+    <tr>
+        <td>Date</td>
+        <td>Amount Donated</td>
+    </tr>
+    <tr *ngFor="let transaction of transactions"> 
+        <td>{{transaction.timestamp?.month}}/{{transaction.timestamp?.day}}/{{transaction.timestamp?.year}}</td>
+        <td>${{transaction.amount}}</td>
+    </tr>
+</table>

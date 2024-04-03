@@ -6,8 +6,8 @@ import { Tag } from "./tag"
  */
 export interface Need {
     // Core information
-    name: String;
-    description: String;
+    name: string;
+    description: string;
     goal: number;
     progress: number;
     volunteerDates: Date[];

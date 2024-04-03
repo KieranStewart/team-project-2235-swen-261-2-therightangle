@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Need } from '../need';
 import { BasketService } from '../basket.service';
+import { LoginService } from '../login.service';
 import { TagManagerService } from '../tag-manager.service';
 import { NeedService } from '../need.service';
 import { LoginService } from '../login.service';
@@ -38,6 +39,14 @@ export class NeedDetailComponent {
     }
     this.basketService.remove(this.displayNeed);
   }
+
+  /**
+   * Checks if the transactions should be visible.
+   * @returns true if admin, false otherwise
+   */
+  transactionListVisible(): boolean {
+    return true;
+  }  
 
   showTagList(): void {
     this.tagManagerContent = this.tagManagerService.getList();
