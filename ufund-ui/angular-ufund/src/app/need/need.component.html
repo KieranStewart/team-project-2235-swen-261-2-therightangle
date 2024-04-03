@@ -1,3 +1,3 @@
-<div class="holder">
+<div *ngIf="canUserSeeNeed()" class="holder">
     <button (click)="showDetails()"> {{need.name}} </button>
 </div>
