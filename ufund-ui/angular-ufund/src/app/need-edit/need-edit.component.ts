@@ -4,6 +4,7 @@ import { NeedService } from "../need.service";
 import { take } from "rxjs";
 import { CupboardComponent } from "../cupboard/cupboard.component";
 import { NeedCacheService } from "../need-cache.service";
+import { TransactionService } from "../transaction.service";
 
 /**
  * Manager is able to make changes to need
@@ -22,7 +23,7 @@ export class NeedEditComponent {
     errorText: string = "";
     createErrorText: string = "";
 
-    constructor(private needService: NeedService, private cupboardComponent: CupboardComponent, private needCacheService: NeedCacheService) {}
+    constructor(private needService: NeedService, private cupboardComponent: CupboardComponent, private needCacheService: NeedCacheService, private transactionService: TransactionService) {}
 
     ngOnChanges() {
         // Fallback code for if something is null in the backend
@@ -218,6 +219,20 @@ export class NeedEditComponent {
                 }
             },
         });
+    }
+
+    deleteTransactionHistory(): void {
+        if(this.currentNeed == null) {
+            return;
+        }
+        if(confirm("Are you sure you want to delete the transaction history for this need (cannot be undone)?")) {
+            const that = this;
+            this.transactionService.deleteTransactionsFor(this.currentNeed.name).pipe(take(1)).subscribe({
+                next(value) {
+                    that.errorText = "Successfully deleted transactions";
+                },
+            });
+        }
     }
 
 }
