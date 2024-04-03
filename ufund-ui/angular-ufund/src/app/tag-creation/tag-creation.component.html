@@ -1,0 +1,23 @@
+<h2>Tag Name: <input type="text" #nameInput></h2>
+
+<h2>Tag Description:</h2>
+<p>Write a description of this tag.</p>
+<textarea type="text" id="tagDescriptionInput" cols="40" rows="10" #tagDescriptionInput></textarea>
+
+<h2><input type="checkbox" (click)="toggleApplyable()"> Users can apply for this Tag</h2>
+
+<h2>Tag Instruction: </h2>
+<div *ngIf="applyable">
+    <p>Write the instruction for user to apply for this tag.</p>
+</div>
+<div *ngIf="!applyable">
+    <p>User can't apply for this tag. Only admin users can add this tag to users.</p>
+</div>
+    <textarea [disabled]="!applyable" type="text" id="tagInstructionInput" value="" cols="40" rows="10" #tagInstructionInput></textarea>
+
+<div>
+<button type="submit" (click)="createTag(nameInput.value,tagDescriptionInput.value, tagInstructionInput.value)"><h3>Create new Tag</h3></button>
+</div>
+
+<h2> {{errorMessage}} </h2>
+<div *ngIf="submitted"> submitted </div>

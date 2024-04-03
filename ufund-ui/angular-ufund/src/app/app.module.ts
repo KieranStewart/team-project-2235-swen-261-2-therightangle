@@ -17,6 +17,10 @@ import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
 import { HomeViewComponent } from './home-view/home-view.component';
 import { ConfirmationViewComponent } from './confirmation-view/confirmation-view.component';
 import { TransactionHistoryDisplayComponent } from './transaction-history-display/transaction-history-display.component';
+import { TagCreationComponent } from './tag-creation/tag-creation.component';
+import { UserComponent } from './user/user.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +34,10 @@ import { TransactionHistoryDisplayComponent } from './transaction-history-displa
     CheckoutViewComponent,
     HomeViewComponent,
     ConfirmationViewComponent,
-    TransactionHistoryDisplayComponent
+    TransactionHistoryDisplayComponent,
+    TagCreationComponent,
+    UserComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

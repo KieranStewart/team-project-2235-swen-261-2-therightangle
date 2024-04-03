@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 
 import { LoginComponent } from './login/login.component';
 import { AccountCreationComponent } from './account-creation/account-creation.component';
+import { TagCreationComponent } from './tag-creation/tag-creation.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: '', component: AppComponent },
   {path: 'Login', component: LoginComponent },
   {path: 'AccountCreation', component: AccountCreationComponent },
+  {path: 'CreateTags', component: TagCreationComponent },
 ];
 
 @NgModule({
