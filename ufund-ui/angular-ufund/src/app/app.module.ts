@@ -20,6 +20,7 @@ import { TransactionHistoryDisplayComponent } from './transaction-history-displa
 import { TagCreationComponent } from './tag-creation/tag-creation.component';
 import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { NeedEditComponent } from './need-edit/need-edit.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     TransactionHistoryDisplayComponent,
     TagCreationComponent,
     UserComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    NeedEditComponent
   ],
   imports: [
     BrowserModule,

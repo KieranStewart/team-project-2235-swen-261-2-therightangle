@@ -80,7 +80,7 @@ export class NeedService {
   /** DELETE: delete the need from the server */
   deleteNeed(name: String): Observable<Need> {
     const url = `${this.cupboardUrl}/${name}`;
-
+    this.log(name.valueOf());
     return this.http.delete<Need>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted need name=${name}`)), // notice: deprecated
       catchError(this.handleError<Need>('deleteNeed'))
