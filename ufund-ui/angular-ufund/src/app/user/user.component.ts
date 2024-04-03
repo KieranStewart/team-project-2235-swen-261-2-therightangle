@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   @Input()
   account!: Account;
 
-  constructor(public accountCasheService: AccountCasheService, private loginService: LoginService) { }
+  constructor(public accountCasheService: AccountCasheService, public loginService: LoginService) { }
 
   ngOnInit(): void {
     this.getAccountList();

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
 import { Observable, take } from 'rxjs';
+import { LoginService } from '../login.service';
+import { Account } from '../account';
 
 @Component({
   selector: 'app-home-view',
@@ -14,7 +16,11 @@ export class HomeViewComponent {
   searchTerm: string = ''; //declares term searched 
   lastTermSearched: string = ''; // stores the last term that we actually searched the cupboard with
 
-  constructor(private needService: NeedService) {}
+  constructor(
+    private needService: NeedService,
+    private loginService: LoginService) {}
+
+    currentUser: Account = this.loginService.userAccount
 
   /**
    * Search for needs
@@ -44,5 +50,9 @@ export class HomeViewComponent {
   clearSearch(): void {
     this.lastTermSearched = "";
     this.searchResults = [];
+  }
+
+  userIsAdmin(): boolean{
+    return this.currentUser.isAdmin;
   }
 }

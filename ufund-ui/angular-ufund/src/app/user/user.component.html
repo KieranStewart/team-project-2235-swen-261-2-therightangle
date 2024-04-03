@@ -1,10 +1,12 @@
-<h1>User Accounts:</h1>
+<div *ngIf="loginService.userAccount.isAdmin == true" > 
+    <h1>User Accounts:</h1>
 
-<div class="btn-group">
-    <div *ngFor="let account of accountList">
-        <button (click)="showDetails(account)">{{account.name}} </button>
+    <div class="btn-group">
+        <div *ngFor="let account of accountList">
+            <button (click)="showDetails(account)">{{account.name}} </button>
+        </div>
     </div>
-</div>
-<div *ngIf="accountCasheService.selectedAccount != null">
-    <app-user-detail [displayAccount]="accountCasheService.selectedAccount"></app-user-detail>
+    <div *ngIf="accountCasheService.selectedAccount != null">
+        <app-user-detail [displayAccount]="accountCasheService.selectedAccount"></app-user-detail>
+    </div>
 </div>
