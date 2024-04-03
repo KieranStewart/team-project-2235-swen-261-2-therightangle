@@ -22,8 +22,8 @@ public class NeedTest {
         String expectedName = "Unlimited Games";
         String expectedDesc = "but no games";
         Date expectedDeadline = new Date(1, 1, 2040);
-        Date[] expectedVolunteerDates = {
-            new Date(10, 10, 2030)
+        VolunteerDate[] expectedVolunteerDates = {
+            new VolunteerDate(10, 10, 2030, false)
         };
         NeedType expectedType = NeedType.DONATION;
 
@@ -48,8 +48,8 @@ public class NeedTest {
         String expectedName = "test name";
         String expectedDesc = "test desc";
         Date expectedDeadline = new Date(1, 1, 2040);
-        Date[] expectedVolunteerDates = {
-            new Date(10, 10, 2030)
+        VolunteerDate[] expectedVolunteerDates = {
+            new VolunteerDate(10, 10, 2030, false)
         };
         NeedType expectedType = NeedType.DONATION;
         Need need = new Need(-1, -1, "old name", "old description", null, null, NeedType.VOLUNTEER);
@@ -81,8 +81,8 @@ public class NeedTest {
         String expectedName = "Unlimited Games";
         String expectedDesc = "but no games";
         Date expectedDeadline = new Date(1, 1, 2040);
-        Date[] expectedVolunteerDates = {
-            new Date(10, 10, 2030)
+        VolunteerDate[] expectedVolunteerDates = {
+            new VolunteerDate(10, 10, 2030, false)
         };
         Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline, NeedType.DONATION);
 

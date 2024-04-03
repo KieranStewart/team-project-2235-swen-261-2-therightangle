@@ -1,5 +1,7 @@
 package com.ufund.api.ufundapi.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a date in time.
  * This allows the back-end and front-end to change the string format
@@ -10,9 +12,9 @@ public class Date {
 
     private final static String TO_STRING_FORMAT = "%d/%d/%d";
 
-    private final int day;
-    private final int month;
-    private final int year;
+    @JsonProperty("day") int day;
+    @JsonProperty("month") int month;
+    @JsonProperty("year") int year;
     
     public Date(int day, int month, int year) {
         this.day = day;

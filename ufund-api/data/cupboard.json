@@ -1,1 +1,85 @@
-[{"goal":0,"progress":10,"name":"new new test need","description":null,"volunteer dates":null,"deadline":null,"type":"DONATION"},{"goal":100,"progress":39,"name":"Donation","description":"A basic need for a donation to a specific cause. \n Money could be donated to this cause.","volunteer dates":null,"deadline":null,"type":"DONATION"},{"goal":0,"progress":2,"name":"test need","description":null,"volunteer dates":null,"deadline":null,"type":"DONATION"},{"goal":0,"progress":2,"name":"Volunteer Need","description":null,"volunteer dates":null,"deadline":null,"type":"VOLUNTEER"}]
+[
+    {
+        "goal": 0,
+        "progress": 10,
+        "name": "new new test need",
+        "description": null,
+        "volunteer dates": null,
+        "deadline": null,
+        "type": "DONATION"
+    },
+    {
+        "goal": 100,
+        "progress": 39,
+        "name": "Donation",
+        "description": "A basic need for a donation to a specific cause. \n Money could be donated to this cause.",
+        "volunteer dates": null,
+        "deadline": null,
+        "type": "DONATION"
+    },
+    {
+        "goal": 0,
+        "progress": 14,
+        "name": "test need",
+        "description": null,
+        "volunteer dates": null,
+        "deadline": null,
+        "type": "DONATION"
+    },
+    {
+        "goal": 0,
+        "progress": 2,
+        "name": "Volunteer Need",
+        "description": null,
+        "volunteer dates": [
+            {
+                "day": 12,
+                "month": 1,
+                "year": 2025,
+                "filled": true
+            },
+            {
+                "day": 12,
+                "month": 1,
+                "year": 2025,
+                "filled": false
+            },
+            {
+                "day": 10,
+                "month": 2,
+                "year": 2025,
+                "filled": false
+            }
+        ],
+        "deadline": null,
+        "type": "VOLUNTEER"
+    },
+    {
+        "goal": 0,
+        "progress": 2,
+        "name": "Volunteering Need",
+        "description": null,
+        "volunteer dates": [
+            {
+                "day": 12,
+                "month": 3,
+                "year": 2025,
+                "filled": true
+            },
+            {
+                "day": 12,
+                "month": 1,
+                "year": 2025,
+                "filled": false
+            },
+            {
+                "day": 10,
+                "month": 2,
+                "year": 2025,
+                "filled": false
+            }
+        ],
+        "deadline": null,
+        "type": "VOLUNTEER"
+    }
+]
