@@ -6,7 +6,7 @@ package com.ufund.api.ufundapi.model;
  * of a date without messing each other up.
  * @author Logan Nickerson
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     private final static String TO_STRING_FORMAT = "%d/%d/%d";
 
@@ -35,6 +35,17 @@ public class Date {
     @Override
     public String toString() {
         return String.format(TO_STRING_FORMAT, month, day, year);
+    }
+
+    @Override
+    public int compareTo(Date timestamp) {
+        if(this.year == timestamp.year) {
+            if(this.month == timestamp.month) {
+                return this.day - timestamp.day;
+            }
+            return this.month - timestamp.month;
+        }
+        return this.year - timestamp.year;
     }
     
 }

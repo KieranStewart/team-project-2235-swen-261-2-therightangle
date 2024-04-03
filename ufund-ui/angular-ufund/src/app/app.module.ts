@@ -16,9 +16,11 @@ import { RouterModule, Routes } from '@angular/router'; // Same as below comment
 import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
 import { HomeViewComponent } from './home-view/home-view.component';
 import { ConfirmationViewComponent } from './confirmation-view/confirmation-view.component';
+import { TransactionHistoryDisplayComponent } from './transaction-history-display/transaction-history-display.component';
 import { TagCreationComponent } from './tag-creation/tag-creation.component';
 import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +34,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     CheckoutViewComponent,
     HomeViewComponent,
     ConfirmationViewComponent,
+    TransactionHistoryDisplayComponent,
     TagCreationComponent,
     UserComponent,
     UserDetailComponent
@@ -43,7 +46,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     RouterModule,
     RouterModule.forRoot(AppRoutingModule.getRoutes())
   ],
-  providers: [],
+  providers: [CupboardComponent],
   bootstrap: [AppComponent]
   
 })
