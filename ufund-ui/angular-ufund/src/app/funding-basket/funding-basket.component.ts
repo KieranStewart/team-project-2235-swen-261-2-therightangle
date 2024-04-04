@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BasketService } from '../basket.service';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-funding-basket',
@@ -21,7 +22,7 @@ export class FundingBasketComponent {
     const that = this;
 
     this.fundingBasket.forEach(donation => {
-      this.needService.updateNeed(donation);
+      this.needService.updateNeed(donation).pipe(take(1)).subscribe();
     });
     this.basketService.clear();
     this.message = "submitted";

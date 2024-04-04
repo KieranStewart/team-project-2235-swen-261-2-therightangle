@@ -117,7 +117,7 @@ export class CheckoutComponent implements OnInit{
     }
     for (let index = 0; index < this.basketService.contents.length; index++) {
       const element = this.basketService.contents[index];
-      if(element.type == "DONATION" && element.donationAmount <= 0) {
+      if(element.type == "donation" && element.donationAmount <= 0) {
         return false;
       }
     }
