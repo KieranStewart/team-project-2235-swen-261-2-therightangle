@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Account } from '../account';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
+import { BasketService } from '../basket.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
   account!: Account;
   message = "";
 
-  constructor(private loginService: LoginService, private router: Router){}
+  constructor(private loginService: LoginService, private router: Router, private basketService: BasketService) {}
 
   login(username: string, password: string): void {
     this.message = "loading";
@@ -30,9 +31,9 @@ export class LoginComponent {
         that.message = response;
         // code that concerns the response should go here
         // putting something like "if success then turn green" outside of here will be weird and not work sometimes
-        if (response == 'Login successful')
-        {
+        if (response == 'Login successful') {
           that.router.navigate(['/']);
+          that.basketService.clear();
         }
       }
     });
