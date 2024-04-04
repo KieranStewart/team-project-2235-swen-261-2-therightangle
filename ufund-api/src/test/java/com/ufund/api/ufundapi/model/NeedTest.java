@@ -76,8 +76,8 @@ public class NeedTest {
     @Test
     public void testToString() {
         // Setup
-        int expectedGoal = 100;
-        int expectedProgress = 0;
+        double expectedGoal = 100;
+        double expectedProgress = 0;
         String expectedName = "Unlimited Games";
         String expectedDesc = "but no games";
         Date expectedDeadline = new Date(1, 1, 2040);
@@ -87,7 +87,7 @@ public class NeedTest {
         Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline, NeedType.DONATION);
 
         // Invoke
-        String expected = String.format(Need.getStringFormat(), expectedGoal, expectedProgress, expectedName, expectedDesc, Arrays.toString(expectedVolunteerDates), expectedDeadline, NeedType.DONATION);
+        String expected = String.format(Need.getStringFormat(), expectedGoal, expectedProgress, expectedName, expectedDesc, Arrays.toString(expectedVolunteerDates), expectedDeadline, NeedType.DONATION, Arrays.toString(new com.ufund.api.ufundapi.model.Tag[0]));
 
         // Analyze
         assertEquals(expected, need.toString());

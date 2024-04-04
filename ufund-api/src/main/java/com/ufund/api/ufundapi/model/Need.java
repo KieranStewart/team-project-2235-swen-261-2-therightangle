@@ -18,10 +18,10 @@ public class Need {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Need [goal = %d, progress = %d, name = %s, description = %s, volunteerDates = %s, deadline = %s, type = %s, tags = %s]";
+    static final String STRING_FORMAT = "Need [goal = %.2f, progress = %.2f, name = %s, description = %s, volunteerDates = %s, deadline = %s, type = %s, tags = %s]";
 
-    @JsonProperty("goal") private int goal;
-    @JsonProperty("progress") private int progress;
+    @JsonProperty("goal") private double goal;
+    @JsonProperty("progress") private double progress;
     @JsonProperty("name") private String name;
     @JsonProperty("description") private String description;
     @JsonProperty("volunteerDates") private VolunteerDate[] volunteerDates;
@@ -29,8 +29,8 @@ public class Need {
     @JsonProperty("type") private NeedType type;
     @JsonProperty("tags") ArrayList<String> tags;
 
-    public Need(@JsonProperty("goal") int goal, 
-    @JsonProperty("progress") int progress, 
+    public Need(@JsonProperty("goal") double goal, 
+    @JsonProperty("progress") double progress, 
     @JsonProperty("name") String name, 
     @JsonProperty("description") String description, 
     @JsonProperty("volunteerDates") VolunteerDate[] volunteerDates,
@@ -47,7 +47,7 @@ public class Need {
         this.tags = tags;
     }
 
-    public Need(int goal, int progress, String name, String description, Date[] volunteerDates, Date deadline, NeedType type) {
+    public Need(double goal, double progress, String name, String description, Date[] volunteerDates, Date deadline, NeedType type) {
         this(goal, progress, name, description, volunteerDates, deadline, type, new ArrayList<String>());
     }
 
@@ -59,19 +59,19 @@ public class Need {
         return STRING_FORMAT;
     }
 
-    public int getGoal() {
+    public double getGoal() {
         return goal;
     }
 
-    public void setGoal(int goal) {
+    public void setGoal(double goal) {
         this.goal = goal;
     }
 
-    public int getProgress() {
+    public double getProgress() {
         return progress;
     }
 
-    public void setProgress(int progress) {
+    public void setProgress(double progress) {
         this.progress = progress;
     }
 
