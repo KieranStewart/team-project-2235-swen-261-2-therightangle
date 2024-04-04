@@ -49,7 +49,7 @@
             (click)="addToFundingBasket()">
             <p><b>Add to funding basket</b></p>
         </button>
-        <button *ngIf="needCacheService.selectedNeed.inFundingBasket && !loginService.userAccount.isAdmin"
+        <button *ngIf="needCacheService.selectedNeed.inFundingBasket && !isAdmin()"
             (click)="removeFromFundingBasket()">
             <p><b>Remove from funding basket</b></p>
         </button>
