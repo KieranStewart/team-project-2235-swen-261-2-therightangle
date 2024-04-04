@@ -42,7 +42,7 @@
                     <!-- <app-date [date]="this_date"></app-date>  -->
                     <!-- New way -->
                     <app-date [date]="this_date" [need]="this.displayNeed"></app-date>
-                    <button *ngIf="dateSelected(this_date)">[-]</button>
+                    <button *ngIf="dateSelected(this_date)" (click)="removeDate(this_date)">[-]</button>
                 </div>
                 <button (click)="removeFromFundingBasket()">Remove from funding basket</button>
             </div>

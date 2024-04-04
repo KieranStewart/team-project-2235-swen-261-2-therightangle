@@ -55,6 +55,7 @@ export class CheckoutComponent implements OnInit{
           this.recordHours(this.basketService.contents[index]);
         else
           this.recordPayment(this.basketService.contents[index]);
+        console.log("Checkout Recorded:" + this.basketService.contents[index].name);
       }
       
       this.basketService.clear();
@@ -98,14 +99,18 @@ export class CheckoutComponent implements OnInit{
       {
         if (need.volunteerDates[j].year == need.selectedVolunteerDates[i].year 
           && need.volunteerDates[j].month == need.selectedVolunteerDates[i].month 
-          && need.volunteerDates[j].day == need.selectedVolunteerDates[i].day)
+          && need.volunteerDates[j].day == need.selectedVolunteerDates[i].day && need.volunteerDates[j].filled == false)
           { 
+            console.log("Volunteer Date " + need.volunteerDates[j].day + " is set to " + need.selectedVolunteerDates[i].day);
+            
             need.volunteerDates[j].filled = true;
             break;
           }
       }
     }
+    console.log(need.volunteerDates + ":" + need.selectedVolunteerDates);
+    
     need.selectedVolunteerDates = [];
-    this.needService.updateNeed(need).subscribe;
+    this.needService.updateNeed(need).subscribe();
   }
 }

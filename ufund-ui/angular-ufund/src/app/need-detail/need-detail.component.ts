@@ -35,6 +35,21 @@ export class NeedDetailComponent {
     
   }
 
+  removeDate(date: VolunteerDate): void {
+    let newVolunteerDates: VolunteerDate[] = this.displayNeed.selectedVolunteerDates;
+    if (newVolunteerDates == undefined)
+    {
+      newVolunteerDates = [];
+    }
+    let index: number = newVolunteerDates.indexOf(date);
+    if (index != -1)
+      newVolunteerDates.splice(index);
+    else
+      console.log("ERROR, VolunteerDate already removed, or not in dates array");
+    console.log("New selectedVolunteerDates array" + newVolunteerDates);
+    this.displayNeed.selectedVolunteerDates = newVolunteerDates;
+  };
+
   // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.
   // You can use this if you want a save button instead of automatically linking to the input field.
   // saveNeed(donationAmount: number): void{
