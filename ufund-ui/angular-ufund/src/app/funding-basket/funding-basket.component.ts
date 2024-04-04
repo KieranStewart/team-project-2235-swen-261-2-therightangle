@@ -21,9 +21,9 @@ export class FundingBasketComponent {
     const that = this;
 
     this.fundingBasket.forEach(donation => {
-      this.needService.updateNeed(donation)
-      this.basketService.clear()
-      this.message = "submitted";
+      this.needService.updateNeed(donation);
     });
+    this.basketService.clear();
+    this.message = "submitted";
   }
 }
