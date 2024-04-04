@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Account } from '../account';
 import { TagManagerService } from '../tag-manager.service';
 import { LoginService } from '../login.service';
+import { Tag } from '../tag';
+import { NONE_TYPE } from '@angular/compiler';
 import { take } from 'rxjs';
 
 
@@ -14,8 +16,9 @@ export class UserDetailComponent {
   @Input()
   displayAccount!: Account;
   tagManagerContent: String[];
+  hoverTag!: Tag;
   showTags = false;
-  tagMessage = ""
+  tagMessage = "click on a tag below to add it to this account"
 
   constructor(private tagManagerService: TagManagerService, private loginService: LoginService) {
     this.tagManagerContent = []
@@ -33,7 +36,7 @@ export class UserDetailComponent {
 
   addTag(name: String): void {
     if (this.displayAccount.tags.indexOf(name) == -1) {
-      this.tagMessage = ""
+      this.tagMessage = name + " has been add to this account: " + this.displayAccount.name
       this.displayAccount.tags.push(name)
       this.loginService.updateAccount(this.displayAccount).subscribe();
     } else {
@@ -44,13 +47,17 @@ export class UserDetailComponent {
   removeTag(name: String): void {
     if (name == "public") {
       this.tagMessage = "can't remove tag " + name + " from this need because it's a permanent variable"
+    } else if (name == "admin" && this.displayAccount.name == "admin") {
+      this.tagMessage = "can't remove admin tag from this admin account"
     } else {
-      this.tagMessage = ""
+      this.tagMessage = name + " has been remove from this account: " + this.displayAccount.name
       var index = this.displayAccount.tags.indexOf(name);
       this.displayAccount.tags.splice(index, 1);
       this.loginService.updateAccount(this.displayAccount).subscribe();
     }
   }
 
-
+  changeHoverTag(name: String): void {
+    this.hoverTag = this.tagManagerService.getTag(name);
+  }
 }

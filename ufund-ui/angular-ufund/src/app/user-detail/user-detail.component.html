@@ -2,7 +2,7 @@
 <h2>{{displayAccount.name}}'s tags</h2>
 <div class="btn-group">
     <div *ngFor="let item of displayAccount.tags">
-        <button (click)="removeTag(item)">{{item}}</button>
+        <button (click)="removeTag(item)" (mouseover)="changeHoverTag(item)">{{item}}</button>
     </div>
 </div>
 
@@ -10,9 +10,11 @@
 
 <div *ngIf="showTags">
     <h4>All tags avaliable to be added to this need:</h4>
+
     <div class="btn-group">
         <div *ngFor="let item of tagManagerContent">
-            <button (click)="addTag(item)">{{item}}</button>
+            <button (click)="addTag(item)" (mouseover)="changeHoverTag(item)">{{item}}</button>
         </div>
     </div>
+    <h4 *ngIf="hoverTag != null">Tag Details: {{hoverTag.tagDetail}}</h4>
 </div>

@@ -27,11 +27,8 @@ const routes: Routes = [
   {path: '', component: AppComponent },
   {path: 'Login', component: LoginComponent },
   {path: 'AccountCreation', component: AccountCreationComponent },
-  {path: 'create-tags', component: TagCreationComponent },
-  {
-    path: "configure-users",
-    component: UserComponent
-  }
+  { path: 'CreateTags', component: TagCreationComponent },
+  { path: 'ManageUsers', component: UserComponent },
 ];
 
 @NgModule({
@@ -42,7 +39,7 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
+export class AppRoutingModule {
   static getRoutes(): Routes {
     return routes;
   }
