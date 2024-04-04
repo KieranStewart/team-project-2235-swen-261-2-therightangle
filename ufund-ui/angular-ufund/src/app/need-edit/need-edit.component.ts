@@ -135,7 +135,7 @@ export class NeedEditComponent {
             this.errorText = "An error occurred";
             return;
         }
-        this.currentNeed.volunteerDates.push({day: 0, month: 0, year: 0});
+        this.currentNeed.volunteerDates.push({day: 0, month: 0, year: 0, filled:true});
     }
 
     removeVolunteerDate(): void {
@@ -210,7 +210,8 @@ export class NeedEditComponent {
             type: "donation",
             tags: ["admin"],
             inFundingBasket: false,
-            donationAmount: 0
+            donationAmount: 0,
+            selectedVolunteerDates: []
         };
 
         const that = this;

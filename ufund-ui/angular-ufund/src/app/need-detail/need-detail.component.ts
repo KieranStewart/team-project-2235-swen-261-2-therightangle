@@ -58,11 +58,12 @@ export class NeedDetailComponent {
     } catch (error) {
       return false;
     }
-    
+    return false;
   }
 
   removeDate(date: VolunteerDate): void {
     if(this.needCacheService.selectedNeed == null) {
+      console.log("Attempted to remove date from null displayNeed");
       return;
     }
     let newVolunteerDates: VolunteerDate[] = this.needCacheService.selectedNeed.selectedVolunteerDates;
