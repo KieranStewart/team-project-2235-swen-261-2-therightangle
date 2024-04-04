@@ -37,15 +37,12 @@ export class CheckoutComponent implements OnInit{
     this.total_h = 0;
     for (let item of this.basketService.contents)
     {
-      if (item.type == "VOLUNTEER") {
+      if (item.type == "volunteer") {
         this.total_h = this.total_h + +this.getVolunteerHours(item);
-      }
-      else if (item.type == "DONATION"){
+      } else if (item.type == "donation"){
         this.total = this.total + parseFloat(item.donationAmount.toString());
-      }
-      else
-      {
-        console.log("One of the items in the cart has no type!");
+      } else {
+        console.log("One of the items in the cart has a weird type! It was " + item.type);
       }
     }
   }
@@ -55,7 +52,7 @@ export class CheckoutComponent implements OnInit{
     if (this.makePayment())
     {
       for (let index = 0; index < this.basketService.contents.length; index++) {
-        if (this.basketService.contents[index].type == "VOLUNTEER")
+        if (this.basketService.contents[index].type == "volunteer")
           this.recordHours(this.basketService.contents[index]);
         else
           this.recordPayment(this.basketService.contents[index]);
@@ -104,7 +101,6 @@ export class CheckoutComponent implements OnInit{
     this.transactionService.addTransaction(transaction).pipe(take(1)).subscribe({
       next(value) {
           that.cupboardComponent.getCupboard(); // update cupboard view
-          that.needCacheService.selectedNeed = need;
       },
     });
   }
