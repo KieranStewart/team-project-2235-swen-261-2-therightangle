@@ -38,7 +38,7 @@
         </div>
 
         <!-- If it isn't in the basket, allow it to be added -->
-        <button *ngIf="!displayNeed.inFundingBasket && !loginService.userAccount.isAdmin"
+        <button *ngIf="!needCacheService.selectedNeed.inFundingBasket && !loginService.userAccount.isAdmin"
             (click)="addToFundingBasket()">
             <p><b>Add to funding basket</b></p>
         </button>
@@ -46,7 +46,7 @@
                 <p><b>Remove from funding basket</b></p>
             </button>
         <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
-        <div *ngIf="needCacheService.inFundingBasket">
+        <div *ngIf="needCacheService.selectedNeed.inFundingBasket">
             <!-- Starter code for the Donate Time story.  Good luck! -->
             <div *ngIf="displayNeed != null && displayNeed.type == 'donation'">
               <label for="donation-amount">Donation amount: </label>
@@ -64,7 +64,7 @@
             <label for="donation-amount">
                 <h4>Donation amount: </h4>
             </label>
-            <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0" #donationAmount />
+            <input id="donation-amount" [(ngModel)]="needCacheService.selectedNeed.donationAmount" placeholder="0" #donationAmount />
 
         </div>
         <!-- If I'm an admin, I see transactions -->
