@@ -37,9 +37,12 @@ export class NeedComponent {
     this.cacheService.selectedNeed = this.need;
   }
 
-  canUserSeeNeed(): boolean {
-    for (let index = 0; index < this.need.tags.length; index++) {
-      const element = this.need.tags[index];
+  canUserSeeNeed(thisNeed : Need): boolean {
+    if(thisNeed == null) {
+      return false;
+    }
+    for (let index = 0; index < thisNeed.tags.length; index++) {
+      const element = thisNeed.tags[index];
       if(this.loginService.userAccount.tags.includes(element)) {
         return true;
       }

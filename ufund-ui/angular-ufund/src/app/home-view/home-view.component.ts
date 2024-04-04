@@ -4,6 +4,7 @@ import { NeedService } from '../need.service';
 import { Observable, take } from 'rxjs';
 import { LoginService } from '../login.service';
 import { Account } from '../account';
+import { NeedComponent } from '../need/need.component';
 
 @Component({
   selector: 'app-home-view',
@@ -18,7 +19,8 @@ export class HomeViewComponent {
 
   constructor(
     private needService: NeedService,
-    private loginService: LoginService) {}
+    private loginService: LoginService,
+    private needComponent: NeedComponent) {}
 
     currentUser: Account = this.loginService.userAccount
 
@@ -39,7 +41,17 @@ export class HomeViewComponent {
               that.clearSearch();
               that.lastTermSearched = thisSearchTerm;
             } else {
-              that.searchResults = value;
+              that.searchResults = [];
+              for (let index = 0; index < value.length; index++) {
+                const element = value[index];
+                if(that.needComponent.canUserSeeNeed(element) && element != null) {
+                  that.searchResults.push(element);
+                }
+              }
+              if(that.searchResults.length == 0) {
+                that.clearSearch();
+                that.lastTermSearched = thisSearchTerm;
+              }
             }
         },
       });
