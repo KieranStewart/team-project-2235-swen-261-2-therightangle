@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Account } from '../account';
 import { TagManagerService } from '../tag-manager.service';
 import { LoginService } from '../login.service';
+import { take } from 'rxjs';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class UserDetailComponent {
 
   constructor(private tagManagerService: TagManagerService, private loginService: LoginService) {
     this.tagManagerContent = []
-    loginService.getAccount("admin").subscribe(displayAccount => this.displayAccount = displayAccount);
+    loginService.getAccount("admin").pipe(take(1)).subscribe(displayAccount => this.displayAccount = displayAccount);
   }
 
   showTagList(): void {

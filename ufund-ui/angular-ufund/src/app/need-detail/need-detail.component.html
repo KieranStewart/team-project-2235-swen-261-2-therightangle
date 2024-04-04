@@ -3,9 +3,8 @@
     <div *ngIf="displayNeed != null">
         <!-- Display need information -->
         <h3>{{displayNeed.name}}</h3>
-        <h5>Completion: {{displayNeed.progress}} - {{displayNeed.goal}}</h5>
+        <h5 *ngIf="displayNeed.type == 'donation'">Funding progress: ${{displayNeed.progress}} / ${{displayNeed.goal}}</h5>
 
-        <h4>Need's Tags:</h4>
         <div class="btn-group">
             <div *ngFor="let item of displayNeed.tags">
                 <button *ngIf="item != 'admin'" [disabled]="!loginService.userAccount.isAdmin" (click)="removeTag(item)">{{item}}</button>
@@ -26,7 +25,7 @@
         </div>
         
 
-        <h4>{{tagMessage}}</h4>
+        <h4 *ngIf="loginService.userAccount.isAdmin">{{tagMessage}}</h4>
 
         <h4>Description:</h4>
         <p>
