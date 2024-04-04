@@ -17,14 +17,14 @@ import { NeedCacheService } from '../need-cache.service';
   styleUrls: ['./need-detail.component.css']
 })
 export class NeedDetailComponent {
-  
+
   @Input() displayNeed!: Need | null;
 
   tagManagerContent: String[];
   hoverTag!: Tag;
   showTags = false;
 
-  tagMessage = "click on a tag below to add it to this need"
+  tagMessage = "All tags avaliable to be added to this need:"
 
   constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService, public loginService: LoginService, public needCacheService : NeedCacheService) {
     this.tagManagerContent = []
@@ -35,14 +35,14 @@ export class NeedDetailComponent {
   }
 
   addToFundingBasket(): void {
-    if(this.displayNeed == null) {
+    if (this.displayNeed == null) {
       return;
     }
     this.basketService.add(this.displayNeed);
   }
 
   removeFromFundingBasket(): void {
-    if(this.displayNeed == null) {
+    if (this.displayNeed == null) {
       return;
     }
     this.basketService.remove(this.displayNeed);
@@ -93,7 +93,7 @@ export class NeedDetailComponent {
    */
   transactionListVisible(): boolean {
     return this.loginService.userAccount.isAdmin;
-  }  
+  }
 
   showTagList(): void {
     this.tagManagerContent = this.tagManagerService.getList();
@@ -105,7 +105,7 @@ export class NeedDetailComponent {
   }
 
   addTag(name: String): void {
-    if(this.displayNeed == null) {
+    if (this.displayNeed == null) {
       return;
     }
     if (this.displayNeed.tags.indexOf(name) == -1) {
@@ -118,11 +118,11 @@ export class NeedDetailComponent {
   }
 
   removeTag(name: String): void {
-    if(this.displayNeed == null) {
+    if (this.displayNeed == null) {
       return;
     }
-    if (name == "admin" || name == "public") {
-      this.tagMessage = "can't remove tag " + name + " from this need because it's a permanent variable"
+    if (name == "admin") {
+      this.tagMessage = "can't remove tag admin from this need because it's a permanent variable"
     } else {
       this.tagMessage = name + " has been remove from this need: " + this.displayNeed.name
       var index = this.displayNeed.tags.indexOf(name);

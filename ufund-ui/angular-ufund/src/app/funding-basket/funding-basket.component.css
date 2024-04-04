@@ -1,5 +1,17 @@
 .need-container {
-    background-color: #72aa96;
+    background-color: #BCBD8B;
     border-radius: 2px;
     padding: 1rem;
+    float: left;
+    min-width: 45%;
+    max-width: 45%;
+}
+
+.container {
+    border: .0625rem solid #373D20;
+    background-color: #EFF1ED;
+    border-radius: .625rem;
+    float: left;
+    width: 95%;
+    padding: 1%;
 }

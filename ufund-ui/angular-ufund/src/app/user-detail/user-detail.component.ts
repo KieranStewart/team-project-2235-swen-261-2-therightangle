@@ -18,7 +18,7 @@ export class UserDetailComponent {
   tagManagerContent: String[];
   hoverTag!: Tag;
   showTags = false;
-  tagMessage = "click on a tag below to add it to this account"
+  tagMessage = "All tags avaliable to be added to this need:"
 
   constructor(private tagManagerService: TagManagerService, private loginService: LoginService) {
     this.tagManagerContent = []

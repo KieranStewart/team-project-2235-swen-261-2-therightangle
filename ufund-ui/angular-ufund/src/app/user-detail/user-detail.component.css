@@ -1,7 +1,7 @@
 .btn-group button {
-    background-color: #04AA6D;
+    background-color: #BE6E46;
     /* Green background */
-    border: 1px solid green;
+    border: .0625rem solid #373D20;
     /* Green border */
     color: white;
     /* White text */
@@ -27,5 +27,5 @@
 
 /* Add a background color on hover */
 .btn-group button:hover {
-    background-color: #3e8e41;
+    background-color: #AD6440;
 }

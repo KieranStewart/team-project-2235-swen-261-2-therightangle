@@ -2,19 +2,22 @@
 <h2>{{displayAccount.name}}'s tags</h2>
 <div class="btn-group">
     <div *ngFor="let item of displayAccount.tags">
-        <button (click)="removeTag(item)" (mouseover)="changeHoverTag(item)">{{item}}</button>
+        <button (click)="removeTag(item)" (mouseover)="changeHoverTag(item)">
+            <p><b>{{item}}</b></p>
+        </button>
     </div>
 </div>
-
-<button (click)="showTagList()">Toggle avaliable tags</button>
+<br>
+<button (click)="showTagList()">
+    <p><b>Toggle avaliable tags</b></p>
+</button>
 
 <div *ngIf="showTags">
-    <h4>All tags avaliable to be added to this need:</h4>
-
+    <h4>{{tagMessage}}</h4>
     <div class="btn-group">
         <div *ngFor="let item of tagManagerContent">
             <button (click)="addTag(item)" (mouseover)="changeHoverTag(item)">{{item}}</button>
         </div>
     </div>
-    <h4 *ngIf="hoverTag != null">Tag Details: {{hoverTag.tagDetail}}</h4>
+    <p *ngIf="hoverTag != null"><i>Tag Details: {{hoverTag.tagDetail}}</i></p>
 </div>

@@ -22,9 +22,7 @@ export class TagManagerService {
   }
 
   getList(): String[] {
-    if (this.tagStringList.length != 0) {
-      return this.tagStringList
-    }
+    this.tagStringList = [];
     const that = this;
     this.tagService.getTags().subscribe({
       next(contents) {

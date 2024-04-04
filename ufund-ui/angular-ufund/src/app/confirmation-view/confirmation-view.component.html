@@ -1,3 +1,11 @@
-<div *ngIf="state == 'success'"><h1>Payment Successfull</h1><p>You may now navigate back to any other page</p></div>
-<div *ngIf="state == 'fail'"><h1>Payment Failed</h1><p>Your cart remains un checked-out. You may go back to the cart page to attempt check out again</p></div>
-<p>Confirmation Page</p>
+<div class="login-box">
+    <div *ngIf="state == 'success'">
+        <h1>Payment Successfull</h1>
+        <p>You may now navigate back to any other page</p>
+    </div>
+    <div *ngIf="state == 'fail'">
+        <h1>Payment Failed</h1>
+        <p>Your cart remains un checked-out. You may go back to the cart page to attempt check out again</p>
+    </div>
+    <p>Confirmation Page</p>
+</div>
