@@ -10,7 +10,7 @@ import { Account } from './account';
 })
 export class LoginService {
 
-  userAccount!: Account;
+  userAccount!: Account | null;
   private accountUrl = 'http://localhost:8080/account';  // URL to web api
 
   httpOptions = {

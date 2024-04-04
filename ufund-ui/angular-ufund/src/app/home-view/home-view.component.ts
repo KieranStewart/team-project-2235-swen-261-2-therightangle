@@ -22,7 +22,7 @@ export class HomeViewComponent {
     private loginService: LoginService,
     private needComponent: NeedComponent) {}
 
-    currentUser: Account = this.loginService.userAccount
+    currentUser: Account | null = this.loginService.userAccount
 
   /**
    * Search for needs
@@ -64,6 +64,8 @@ export class HomeViewComponent {
   }
 
   userIsAdmin(): boolean{
-    return this.currentUser.isAdmin;
+    if (this.currentUser != null)
+    {return this.currentUser.isAdmin;}
+    return false;
   }
 }

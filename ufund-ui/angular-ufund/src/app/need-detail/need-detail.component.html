@@ -17,15 +17,15 @@
             {{needCacheService.selectedNeed.deadline.month}}/{{needCacheService.selectedNeed.deadline.day}}/{{needCacheService.selectedNeed.deadline.year}}
         </h4>
 
-        <div *ngIf="loginService.userAccount.isAdmin" class="btn-group">
+        <div *ngIf="isAdmin()" class="btn-group">
             <h4>Tags:</h4>
             <div *ngFor="let item of needCacheService.selectedNeed.tags">
-                <button *ngIf="item != 'admin'" [disabled]="!loginService.userAccount.isAdmin"
+                <button *ngIf="item != 'admin'" [disabled]="!isAdmin()"
                     (click)="removeTag(item)"><b>{{item}}</b></button>
             </div>
         </div>
         <!-- Admin-only tag modification -->
-        <div *ngIf="loginService.userAccount.isAdmin">
+        <div *ngIf="isAdmin()">
             <br>
             <button (click)="showTagList()">
                 <p><b>Toggle avaliable tags</b></p>
@@ -42,11 +42,11 @@
         </div>
 
         <!-- If it isn't in the basket, allow it to be added -->
-        <button *ngIf="!needCacheService.selectedNeed.inFundingBasket && !loginService.userAccount.isAdmin"
+        <button *ngIf="!needCacheService.selectedNeed.inFundingBasket && !isAdmin()"
             (click)="addToFundingBasket()">
             <p><b>Add to funding basket</b></p>
         </button>
-        <button *ngIf="needCacheService.selectedNeed.inFundingBasket && !loginService.userAccount.isAdmin"
+        <button *ngIf="needCacheService.selectedNeed.inFundingBasket && !isAdmin()"
             (click)="removeFromFundingBasket()">
             <p><b>Remove from funding basket</b></p>
         </button>
@@ -85,6 +85,6 @@
     </div>
 </div>
 <div>
-    <app-need-edit *ngIf="loginService.userAccount.isAdmin" [currentNeed]="needCacheService.selectedNeed"
+    <app-need-edit *ngIf="isAdmin()" [currentNeed]="needCacheService.selectedNeed"
         class="detail-container-right"></app-need-edit>
 </div>
