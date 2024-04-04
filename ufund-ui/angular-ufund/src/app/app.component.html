@@ -1,8 +1,15 @@
-<div class="header">
-    <a routerLink="/Login" class="header-link">Login</a>
-    <a routerLink="/" class="header-link">Home</a>|
-    <a routerLink="/checkout" class="header-link">Checkout</a>
-    <a routerLink="/CreateTags" class="header-link">Create Tags</a></div>
-<router-outlet></router-outlet>
+<div *ngIf="loginService.userAccount != null">
+    <div class="header">
+        <a routerLink="/Login" class="header-link">Login</a>
+        <a routerLink="/" class="header-link">Home</a>|
+        <a *ngIf="!loginService.userAccount.isAdmin" routerLink="/checkout" class="header-link">Checkout</a>
+        <a *ngIf="loginService.userAccount.isAdmin" routerLink="/CreateTags" class="header-link">Create Tags</a>
+    </div>
+    <router-outlet></router-outlet>
 
-<app-user></app-user>
+    <app-user *ngIf="loginService.userAccount.isAdmin"></app-user>
+</div>
+
+<div *ngIf="loginService.userAccount == null">
+    <app-login></app-login>
+</div>

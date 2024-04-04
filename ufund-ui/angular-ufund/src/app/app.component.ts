@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(
     public needCacheService: NeedCacheService,
     public accountCasheService: AccountCasheService,
-    private loginService: LoginService) { }
+    public loginService: LoginService) { }
 
   title = 'angular-ufund';
   

@@ -27,7 +27,6 @@ export class HomeViewComponent {
    * @param thisSearchTerm Pass in the search term so that it does not change while searching.
    */
   search(thisSearchTerm: string): void {
-    console.log(thisSearchTerm);
     if(thisSearchTerm == null || thisSearchTerm == "") {
       this.clearSearch();
     } else {

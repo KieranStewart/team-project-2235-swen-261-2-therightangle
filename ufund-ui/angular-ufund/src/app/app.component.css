@@ -17,3 +17,18 @@
     color: white;
     border-radius: 2px;
 }
+.login-button {
+    margin-left: auto;
+    margin-right: auto;
+    padding: .5rem;
+    background-color: blue;
+    color: white;
+    border-radius: 2px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: large;
+
+}
