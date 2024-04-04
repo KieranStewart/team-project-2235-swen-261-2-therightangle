@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NeedCacheService } from '../need-cache.service';
 import { take } from 'rxjs';
 import { HomeViewComponent } from '../home-view/home-view.component';
+import { BasketService } from '../basket.service';
+import { NeedDetailComponent } from '../need-detail/need-detail.component';
 
 
 @Component({
@@ -16,8 +18,8 @@ export class CupboardComponent implements OnInit{
   cupboard: Need[] = []; 
   title = 'angular-ufund';
 
-  constructor(private needService: NeedService, public needCacheService: NeedCacheService, private searchComponent : HomeViewComponent) { }
-  
+  constructor(private needService: NeedService, public needCacheService: NeedCacheService, private searchComponent : HomeViewComponent, private basketService : BasketService, private needDetailComponent : NeedDetailComponent) { }
+
   ngOnInit(): void {
     this.getCupboard();
   }
@@ -32,9 +34,13 @@ export class CupboardComponent implements OnInit{
           for (let index = 0; index < that.cupboard.length; index++) {
             const element = that.cupboard[index];
             if(that.needCacheService.selectedNeed != null && element.name == that.needCacheService.selectedNeed.name) {
-              that.needCacheService.selectedNeed = element;
-            }   
+              that.cupboard[index].inFundingBasket = that.needCacheService.selectedNeed.inFundingBasket;
+              that.cupboard[index].donationAmount = that.needCacheService.selectedNeed.donationAmount;
+              that.needCacheService.selectedNeed = that.cupboard[index];
+              that.needDetailComponent.displayNeed = that.cupboard[index];
+            }
           }
+          that.basketService.refresh(that.cupboard);
       }
     });
   }

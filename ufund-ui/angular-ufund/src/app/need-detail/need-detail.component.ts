@@ -5,6 +5,7 @@ import { LoginService } from '../login.service';
 import { TagManagerService } from '../tag-manager.service';
 import { NeedService } from '../need.service';
 import { Tag } from '../tag';
+import { NeedCacheService } from '../need-cache.service';
 
 /**
  * Shows the details for the selected need.
@@ -24,8 +25,12 @@ export class NeedDetailComponent {
 
   tagMessage = "click on a tag below to add it to this need"
 
-  constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService, public loginService: LoginService) {
+  constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService, public loginService: LoginService, private needCacheService : NeedCacheService) {
     this.tagManagerContent = []
+  }
+
+  refresh() {
+    this.displayNeed = this.needCacheService.selectedNeed;
   }
 
   addToFundingBasket(): void {

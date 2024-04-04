@@ -3,6 +3,7 @@ import { Account } from '../account';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
 import { BasketService } from '../basket.service';
+import { NeedCacheService } from '../need-cache.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent {
   account!: Account;
   message = "";
 
-  constructor(private loginService: LoginService, private router: Router, private basketService: BasketService) {}
+  constructor(private loginService: LoginService, private router: Router, private basketService: BasketService, private needCacheService : NeedCacheService) {}
 
   login(username: string, password: string): void {
     this.message = "loading";
@@ -34,6 +35,7 @@ export class LoginComponent {
         if (response == 'Login successful') {
           that.router.navigate(['/']);
           that.basketService.clear();
+          that.needCacheService.selectedNeed = null;
         }
       }
     });
