@@ -17,14 +17,12 @@ export class TagCreationComponent {
   constructor(private tagService: TagService, private router: Router) { }
 
 
-  createTag(nameInput: string, tagDescriptionInput: string, tagInstructionInput: string): void {
+  createTag(nameInput: string, tagDescriptionInput: string): void {
     const that = this;
     if (nameInput == '' || tagDescriptionInput == '') {
       this.errorMessage = "Please fill in all the boxes"
-    } else if (this.applyable && tagInstructionInput == '') {
-      this.errorMessage = "Please fill in all the boxes"
     } else {
-      this.newTag = { name: nameInput, tagDetail: tagDescriptionInput, tagInstruction: tagInstructionInput, applyable: this.applyable } as Tag;
+      this.newTag = { name: nameInput, tagDetail: tagDescriptionInput, tagInstruction: "", applyable: this.applyable } as Tag;
       this.tagService.addTag(this.newTag).subscribe({
         next(newTag) {
           if (newTag == undefined) {
@@ -33,7 +31,7 @@ export class TagCreationComponent {
             that.newTag = newTag;
             that.submitted = true;
             that.errorMessage = '';
-            that.router.navigate(['/']).then(() => { window.location.reload(); });
+            that.router.navigate(['/']);
           }
         }
       })

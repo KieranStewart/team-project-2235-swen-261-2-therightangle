@@ -70,6 +70,9 @@ export class AccountCreationComponent {
     }
   }
 
+  toggleAccountCreationScreen(): void {
+    this.loginComponent.toggleAccountCreationScreen();
+  }
   onSubmit() {
     this.submitted = true;
   }

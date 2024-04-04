@@ -1,0 +1,11 @@
+.login-box {
+    border: .0625rem solid #EFF1ED;
+    background-color: #EFF1ED;
+    border-radius: .625rem;
+    margin-top: 2rem;
+    padding: 2.3125rem 4rem 3rem;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

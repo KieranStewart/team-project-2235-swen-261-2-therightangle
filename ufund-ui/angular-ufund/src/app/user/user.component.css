@@ -1,7 +1,7 @@
 .btn-group button {
-    background-color: #04AA6D;
+    background-color: #7286A0;
     /* Green background */
-    border: 1px solid green;
+    border: 1px solid black;
     /* Green border */
     color: white;
     /* White text */
@@ -11,6 +11,7 @@
     /* Pointer/hand icon */
     float: left;
     /* Float the buttons side by side */
+    font-size: medium;
 }
 
 .btn-group button:not(:last-child) {
@@ -27,5 +28,19 @@
 
 /* Add a background color on hover */
 .btn-group button:hover {
-    background-color: #3e8e41;
+    background-color: #BCBD8B;
+}
+
+.user-box {
+    border: .0625rem solid #373D20;
+    border: .0625rem solid #373D20;
+    background-color: #EFF1ED;
+    border-radius: .625rem;
+    margin-top: 2rem;
+    padding: 2.3125rem 4rem 3rem;
+    position: absolute;
+    min-width: 50%;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

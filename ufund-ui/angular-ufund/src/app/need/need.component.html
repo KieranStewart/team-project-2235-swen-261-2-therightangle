@@ -1,3 +1,5 @@
-<div *ngIf="canUserSeeNeed(need)" class="holder">
-    <button (click)="showDetails()"> {{need.name}} </button>
+<div class="btn-group" *ngIf="canUserSeeNeed(need)">
+    <button (click)="showDetails()">
+        <p><b>{{need.name}}</b></p>
+    </button>
 </div>

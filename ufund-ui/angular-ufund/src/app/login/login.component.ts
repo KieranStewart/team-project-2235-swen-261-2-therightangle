@@ -13,10 +13,11 @@ import { NeedCacheService } from '../need-cache.service';
 export class LoginComponent {
   showAccountCreation = false;
   LoginSuccess = false;
-  username ="";
-  password ="";
+  username = "";
+  password = "";
   account!: Account;
   message = "";
+
 
   constructor(private loginService: LoginService, private router: Router, private basketService: BasketService, private needCacheService : NeedCacheService) {}
 
@@ -37,12 +38,10 @@ export class LoginComponent {
           that.basketService.clear();
           that.needCacheService.selectedNeed = null;
         }
-      }
-    });
+      });
   }
   toggleAccountCreationScreen(): void {
     this.showAccountCreation = !this.showAccountCreation;
   }
 
 }
- 

@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { AccountCreationComponent } from './account-creation/account-creation.component';
 import { TagCreationComponent } from './tag-creation/tag-creation.component';
 import { UserComponent } from './user/user.component';
+import { NeedEditComponent } from './need-edit/need-edit.component';
 
 const routes: Routes = [
   {
@@ -24,11 +25,12 @@ const routes: Routes = [
     path: '',
     component: HomeViewComponent
   },
-  {path: '', component: AppComponent },
-  {path: 'Login', component: LoginComponent },
-  {path: 'account-creation', component: AccountCreationComponent },
-  { path: 'create-tags', component: TagCreationComponent },
-  { path: 'manage-users', component: UserComponent },
+  { path: '', component: AppComponent },
+  { path: 'Login', component: LoginComponent },
+  { path: 'AccountCreation', component: AccountCreationComponent },
+  { path: 'CreateTags', component: TagCreationComponent },
+  { path: 'ManageUsers', component: UserComponent },
+
 ];
 
 @NgModule({

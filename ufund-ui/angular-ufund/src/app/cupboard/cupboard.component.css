@@ -1,12 +1,22 @@
 .container {
-    border: .0625rem solid #a9acaa;
+    border: .0625rem solid #373D20;
+    background-color: #EFF1ED;
     border-radius: .625rem;
     float: left;
-    width: 45%;
+    width: 95%;
+    padding: 1%;
+}
+
+.containerTop {
+    border: .0625rem solid #EFF1ED;
+    border-radius: .625rem;
+    width: 95%;
     padding: 1%;
 }
 
 .section-name {
+    background-color: #EFF1ED;
+    border: .0625rem solid #373D20;
     text-align: center;
 }
 

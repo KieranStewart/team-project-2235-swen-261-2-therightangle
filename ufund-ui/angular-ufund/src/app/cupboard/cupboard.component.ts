@@ -14,6 +14,7 @@ import { NeedDetailComponent } from '../need-detail/need-detail.component';
   templateUrl: './cupboard.component.html',
   styleUrls: ['./cupboard.component.css']
 })
+
 export class CupboardComponent implements OnInit{
   title = 'angular-ufund';
 
@@ -26,6 +27,7 @@ export class CupboardComponent implements OnInit{
   getCupboard(): void {
     const that = this;
     this.needService.getCupboard().pipe(take(1))
+
     .subscribe({
       next(newCupboard) {
           let oldCupboard = that.needCacheService.cupboard;
