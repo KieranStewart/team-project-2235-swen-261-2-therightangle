@@ -26,4 +26,10 @@ export class UserComponent implements OnInit {
   getAccountList(): void {
     this.loginService.getAccounts().subscribe(accountList => this.accountList = accountList);
   }
+
+  isAdmin(): boolean {
+    if (this.loginService.userAccount != null)
+    {return this.loginService.userAccount.isAdmin}
+    return false;
+  }
 }

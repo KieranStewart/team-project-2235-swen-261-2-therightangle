@@ -92,7 +92,9 @@ export class NeedDetailComponent {
    * @returns true if admin, false otherwise
    */
   transactionListVisible(): boolean {
-    return this.loginService.userAccount.isAdmin;
+    if (this.loginService.userAccount != null)
+      return this.loginService.userAccount.isAdmin;
+    return false;
   }
 
   showTagList(): void {
@@ -135,5 +137,9 @@ export class NeedDetailComponent {
     this.hoverTag = this.tagManagerService.getTag(name);
   }
 
-
+  isAdmin(): boolean {
+    if (this.loginService.userAccount != null)
+      return this.loginService.userAccount.isAdmin
+    return false;
+  }
 }

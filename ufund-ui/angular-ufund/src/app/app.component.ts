@@ -20,9 +20,15 @@ export class AppComponent {
 
   title = 'angular-ufund';
   
-  currentUser: Account = this.loginService.userAccount
+  currentUser: Account | null = this.loginService.userAccount
 
   userIsAdmin(): boolean{
-    return this.currentUser.isAdmin;
+    if (this.currentUser != null)
+    {return this.currentUser.isAdmin;}
+    return false;
+  }
+
+  logout(): void {
+    this.loginService.userAccount = null;
   }
 }
