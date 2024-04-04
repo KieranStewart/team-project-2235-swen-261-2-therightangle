@@ -1,7 +1,5 @@
 <h1>Account detail section</h1>
-<h2>{{displayAccount.name}}</h2>
-
-<h4>Need's Tags:</h4>
+<h2>{{displayAccount.name}}'s tags</h2>
 <div class="btn-group">
     <div *ngFor="let item of displayAccount.tags">
         <button (click)="removeTag(item)">{{item}}</button>
@@ -10,7 +8,7 @@
 
 <button (click)="showTagList()">Toggle avaliable tags</button>
 
-<div *ngIf="showTags != false">
+<div *ngIf="showTags">
     <h4>All tags avaliable to be added to this need:</h4>
     <div class="btn-group">
         <div *ngFor="let item of tagManagerContent">
