@@ -1,21 +1,20 @@
-<br>
-<div class="detail-container">
-    <p>Detail section</p>
+<div class="detail-container-left">
+    <h2>Detail section</h2>
     <div *ngIf="displayNeed != null">
         <!-- Display need information -->
-        <h2>{{displayNeed.name}}</h2>
-        <h3 *ngIf="displayNeed.type == 'donation'">Funding progress: ${{displayNeed.progress}} / ${{displayNeed.goal}}
-        </h3>
+        <h3>{{displayNeed.name}}</h3>
+        <h4 *ngIf="displayNeed.type == 'donation'">Funding progress: ${{displayNeed.progress}} / ${{displayNeed.goal}}
+        </h4>
         <p *ngIf="displayNeed.progress >= displayNeed.goal"> <i>Note: This need's goal has been meet, but you may
                 overdonate to
                 this need if you like. However it is suggested to donate to other needs that haven't meet their goal
                 yet.
             </i></p>
-        <h3>Description: {{displayNeed.description}}</h3>
-        <h3>Ends on {{displayNeed.deadline.month}}/{{displayNeed.deadline.day}}/{{displayNeed.deadline.year}}</h3>
-        <h3>Tags:</h3>
-        <div *ngIf="loginService.userAccount.isAdmin" class="btn-group">
+        <h4>Description: {{displayNeed.description}}</h4>
+        <h4>Ends on {{displayNeed.deadline.month}}/{{displayNeed.deadline.day}}/{{displayNeed.deadline.year}}</h4>
 
+        <div *ngIf="loginService.userAccount.isAdmin" class="btn-group">
+            <h4>Tags:</h4>
             <div *ngFor="let item of displayNeed.tags">
                 <button *ngIf="item != 'admin'" [disabled]="!loginService.userAccount.isAdmin"
                     (click)="removeTag(item)"><b>{{item}}</b></button>
@@ -23,18 +22,18 @@
         </div>
         <!-- Admin-only tag modification -->
         <div *ngIf="loginService.userAccount.isAdmin">
+            <br>
             <button (click)="showTagList()">
                 <p><b>Toggle avaliable tags</b></p>
             </button>
             <div *ngIf="showTags">
-                <h4>{{tagMessage}}</h4>
+                <p>{{tagMessage}}</p>
                 <div class="btn-group">
                     <div *ngFor="let item of tagManagerContent">
                         <button (click)="addTag(item)" (mouseover)="changeHoverTag(item)"><b>{{item}}</b></button>
                     </div>
                 </div>
-                <h4 *ngIf="hoverTag != null">Tag Details: {{hoverTag.tagDetail}}</h4>
-
+                <p *ngIf="hoverTag != null"><i>Tag Details: {{hoverTag.tagDetail}}</i></p>
             </div>
         </div>
 
@@ -50,7 +49,9 @@
             <button (click)="removeFromFundingBasket()">
                 <p><b>Remove from funding basket</b></p>
             </button>
-            <label for="donation-amount">Donation amount: </label>
+            <label for="donation-amount">
+                <h4>Donation amount: </h4>
+            </label>
             <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0" #donationAmount />
 
         </div>
@@ -63,5 +64,5 @@
         <p><i>Select a need to see its details.</i></p>
     </div>
 </div>
-<br>
-<app-need-edit *ngIf="loginService.userAccount.isAdmin" [currentNeed]="displayNeed"></app-need-edit>
+<app-need-edit *ngIf="loginService.userAccount.isAdmin" [currentNeed]="displayNeed"
+    class="detail-container-right"></app-need-edit>

@@ -18,13 +18,6 @@
         <input id="deadline-year" type="text" [(ngModel)]="currentNeed.deadline.year"
             placeholder="{{currentNeed.deadline.year}}" />
     </div>
-
-    <label for="description">
-        <h4>Description: </h4>
-    </label>
-    <textarea type="text" id="description" cols="40" rows="10" [(ngModel)]="currentNeed.description"
-        placeholder="{{currentNeed.description}}"></textarea>
-
     <label for="need-type">
         <h4>Need type: </h4>
     </label>
@@ -59,7 +52,14 @@
         <button type="button" (click)="removeVolunteerDate()">
             <p><b>Remove last date</b></p>
         </button>
+
     </div>
+    <label for="description">
+        <h4>Description: </h4>
+    </label>
+    <textarea type="text" id="description" cols="40" rows="10" [(ngModel)]="currentNeed.description"
+        placeholder="{{currentNeed.description}}"></textarea>
+
 
     <!-- Buttons -->
     <br>
@@ -78,6 +78,7 @@
     </button>
     <p>{{errorText}}</p>
 </div>
+
 <br>
 <div class="create">
     <h2>Create Need</h2>

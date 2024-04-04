@@ -12,12 +12,12 @@ import { HomeViewComponent } from '../home-view/home-view.component';
   templateUrl: './cupboard.component.html',
   styleUrls: ['./cupboard.component.css']
 })
-export class CupboardComponent implements OnInit{
-  cupboard: Need[] = []; 
+export class CupboardComponent implements OnInit {
+  cupboard: Need[] = [];
   title = 'angular-ufund';
 
-  constructor(private needService: NeedService, public needCacheService: NeedCacheService, private searchComponent : HomeViewComponent) { }
-  
+  constructor(private needService: NeedService, public needCacheService: NeedCacheService, private searchComponent: HomeViewComponent) { }
+
   ngOnInit(): void {
     this.getCupboard();
   }
@@ -25,17 +25,17 @@ export class CupboardComponent implements OnInit{
   getCupboard(): void {
     const that = this;
     this.needService.getCupboard().pipe(take(1))
-    .subscribe({
-      next(cupboard) {
+      .subscribe({
+        next(cupboard) {
           that.cupboard = cupboard;
           that.searchComponent.search(that.searchComponent.searchTerm);
           for (let index = 0; index < that.cupboard.length; index++) {
             const element = that.cupboard[index];
-            if(that.needCacheService.selectedNeed != null && element.name == that.needCacheService.selectedNeed.name) {
+            if (that.needCacheService.selectedNeed != null && element.name == that.needCacheService.selectedNeed.name) {
               that.needCacheService.selectedNeed = element;
-            }   
+            }
           }
-      }
-    });
+        }
+      });
   }
 }

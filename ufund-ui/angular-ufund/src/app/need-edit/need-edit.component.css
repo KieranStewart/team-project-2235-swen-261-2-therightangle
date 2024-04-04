@@ -1,8 +1,9 @@
 /* Placeholder */
 .edit-container {
-    background-color: #47bfff;
+    background-color: #BCBD8B;
     border-radius: 2px;
     padding: 1rem;
+    ;
 }
 
 .date-edit {
@@ -26,7 +27,7 @@
 }
 
 .create {
-    background-color: #dffb64;
+    background-color: #BCBD8B;
     border-radius: 2px;
     padding: 1rem;
 }
