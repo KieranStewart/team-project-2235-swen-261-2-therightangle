@@ -1,6 +1,6 @@
 <div *ngIf="loginService.userAccount != null">
     <div class="header">
-        <a routerLink="/Login" class="header-link">Login</a>
+        <a routerLink="/Login" class="header-link">Sign Out</a>
         <a routerLink="/" class="header-link">Home</a>|
         <a *ngIf="!loginService.userAccount.isAdmin" routerLink="/checkout" class="header-link">Checkout</a>
         <a *ngIf="loginService.userAccount.isAdmin" routerLink="/CreateTags" class="header-link">Create Tags</a>
