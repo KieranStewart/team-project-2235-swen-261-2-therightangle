@@ -75,11 +75,10 @@ public class CupboardController {
     {
         try {
             Need out = cupboardDao.getNeed(name);
-            if (out != null)
-            {
+            if (out != null) {
                 return new ResponseEntity<Need>(out, HttpStatus.OK);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, asyncScheduler, scheduled } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, take, tap } from 'rxjs/operators';
 import { Need } from './need';
+import { TransactionService } from './transaction.service';
 
 /**
  * Any method that sends an HTTP request must have its return value
@@ -19,7 +20,8 @@ export class NeedService {
   };
 
   constructor(
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private transactionService: TransactionService) { }
 
   /** GET needs from the server */
   getCupboard(): Observable<Need[]> {
@@ -81,6 +83,7 @@ export class NeedService {
   deleteNeed(name: String): Observable<Need> {
     const url = `${this.cupboardUrl}/${name}`;
     this.log(name.valueOf());
+    this.transactionService.deleteTransactionsFor(name.valueOf()).pipe(take(1)).subscribe();
     return this.http.delete<Need>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted need name=${name}`)), // notice: deprecated
       catchError(this.handleError<Need>('deleteNeed'))

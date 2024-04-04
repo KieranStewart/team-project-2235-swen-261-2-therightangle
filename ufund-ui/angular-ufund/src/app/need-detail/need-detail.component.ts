@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Need } from '../need';
 import { BasketService } from '../basket.service';
+import { LoginService } from '../login.service';
 import { TagManagerService } from '../tag-manager.service';
 import { NeedService } from '../need.service';
-import { LoginService } from '../login.service';
 
 /**
  * Shows the details for the selected need.
@@ -38,6 +38,14 @@ export class NeedDetailComponent {
     }
     this.basketService.remove(this.displayNeed);
   }
+
+  /**
+   * Checks if the transactions should be visible.
+   * @returns true if admin, false otherwise
+   */
+  transactionListVisible(): boolean {
+    return this.loginService.userAccount.isAdmin;
+  }  
 
   showTagList(): void {
     this.tagManagerContent = this.tagManagerService.getList();
@@ -75,12 +83,13 @@ export class NeedDetailComponent {
     }
   }
 
-  removeFromCupboard(): void {
-    if(this.displayNeed == null) {
-      return;
-    }
-    this.needService.deleteNeed(this.displayNeed.name);
-  }
+  // Seemingly unused method, delete if it is never used
+  // removeFromCupboard(): void {
+  //   if(this.displayNeed == null) {
+  //     return;
+  //   }
+  //   this.needService.deleteNeed(this.displayNeed.name);
+  // }
   // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.
   // You can use this if you want a save button instead of automatically linking to the input field.
   // saveNeed(donationAmount: number): void{
