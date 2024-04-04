@@ -26,9 +26,9 @@ const routes: Routes = [
   },
   {path: '', component: AppComponent },
   {path: 'Login', component: LoginComponent },
-  {path: 'AccountCreation', component: AccountCreationComponent },
-  { path: 'CreateTags', component: TagCreationComponent },
-  { path: 'ManageUsers', component: UserComponent },
+  {path: 'account-creation', component: AccountCreationComponent },
+  { path: 'create-tags', component: TagCreationComponent },
+  { path: 'manage-users', component: UserComponent },
 ];
 
 @NgModule({
