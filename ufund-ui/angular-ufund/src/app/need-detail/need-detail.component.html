@@ -40,8 +40,17 @@
         <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
         <div *ngIf="needCacheService.selectedNeed.inFundingBasket">
             <!-- Starter code for the Donate Time story.  Good luck! -->
-            <label for="donation-amount">Donation amount: </label>
-            <input id="donation-amount" [(ngModel)]="needCacheService.selectedNeed.donationAmount" placeholder="0" #donationAmount />
+            <div *ngIf="displayNeed != null && displayNeed.type == 'DONATION'">
+              <label for="donation-amount">Donation amount: </label>
+              <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0" #donationAmount />
+            </div>
+            
+            <div *ngIf="displayNeed != null && displayNeed.type == 'VOLUNTEER'">
+              <div *ngFor="let this_date of displayNeed.volunteerDates">
+                    <app-date [date]="this_date" [need]="this.displayNeed"></app-date>
+                    <button *ngIf="dateSelected(this_date)" (click)="removeDate(this_date)">[-]</button>
+              </div>
+            </div>
             <!-- <button (click)="saveNeed(donationAmount.value)"> Save </button> -->
             <button (click)="removeFromFundingBasket()">Remove from funding basket</button>
         </div>

@@ -1,0 +1,2 @@
+<div *ngIf="!this.date.filled"><button (click)="select()"> {{date.day}} / {{date.month}} / {{date.year}}</button></div>
+<div *ngIf="this.date.filled"><button disabled> {{date.day}} / {{date.month}} / {{date.year}}</button></div>

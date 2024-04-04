@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Need } from '../need';
 import { BasketService } from '../basket.service';
+import { VolunteerDate } from '../volunteer-date';
 import { LoginService } from '../login.service';
 import { TagManagerService } from '../tag-manager.service';
 import { NeedService } from '../need.service';
@@ -46,6 +47,44 @@ export class NeedDetailComponent {
     }
     this.basketService.remove(this.displayNeed);
   }
+
+  
+  dateSelected(date: VolunteerDate): boolean {
+    try {
+      if(this.needCacheService.selectedNeed == null) {
+        return false;
+      }
+      return this.needCacheService.selectedNeed.selectedVolunteerDates.indexOf(date, 0) != -1;
+    } catch (error) {
+      return false;
+    }
+    
+  }
+
+  removeDate(date: VolunteerDate): void {
+    if(this.needCacheService.selectedNeed == null) {
+      return;
+    }
+    let newVolunteerDates: VolunteerDate[] = this.needCacheService.selectedNeed.selectedVolunteerDates;
+    if (newVolunteerDates == undefined)
+    {
+      newVolunteerDates = [];
+    }
+    let index: number = newVolunteerDates.indexOf(date);
+    if (index != -1) {
+      newVolunteerDates.splice(index);
+    } else {
+      console.log("ERROR, VolunteerDate already removed, or not in dates array");
+    }
+    console.log("Date removed from cart");
+    this.needCacheService.selectedNeed.selectedVolunteerDates = newVolunteerDates;
+  };
+
+  // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.
+  // You can use this if you want a save button instead of automatically linking to the input field.
+  // saveNeed(donationAmount: number): void{
+  //   this.displayNeed.donationAmount = donationAmount;
+  // }
 
   /**
    * Checks if the transactions should be visible.
