@@ -47,7 +47,7 @@ public class Need {
         this.tags = tags;
     }
 
-    public Need(double goal, double progress, String name, String description, Date[] volunteerDates, Date deadline, NeedType type) {
+    public Need(double goal, double progress, String name, String description, VolunteerDate[] volunteerDates, Date deadline, NeedType type) {
         this(goal, progress, name, description, volunteerDates, deadline, type, new ArrayList<String>());
     }
 
