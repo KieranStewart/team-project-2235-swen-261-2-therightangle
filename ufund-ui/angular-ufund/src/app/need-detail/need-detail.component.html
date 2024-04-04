@@ -8,6 +8,7 @@
         <h4>Need's Tags:</h4>
         <div class="btn-group">
             <div *ngFor="let item of displayNeed.tags">
+
                 <button *ngIf="item != 'admin'" [disabled]="!loginService.userAccount.isAdmin" (click)="removeTag(item)">{{item}}</button>
             </div>
         </div>
@@ -23,10 +24,9 @@
                     </div>
                 </div>
             </div>
+            <h4 *ngIf="hoverTag != null">Tag Details: {{hoverTag.tagDetail}}</h4>
         </div>
         
-
-        <h4>{{tagMessage}}</h4>
 
         <h4>Description:</h4>
         <p>
@@ -35,6 +35,7 @@
         <h5>Ends on {{displayNeed.deadline}}</h5>
         <!-- If it isn't in the basket, allow it to be added -->
         <button *ngIf="!displayNeed.inFundingBasket && !loginService.userAccount.isAdmin" (click)="addToFundingBasket()">Add to funding basket</button>
+
         <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
         <div *ngIf="displayNeed.inFundingBasket">
             <!-- Starter code for the Donate Time story.  Good luck! -->

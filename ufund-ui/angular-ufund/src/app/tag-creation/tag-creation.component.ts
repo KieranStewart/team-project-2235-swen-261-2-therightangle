@@ -14,35 +14,34 @@ export class TagCreationComponent {
   newTag!: Tag;
   applyable = false;
 
-constructor(private tagService: TagService, private router: Router) {}
+  constructor(private tagService: TagService, private router: Router) { }
 
 
-createTag(nameInput: string, tagDescriptionInput: string,tagInstructionInput: string): void{
-  const that = this;
-  if(nameInput == '' || tagDescriptionInput == ''){
-    this.errorMessage = "Please fill in all the boxes"
-  } else if (this.applyable && tagInstructionInput == ''){
-    this.errorMessage = "Please fill in all the boxes"
-  }else {
-  this.newTag = {name: nameInput, tagDetail: tagDescriptionInput, tagInstruction: tagInstructionInput, applyable: this.applyable} as Tag;
-  this.tagService.addTag(this.newTag).subscribe({
-    next(newTag) {
-      if(newTag == undefined) {
-        that.errorMessage = "Tag name is already taken";
-      } else {
-        that.newTag = newTag;
-        that.submitted = true;
-        that.errorMessage = '';
-        that.router.navigate(['/']);
-      }
+  createTag(nameInput: string, tagDescriptionInput: string, tagInstructionInput: string): void {
+    const that = this;
+    if (nameInput == '' || tagDescriptionInput == '') {
+      this.errorMessage = "Please fill in all the boxes"
+    } else if (this.applyable && tagInstructionInput == '') {
+      this.errorMessage = "Please fill in all the boxes"
+    } else {
+      this.newTag = { name: nameInput, tagDetail: tagDescriptionInput, tagInstruction: tagInstructionInput, applyable: this.applyable } as Tag;
+      this.tagService.addTag(this.newTag).subscribe({
+        next(newTag) {
+          if (newTag == undefined) {
+            that.errorMessage = "Tag name is already taken";
+          } else {
+            that.newTag = newTag;
+            that.submitted = true;
+            that.errorMessage = '';
+            that.router.navigate(['/']).then(() => { window.location.reload(); });
+          }
+        }
+      })
     }
-    
-  })
-}
-}
+  }
 
-toggleApplyable(): void{
-  this.applyable = !this.applyable;
-}
+  toggleApplyable(): void {
+    this.applyable = !this.applyable;
+  }
 
 }
