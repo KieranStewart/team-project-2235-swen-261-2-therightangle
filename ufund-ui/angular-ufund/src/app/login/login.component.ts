@@ -41,6 +41,7 @@ export class LoginComponent {
         }
       });
   }
+
   toggleAccountCreationScreen(): void {
     this.showAccountCreation = !this.showAccountCreation;
   }
