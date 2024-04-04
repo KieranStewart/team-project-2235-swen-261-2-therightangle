@@ -51,7 +51,10 @@ export class CheckoutComponent implements OnInit{
     if (this.makePayment())
     {
       for (let index = 0; index < this.basketService.contents.length; index++) {
-        this.recordPayment(this.basketService.contents[index]);
+        if (this.basketService.contents[index].type == "VOLUNTEER")
+          this.recordHours(this.basketService.contents[index]);
+        else
+          this.recordPayment(this.basketService.contents[index]);
       }
       
       this.basketService.clear();
@@ -86,5 +89,23 @@ export class CheckoutComponent implements OnInit{
   private recordPayment(need: Need): void {
     need.progress += Number(need.donationAmount);
     this.needService.updateNeed(need).subscribe();
+  }
+
+  private recordHours(need: Need): void {
+    for (let i = 0; i < need.selectedVolunteerDates.length; i++)
+    {
+      for (let j = 0; j < need.volunteerDates.length; j++)
+      {
+        if (need.volunteerDates[j].year == need.selectedVolunteerDates[i].year 
+          && need.volunteerDates[j].month == need.selectedVolunteerDates[i].month 
+          && need.volunteerDates[j].day == need.selectedVolunteerDates[i].day)
+          { 
+            need.volunteerDates[j].filled = true;
+            break;
+          }
+      }
+    }
+    need.selectedVolunteerDates = [];
+    this.needService.updateNeed(need).subscribe;
   }
 }

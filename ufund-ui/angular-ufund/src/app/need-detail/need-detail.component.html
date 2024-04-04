@@ -3,6 +3,8 @@
     <div *ngIf="displayNeed != null">
         <!-- Display need information -->
         <h3>{{displayNeed.name}}</h3> 
+
+
         <div *ngIf="displayNeed.type == 'DONATION'">
             <h5>Completion: {{displayNeed.progress}} - {{displayNeed.goal}}</h5>
             <h4>Description:</h4>
@@ -21,6 +23,8 @@
                 <button (click)="removeFromFundingBasket()">[Remove from funding basket]</button>
             </div>
         </div>
+
+
         <div *ngIf="displayNeed.type == 'VOLUNTEER'">
             <h5>Time Slots:</h5>
             
@@ -33,10 +37,13 @@
             <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">[+]</button>
             <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
             <div *ngIf="displayNeed.inFundingBasket == true">
-                <p>volunteerDates: {{ displayNeed.volunteerDates }}</p>
-                <app-date 
-                 *ngFor="let this_date of displayNeed.volunteerDates"
-                [date]="this_date"></app-date>
+                <div *ngFor="let this_date of displayNeed.volunteerDates">
+                    <!-- old way of doing it -->
+                    <!-- <app-date [date]="this_date"></app-date>  -->
+                    <!-- New way -->
+                    <app-date [date]="this_date" [need]="this.displayNeed"></app-date>
+                    <button *ngIf="dateSelected(this_date)">[-]</button>
+                </div>
                 <button (click)="removeFromFundingBasket()">Remove from funding basket</button>
             </div>
         </div>

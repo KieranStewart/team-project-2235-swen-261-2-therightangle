@@ -33,4 +33,10 @@ export class BasketService {
     need.inFundingBasket = false;
   }
 
+  edit(need:Need, modifiedNeed: Need): void {
+    var editIndex = this.contents.indexOf(need);
+    if (editIndex != -1){
+      this.contents[editIndex] = modifiedNeed;
+    }
+  }
 }

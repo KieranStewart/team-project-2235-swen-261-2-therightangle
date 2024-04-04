@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Need } from '../need';
 import { BasketService } from '../basket.service';
+import { VolunteerDate } from '../volunteer-date';
 
 /**
  * Shows the details for the selected need.
@@ -23,6 +24,15 @@ export class NeedDetailComponent {
 
   removeFromFundingBasket(): void {
     this.basketService.remove(this.displayNeed);
+  }
+
+  dateSelected(date: VolunteerDate): boolean {
+    try {
+      return this.displayNeed.selectedVolunteerDates.indexOf(date, 0) != -1;
+    } catch (error) {
+      return false;
+    }
+    
   }
 
   // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.
