@@ -52,10 +52,16 @@ export class CheckoutComponent implements OnInit{
     if (this.makePayment())
     {
       for (let index = 0; index < this.basketService.contents.length; index++) {
+        console.log("Checking out need of type:" + this.basketService.contents[index].type);
+        
         if (this.basketService.contents[index].type == "volunteer")
+        {
           this.recordHours(this.basketService.contents[index]);
+        }
         else
+        {
           this.recordPayment(this.basketService.contents[index]);
+        }
         console.log("Checkout Recorded:" + this.basketService.contents[index].name);
       }
       
@@ -111,7 +117,7 @@ export class CheckoutComponent implements OnInit{
     }
     for (let index = 0; index < this.basketService.contents.length; index++) {
       const element = this.basketService.contents[index];
-      if(element.donationAmount <= 0) {
+      if(element.type == "DONATION" && element.donationAmount <= 0) {
         return false;
       }
     }
