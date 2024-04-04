@@ -31,7 +31,7 @@
         <p>
             {{displayNeed.description}}
         </p>
-        <h5>Ends on {{displayNeed.deadline}}</h5>
+        <h5>Ends on {{displayNeed.deadline.month}}/{{displayNeed.deadline.day}}/{{displayNeed.deadline.year}}</h5>
         <!-- If it isn't in the basket, allow it to be added -->
         <button *ngIf="!displayNeed.inFundingBasket && !loginService.userAccount.isAdmin" (click)="addToFundingBasket()">Add to funding basket</button>
         <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
