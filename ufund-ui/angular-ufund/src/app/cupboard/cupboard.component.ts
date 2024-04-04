@@ -29,13 +29,15 @@ export class CupboardComponent implements OnInit{
     this.needService.getCupboard().pipe(take(1))
     .subscribe({
       next(newCupboard) {
+          let oldCupboard = that.cupboard;
           that.cupboard = newCupboard;
           for (let index = 0; index < that.cupboard.length; index++) {
             const element = that.cupboard[index];
+            // The cupboard index here doesn't have these local fields.  Set them to what they were a second ago.
+            that.cupboard[index].inFundingBasket = oldCupboard[index].inFundingBasket;
+            that.cupboard[index].donationAmount = oldCupboard[index].donationAmount;
+            that.cupboard[index].selectedVolunteerDates = oldCupboard[index].selectedVolunteerDates;
             if(that.needCacheService.selectedNeed != null && element.name == that.needCacheService.selectedNeed.name) {
-              that.cupboard[index].inFundingBasket = that.needCacheService.selectedNeed.inFundingBasket;
-              that.cupboard[index].donationAmount = that.needCacheService.selectedNeed.donationAmount;
-              that.cupboard[index].selectedVolunteerDates = that.needCacheService.selectedNeed.selectedVolunteerDates;
               that.needCacheService.selectedNeed = that.cupboard[index];
               that.needDetailComponent.displayNeed = that.cupboard[index];
             }
