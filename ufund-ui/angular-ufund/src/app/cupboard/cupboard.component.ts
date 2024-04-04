@@ -20,7 +20,6 @@ export class CupboardComponent implements OnInit{
   constructor(private needService: NeedService, public needCacheService: NeedCacheService, private searchComponent : HomeViewComponent, private basketService : BasketService, private needDetailComponent : NeedDetailComponent) { }
 
   ngOnInit(): void {
-    console.log("now you may be wondering how I got here");
     this.getCupboard();
   }
 
