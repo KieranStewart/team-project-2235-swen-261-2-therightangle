@@ -1,0 +1,17 @@
+.container {
+    border: .0625rem solid #a9acaa;
+    border-radius: .625rem;
+    float: left;
+    width: 45%;
+    padding: 1%;
+}
+
+.section-name {
+    text-align: center;
+}
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
