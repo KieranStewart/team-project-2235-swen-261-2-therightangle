@@ -1,20 +1,22 @@
-<h1>Login</h1>
-<div *ngIf="showAccountCreation == false">
-    <div>
-    <h2>Username: <input type="text" #usernameInput></h2>
+<div class="login-box">
+    <h1>Login</h1>
+    <div *ngIf="showAccountCreation == false">
+        <div>
+        <h2>Username: <input type="text" #usernameInput></h2>
+        </div>
+        <h2>Password: <input type="text" #passwordInput></h2>
+        <button type="button" (click)="login(usernameInput.value,passwordInput.value)"><h3>Login</h3></button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button routerLink="AccountCreation" (click)="toggleAccountCreationScreen()"><h3>Create An Account</h3></button>
+
+        <h2> {{message}} </h2>
+
     </div>
-    <h2>Password: <input type="text" #passwordInput></h2>
-    <button type="button" (click)="login(usernameInput.value,passwordInput.value)"><h3>Login</h3></button>
-    <button routerLink="AccountCreation" (click)="toggleAccountCreationScreen()">Create An Account</button>
 
-    <h2> {{message}} </h2>
 
+
+    <!-- <router-outlet></router-outlet> -->
+    <div *ngIf="showAccountCreation" >
+        <app-account-creation></app-account-creation>
+    </div>
 </div>
-
-
-
-<!-- <router-outlet></router-outlet> -->
-<div *ngIf="showAccountCreation" >
-<app-account-creation></app-account-creation>
-</div>
-

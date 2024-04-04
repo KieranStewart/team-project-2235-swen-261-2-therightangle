@@ -1,10 +1,7 @@
-<h1>Need Cupboard:</h1>
-<h6 style="color: white;">cup bird</h6>
-<!--
-    The following takes all needs from the cupboard and displays them
-    using the need component.  It is up to the cupboard story person
-    to go on from here.
--->
-<need-button 
-*ngFor="let thisNeed of cupboard"
-[need]="thisNeed"></need-button>
+<div class="row">
+    <div class="container">
+        <h6 class="section-name">Cupboard</h6>
+        <need-button *ngFor="let thisNeed of cupboard" [need]="thisNeed"></need-button>
+    </div>  
+    <app-need-detail [displayNeed]="needCacheService.selectedNeed" class="container"></app-need-detail>
+</div>

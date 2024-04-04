@@ -8,15 +8,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * of a date without messing each other up.
  * @author Logan Nickerson
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     private final static String TO_STRING_FORMAT = "%d/%d/%d";
 
-    @JsonProperty("day") int day;
-    @JsonProperty("month") int month;
-    @JsonProperty("year") int year;
+    @JsonProperty("day") private final int day;
+    @JsonProperty("month") private final int month;
+    @JsonProperty("year") private final int year;
     
-    public Date(int day, int month, int year) {
+    public Date(@JsonProperty("day") int day, @JsonProperty("month") int month, @JsonProperty("year") int year) {
         this.day = day;
         this.month = month;
         this.year = year;
@@ -37,6 +37,17 @@ public class Date {
     @Override
     public String toString() {
         return String.format(TO_STRING_FORMAT, month, day, year);
+    }
+
+    @Override
+    public int compareTo(Date timestamp) {
+        if(this.year == timestamp.year) {
+            if(this.month == timestamp.month) {
+                return this.day - timestamp.day;
+            }
+            return this.month - timestamp.month;
+        }
+        return this.year - timestamp.year;
     }
     
 }

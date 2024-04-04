@@ -1,3 +1,14 @@
-<div class="header"><a routerLink="/Login" class="header-link">Login</a><a routerLink="/" class="header-link">Home</a>|<a routerLink="/checkout" class="header-link">Checkout</a></div>
-<router-outlet></router-outlet>
-<app-need-detail [displayNeed]="needCacheService.selectedNeed"></app-need-detail>
+<div *ngIf="loginService.userAccount != null">
+    <div class="header">
+        <a routerLink="/Login" class="header-link">Login</a>
+        <a routerLink="/" class="header-link">Home</a>|
+        <a *ngIf="!loginService.userAccount.isAdmin" routerLink="/checkout" class="header-link">Checkout</a>
+        <a *ngIf="loginService.userAccount.isAdmin" routerLink="/CreateTags" class="header-link">Create Tags</a>
+        <a *ngIf="loginService.userAccount.isAdmin" routerLink="/ManageUsers" class="header-link">Configure Account Tags</a>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="loginService.userAccount == null">
+    <app-login></app-login>
+</div>

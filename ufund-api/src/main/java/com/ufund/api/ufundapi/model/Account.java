@@ -1,5 +1,7 @@
 package com.ufund.api.ufundapi.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /**
@@ -18,21 +20,28 @@ public class Account {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package privates
-    static final String STRING_FORMAT = "Account [name = %s, password = %s, email = %s, isAdmin = %b]";
+    static final String STRING_FORMAT = "Account [name = %s, password = %s, email = %s, tags = %s, isAdmin = %b]";
 
     @JsonProperty("name") private String name;
     @JsonProperty("password") private String password;
     @JsonProperty("email") private String email;
+    @JsonProperty("tags") ArrayList<String> tags;
     @JsonProperty("isAdmin") private boolean isAdmin;
 
     public Account(@JsonProperty("name") String name,
     @JsonProperty("password") String password,
     @JsonProperty("email") String email,
+    @JsonProperty("tags") ArrayList<String> tags,
     @JsonProperty("isAdmin") boolean isAdmin) {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.tags = tags;
         this.isAdmin = isAdmin;
+    }
+
+    public Account(String name, String password, String email, boolean isAdmin) {
+        this(name, password, email, new ArrayList<String>(), isAdmin);
     }
 
     public static String getStringFormat() {
@@ -63,6 +72,14 @@ public class Account {
         this.email = email;
     }
 
+    public ArrayList<String> getTags() {
+        return this.tags;
+    }
+
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
+    }
+
     public boolean getIsAdmin(){
         return this.isAdmin;
     }
@@ -73,6 +90,6 @@ public class Account {
 
         @Override
     public String toString() {
-        return String.format(STRING_FORMAT, name, password, email, isAdmin);
+        return String.format(STRING_FORMAT, name, password, email, tags, isAdmin);
     }
 }

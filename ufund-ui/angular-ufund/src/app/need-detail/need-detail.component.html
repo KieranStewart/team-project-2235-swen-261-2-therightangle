@@ -2,53 +2,65 @@
     <p>Detail section</p>
     <div *ngIf="displayNeed != null">
         <!-- Display need information -->
-        <h3>{{displayNeed.name}}</h3> 
+        <h3>{{displayNeed.name}}</h3>
+        <h5 *ngIf="displayNeed.type == 'donation'">Funding progress: ${{displayNeed.progress}} / ${{displayNeed.goal}}</h5>
 
+        <div class="btn-group">
+            <div *ngFor="let item of displayNeed.tags">
 
-        <div *ngIf="displayNeed.type == 'DONATION'">
-            <h5>Completion: {{displayNeed.progress}} - {{displayNeed.goal}}</h5>
-            <h4>Description:</h4>
-            <p>
-                {{displayNeed.description}}    
-            </p>
-            <h5>Ends on {{displayNeed.deadline}}</h5>
-            <!-- If it isn't in the basket, allow it to be added -->
-            <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">[+]</button>
-            <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
-            <div *ngIf="displayNeed.inFundingBasket">
-                <!-- Starter code for the Donate Time story.  Good luck! -->
-                <label for="donation-amount">Donation amount: </label>
-                <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0" #donationAmount/>
-                <!-- <button (click)="saveNeed(donationAmount.value)"> Save </button> -->
-                <button (click)="removeFromFundingBasket()">[Remove from funding basket]</button>
+                <button *ngIf="item != 'admin'" [disabled]="!loginService.userAccount.isAdmin" (click)="removeTag(item)">{{item}}</button>
             </div>
         </div>
 
+        <!-- Admin-only tag modification -->
+        <div *ngIf="loginService.userAccount.isAdmin">
+            <button (click)="showTagList()">Toggle avaliable tags</button>
+            <div *ngIf="showTags">
+                <h4>All tags avaliable to be added to this need:</h4>
+                <div class="btn-group">
+                    <div *ngFor="let item of tagManagerContent">
+                        <button (click)="addTag(item)">{{item}}</button>
+                    </div>
+                </div>
+            </div>
+            <h4 *ngIf="hoverTag != null">Tag Details: {{hoverTag.tagDetail}}</h4>
+        </div>
+        
 
-        <div *ngIf="displayNeed.type == 'VOLUNTEER'">
-            <h5>Time Slots:</h5>
+        <h4 *ngIf="loginService.userAccount.isAdmin">{{tagMessage}}</h4>
+
+        <h4>Description:</h4>
+        <p>
+            {{displayNeed.description}}
+        </p>
+        <h5>Ends on {{displayNeed.deadline.month}}/{{displayNeed.deadline.day}}/{{displayNeed.deadline.year}}</h5>
+        <!-- If it isn't in the basket, allow it to be added -->
+        <button *ngIf="!displayNeed.inFundingBasket && !loginService.userAccount.isAdmin" (click)="addToFundingBasket()">Add to funding basket</button>
+
+        <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
+        <div *ngIf="displayNeed.inFundingBasket">
+            <!-- Starter code for the Donate Time story.  Good luck! -->
+            <div *ngIf="displayNeed.type == 'DONATION'">
+              <label for="donation-amount">Donation amount: </label>
+              <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0" #donationAmount />
+            </div>
             
-            <h4>Description:</h4>
-            <p>
-                {{displayNeed.description}}    
-            </p>
-            <h5>Ends on {{displayNeed.deadline}}</h5>
-            <!-- If it isn't in the basket, allow it to be added -->
-            <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">[+]</button>
-            <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
-            <div *ngIf="displayNeed.inFundingBasket == true">
-                <div *ngFor="let this_date of displayNeed.volunteerDates">
-                    <!-- old way of doing it -->
-                    <!-- <app-date [date]="this_date"></app-date>  -->
-                    <!-- New way -->
+            <div *ngIf="displayNeed.type == 'VOLUNTEER'">
+              <div *ngFor="let this_date of displayNeed.volunteerDates">
                     <app-date [date]="this_date" [need]="this.displayNeed"></app-date>
                     <button *ngIf="dateSelected(this_date)" (click)="removeDate(this_date)">[-]</button>
-                </div>
-                <button (click)="removeFromFundingBasket()">Remove from funding basket</button>
+              </div>
             </div>
+            <!-- <button (click)="saveNeed(donationAmount.value)"> Save </button> -->
+            <button (click)="removeFromFundingBasket()">Remove from funding basket</button>
+        </div>
+        <!-- If I'm an admin, I see transactions -->
+        <div *ngIf="transactionListVisible()">
+            <app-transaction-history-display [displayNeed]="displayNeed"></app-transaction-history-display>
         </div>
     </div>
     <div *ngIf="displayNeed == null">
         <p><i>Select a need to see its details.</i></p>
     </div>
+    <app-need-edit *ngIf="loginService.userAccount.isAdmin" [currentNeed]="displayNeed"></app-need-edit>
 </div>

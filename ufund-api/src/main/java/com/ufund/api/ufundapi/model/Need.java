@@ -1,4 +1,5 @@
 package com.ufund.api.ufundapi.model;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,7 +18,7 @@ public class Need {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Need [goal = %d, progress = %d, name = %s, description = %s, volunteer dates = %s, deadline = %s, type = %s]";
+    static final String STRING_FORMAT = "Need [goal = %d, progress = %d, name = %s, description = %s, volunteerDates = %s, deadline = %s, type = %s, tags = %s]";
 
     @JsonProperty("goal") private int goal;
     @JsonProperty("progress") private int progress;
@@ -26,14 +27,16 @@ public class Need {
     @JsonProperty("volunteerDates") private VolunteerDate[] volunteerDates;
     @JsonProperty("deadline") private Date deadline;
     @JsonProperty("type") private NeedType type;
+    @JsonProperty("tags") ArrayList<String> tags;
 
     public Need(@JsonProperty("goal") int goal, 
     @JsonProperty("progress") int progress, 
     @JsonProperty("name") String name, 
     @JsonProperty("description") String description, 
-    @JsonProperty("volunteerDates") VolunteerDate[] volunteerDates, 
+    @JsonProperty("volunteerDates") VolunteerDate[] volunteerDates,
     @JsonProperty("deadline") Date deadline, 
-    @JsonProperty("type") NeedType type) {
+    @JsonProperty("type") NeedType type,
+    @JsonProperty("tags") ArrayList<String> tags) {
         this.goal = goal;
         this.progress = progress;
         this.name = name;
@@ -41,22 +44,12 @@ public class Need {
         this.volunteerDates = volunteerDates;
         this.deadline = deadline;
         this.type = type;
+        this.tags = tags;
     }
 
-    // public Need(@JsonProperty("goal") int goal, 
-    // @JsonProperty("progress") int progress, 
-    // @JsonProperty("name") String name, 
-    // @JsonProperty("description") String description, 
-    // @JsonProperty("volunteer dates") Date[] volunteerDates, 
-    // @JsonProperty("deadline") Date deadline) {
-    //     this.goal = goal;
-    //     this.progress = progress;
-    //     this.name = name;
-    //     this.description = description;
-    //     this.volunteerDates = volunteerDates;
-    //     this.deadline = deadline;
-    //     this.type = "donation";
-    // }
+    public Need(int goal, int progress, String name, String description, Date[] volunteerDates, Date deadline, NeedType type) {
+        this(goal, progress, name, description, volunteerDates, deadline, type, new ArrayList<String>());
+    }
 
     public void setName(String name) {this.name = name;}
 
@@ -109,13 +102,22 @@ public class Need {
     public NeedType getType() {
         return type;
     }
-
-    @Override
-    public String toString() {
-        return String.format(STRING_FORMAT, goal, progress, name, description, Arrays.toString(volunteerDates), deadline, type);
-    }
-
+    
     public void setType(NeedType type) {
         this.type = type;
     }
+
+    public ArrayList<String> getTags() {
+        return this.tags;
+    }
+
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(STRING_FORMAT, goal, progress, name, description, Arrays.toString(volunteerDates), deadline, type, tags);
+    }
+
 }

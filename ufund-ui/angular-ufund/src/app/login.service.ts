@@ -10,6 +10,7 @@ import { Account } from './account';
 })
 export class LoginService {
 
+  userAccount!: Account;
   private accountUrl = 'http://localhost:8080/account';  // URL to web api
 
   httpOptions = {
@@ -74,8 +75,8 @@ export class LoginService {
   addAccount(Account: Account): Observable<Account> {
     return this.http.post<Account>(this.accountUrl, Account, this.httpOptions).pipe(
       tap((newAccount: Account) => this.log(`added Account w/ name=${newAccount.name}`)), // notice: deprecated
-      catchError(this.handleError<Account>('addAccount'))
-    );
+      catchError((this.handleError<Account>('addAccount')))
+      )
   }
 
   /** DELETE: delete the Account from the server */
@@ -136,8 +137,8 @@ export class LoginService {
       return new Observable((subscriber) => {
         subscriber.next("Please enter your username"); 
       });
+    }    
 
-    }
     if(password == "") {
       return new Observable((subscriber) => {
         subscriber.next("Please enter your password"); 
@@ -159,7 +160,8 @@ export class LoginService {
             return;
           }
           if(password == account.password) {
-            subscriber.next("Login successful"); 
+            subscriber.next("Login successful");
+            that.userAccount = account;
           } else {
             subscriber.next("Incorrect password"); 
           }
@@ -172,6 +174,7 @@ export class LoginService {
     });
     return response;
   }
+
 
 }
 

@@ -75,11 +75,10 @@ public class CupboardController {
     {
         try {
             Need out = cupboardDao.getNeed(name);
-            if (out != null)
-            {
+            if (out != null) {
                 return new ResponseEntity<Need>(out, HttpStatus.OK);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -180,6 +179,7 @@ public class CupboardController {
     @DeleteMapping("/{name}")
     public ResponseEntity<Need> deleteNeed(@PathVariable String name)
     {
+        if(name != null) LOG.info("DELETE /" + name);
         try {
             if (cupboardDao.deleteNeed(name))
                 return new ResponseEntity<Need>(HttpStatus.OK);

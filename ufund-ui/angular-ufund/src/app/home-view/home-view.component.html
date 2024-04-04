@@ -1,2 +1,19 @@
+<div>
+    <!-- Search bar -->
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Search Needs!">
+    <button type=button (click)="search(searchTerm)">Search</button>
+    <button type=button *ngIf="searchResults.length != 0" (click)="clearSearch()" class="red-button">X</button>
+    <div *ngIf="searchResults.length != 0" class="search-results">
+        <div *ngFor="let thisNeed of searchResults">
+            <need-button *ngIf="thisNeed != null" [need]="thisNeed"></need-button>
+        </div>
+    </div>
+    <div *ngIf="lastTermSearched.length != 0 && searchResults.length == 0">
+        <p><i>No results were found for {{lastTermSearched}}</i></p>
+    </div>
+</div>
 <app-cupboard></app-cupboard>
-<app-funding-basket></app-funding-basket>
+
+<div *ngIf="userIsAdmin() == false">
+    <app-funding-basket></app-funding-basket>
+</div>

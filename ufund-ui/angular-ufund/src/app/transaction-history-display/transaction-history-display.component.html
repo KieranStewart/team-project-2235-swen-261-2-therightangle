@@ -1,0 +1,12 @@
+<h1>Transactions:</h1>
+<table *ngIf="transactions != null">
+    <tr>
+        <td>Date</td>
+        <td>Amount Donated</td>
+    </tr>
+    <tr *ngFor="let transaction of transactions"> 
+        <td>{{transaction.timestamp?.month}}/{{transaction.timestamp?.day}}/{{transaction.timestamp?.year}}</td>
+        <td>${{transaction.amount}}</td>
+    </tr>
+</table>
+<p *ngIf="transactions == null || transactions == []"><i>There are no transactions</i></p>

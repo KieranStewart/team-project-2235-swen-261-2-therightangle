@@ -5,6 +5,10 @@ import { BasketService } from '../basket.service';
 import { Router } from '@angular/router';
 import { NeedService } from '../need.service';
 import { Need } from '../need';
+import { TransactionService } from '../transaction.service';
+import { Transaction } from '../transaction';
+import { take } from 'rxjs';
+import { NeedCacheService } from '../need-cache.service';
 
 @Component({
   selector: 'app-checkout',
@@ -14,7 +18,7 @@ import { Need } from '../need';
 
 export class CheckoutComponent implements OnInit{
 
-  constructor(private basketService: BasketService, private router: Router, private needService: NeedService) { }
+  constructor(public basketService: BasketService, private router: Router, private needService: NeedService, private transactionService: TransactionService, private cupboardComponent: CupboardComponent, private needCacheService: NeedCacheService) { }
   
   total: number = 0;
   total_h: number = 0;
@@ -88,8 +92,38 @@ export class CheckoutComponent implements OnInit{
   }
 
   private recordPayment(need: Need): void {
+    const that = this;
     need.progress += Number(need.donationAmount);
-    this.needService.updateNeed(need).subscribe();
+    this.needService.updateNeed(need).pipe(take(1)).subscribe();
+    let transaction: Transaction;
+    transaction = {
+      amount: need.donationAmount,
+      needName: need.name
+    };
+    // If you don't like and subscribe, it won't get any views (TypeScript moment)
+    this.transactionService.addTransaction(transaction).pipe(take(1)).subscribe({
+      next(value) {
+          that.cupboardComponent.getCupboard(); // update cupboard view
+          that.needCacheService.selectedNeed = need;
+      },
+    });
+  }
+
+  areDonationsValid(): boolean {
+    if(Number.isNaN(this.total)) {
+      return false;
+    }
+    for (let index = 0; index < this.basketService.contents.length; index++) {
+      const element = this.basketService.contents[index];
+      if(element.donationAmount <= 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  areVolunteerDatesValid(): boolean {
+    return true; // TODO
   }
 
   private recordHours(need: Need): void {

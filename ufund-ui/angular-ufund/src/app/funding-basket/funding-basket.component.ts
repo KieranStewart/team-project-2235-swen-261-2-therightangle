@@ -12,15 +12,18 @@ export class FundingBasketComponent {
   fundingBasket: Need[] = this.basketService.contents;
   message = "";
 
-  constructor(private basketService: BasketService, private needService: NeedService) {}
+  constructor(
+    private basketService: BasketService, 
+    private needService: NeedService,) {}
+
 
   submitFundingBasket(): void{
     const that = this;
 
     this.fundingBasket.forEach(donation => {
-      this.needService.updateNeed(donation)
-      this.basketService.clear()
-      this.message = "submitted";
+      this.needService.updateNeed(donation);
     });
+    this.basketService.clear();
+    this.message = "submitted";
   }
 }
