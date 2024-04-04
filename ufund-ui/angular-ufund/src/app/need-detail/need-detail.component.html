@@ -1,12 +1,12 @@
 <div class="detail-container">
     <p>Detail section</p>
-    <div *ngIf="displayNeed != null">
+    <div *ngIf="needCacheService.selectedNeed != null">
         <!-- Display need information -->
-        <h3>{{displayNeed.name}}</h3>
-        <h5 *ngIf="displayNeed.type == 'donation'">Funding progress: ${{displayNeed.progress}} / ${{displayNeed.goal}}</h5>
+        <h3>{{needCacheService.selectedNeed.name}}</h3>
+        <h5 *ngIf="needCacheService.selectedNeed.type == 'donation'">Funding progress: ${{needCacheService.selectedNeed.progress}} / ${{needCacheService.selectedNeed.goal}}</h5>
 
         <div class="btn-group">
-            <div *ngFor="let item of displayNeed.tags">
+            <div *ngFor="let item of needCacheService.selectedNeed.tags">
 
                 <button *ngIf="item != 'admin'" [disabled]="!loginService.userAccount.isAdmin" (click)="removeTag(item)">{{item}}</button>
             </div>
@@ -31,27 +31,27 @@
 
         <h4>Description:</h4>
         <p>
-            {{displayNeed.description}}
+            {{needCacheService.selectedNeed.description}}
         </p>
-        <h5>Ends on {{displayNeed.deadline.month}}/{{displayNeed.deadline.day}}/{{displayNeed.deadline.year}}</h5>
+        <h5>Ends on {{needCacheService.selectedNeed.deadline.month}}/{{needCacheService.selectedNeed.deadline.day}}/{{needCacheService.selectedNeed.deadline.year}}</h5>
         <!-- If it isn't in the basket, allow it to be added -->
-        <button *ngIf="!displayNeed.inFundingBasket && !loginService.userAccount.isAdmin" (click)="addToFundingBasket()">Add to funding basket</button>
+        <button *ngIf="!needCacheService.selectedNeed.inFundingBasket && !loginService.userAccount.isAdmin" (click)="addToFundingBasket()">Add to funding basket</button>
 
         <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
-        <div *ngIf="displayNeed.inFundingBasket">
+        <div *ngIf="needCacheService.selectedNeed.inFundingBasket">
             <!-- Starter code for the Donate Time story.  Good luck! -->
             <label for="donation-amount">Donation amount: </label>
-            <input id="donation-amount" [(ngModel)]="displayNeed.donationAmount" placeholder="0" #donationAmount />
+            <input id="donation-amount" [(ngModel)]="needCacheService.selectedNeed.donationAmount" placeholder="0" #donationAmount />
             <!-- <button (click)="saveNeed(donationAmount.value)"> Save </button> -->
             <button (click)="removeFromFundingBasket()">Remove from funding basket</button>
         </div>
         <!-- If I'm an admin, I see transactions -->
         <div *ngIf="transactionListVisible()">
-            <app-transaction-history-display [displayNeed]="displayNeed"></app-transaction-history-display>
+            <app-transaction-history-display [displayNeed]="needCacheService.selectedNeed"></app-transaction-history-display>
         </div>
     </div>
-    <div *ngIf="displayNeed == null">
+    <div *ngIf="needCacheService.selectedNeed == null">
         <p><i>Select a need to see its details.</i></p>
     </div>
-    <app-need-edit *ngIf="loginService.userAccount.isAdmin" [currentNeed]="displayNeed"></app-need-edit>
+    <app-need-edit *ngIf="loginService.userAccount.isAdmin" [currentNeed]="needCacheService.selectedNeed"></app-need-edit>
 </div>

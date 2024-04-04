@@ -28,9 +28,8 @@ export class CupboardComponent implements OnInit{
     const that = this;
     this.needService.getCupboard().pipe(take(1))
     .subscribe({
-      next(cupboard) {
-          that.cupboard = cupboard;
-          that.searchComponent.search(that.searchComponent.searchTerm);
+      next(newCupboard) {
+          that.cupboard = newCupboard;
           for (let index = 0; index < that.cupboard.length; index++) {
             const element = that.cupboard[index];
             if(that.needCacheService.selectedNeed != null && element.name == that.needCacheService.selectedNeed.name) {
@@ -40,7 +39,9 @@ export class CupboardComponent implements OnInit{
               that.needDetailComponent.displayNeed = that.cupboard[index];
             }
           }
+          that.searchComponent.search(that.searchComponent.searchTerm);
           that.basketService.refresh(that.cupboard);
+          that.needDetailComponent.refresh();
       }
     });
   }

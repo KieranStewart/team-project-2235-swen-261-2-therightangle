@@ -39,12 +39,12 @@ export class BasketService {
   refresh(cupboard : Need[]): void {
     for (let index = 0; index < cupboard.length; index++) {
       const element = cupboard[index];
-      this.contents.forEach(need => {
-        if(need.name == element.name) {
-          cupboard[index] = need;
+      for (let jndex = 0; jndex < this.contents.length; jndex++) {
+        if(this.contents[jndex].name == element.name) {
+          this.contents[jndex] = cupboard[index];
         }
-      })
-      
+        
+      }
     }
   }
 

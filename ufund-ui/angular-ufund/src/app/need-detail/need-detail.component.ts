@@ -25,7 +25,7 @@ export class NeedDetailComponent {
 
   tagMessage = "click on a tag below to add it to this need"
 
-  constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService, public loginService: LoginService, private needCacheService : NeedCacheService) {
+  constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService, public loginService: LoginService, public needCacheService : NeedCacheService) {
     this.tagManagerContent = []
   }
 
