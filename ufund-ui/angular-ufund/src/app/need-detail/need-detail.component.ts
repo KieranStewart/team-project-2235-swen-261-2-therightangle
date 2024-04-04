@@ -51,14 +51,20 @@ export class NeedDetailComponent {
   
   dateSelected(date: VolunteerDate): boolean {
     try {
-      return this.displayNeed.selectedVolunteerDates.indexOf(date, 0) != -1;
+      if (this.displayNeed != null)
+        return this.displayNeed.selectedVolunteerDates.indexOf(date, 0) != -1;
     } catch (error) {
       return false;
     }
-    
+    return false;
   }
 
   removeDate(date: VolunteerDate): void {
+    if (this.displayNeed == null)
+    {
+      console.log("Attempted to remove date from null displayNeed");
+      return;
+    }
     let newVolunteerDates: VolunteerDate[] = this.displayNeed.selectedVolunteerDates;
     if (newVolunteerDates == undefined)
     {

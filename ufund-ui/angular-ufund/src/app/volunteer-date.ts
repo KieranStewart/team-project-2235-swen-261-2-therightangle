@@ -1,5 +1,5 @@
 import { DateComponent } from "./date/date.component";
-export interface VolunteerDate extends DateComponent {
+export interface VolunteerDate{
     month: number;
     day: number;
     year: number;
