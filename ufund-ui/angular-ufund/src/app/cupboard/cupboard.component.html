@@ -1,7 +1,7 @@
 <div class="row">
     <div class="containerTop">
         <h1 class="section-name">Cupboard</h1>
-        <need-button *ngFor="let thisNeed of cupboard" [need]="thisNeed"></need-button>
+        <need-button *ngFor="let thisNeed of needCacheService.cupboard" [need]="thisNeed"></need-button>
     </div>
     <app-need-detail [displayNeed]="needCacheService.selectedNeed" class="container"></app-need-detail>
 </div>

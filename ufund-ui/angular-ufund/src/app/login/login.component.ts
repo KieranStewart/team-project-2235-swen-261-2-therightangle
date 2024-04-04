@@ -19,7 +19,7 @@ export class LoginComponent {
   message = "";
 
 
-  constructor(private loginService: LoginService, private router: Router, private basketService: BasketService, private needCacheService : NeedCacheService) {}
+  constructor(private loginService: LoginService, private router: Router, private basketService: BasketService, private needCacheService: NeedCacheService) { }
 
   login(username: string, password: string): void {
     this.message = "loading";
@@ -28,15 +28,16 @@ export class LoginComponent {
     const that = this;
 
     this.loginService.validateLogin(username, password)
-    .subscribe({
-      next(response) {
-        that.message = response;
-        // code that concerns the response should go here
-        // putting something like "if success then turn green" outside of here will be weird and not work sometimes
-        if (response == 'Login successful') {
-          that.router.navigate(['/']);
-          that.basketService.clear();
-          that.needCacheService.selectedNeed = null;
+      .subscribe({
+        next(response) {
+          that.message = response;
+          // code that concerns the response should go here
+          // putting something like "if success then turn green" outside of here will be weird and not work sometimes
+          if (response == 'Login successful') {
+            that.router.navigate(['/']);
+            that.basketService.clear();
+            that.needCacheService.selectedNeed = null;
+          }
         }
       });
   }
