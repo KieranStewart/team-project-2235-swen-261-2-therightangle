@@ -19,10 +19,13 @@ export class AppComponent {
     public loginService: LoginService) { }
 
   title = 'angular-ufund';
-  
+
   currentUser: Account = this.loginService.userAccount
 
-  userIsAdmin(): boolean{
+  userIsAdmin(): boolean {
     return this.currentUser.isAdmin;
+  }
+  refresh(): void {
+    location.reload()
   }
 }
