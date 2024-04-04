@@ -2,6 +2,6 @@
     <div class="container">
         <h6 class="section-name">Cupboard</h6>
         <need-button *ngFor="let thisNeed of cupboard" [need]="thisNeed"></need-button>
-    </div>  
+    </div>
     <app-need-detail [displayNeed]="needCacheService.selectedNeed" class="container"></app-need-detail>
 </div>
