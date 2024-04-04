@@ -10,7 +10,7 @@ export interface Need {
     description: string;
     goal: number;
     progress: number;
-    volunteerDates: Date;
+    volunteerDates: Date[];
     deadline: Date;
     type: String;
     tags: String[];

@@ -16,7 +16,7 @@ export class NeedCacheService {
   /**
    * Keeps track of the need that is being displayed currently.
    */
-  selectedNeed!: Need;
+  selectedNeed!: Need | null;
 
   /**
    * Not finished.

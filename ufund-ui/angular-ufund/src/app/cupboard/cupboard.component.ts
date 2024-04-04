@@ -3,6 +3,7 @@ import { Need } from '../need';
 import { NeedService } from '../need.service';
 import { ActivatedRoute } from '@angular/router';
 import { NeedCacheService } from '../need-cache.service';
+import { take } from 'rxjs';
 
 
 @Component({
@@ -21,7 +22,18 @@ export class CupboardComponent implements OnInit{
   }
 
   getCupboard(): void {
-    this.needService.getCupboard()
-    .subscribe(cupboard => this.cupboard = cupboard);
+    const that = this;
+    this.needService.getCupboard().pipe(take(1))
+    .subscribe({
+      next(cupboard) {
+          that.cupboard = cupboard;
+          for (let index = 0; index < that.cupboard.length; index++) {
+            const element = that.cupboard[index];
+            if(that.needCacheService.selectedNeed != null && element.name == that.needCacheService.selectedNeed.name) {
+              that.needCacheService.selectedNeed = element;
+            }   
+          }
+      }
+    });
   }
 }

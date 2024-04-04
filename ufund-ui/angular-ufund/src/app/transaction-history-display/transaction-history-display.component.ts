@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TransactionService } from '../transaction.service';
 import { Transaction } from '../transaction';
 import { Need } from '../need';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-transaction-history-display',
@@ -14,15 +15,23 @@ export class TransactionHistoryDisplayComponent {
   }
 
   ngOnChanges() {
+    this.update();
+  }
+
+  update(): void {
+    if(this.displayNeed == null || this.displayNeed == undefined) {
+      this.transactions = [];
+      return;
+    }
     const that = this;
-    this.transactionService.getTransactionsNo404(this.displayNeed.name).subscribe({
+    this.transactionService.getTransactionsNo404(this.displayNeed.name).pipe(take(1)).subscribe({
       next(transactionArray) {
         that.transactions = transactionArray;
       }
     });
   }
 
-  @Input() displayNeed!: Need;
+  @Input() displayNeed!: Need | null;
 
   transactions!: Transaction[];
 

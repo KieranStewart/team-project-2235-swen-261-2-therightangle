@@ -1,0 +1,62 @@
+<div class= "edit-container" *ngIf="currentNeed != null">
+    <p>Edit Need</p>
+
+    <!---- Display editing options -->
+    <h2>Editing {{currentNeed.name}}</h2>
+    <p>Deadline</p>
+    <div class="date-edit"> 
+        <label for="deadline-day">Day: </label>
+        <input id="deadline-day" type="text" [(ngModel)]="currentNeed.deadline.day" placeholder="{{currentNeed.deadline.day}}"/>
+        <br>
+        <label for="deadline-month">Month: </label>
+        <input id="deadline-month" type="text" [(ngModel)]="currentNeed.deadline.month" placeholder="{{currentNeed.deadline.month}}"/>
+        <br>
+        <label for="deadline-year">Year: </label>
+        <input id="deadline-year" type="text" [(ngModel)]="currentNeed.deadline.year" placeholder="{{currentNeed.deadline.year}}"/>
+    </div>
+
+    <label for="description">Description: </label>
+    <textarea type="text" id="description" cols="40" rows="10" [(ngModel)]="currentNeed.description" placeholder="{{currentNeed.description}}"></textarea>
+    
+    <label for="need-type">Need type: </label>
+    <select [(ngModel)]="currentNeed.type" name="need-type" id="need-type">
+        <option *ngFor="let needType of validTypes" value="{{needType}}" selected="{{needType == currentNeed.type}}">{{needType}}</option>
+    </select>
+
+    <div *ngIf="currentNeed.type == validTypes[0]"> <!-- donation -->
+        <label for="goal">Funding Goal: </label>
+        <input id="goal" type="text" [(ngModel)]="currentNeed.goal" placeholder="{{currentNeed.goal}}"/>
+    </div>
+
+    <div *ngIf="currentNeed.type == validTypes[1]"> <!-- volunteer -->
+        <p>Volunteer Dates</p>
+        <div *ngFor="let date of currentNeed.volunteerDates" class="date-edit">
+            <label for="day">Day: </label>
+            <input id="day" type="text" [(ngModel)]="date.day" placeholder="{{date.day}}"/>
+            <br>
+            <label for="month">Month: </label>
+            <input id="month" type="text" [(ngModel)]="date.month" placeholder="{{date.month}}"/>
+            <br>
+            <label for="year">Year: </label>
+            <input id="year" type="text" [(ngModel)]="date.year" placeholder="{{date.year}}"/>
+        </div>
+
+        <button type="button" (click)="addNewVolunteerDate()">Add date</button>
+        <button type="button" (click)="removeVolunteerDate()">Remove last date</button>
+    </div>
+    
+    <!-- Buttons -->
+    <br>
+    <button type=button id="enterButton" (click)="updateNeed()">Update</button>
+    <button type=button id="deleteTransactionHistory" (click)="deleteTransactionHistory()">Delete transaction history</button>
+    <button type=button id="discardButton" (click)="discardChanges(true)">Discard changes</button>
+    <button type=button id="deleteButton" (click)="deleteNeed()">Delete need</button>
+    <p>{{errorText}}</p>
+</div>
+<div class="create">
+    <h2>Create Need</h2>
+    <label for="name">New need name (cannot be changed): </label>
+    <input id="name" type="text" [(ngModel)]="newNeedName" placeholder="Consider a unique name"/>
+    <button type=button id="createButton" (click)="createNeed(newNeedName)">Create new need</button>
+    <p>{{createErrorText}}</p>
+</div>

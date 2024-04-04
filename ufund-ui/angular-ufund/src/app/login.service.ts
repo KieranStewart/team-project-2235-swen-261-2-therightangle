@@ -10,6 +10,7 @@ import { Account } from './account';
 })
 export class LoginService {
 
+  userAccount!: Account;
   private accountUrl = 'http://localhost:8080/account';  // URL to web api
 
   httpOptions = {
@@ -136,8 +137,9 @@ export class LoginService {
       return new Observable((subscriber) => {
         subscriber.next("Please enter your username"); 
       });
+    }    
 
-    }    if(password == "") {
+    if(password == "") {
       return new Observable((subscriber) => {
         subscriber.next("Please enter your password"); 
       });
@@ -158,7 +160,8 @@ export class LoginService {
             return;
           }
           if(password == account.password) {
-            subscriber.next("Login successful"); 
+            subscriber.next("Login successful");
+            that.userAccount = account;
           } else {
             subscriber.next("Incorrect password"); 
           }

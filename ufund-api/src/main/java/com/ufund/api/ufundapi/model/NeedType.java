@@ -1,8 +1,11 @@
 package com.ufund.api.ufundapi.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum NeedType {
-    VOLUNTEER,
-    DONATION;
+
+    @JsonProperty("volunteer") VOLUNTEER,
+    @JsonProperty("donation") DONATION;
 
     @Override
     public String toString() {

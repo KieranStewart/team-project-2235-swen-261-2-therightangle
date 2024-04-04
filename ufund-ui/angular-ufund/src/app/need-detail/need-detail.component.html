@@ -8,20 +8,23 @@
         <h4>Need's Tags:</h4>
         <div class="btn-group">
             <div *ngFor="let item of displayNeed.tags">
-                <button (click)="removeTag(item)">{{item}}</button>
+                <button *ngIf="item != 'admin'" [disabled]="!loginService.userAccount.isAdmin" (click)="removeTag(item)">{{item}}</button>
             </div>
         </div>
 
-        <button (click)="showTagList()">Toggle avaliable tags</button>
-
-        <div *ngIf="showTags != false">
-            <h4>All tags avaliable to be added to this need:</h4>
-            <div class="btn-group">
-                <div *ngFor="let item of tagManagerContent">
-                    <button (click)="addTag(item)">{{item}}</button>
+        <!-- Admin-only tag modification -->
+        <div *ngIf="loginService.userAccount.isAdmin">
+            <button (click)="showTagList()">Toggle avaliable tags</button>
+            <div *ngIf="showTags">
+                <h4>All tags avaliable to be added to this need:</h4>
+                <div class="btn-group">
+                    <div *ngFor="let item of tagManagerContent">
+                        <button (click)="addTag(item)">{{item}}</button>
+                    </div>
                 </div>
             </div>
         </div>
+        
 
         <h4>{{tagMessage}}</h4>
 
@@ -31,7 +34,7 @@
         </p>
         <h5>Ends on {{displayNeed.deadline}}</h5>
         <!-- If it isn't in the basket, allow it to be added -->
-        <button *ngIf="!displayNeed.inFundingBasket" (click)="addToFundingBasket()">Add to funding basket</button>
+        <button *ngIf="!displayNeed.inFundingBasket && !loginService.userAccount.isAdmin" (click)="addToFundingBasket()">Add to funding basket</button>
         <!-- If it is in the basket, allow it to be removed. Also allow its donation amounts to be modified.-->
         <div *ngIf="displayNeed.inFundingBasket">
             <!-- Starter code for the Donate Time story.  Good luck! -->
@@ -48,4 +51,5 @@
     <div *ngIf="displayNeed == null">
         <p><i>Select a need to see its details.</i></p>
     </div>
+    <app-need-edit *ngIf="loginService.userAccount.isAdmin" [currentNeed]="displayNeed"></app-need-edit>
 </div>

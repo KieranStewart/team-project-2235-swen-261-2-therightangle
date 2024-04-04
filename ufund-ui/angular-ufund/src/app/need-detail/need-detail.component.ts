@@ -14,21 +14,28 @@ import { NeedService } from '../need.service';
   styleUrls: ['./need-detail.component.css']
 })
 export class NeedDetailComponent {
-  @Input()
-  displayNeed!: Need;
+  
+  @Input() displayNeed!: Need | null;
+
   tagManagerContent: String[];
   showTags = false;
-  tagMessage = ""
+  tagMessage = "";
 
-  constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService) {
+  constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService, public loginService: LoginService) {
     this.tagManagerContent = []
   }
 
   addToFundingBasket(): void {
+    if(this.displayNeed == null) {
+      return;
+    }
     this.basketService.add(this.displayNeed);
   }
 
   removeFromFundingBasket(): void {
+    if(this.displayNeed == null) {
+      return;
+    }
     this.basketService.remove(this.displayNeed);
   }
 
@@ -37,7 +44,7 @@ export class NeedDetailComponent {
    * @returns true if admin, false otherwise
    */
   transactionListVisible(): boolean {
-    return true;
+    return this.loginService.userAccount.isAdmin;
   }  
 
   showTagList(): void {
@@ -50,6 +57,9 @@ export class NeedDetailComponent {
   }
 
   addTag(name: String): void {
+    if(this.displayNeed == null) {
+      return;
+    }
     if (this.displayNeed.tags.indexOf(name) == -1) {
       this.tagMessage = ""
       this.displayNeed.tags.push(name)
@@ -60,6 +70,9 @@ export class NeedDetailComponent {
   }
 
   removeTag(name: String): void {
+    if(this.displayNeed == null) {
+      return;
+    }
     if (name == "admin" || name == "public") {
       this.tagMessage = "can't remove tag " + name + " from this need because it's a permanent variable"
     } else {
@@ -70,6 +83,13 @@ export class NeedDetailComponent {
     }
   }
 
+  // Seemingly unused method, delete if it is never used
+  // removeFromCupboard(): void {
+  //   if(this.displayNeed == null) {
+  //     return;
+  //   }
+  //   this.needService.deleteNeed(this.displayNeed.name);
+  // }
   // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.
   // You can use this if you want a save button instead of automatically linking to the input field.
   // saveNeed(donationAmount: number): void{

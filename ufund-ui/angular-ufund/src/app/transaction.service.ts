@@ -29,7 +29,6 @@ export class TransactionService {
   /** GET transactions by need name. Return `undefined` when name not found */
   getTransactionsNo404<Data>(name: string): Observable<Transaction[]> {
     const url = `${this.transactionUrl}/${name}`;
-    console.log(url);
     return this.http.get<Transaction[]>(url)
       .pipe(
         map(transactions => transactions), // The right side is the actual returned thing. The left side is... all Transactions???

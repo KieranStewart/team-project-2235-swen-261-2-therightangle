@@ -1,0 +1,20 @@
+/* Placeholder */
+.edit-container {
+    background-color: #47bfff;
+    border-radius: 2px;
+    padding: 1rem;
+}
+
+.date-edit {
+    width: 20%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.create {
+    background-color: #dffb64;
+    border-radius: 2px;
+    padding: 1rem;
+}
