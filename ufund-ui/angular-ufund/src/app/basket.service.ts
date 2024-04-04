@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Need } from './need';
+import { NeedCacheService } from './need-cache.service';
+import { CupboardComponent } from './cupboard/cupboard.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +36,22 @@ export class BasketService {
     need.inFundingBasket = false;
   }
 
+  edit(need:Need, modifiedNeed: Need): void {
+    var editIndex = this.contents.indexOf(need);
+    if (editIndex != -1){
+      this.contents[editIndex] = modifiedNeed;
+    }
+  }
+  
+  refresh(cupboard : Need[]): void {
+    for (let index = 0; index < cupboard.length; index++) {
+      const element = cupboard[index];
+      for (let jndex = 0; jndex < this.contents.length; jndex++) {
+        if(this.contents[jndex].name == element.name) {
+          this.contents[jndex] = cupboard[index];
+        }
+        
+      }
+    }
+  }
 }

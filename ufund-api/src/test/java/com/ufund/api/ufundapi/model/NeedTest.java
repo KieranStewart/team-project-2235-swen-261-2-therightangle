@@ -22,8 +22,8 @@ public class NeedTest {
         String expectedName = "Unlimited Games";
         String expectedDesc = "but no games";
         Date expectedDeadline = new Date(1, 1, 2040);
-        Date[] expectedVolunteerDates = {
-            new Date(10, 10, 2030)
+        VolunteerDate[] expectedVolunteerDates = {
+            new VolunteerDate(10, 10, 2030, false)
         };
         NeedType expectedType = NeedType.DONATION;
 
@@ -48,8 +48,8 @@ public class NeedTest {
         String expectedName = "test name";
         String expectedDesc = "test desc";
         Date expectedDeadline = new Date(1, 1, 2040);
-        Date[] expectedVolunteerDates = {
-            new Date(10, 10, 2030)
+        VolunteerDate[] expectedVolunteerDates = {
+            new VolunteerDate(10, 10, 2030, false)
         };
         NeedType expectedType = NeedType.DONATION;
         Need need = new Need(-1, -1, "old name", "old description", null, null, NeedType.VOLUNTEER);
@@ -76,18 +76,18 @@ public class NeedTest {
     @Test
     public void testToString() {
         // Setup
-        int expectedGoal = 100;
-        int expectedProgress = 0;
+        double expectedGoal = 100;
+        double expectedProgress = 0;
         String expectedName = "Unlimited Games";
         String expectedDesc = "but no games";
         Date expectedDeadline = new Date(1, 1, 2040);
-        Date[] expectedVolunteerDates = {
-            new Date(10, 10, 2030)
+        VolunteerDate[] expectedVolunteerDates = {
+            new VolunteerDate(10, 10, 2030, false)
         };
         Need need = new Need(expectedGoal, expectedProgress, expectedName, expectedDesc, expectedVolunteerDates, expectedDeadline, NeedType.DONATION);
 
         // Invoke
-        String expected = String.format(Need.getStringFormat(), expectedGoal, expectedProgress, expectedName, expectedDesc, Arrays.toString(expectedVolunteerDates), expectedDeadline, NeedType.DONATION);
+        String expected = String.format(Need.getStringFormat(), expectedGoal, expectedProgress, expectedName, expectedDesc, Arrays.toString(expectedVolunteerDates), expectedDeadline, NeedType.DONATION, Arrays.toString(new com.ufund.api.ufundapi.model.Tag[0]));
 
         // Analyze
         assertEquals(expected, need.toString());

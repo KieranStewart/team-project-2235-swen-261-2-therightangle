@@ -1,6 +1,9 @@
 package com.ufund.api.ufundapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -59,7 +62,7 @@ public class AccountTest {
         String expectedEmail = "a@gmail.com";
         boolean expectedAdminStatus = false;
         Account account = new Account(expectedName, expectedPassword, expectedEmail, expectedAdminStatus);
-        String expected = String.format(Account.getStringFormat(), expectedName, expectedPassword, expectedEmail, expectedAdminStatus);
+        String expected = String.format(Account.getStringFormat(), expectedName, expectedPassword, expectedEmail, new ArrayList<String>() , expectedAdminStatus);
 
         // Invoke
         String actual = account.toString();

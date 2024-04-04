@@ -31,6 +31,12 @@ export class NeedService {
         catchError(this.handleError<Need[]>('getCupboard', []))
       );
   }
+  // getCupboard(): Observable<Need[]> {
+  //   fetch('http://localhost:8080/cupboard')
+  //   .then((response) => response.json())
+  //   .then((json) => console.log(json));
+  //   return new Observable<Need[]>();
+  // }
 
   /** GET need by name. Return `undefined` when name not found */
   getNeedNo404<Data>(name: String): Observable<Need> {
