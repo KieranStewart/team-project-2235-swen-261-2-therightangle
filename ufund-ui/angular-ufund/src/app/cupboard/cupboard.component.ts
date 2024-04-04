@@ -35,6 +35,7 @@ export class CupboardComponent implements OnInit{
             if(that.needCacheService.selectedNeed != null && element.name == that.needCacheService.selectedNeed.name) {
               that.cupboard[index].inFundingBasket = that.needCacheService.selectedNeed.inFundingBasket;
               that.cupboard[index].donationAmount = that.needCacheService.selectedNeed.donationAmount;
+              that.cupboard[index].selectedVolunteerDates = that.needCacheService.selectedNeed.selectedVolunteerDates;
               that.needCacheService.selectedNeed = that.cupboard[index];
               that.needDetailComponent.displayNeed = that.cupboard[index];
             }
