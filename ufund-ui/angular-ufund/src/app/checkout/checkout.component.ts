@@ -21,15 +21,32 @@ export class CheckoutComponent implements OnInit{
   constructor(public basketService: BasketService, private router: Router, private needService: NeedService, private transactionService: TransactionService, private cupboardComponent: CupboardComponent, private needCacheService: NeedCacheService) { }
   
   total: number = 0;
+  total_h: number = 0;
 
   ngOnInit(): void {
     this.getTotal();
   }
 
+  displayCheckout(): boolean {
+    this.getTotal();
+    return this.total + this.total_h > 0;
+  }
+
   getTotal(): void {
-    for (const item of this.basketService.contents)
+    this.total = 0;
+    this.total_h = 0;
+    for (let item of this.basketService.contents)
     {
-      this.total = this.total + +item.donationAmount;
+      if (item.type == "VOLUNTEER") {
+        this.total_h = this.total_h + +this.getVolunteerHours(item);
+      }
+      else if (item.type == "DONATION"){
+        this.total = this.total + parseFloat(item.donationAmount.toString());
+      }
+      else
+      {
+        console.log("One of the items in the cart has no type!");
+      }
     }
   }
   
@@ -38,7 +55,11 @@ export class CheckoutComponent implements OnInit{
     if (this.makePayment())
     {
       for (let index = 0; index < this.basketService.contents.length; index++) {
-        this.recordPayment(this.basketService.contents[index]);
+        if (this.basketService.contents[index].type == "VOLUNTEER")
+          this.recordHours(this.basketService.contents[index]);
+        else
+          this.recordPayment(this.basketService.contents[index]);
+        console.log("Checkout Recorded:" + this.basketService.contents[index].name);
       }
       
       this.basketService.clear();
@@ -56,6 +77,18 @@ export class CheckoutComponent implements OnInit{
    */
   makePayment(): boolean {
     return true;
+  }
+
+  private getVolunteerHours(item: Need): number {
+    let out:number = 0;
+    for (let date_item of item.volunteerDates)
+      {
+        if (date_item.filled)
+        {
+          out ++;
+        }
+      }
+    return out;
   }
 
   private recordPayment(need: Need): void {
@@ -91,5 +124,27 @@ export class CheckoutComponent implements OnInit{
 
   areVolunteerDatesValid(): boolean {
     return true; // TODO
+  }
+
+  private recordHours(need: Need): void {
+    for (let i = 0; i < need.selectedVolunteerDates.length; i++)
+    {
+      for (let j = 0; j < need.volunteerDates.length; j++)
+      {
+        if (need.volunteerDates[j].year == need.selectedVolunteerDates[i].year 
+          && need.volunteerDates[j].month == need.selectedVolunteerDates[i].month 
+          && need.volunteerDates[j].day == need.selectedVolunteerDates[i].day && need.volunteerDates[j].filled == false)
+          { 
+            console.log("Volunteer Date " + need.volunteerDates[j].day + " is set to " + need.selectedVolunteerDates[i].day);
+            
+            need.volunteerDates[j].filled = true;
+            break;
+          }
+      }
+    }
+    console.log(need.volunteerDates + ":" + need.selectedVolunteerDates);
+    
+    need.selectedVolunteerDates = [];
+    this.needService.updateNeed(need).subscribe();
   }
 }

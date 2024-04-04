@@ -36,6 +36,13 @@ export class BasketService {
     need.inFundingBasket = false;
   }
 
+  edit(need:Need, modifiedNeed: Need): void {
+    var editIndex = this.contents.indexOf(need);
+    if (editIndex != -1){
+      this.contents[editIndex] = modifiedNeed;
+    }
+  }
+  
   refresh(cupboard : Need[]): void {
     for (let index = 0; index < cupboard.length; index++) {
       const element = cupboard[index];
@@ -47,5 +54,4 @@ export class BasketService {
       
     }
   }
-
 }

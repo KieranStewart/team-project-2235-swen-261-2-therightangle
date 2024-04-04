@@ -1,4 +1,5 @@
 import { Date } from "./date";
+import { VolunteerDate } from "./volunteer-date";
 import { Tag } from "./tag"
 
 /**
@@ -10,7 +11,7 @@ export interface Need {
     description: string;
     goal: number;
     progress: number;
-    volunteerDates: Date[];
+    volunteerDates: VolunteerDate[];
     deadline: Date;
     type: String;
     tags: String[];
@@ -18,4 +19,5 @@ export interface Need {
     // Client-exclusive state
     inFundingBasket: boolean;
     donationAmount: number;
+    selectedVolunteerDates: VolunteerDate[];
 }

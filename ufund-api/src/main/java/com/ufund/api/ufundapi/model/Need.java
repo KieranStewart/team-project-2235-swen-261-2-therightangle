@@ -24,7 +24,7 @@ public class Need {
     @JsonProperty("progress") private double progress;
     @JsonProperty("name") private String name;
     @JsonProperty("description") private String description;
-    @JsonProperty("volunteerDates") private Date[] volunteerDates;
+    @JsonProperty("volunteerDates") private VolunteerDate[] volunteerDates;
     @JsonProperty("deadline") private Date deadline;
     @JsonProperty("type") private NeedType type;
     @JsonProperty("tags") ArrayList<String> tags;
@@ -33,7 +33,7 @@ public class Need {
     @JsonProperty("progress") double progress, 
     @JsonProperty("name") String name, 
     @JsonProperty("description") String description, 
-    @JsonProperty("volunteerDates") Date[] volunteerDates, 
+    @JsonProperty("volunteerDates") VolunteerDate[] volunteerDates,
     @JsonProperty("deadline") Date deadline, 
     @JsonProperty("type") NeedType type,
     @JsonProperty("tags") ArrayList<String> tags) {
@@ -83,11 +83,11 @@ public class Need {
         this.description = description;
     }
 
-    public Date[] getVolunteerDates() {
+    public VolunteerDate[] getVolunteerDates() {
         return volunteerDates;
     }
 
-    public void setVolunteerDates(Date[] volunteerDates) {
+    public void setVolunteerDates(VolunteerDate[] volunteerDates) {
         this.volunteerDates = volunteerDates;
     }
 
