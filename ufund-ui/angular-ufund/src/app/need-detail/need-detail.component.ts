@@ -46,7 +46,7 @@ export class NeedDetailComponent {
       newVolunteerDates.splice(index);
     else
       console.log("ERROR, VolunteerDate already removed, or not in dates array");
-    console.log("New selectedVolunteerDates array" + newVolunteerDates);
+    console.log("Date removed from cart");
     this.displayNeed.selectedVolunteerDates = newVolunteerDates;
   };
 

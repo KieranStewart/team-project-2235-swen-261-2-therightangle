@@ -31,9 +31,7 @@ export class  DateComponent {
     {
       newVolunteerDates = [];
     }
-    console.log(newVolunteerDates);
     newVolunteerDates.push(date);
-    console.log(newVolunteerDates);
     this.need.selectedVolunteerDates = newVolunteerDates;
   };
 }
