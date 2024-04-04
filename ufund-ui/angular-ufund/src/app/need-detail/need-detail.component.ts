@@ -4,6 +4,7 @@ import { BasketService } from '../basket.service';
 import { LoginService } from '../login.service';
 import { TagManagerService } from '../tag-manager.service';
 import { NeedService } from '../need.service';
+import { Tag } from '../tag';
 
 /**
  * Shows the details for the selected need.
@@ -18,8 +19,10 @@ export class NeedDetailComponent {
   @Input() displayNeed!: Need | null;
 
   tagManagerContent: String[];
+  hoverTag!: Tag;
   showTags = false;
-  tagMessage = "";
+
+  tagMessage = "click on a tag below to add it to this need"
 
   constructor(private basketService: BasketService, private tagManagerService: TagManagerService, private needService: NeedService, public loginService: LoginService) {
     this.tagManagerContent = []
@@ -61,7 +64,7 @@ export class NeedDetailComponent {
       return;
     }
     if (this.displayNeed.tags.indexOf(name) == -1) {
-      this.tagMessage = ""
+      this.tagMessage = name + " has been add to this need: " + this.displayNeed.name
       this.displayNeed.tags.push(name)
       this.needService.updateNeed(this.displayNeed).subscribe();
     } else {
@@ -76,27 +79,16 @@ export class NeedDetailComponent {
     if (name == "admin" || name == "public") {
       this.tagMessage = "can't remove tag " + name + " from this need because it's a permanent variable"
     } else {
-      this.tagMessage = ""
+      this.tagMessage = name + " has been remove from this need: " + this.displayNeed.name
       var index = this.displayNeed.tags.indexOf(name);
       this.displayNeed.tags.splice(index, 1);
       this.needService.updateNeed(this.displayNeed).subscribe();
     }
   }
 
-  // Seemingly unused method, delete if it is never used
-  // removeFromCupboard(): void {
-  //   if(this.displayNeed == null) {
-  //     return;
-  //   }
-  //   this.needService.deleteNeed(this.displayNeed.name);
-  // }
-  // Don't use this, directly bind the input to displayNeed.donationAmount.  It'll probably be easier.
-  // You can use this if you want a save button instead of automatically linking to the input field.
-  // saveNeed(donationAmount: number): void{
-  //   this.displayNeed.donationAmount = donationAmount;
-  // }
+  changeHoverTag(name: String): void {
+    this.hoverTag = this.tagManagerService.getTag(name);
+  }
 
-  /**
-   * additional logic as necessary
-   */
+
 }

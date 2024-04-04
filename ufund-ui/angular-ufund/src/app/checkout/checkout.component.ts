@@ -18,7 +18,7 @@ import { NeedCacheService } from '../need-cache.service';
 
 export class CheckoutComponent implements OnInit{
 
-  constructor(private basketService: BasketService, private router: Router, private needService: NeedService, private transactionService: TransactionService, private cupboardComponent: CupboardComponent, private needCacheService: NeedCacheService) { }
+  constructor(public basketService: BasketService, private router: Router, private needService: NeedService, private transactionService: TransactionService, private cupboardComponent: CupboardComponent, private needCacheService: NeedCacheService) { }
   
   total: number = 0;
 
@@ -74,5 +74,22 @@ export class CheckoutComponent implements OnInit{
           that.needCacheService.selectedNeed = need;
       },
     });
+  }
+
+  areDonationsValid(): boolean {
+    if(Number.isNaN(this.total)) {
+      return false;
+    }
+    for (let index = 0; index < this.basketService.contents.length; index++) {
+      const element = this.basketService.contents[index];
+      if(element.donationAmount <= 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  areVolunteerDatesValid(): boolean {
+    return true; // TODO
   }
 }

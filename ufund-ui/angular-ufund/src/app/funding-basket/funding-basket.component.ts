@@ -12,7 +12,10 @@ export class FundingBasketComponent {
   fundingBasket: Need[] = this.basketService.contents;
   message = "";
 
-  constructor(private basketService: BasketService, private needService: NeedService) {}
+  constructor(
+    private basketService: BasketService, 
+    private needService: NeedService,) {}
+
 
   submitFundingBasket(): void{
     const that = this;

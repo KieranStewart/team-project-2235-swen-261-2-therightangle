@@ -1,7 +1,13 @@
-<div *ngIf="total > 0" class="accept" style="display: flex;">
+<div *ngIf="areDonationsValid() && areVolunteerDatesValid() && basketService.contents.length > 0" class="accept" style="display: flex;">
     <h2>Total ${{total}}</h2>
     <button (click)="checkout()" class="button" style="margin-right: auto; margin-left: auto;"> Confirm </button>
 </div>
-<div *ngIf="!(total > 0)">
-    <h3>There are no items with donation ammounts in the cart, either add items or increase ammount on a donations already in your cart if you wish donate.</h3>
+<div *ngIf="!areDonationsValid()">
+    <h3>Items in your cart have invalid donation amounts.  Please check that you filled each item's amount!</h3>
+</div>
+<div *ngIf="!areVolunteerDatesValid()">
+    <h3>Items in your cart have invalid volunteer times.  Please check your input!</h3>
+</div>
+<div *ngIf="basketService.contents.length <= 0">
+    <h3><i>Items you put in the funding basket can be checked out here</i></h3>
 </div>

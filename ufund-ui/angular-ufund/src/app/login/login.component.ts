@@ -41,9 +41,5 @@ export class LoginComponent {
     this.showAccountCreation = !this.showAccountCreation;
   }
 
-  progressPastLogin(): void {
-    // TODO Dashboard(s) story: make this hide log in and show the rest of the stuff instead
-  }
-
 }
  

@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AccountCreationComponent } from './account-creation/account-creation.component';
 import { TagCreationComponent } from './tag-creation/tag-creation.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: '', component: AppComponent },
   {path: 'Login', component: LoginComponent },
   {path: 'AccountCreation', component: AccountCreationComponent },
-  {path: 'CreateTags', component: TagCreationComponent },
+  { path: 'CreateTags', component: TagCreationComponent },
+  { path: 'ManageUsers', component: UserComponent },
 ];
 
 @NgModule({
@@ -37,7 +39,7 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
+export class AppRoutingModule {
   static getRoutes(): Routes {
     return routes;
   }

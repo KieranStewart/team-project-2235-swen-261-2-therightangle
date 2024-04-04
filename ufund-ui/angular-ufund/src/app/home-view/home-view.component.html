@@ -13,4 +13,7 @@
     </div>
 </div>
 <app-cupboard></app-cupboard>
-<app-funding-basket></app-funding-basket>
+
+<div *ngIf="userIsAdmin() == false">
+    <app-funding-basket></app-funding-basket>
+</div>
