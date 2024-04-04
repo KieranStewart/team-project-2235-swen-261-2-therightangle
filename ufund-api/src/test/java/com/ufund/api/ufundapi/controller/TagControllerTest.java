@@ -112,92 +112,92 @@ public class TagControllerTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
-    // @Test
-    // public void testSearchTagsNotFound() throws IOException {
-    //     // Setup
-    //     String searchTag = "Fund giant panda propaganda to undermine the rat party";
-    //     Tag[] needs = new Tag[] {
-    //         new Tag(0, 0, "Help starving children", " ", null, null, null)
-    //     };
+    @Test
+    public void testSearchTagsNotFound() throws IOException {
+        // Setup
+        String searchTag = "Fund giant panda propaganda to undermine the rat party";
+        Tag[] needs = new Tag[] {
+            new Tag("noo not found", searchTag, searchTag, false)
+        };
 
-    //     when(mockTagDAO.getTags()).thenReturn(needs);
+        when(mockTagDAO.getTags()).thenReturn(needs);
 
-    //     // Invoke
-    //     ResponseEntity<Tag[]> response = tagController.searchTags(searchTag);
+        // Invoke
+        ResponseEntity<Tag[]> response = tagController.searchTags(searchTag);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 
-    // @Test
-    // public void testSearchTagsHandleException() throws IOException {
-    //     // Setup
-    //     String searchTag = "Volunteers";
+    @Test
+    public void testSearchTagsHandleException() throws IOException {
+        // Setup
+        String searchTag = "Volunteers";
 
-    //     doThrow(new IOException()).when(mockTagDAO).getTags();
+        doThrow(new IOException()).when(mockTagDAO).getTags();
 
-    //     // Invoke
-    //     ResponseEntity<Tag[]> response = tagController.searchTags(searchTag);
+        // Invoke
+        ResponseEntity<Tag[]> response = tagController.searchTags(searchTag);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 
-    // @Test
-    // public void testGetTags() throws IOException
-    // {
-    //     // Setup
-    //     Tag[] expectedTags = mockTagDAO.getTags();
-    //     ResponseEntity<Tag[]> expected = new ResponseEntity<Tag[]>(expectedTags, HttpStatus.OK);
+    @Test
+    public void testGetTags() throws IOException
+    {
+        // Setup
+        Tag[] expectedTags = mockTagDAO.getTags();
+        ResponseEntity<Tag[]> expected = new ResponseEntity<Tag[]>(expectedTags, HttpStatus.OK);
 
-    //     // Invoke
-    //     ResponseEntity<Tag[]> actual = tagController.getTags();
+        // Invoke
+        ResponseEntity<Tag[]> actual = tagController.getTags();
 
-    //     // Check
-    //     assertEquals(expected, actual);
-    // }
+        // Check
+        assertEquals(expected, actual);
+    }
 
-    // @Test
-    // public void testUpdateTag() throws IOException { // updateTag may throw IOException
-    //     // Setup
-    //     Tag need = new Tag(0, 0, null, null, null, null, null);
-    //     when(mockTagDAO.updateTag(need)).thenReturn(need);
-    //     ResponseEntity<Tag> response = tagController.updateTag(need);
-    //     need.setName("Test");
+    @Test
+    public void testUpdateTag() throws IOException { // updateTag may throw IOException
+        // Setup
+        Tag tag = new Tag(null, null, null, false);
+        when(mockTagDAO.updateTag(tag)).thenReturn(tag);
+        ResponseEntity<Tag> response = tagController.updateTag(tag);
+        tag.setName("Test");
 
-    //     // Invoke
-    //     response = tagController.updateTag(need);
+        // Invoke
+        response = tagController.updateTag(tag);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.OK, response.getStatusCode());
-    //     assertEquals(need, response.getBody());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(tag, response.getBody());
+    }
 
-    // @Test
-    // public void testUpdateTagFailed() throws IOException { // updateTag may throw IOException
-    //     // Setup
-    //     Tag need = new Tag(0, 0, null, null, null, null, null);
-    //     when(mockTagDAO.updateTag(need)).thenReturn(null);
+    @Test
+    public void testUpdateTagFailed() throws IOException { // updateTag may throw IOException
+        // Setup
+        Tag need = new Tag(null, null, null, false);
+        when(mockTagDAO.updateTag(need)).thenReturn(null);
 
-    //     // Invoke
-    //     ResponseEntity<Tag> response = tagController.updateTag(need);
+        // Invoke
+        ResponseEntity<Tag> response = tagController.updateTag(need);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 
-    // @Test
-    // public void testUpdateTagHandleException() throws IOException { // updateTag may throw IOException
-    //     // Setup
-    //     Tag need = new Tag(0, 0, null, null, null, null, null);
-    //     doThrow(new IOException()).when(mockTagDAO).updateTag(need);
+    @Test
+    public void testUpdateTagHandleException() throws IOException { // updateTag may throw IOException
+        // Setup
+        Tag need = new Tag(null, null, null, false);
+        doThrow(new IOException()).when(mockTagDAO).updateTag(need);
 
-    //     // Invoke
-    //     ResponseEntity<Tag> response = tagController.updateTag(need);
+        // Invoke
+        ResponseEntity<Tag> response = tagController.updateTag(need);
 
-    //     // Analyze
-    //     assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
-    // }
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 
     // @Test
     // public void testGetTag() throws IOException {  // getTag may throw IOException
