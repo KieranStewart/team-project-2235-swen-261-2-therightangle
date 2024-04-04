@@ -38,8 +38,9 @@ export class LoginComponent {
           that.basketService.clear();
           that.needCacheService.selectedNeed = null;
         }
-      });
+      }});
   }
+  
   toggleAccountCreationScreen(): void {
     this.showAccountCreation = !this.showAccountCreation;
   }
