@@ -9,10 +9,7 @@
             </h4>
             <p *ngIf="needCacheService.selectedNeed.progress >= needCacheService.selectedNeed.goal"> <i>Note: This
                     need's
-                    goal has been meet, but you may
-                    overdonate to
-                    this need if you like. However it is suggested to donate to other needs that haven't meet their goal
-                    yet.
+                    goal has been meet. Users can no longer see this need unless the progress get updated.
                 </i></p>
         </div>
         <h4>Description: {{needCacheService.selectedNeed.description}}</h4>

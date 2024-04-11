@@ -1,6 +1,6 @@
 <div *ngIf="loginService.userAccount != null">
     <div class="header">
-        <a routerLink="/Login" onclick="logout()" class="header-link">
+        <a routerLink="/Login" (click)="logout()" class="header-link">
             <p><b>Logout</b></p>
         </a>
         <a routerLink="/" class="header-link">

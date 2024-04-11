@@ -19,16 +19,19 @@ export class AppComponent {
     public loginService: LoginService) { }
 
   title = 'angular-ufund';
-  
+
   currentUser: Account | null = this.loginService.userAccount
 
-  userIsAdmin(): boolean{
-    if (this.currentUser != null)
-    {return this.currentUser.isAdmin;}
+  userIsAdmin(): boolean {
+    if (this.currentUser != null) { return this.currentUser.isAdmin; }
     return false;
   }
 
   logout(): void {
     this.loginService.userAccount = null;
+    location.reload()
+  }
+  refresh(): void {
+    location.reload()
   }
 }
