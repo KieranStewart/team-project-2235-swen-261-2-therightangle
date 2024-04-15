@@ -117,7 +117,7 @@ The following Tiers/Layers model shows a high-level view of the webapp's archite
 
 The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
 
-The Model stores the application data objects including any functionality to provide persistance. 
+The Model stores the application data objects including any functionality to provide persistence. 
 
 The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeScript. The ViewModel provides RESTful APIs to the client (View) as well as any logic required to manipulate the data objects from the Model.
 
