@@ -25,11 +25,15 @@ This is a summary of the project.
 This is a website for the Hope Center that aims to help the church keep track of donation and volunteering hours. Admins on the site will be able to manage all the needs that church currently have avaliable that users can contribute to. Some needs will ask for monetary donation while other will ask for volunteer hours. The most important user group in this application is the potential volunteers, whose goals are to donate either their time or money through a simple and effective site. 
 
 ### Glossary and Acronyms
-> _**[Sprint 4]** Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
 | SPA | Single Page |
+| Manager | Account of admin in U-fund |
+| Helper/Volunteer | Account of general user |
+| Tags | System used to filter needs and volunteers |
+| need-details | Class containing all details represented in a single need |
+
 
 
 ## Requirements
@@ -83,26 +87,26 @@ This section describes the application domain.
 Entities + Relationships:
 
 Manager- represents a U-Fund manager account
-  Manager->Cupboard: able to add, remove, edit needs within Cupboard
-  Manager->Helper: manage permissons/view of volunteers
-  Manager->Needs: able to view monetary transaction history of each need
+  1) Manager->Cupboard: able to add, remove, edit needs within Cupboard
+  2) Manager->Helper: manage permissons/view of volunteers
+  3) Manager->Needs: able to view monetary transaction history of each need
 
 Helper- represents a Volunteer account
-  Helper->Checkout: able to confirm and commit to need(s)
-  Helper->Funding Basket: able to add need(s) they want to support to basket
-  Helper->Needs: able to view needs of U-Fund 
+  1) Helper->Checkout: able to confirm and commit to need(s)
+  2) Helper->Funding Basket: able to add need(s) they want to support to basket
+  3) Helper->Needs: able to view needs of U-Fund 
 
 Needs- represents a goal of the U-fund - from volunteer view simply contains monetary/volunteer goal, deadline. Manager contains same view in addition to transaction history
-  Needs->Helper: 
+  1) Needs->Helper: 
 
 Cupboard- contains list of needs
 
 Funding Basket- represents container where needs volunteer choose to support are collected
 
 Checkout- represents space where volunteers confirm to chosen needs 
-  Checkout->Needs: updates progress on needs checked out by helper/volunteer
-  Checkout->Cupboard: updates quantity of needs seen by helper depending on whether a donation has fully fulfilled a need 
-  Checkout->Funding Basket: looks at Funding Basket for needs that need to be updated
+  1) Checkout->Needs: updates progress on needs checked out by helper/volunteer
+  2) Checkout->Cupboard: updates quantity of needs seen by helper depending on whether a donation has fully fulfilled a need 
+  3) Checkout->Funding Basket: looks at Funding Basket for needs that need to be updated
 
 
 ## Architecture and Design
@@ -132,12 +136,19 @@ This section describes the web interface flow; this is how the user views and in
 
 > _Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages in the web application._
 
+When the application is initally opened, a user is brought to the login screen where they can input their login information if they have a preexisting account. If the user needs to create an account they can click the button "Create An Account" which will lead them to a serparate page that inquires for a new username, password, and email. Once an account is created the user gets a confirmation message and brought back to the original login screen.
+
+For a user that is just a volunteer, they are brought to a Homepage that contains a header with directories to logging out, the current Homepage, and Checkout. Below the header lies the Cupboard with the list of needs, and below that there a section labeled "Detail section". When a user clicks a need this view will change to display the details of that specific need. Below that there's a Search bar for the Cupboard, and below that is the Users funding basket. When adding and removing needs from a users funding basket the user remains on the same page. When clicking the Checkout they are brought to a separate page which displays they're current basket and prompts for confirmation. When confirmed user is brought to a page that relays the succes of payments and prompts them to direct a different page. 
+
+For a user that is an admin they're also brought to a Homepage. The header contains directories Logout, the current Homepage, Create Tags, and Configure Account Tags. From top to bottem the Homepage contains the Cupboard, a Detail, Edit, and Create Needs section, and a Search needs bar. Same as removing and adding needs, when an admin is editing and creating they remain on the homepage. The Create Tags directory brings admins to a page inquiring details on the newly desired tag, and when the button "Create Tag" is hit the admin is brought back to Homepage. The Configure Account Tags brings admin to a page containing all current user accounts. When delegating tags to certain user the admin remains on the same page, with the display altering to display the current tags a user contians and all the available tags there are. Admin can then return to Homepage by using the Header.
 
 ### View Tier
 > _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
 > Describe the types of components in the tier and describe their
 > responsibilities.  This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
+
+The Entierty of our UI Lies in app. Within the App there are 2 main components, the Header (being the RouterLink), and the home-view. The home-view from top to bottom is made up of the Cupboard, Search bar, and funding-basket. The Search bar and the funding-basket both contain a list of need-buttons that when clicked open up to the need-detail, which lies in the Cupboard along with the entire collection 
 
 > _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects 
 > of the design that you are describing.  (**For example**, in a shopping experience application you might create a 
@@ -205,7 +216,7 @@ In JavaScript and TypeScript, var and let are two ways to create a variable.  Th
 > Include any relevant screenshot(s) with each area._
 
 
-If we given more time to work on our application we think there are many changes that could made to the user interface regarding style and functionality when it comes to the look of the cupboard. At a certain point because of the way we presented our needs after adding a certain amount of needs they run off the page. If we had more time we could possibly create icons instead of tabs side to side, and resize the cupboard when too much space has been taken up. As for the matter of refactoring, we most likley would alter the current state of our UI applcation, because although it works seamlessly, a majority of it lies within a single class's (need-details) html. We should most likley choose home-view as the class to designate this responsibility to instead
+  If we given more time to work on our application we think there are many changes that could made to the user interface regarding style and functionality when it comes to the look of the cupboard. At a certain point because of the way we presented our needs after adding a certain amount of needs they run off the page. If we had more time we could possibly create icons instead of tabs side to side, and resize the cupboard when too much space has been taken up. As for the matter of refactoring, we most likley would alter the current state of our UI applcation, because although it works seamlessly, a majority of it lies within a single class's (need-details) html. We should most likley choose home-view as the class to designate this responsibility to instead
 
 ## Testing
 > _This section will provide information about the testing performed
@@ -228,3 +239,4 @@ All completed stories pass their acceptance testing accept for checking out in t
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
+
