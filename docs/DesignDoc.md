@@ -134,7 +134,6 @@ The user interface is built with Angular 15.
 
 This section describes the web interface flow; this is how the user views and interacts with the web application.
 
-> _Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages in the web application._
 
 When the application is initally opened, a user is brought to the login screen where they can input their login information if they have a preexisting account. If the user needs to create an account they can click the button "Create An Account" which will lead them to a serparate page that inquires for a new username, password, and email. Once an account is created the user gets a confirmation message and brought back to the original login screen.
 
@@ -143,24 +142,11 @@ For a user that is just a volunteer, they are brought to a Homepage that contain
 For a user that is an admin they're also brought to a Homepage. The header contains directories Logout, the current Homepage, Create Tags, and Configure Account Tags. From top to bottem the Homepage contains the Cupboard, a Detail, Edit, and Create Needs section, and a Search needs bar. Same as removing and adding needs, when an admin is editing and creating they remain on the homepage. The Create Tags directory brings admins to a page inquiring details on the newly desired tag, and when the button "Create Tag" is hit the admin is brought back to Homepage. The Configure Account Tags brings admin to a page containing all current user accounts. When delegating tags to certain user the admin remains on the same page, with the display altering to display the current tags a user contians and all the available tags there are. Admin can then return to Homepage by using the Header.
 
 ### View Tier
-> _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
 
-The Entierty of our UI Lies in app. Within the App there are 2 main components, the Header (being the RouterLink), and the home-view. The home-view from top to bottom is made up of the Cupboard, Search bar, and funding-basket. The Search bar and the funding-basket both contain a list of need-buttons that when clicked open up to the need-detail, which lies in the Cupboard along with the entire collection 
+The Entierty of our UI Lies in App. Within the App there are 2 main components, the Header (being the RouterLink), and the home-view. The home-view from top to bottom is made up of the Cupboard, Search bar, and funding-basket. The Search bar and the funding-basket both contain a list of need-buttons that when clicked open up to the need-detail, which lies in the Cupboard along with the entire collection of need-buttons.
 
-> _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects 
-> of the design that you are describing.  (**For example**, in a shopping experience application you might create a 
-> sequence diagram of a customer searching for an item and adding to their cart.)
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side 
-> to help illustrate the end-to-end flow._
+need-detail contains a hefty amount. On the left hand side going from top to bottom it contains the description containing info on the current need displaying (shown as static text) it's followed by a list of tags, the add/remove from funding basket buttons, the dates if the need is one that requires volunteers time, and finally a display of the transaction history for said need. On the right hand of the Cupboard lies need-edit, where there are a list of optional entries that can be used to update need. Below that collection of information Create new need entry, where only a name is required to be input for that need-button to be added in the collection at the top of the Cupboard
 
-> _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
- >* _Class diagrams only apply to the **ViewModel** and **Model** Tier_
->* _A single class diagram of the entire system will not be effective. You may start with one, but will be need to break it down into smaller sections to account for requirements of each of the Tier static models below._
- >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
- >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
 ### ViewModel Tier
 * CupboardController: This is the controller class that handles all the HTTP request that handles the Needs object. It's uses the REST API and Spring to handle all the HTTP requests.
@@ -188,8 +174,8 @@ The Entierty of our UI Lies in app. Within the App there are 2 main components, 
 
 * Dependency injection: We are using Spring framework which creates a CupboardFileDAO object. The controller class receives an instance of the interface CupboardDAO that has methods needed to alter data in the cupboard.json. When we have to write data to the cupboard.json we used CupboardFileDAO which implements the methods from the interface CupboardDAO. CupboardController does not depend on the specific implementation, however, as long as it implements CupboardDAO. The CupboardDAO, as an interface, enforces CupboardFileDAO to contain the correct methods. If we need to change how data is written to cupboard.json (or if we get rid of cupboard.json altogether) we can do so without impacting the functionality of the CupboardController.
 * Single Responsibility: For our UI, we use multiple angular services to help direct the flow of different data between the different components. For example, we have both a NeedService, BasketService, and LoginService. NeedService is specifically used to send the HTTP request to the CupboardController to manipulate data in the cupboard.json. The BasketService allows users to add, remove, update, and clear needs from their funding basket. When a user wants to checkout their funding basket, NeedService is called to send the HTTP request to the CupboardController to make changes to the cupboard.json while the BasketService is called to clear the funding basket. LoginService handles all the HTTP request to the AccountController to manipulate data in the account.json, and to also verify that usernames and passwords match each other when users login.  Need component (the way we show a need), for example, can use the Need service without caring about how Needs are retrieved.  Need service, therefore, has that single responsibility.
-* Pure Fabrication: For our application, the Need class was responsible for managing all aspects related to user needs, including details and editing functionalities. But as we starting implementing tools the managers would be using and the application grew more complex, it became apparent that it was too much for a single class to hold responsibility of. This resulted in us creating the need-detail class and the need-edit. Now instead of offloading functionaility into the need class itself, need-detail and need-edit are able to bear a majority of the load in order to maintain Single Responsibility
-*  Open/closed : In our application through the implementation of dependency injection, resulted by the Spring framework, we make sure our components are open for extension but closed for modification. For instance, the CupboardController class gets an instance of the CupboardDAO interface, abstracting away the specific implementation details necessary. By use of the CupboardFileDAO, which implements the CupboardDAO interface, we obtain functionality while maintaining loose coupling. This adherence to the open/closed principle makes us able to effortlessly switch implementations or modify data storage mechanisms, such as transitioning away from cupboard.json, without making alterations to the CupboardController
+* Pure Fabrication: For our application, the Need class was responsible for managing all aspects related to user needs, including details and editing functionalities. But as we starting implementing tools the managers would be using and the application grew more complex, it became apparent that it was too much for a single class to hold responsibility of. This resulted in us creating the need-detail class and the need-edit. Now instead of offloading functionaility into the need class itself, need-detail and need-edit are able to bear a majority of the load 
+* Low Coupling: When creating classes we ensured information for a class was contained in and of itself. Classes intearct with one another but if altered independently the relating classes would function as normal. For example, our overarching Need class and Account class both interact with our Tag class- admins are able to add tags onto a user account and onto needs. This is done by Need and Account calling tag functionality through tag-manager.service. By ensuring that each class encapsulates its own data and functionality, we minimize dependencies between classes, allowing them to evolve and be changed independently without affecting the behavior of other components.
 
 
 ## Static Code Analysis/Future Design Improvements
@@ -210,13 +196,8 @@ In JavaScript and TypeScript, var and let are two ways to create a variable.  Th
 ![Area Five screenshot](var.png)
 
 
-> _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
-> **Identify 3-4** areas within your code that have been flagged by the Static Code 
-> Analysis Tool (SonarQube) and provide your analysis and recommendations.  
-> Include any relevant screenshot(s) with each area._
 
-
-  If we given more time to work on our application we think there are many changes that could made to the user interface regarding style and functionality when it comes to the look of the cupboard. At a certain point because of the way we presented our needs after adding a certain amount of needs they run off the page. If we had more time we could possibly create icons instead of tabs side to side, and resize the cupboard when too much space has been taken up. As for the matter of refactoring, we most likley would alter the current state of our UI applcation, because although it works seamlessly, a majority of it lies within a single class's (need-details) html. We should most likley choose home-view as the class to designate this responsibility to instead
+If we given more time to work on our application we think there are many changes that could made to the user interface regarding style and functionality when it comes to the look of the cupboard. At a certain point because of the way we presented our needs after adding a certain amount of needs they run off the page. If we had more time we could possibly create icons instead of tabs side to side, and resize the cupboard when too much space has been taken up. As for the matter of refactoring, we most likley would alter the current state of our UI applcation, because although it works seamlessly, a majority of it lies within a single class's (need-details) html. We should most likley choose home-view as the class to designate this responsibility to instead
 
 ## Testing
 > _This section will provide information about the testing performed
@@ -239,4 +220,11 @@ All completed stories pass their acceptance testing accept for checking out in t
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
+
+1) (2024/04/03) Sprint 4: A member had been working on the enhancement of donation transaction history in our application and brought up the question of whether transaction history should be kept for deleted needs, for admins to be able to keep a record. It was decided that no, when a need was deleted the history would be deleted along with it
+
+2) (2024/04/03) Sprint 4: A feature that had been being worked on was Payment ID, but due to the closeness of the upcoming deadline and the bugs the feature was producing it was axed.
+
+3) (2024/04/03) Sprint 4: It was decided the application wouldn't store names for people who make transactions because it felt like a violation of privacy
+
 
