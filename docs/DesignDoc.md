@@ -65,7 +65,7 @@ Admins and users will log into the website portal, where they will be directed t
 
 The first enhancement incorporated is time stamps along with donor payments. When viewing a need, an admin user is able to look and see a table with the history of every transaction made on that need including the date and monetary amount donated. 
 
-Our second enhancement is Authorized Volunteers. Admins have the ability to create tags. These tags are then delegated to needs and certain volunteers. Volunteers are then able to view needs that contain the corresponding tags they’ve been given by the admin. For example, say an admin creates a need called “School fund”, and say they only want certain volunteers to be able to see and donate to this need. They can create a tag called “School exclusive” and attach it to the “School fund” need. Then they can go the volunteer accounts and attach the tag to whatever volunteers they choose to. These volunteers are thus given exclusive access to said need.
+Our second enhancement is Authorized Volunteers. Admins have the ability to create tags. These tags are then delegated to needs and certain volunteers. Volunteers are then able to view needs that contain the corresponding tags they’ve been given by the admin. For example, say an admin creates a need called “School fund”, and say they only want certain volunteers to be able to see and donate to this need. They can create a tag called “School exclusive” and attach it to the “School fund” need. Then they can go to the volunteer account edit screen and attach the tag to whatever volunteers they choose to. These volunteers are thus given exclusive access to said need.
 
 
 
@@ -79,7 +79,7 @@ Entities + Relationships:
 
 Manager- represents a U-Fund manager account
   1) Manager->Cupboard: able to add, remove, edit needs within Cupboard
-  2) Manager->Helper: manage permissons/view of volunteers
+  2) Manager->Helper: manage permissions/view of volunteers
   3) Manager->Needs: able to view monetary transaction history of each need
 
 Helper- represents a Volunteer account
@@ -126,7 +126,7 @@ The user interface is built with Angular 15.
 This section describes the web interface flow; this is how the user views and interacts with the web application.
 
 
-When the application is initally opened, a user is brought to the login screen where they can input their login information if they have a preexisting account. If the user needs to create an account they can click the button "Create An Account" which will lead them to a serparate page that inquires for a new username, password, and email. Once an account is created the user gets a confirmation message and brought back to the original login screen.
+When the application is initially opened, a user is brought to the login screen where they can input their login information if they have a preexisting account. If the user needs to create an account they can click the button "Create An Account" which will lead them to a separate page that inquires for a new username, password, and email. Once an account is created the user gets a confirmation message and brought back to the original login screen.
 
 For a user that is just a volunteer, they are brought to a Homepage that contains a header with directories to logging out, the current Homepage, and Checkout. Below the header lies the Cupboard with the list of needs, and below that there a section labeled "Detail section". When a user clicks a need this view will change to display the details of that specific need. Below that there's a Search bar for the Cupboard, and below that is the Users funding basket. When adding and removing needs from a users funding basket the user remains on the same page. When clicking the Checkout they are brought to a separate page which displays they're current basket and prompts for confirmation. When confirmed user is brought to a page that relays the succes of payments and prompts them to direct a different page. 
 
