@@ -208,18 +208,14 @@ If we given more time to work on our application we think there are many changes
 All completed stories pass their acceptance testing accept for checking out in the case of a need with a volunteer, but some UI stories have other issues. A recent release has fixed outstanding log in issues, but a remaining quirk is that when logging in with a username that does not exist, a console error is generated.  This does not impact the functionality of log in.  Admin privileges are successfully loaded, but they do not impact the site yet. There are a couple more console errors, for example when admin goes onto a need that's goal is volunteer hours, transaction history returns back a 404.
 
 ### Unit Testing and Code Coverage
-> _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets._
 
->_**[Sprint 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
-> those._
+We went about our unit testing by creating at least one test for each function ensuring the success of it. For some functions such as the ones found in CupboardController a tests was created to see a functions's success, failure, handle exception, and not found. There was an uncertainity over how easily it would be to utilize mockito at the end of sprint 2 but it's implementation proved to be pretty seamless.
+
+For a code coverage target we aimed for above a 90-95%. These values were choosen due to thier recommendation in class - it seemed like an reasonable obtainable standard to follow. Our target was met as out code coverage averaged to a 90%. It covered 3 tiers. The lowest rated tier was the Persitence. 3/4 of the DAO files got coverage of 100%, which left the fault of lacked coverage to TagFileDAO, which was missing a testing file all together, explaining the poor coverage. The Model tier ranked the second highest. Similarly to the Persistence tier, the one that ranked the poorest was Tag, which same as before lacked a designated testing class. The Controller tier, which ranked the highest, was the only tier that didnt come across this problem. This is due to the tests created for each Controller being fairly thurough, and unlike the other tiers each class having it's own matching testing class.
 
 ![Code Coverage at End of Sprint 2](Code-Coverage.png)
 
 ## Ongoing Rationale
->_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
 
 1) (2024/04/03) Sprint 4: A member had been working on the enhancement of donation transaction history in our application and brought up the question of whether transaction history should be kept for deleted needs, for admins to be able to keep a record. It was decided that no, when a need was deleted the history would be deleted along with it
 
