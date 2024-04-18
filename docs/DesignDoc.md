@@ -45,7 +45,7 @@ Admins and users will log into the website portal, where they will be directed t
 ### MVP Features
   Authentication/Login in: 
 1) Users have the ability to log in and out of application
-2) U-fund Manager logs in using reserved username of "admin" - any other username is assumed to be helpers/volunteers. 
+2) U-fund Manager logs in using reserved the username "admin" - any other username is assumed to be helpers/volunteers. 
 3) Usernames also can't be duplicated
 
   Volunteer Functionality 
