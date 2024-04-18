@@ -40,7 +40,7 @@ This section describes the features of the application.
 
 ### Definition of MVP
 
-Admins and users will log into the website portal, where they will be directed to their personal dashboard. Admins on the site will be able to add/delete/update needs to the cupboard, and users will be able to send donation and/or sign up for vounteering hours for needs in their funding basket taken from the cupboard. Users will be able to add the needs to their basket by reviewing the list of available needs the admins has created. Once the user is satisfied with their contribution, they can check out their funding basket which will update the information in the backend for the admin and future users to see. 
+Admins and users will log into the website portal, where they will be directed to their personal dashboard. Admins on the site will be able to add/delete/update needs to the cupboard, and users will be able to send donations and/or sign up for volunteering hours for needs in their funding basket taken from the cupboard. Users will be able to add the needs to their basket by reviewing the list of available needs the admins has created. Once the user is satisfied with their contribution, they can check out their funding basket which will update the information in the backend for the admin and future users to see. 
 
 ### MVP Features
   Authentication/Login in: 
@@ -50,14 +50,14 @@ Admins and users will log into the website portal, where they will be directed t
 
   Volunteer Functionality 
 1) A Volunteer is able to see Cupboard containing list of needs
-2) A Volunteer is able to Search through needs
+2) A Volunteer is able to search through needs
 3) A Volunteer is able to add and remove needs from their funding basket
-4) A Volunteer is able to "checkout" (commit) to need(s) in their funding basket - Cupboard and corresponding needs are updated accordingly 
+4) A Volunteer is able to "checkout" (commit to purchase/volunteering) to need(s) in their funding basket - Cupboard and corresponding needs are updated accordingly 
 
   U-fund Manager Functionality
 1) U-fund Manager is able to add, remove, and edit need(s) within Cupboard
-2) U-fund Manager is able to Search through needs
-3) U-fund Manager does NOT have accoess to funding basket and in turn checkout, but is able to view transaction history of a need
+2) U-fund Manager is able to search through needs
+3) U-fund Manager does NOT have access to funding basket and in turn checkout, but is able to view transaction history of a need
 4) U-fund Manager is able to create tags and delegate to specific needs and volunteers 
 
 
@@ -191,8 +191,7 @@ In JavaScript and TypeScript, var and let are two ways to create a variable.  Th
 If we were given more time to work on our application we think there are many changes that could made to the user interface regarding style and functionality when it comes to the look of the cupboard. At a certain point because of the way we presented our needs after adding a certain amount of needs they run off the page. If we had more time we could possibly create icons instead of tabs side to side, and resize the cupboard when too much space has been taken up. As for the matter of refactoring, we most likley would alter the current state of our UI applcation, because although it works seamlessly, a majority of it lies within a single class's (need-details) html. We should most likley choose home-view as the class to designate this responsibility to instead
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
+Here are a few of the ways we tested our application.
 
 ### Acceptance Testing
 
