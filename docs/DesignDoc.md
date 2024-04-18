@@ -199,23 +199,23 @@ All completed stories pass their acceptance testing accept for checking out in t
 
 ### Unit Testing and Code Coverage
 
-We went about our unit testing by creating at least one test for each function ensuring the success of it. For some functions such as the ones found in CupboardController a tests was created to see a functions's success, failure, handle exception, and not found. There was an uncertainity over how easily it would be to utilize mockito at the end of sprint 2 but it's implementation proved to be pretty seamless.
+We went about our unit testing by creating at least one test for each function ensuring the success of it. For some functions such as the ones found in CupboardController a test was created to see a functions's success, failure, handle exception, and not found. There was an uncertainity over how easy it would be to utilize mockito at the end of sprint 2 but its implementation proved to be pretty seamless.  Most MVP classes are fully covered, but enhancements are less covered due to a time shortage.
 
 For a code coverage target we aimed for above a 90-95%. These values were choosen due to thier recommendation in class - it seemed like an reasonable obtainable standard to follow. Our target was met as out code coverage averaged to a 90%. It covered 3 tiers. 
 
 ![Overall Code Coverage](api-Cov.png)
 
 
-The lowest rated tier was the Persitence. 3/4 of the DAO files got coverage of 100%, which left the fault of lacked coverage to TagFileDAO, which was missing a testing file all together, explaining the poor coverage.
+The lowest rated tier was the Persistence. 3/4 of the DAO files got coverage of 100%, which left the fault of lacked coverage to TagFileDAO, which was missing a testing file all together, explaining the poor coverage.
 
 ![Persistence coverage](Persistence-Cov.png)
 
 
-The Model tier ranked the second highest. Similarly to the Persistence tier, the one that ranked the poorest was Tag, which same as before lacked a designated testing class. 
+The Model tier ranked the second highest. Similar to the Persistence tier, the one that ranked the poorest was Tag, which same as before lacked a designated testing class. 
  
 ![Overall Code Coverage](Model-Cov.png)
 
-The Controller tier, which ranked the highest, was the only tier that didnt come across this problem. This is due to the tests created for each Controller being fairly thurough, and unlike the other tiers each class having it's own matching testing class.
+The Controller tier, which ranked the highest, was the only tier that didn't come across this problem. This is due to the tests created for each Controller being fairly thorough, and unlike the other tiers each class had its own test class.
 
 ![Overall Code Coverage](Controller-Cov.png)
 
