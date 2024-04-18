@@ -241,4 +241,6 @@ The Controller tier, which ranked the highest, was the only tier that didn't com
 
 3) (2024/04/03) Sprint 4: It was decided the application wouldn't store names for people who make transactions because it felt like a violation of privacy
 
+4) (2024/03/29) Sprint 4: A member working on user permission enhancement decided that to change how the tags were store in user and needs. Orginally it was store as a Tag[] but then changed to Arraylist<String> to prevent the account and cupboard controller from doing a GET command from the Tag controller to get the tag information. 
+
 
