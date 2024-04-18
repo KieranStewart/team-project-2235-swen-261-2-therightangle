@@ -28,7 +28,6 @@ This is a website for the Hope Center that aims to help the church keep track of
 
 | Term | Definition |
 |------|------------|
-| SPA | Single Page |
 | Manager | Account of admin in U-fund |
 | Helper/Volunteer | Account of general user |
 | Tags | System used to filter needs and volunteers |
@@ -211,9 +210,23 @@ All completed stories pass their acceptance testing accept for checking out in t
 
 We went about our unit testing by creating at least one test for each function ensuring the success of it. For some functions such as the ones found in CupboardController a tests was created to see a functions's success, failure, handle exception, and not found. There was an uncertainity over how easily it would be to utilize mockito at the end of sprint 2 but it's implementation proved to be pretty seamless.
 
-For a code coverage target we aimed for above a 90-95%. These values were choosen due to thier recommendation in class - it seemed like an reasonable obtainable standard to follow. Our target was met as out code coverage averaged to a 90%. It covered 3 tiers. The lowest rated tier was the Persitence. 3/4 of the DAO files got coverage of 100%, which left the fault of lacked coverage to TagFileDAO, which was missing a testing file all together, explaining the poor coverage. The Model tier ranked the second highest. Similarly to the Persistence tier, the one that ranked the poorest was Tag, which same as before lacked a designated testing class. The Controller tier, which ranked the highest, was the only tier that didnt come across this problem. This is due to the tests created for each Controller being fairly thurough, and unlike the other tiers each class having it's own matching testing class.
+For a code coverage target we aimed for above a 90-95%. These values were choosen due to thier recommendation in class - it seemed like an reasonable obtainable standard to follow. Our target was met as out code coverage averaged to a 90%. It covered 3 tiers. 
 
-![Code Coverage at End of Sprint 2](Code-Coverage.png)
+![Overall Code Coverage](api-Cov.png)
+
+
+The lowest rated tier was the Persitence. 3/4 of the DAO files got coverage of 100%, which left the fault of lacked coverage to TagFileDAO, which was missing a testing file all together, explaining the poor coverage.
+
+![Persistence coverage](Persistence-Cov.png)
+
+
+The Model tier ranked the second highest. Similarly to the Persistence tier, the one that ranked the poorest was Tag, which same as before lacked a designated testing class. 
+ 
+![Overall Code Coverage](Model-Cov.png)
+
+The Controller tier, which ranked the highest, was the only tier that didnt come across this problem. This is due to the tests created for each Controller being fairly thurough, and unlike the other tiers each class having it's own matching testing class.
+
+![Overall Code Coverage](Controller-Cov.png)
 
 ## Ongoing Rationale
 
