@@ -34,12 +34,9 @@ This is a website for the Hope Center that aims to help the church keep track of
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
-* Account management (create,delete,update,and login accounts)
-* Need management (create,delete,and update needs)
-* Funding Basket management (add,remove,and save needs within the funding basket)
+* Account management (create, delete, update, and login accounts)
+* Need management (create, delete, and update needs)
+* Funding Basket management (add, remove, checkout, and maintain needs within the funding basket)
 
 ### Definition of MVP
 
