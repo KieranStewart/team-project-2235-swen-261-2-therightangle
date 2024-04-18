@@ -125,6 +125,10 @@ The user interface is built with Angular 15.
 
 This section describes the web interface flow; this is how the user views and interacts with the web application.
 
+![over UML](UI-HTML-layout.png)
+
+User Interface HTML layout
+
 
 When the application is initally opened, a user is brought to the login screen where they can input their login information if they have a preexisting account. If the user needs to create an account they can click the button "Create An Account" which will lead them to a serparate page that inquires for a new username, password, and email. Once an account is created the user gets a confirmation message and brought back to the original login screen.
 
@@ -133,6 +137,16 @@ For a user that is just a volunteer, they are brought to a Homepage that contain
 For a user that is an admin they're also brought to a Homepage. The header contains directories Logout, the current Homepage, Create Tags, and Configure Account Tags. From top to bottem the Homepage contains the Cupboard, a Detail, Edit, and Create Needs section, and a Search needs bar. Same as removing and adding needs, when an admin is editing and creating they remain on the homepage. The Create Tags directory brings admins to a page inquiring details on the newly desired tag, and when the button "Create Tag" is hit the admin is brought back to Homepage. The Configure Account Tags brings admin to a page containing all current user accounts. When delegating tags to certain user the admin remains on the same page, with the display altering to display the current tags a user contians and all the available tags there are. Admin can then return to Homepage by using the Header.
 
 ### View Tier
+
+
+![user funding basket sequence](Sequence-diagram.png)
+
+Sequence Diagram of a customer searching for an item and adding to their cart.
+
+![Tag funding basket sequence](tag-seq-dia.png)
+
+Sequence diagram of a admin adding creating tag and creating filter by attaching it to a need and a user
+
 
 The Entierty of our UI Lies in App. Within the App there are 2 main components, the Header (being the RouterLink), and the home-view. The home-view from top to bottom is made up of the Cupboard, Search bar, and funding-basket. The Search bar and the funding-basket both contain a list of need-buttons that when clicked open up to the need-detail, which lies in the Cupboard along with the entire collection of need-buttons.
 
