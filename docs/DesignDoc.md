@@ -45,7 +45,7 @@ Admins and users will log into the website portal, where they will be directed t
 ### MVP Features
   Authentication/Login in: 
 1) Users have the ability to log in and out of application
-2) U-fund Manager logs in using reserved username of "admin" - any other username is assumed to be helpers/volunteers. 
+2) U-fund Manager logs in using reserved the username "admin" - any other username is assumed to be helpers/volunteers. 
 3) Usernames also can't be duplicated
 
   Volunteer Functionality 
@@ -65,7 +65,7 @@ Admins and users will log into the website portal, where they will be directed t
 
 The first enhancement incorporated is time stamps along with donor payments. When viewing a need, an admin user is able to look and see a table with the history of every transaction made on that need including the date and monetary amount donated. 
 
-Our second enhancement is Authorized Volunteers. Admins have the ability to create tags. These tags are then delegated to needs and certain volunteers. Volunteers are then able to view needs that contain the corresponding tags they’ve been given by the admin. For example, say an admin creates a need called “School fund”, and say they only want certain volunteers to be able to see and donate to this need. They can create a tag called “School exclusive” and attach it to the “School fund” need. Then they can go the volunteer accounts and attach the tag to whatever volunteers they choose to. These volunteers are thus given exclusive access to said need.
+Our second enhancement is Authorized Volunteers. Admins have the ability to create tags. These tags are then delegated to needs and certain volunteers. Volunteers are then able to view needs that contain the corresponding tags they’ve been given by the admin. For example, say an admin creates a need called “School fund”, and say they only want certain volunteers to be able to see and donate to this need. They can create a tag called “School exclusive” and attach it to the “School fund” need. Then they can go to the volunteer account edit screen and attach the tag to whatever volunteers they choose to. These volunteers are thus given exclusive access to said need.
 
 
 
@@ -79,7 +79,7 @@ Entities + Relationships:
 
 Manager- represents a U-Fund manager account
   1) Manager->Cupboard: able to add, remove, edit needs within Cupboard
-  2) Manager->Helper: manage permissons/view of volunteers
+  2) Manager->Helper: manage permissions/view of volunteers
   3) Manager->Needs: able to view monetary transaction history of each need
 
 Helper- represents a Volunteer account
@@ -130,7 +130,7 @@ This section describes the web interface flow; this is how the user views and in
 User Interface HTML layout
 
 
-When the application is initally opened, a user is brought to the login screen where they can input their login information if they have a preexisting account. If the user needs to create an account they can click the button "Create An Account" which will lead them to a serparate page that inquires for a new username, password, and email. Once an account is created the user gets a confirmation message and brought back to the original login screen.
+When the application is initially opened, a user is brought to the login screen where they can input their login information if they have a preexisting account. If the user needs to create an account they can click the button "Create An Account" which will lead them to a separate page that inquires for a new username, password, and email. Once an account is created the user gets a confirmation message and brought back to the original login screen.
 
 For a user that is just a volunteer, they are brought to a Homepage that contains a header with directories to logging out, the current Homepage, and Checkout. Below the header lies the Cupboard with the list of needs, and below that there a section labeled "Detail section". When a user clicks a need this view will change to display the details of that specific need. Below that there's a Search bar for the Cupboard, and below that is the Users funding basket. When adding and removing needs from a users funding basket the user remains on the same page. When clicking the Checkout they are brought to a separate page which displays they're current basket and prompts for confirmation. When confirmed user is brought to a page that relays the succes of payments and prompts them to direct a different page. 
 
@@ -179,8 +179,8 @@ need-detail contains a hefty amount. On the left hand side going from top to bot
 
 * Dependency injection: We are using Spring framework which creates a CupboardFileDAO object. The controller class receives an instance of the interface CupboardDAO that has methods needed to alter data in the cupboard.json. When we have to write data to the cupboard.json we used CupboardFileDAO which implements the methods from the interface CupboardDAO. CupboardController does not depend on the specific implementation, however, as long as it implements CupboardDAO. The CupboardDAO, as an interface, enforces CupboardFileDAO to contain the correct methods. If we need to change how data is written to cupboard.json (or if we get rid of cupboard.json altogether) we can do so without impacting the functionality of the CupboardController.
 * Single Responsibility: For our UI, we use multiple angular services to help direct the flow of different data between the different components. For example, we have both a NeedService, BasketService, and LoginService. NeedService is specifically used to send the HTTP request to the CupboardController to manipulate data in the cupboard.json. The BasketService allows users to add, remove, update, and clear needs from their funding basket. When a user wants to checkout their funding basket, NeedService is called to send the HTTP request to the CupboardController to make changes to the cupboard.json while the BasketService is called to clear the funding basket. LoginService handles all the HTTP request to the AccountController to manipulate data in the account.json, and to also verify that usernames and passwords match each other when users login.  Need component (the way we show a need), for example, can use the Need service without caring about how Needs are retrieved.  Need service, therefore, has that single responsibility.
-* Pure Fabrication: For our application's UI, the Need class was responsible for managing all aspects related to user needs, including details and editing functionalities. But as we starting implementing tools the managers would be using and the application grew more complex, it became apparent that it was too much for a single class to hold responsibility of. This resulted in us creating the need-detail class and the need-edit. Now instead of offloading functionaility into the need class itself, need-detail and need-edit are able to bear a majority of the load 
-* Low Coupling: When creating classes we ensured information for a class was contained in and of itself. Classes intearct with one another but if altered independently the relating classes would function as normal. For example, our overarching Need class and Account class both interact with our Tag class- admins are able to add tags onto a user account and onto needs. This is done by Need and Account calling tag functionality through tag-manager.service. By ensuring that each class encapsulates its own data and functionality, we minimize dependencies between classes, allowing them to evolve and be changed independently without affecting the behavior of other components.
+* Pure Fabrication: For our application's UI, the Need class was responsible for managing all aspects related to user needs, including details and editing functionalities. But as we starting implementing tools the managers would be using and the application grew more complex, it became apparent that it was too much for a single class to hold responsibility of. This resulted in us creating the need-detail class and the need-edit. Now instead of offloading functionality into the need class itself, need-detail and need-edit are able to bear a majority of the load 
+* Low Coupling: When creating classes we ensured information for a class was contained in and of itself. Classes interact with one another but if altered independently the relating classes would function as normal. For example, our overarching Need class and Account class both interact with our Tag class- admins are able to add tags onto a user account and onto needs. This is done by Need and Account calling tag functionality through tag-manager.service. By ensuring that each class encapsulates its own data and functionality, we minimize dependencies between classes, allowing them to evolve and be changed independently without affecting the behavior of other components.
 
 
 ## Static Code Analysis/Future Design Improvements
@@ -202,7 +202,7 @@ In JavaScript and TypeScript, var and let are two ways to create a variable.  Th
 
 
 
-If we were given more time to work on our application we think there are many changes that could made to the user interface regarding style and functionality when it comes to the look of the cupboard. At a certain point because of the way we presented our needs after adding a certain amount of needs they run off the page. If we had more time we could possibly create icons instead of tabs side to side, and resize the cupboard when too much space has been taken up. As for the matter of refactoring, we most likley would alter the current state of our UI applcation, because although it works seamlessly, a majority of it lies within a single class's (need-details) html. We should most likley choose home-view as the class to designate this responsibility to instead
+If we were given more time to work on our application we think there are many changes that could made to the user interface regarding style and functionality when it comes to the look of the cupboard. At a certain point because of the way we presented our needs after adding a certain amount of needs they run off the page. If we had more time we could possibly create icons instead of tabs side to side, and resize the cupboard when too much space has been taken up. As for the matter of refactoring, we most likely would alter the current state of our UI application, because although it works seamlessly, a majority of it lies within a single class's (need-details) html. We should most likely choose home-view as the class to designate this responsibility to instead
 
 ## Testing
 Here are a few of the ways we tested our application.
@@ -213,23 +213,23 @@ All completed stories pass their acceptance testing accept for checking out in t
 
 ### Unit Testing and Code Coverage
 
-We went about our unit testing by creating at least one test for each function ensuring the success of it. For some functions such as the ones found in CupboardController a tests was created to see a functions's success, failure, handle exception, and not found. There was an uncertainity over how easily it would be to utilize mockito at the end of sprint 2 but it's implementation proved to be pretty seamless.
+We went about our unit testing by creating at least one test for each function ensuring the success of it. For some functions such as the ones found in CupboardController a test was created to see a functions's success, failure, handle exception, and not found. There was an uncertainity over how easy it would be to utilize mockito at the end of sprint 2 but its implementation proved to be pretty seamless.  Most MVP classes are fully covered, but enhancements are less covered due to a time shortage.
 
 For a code coverage target we aimed for above a 90-95%. These values were choosen due to thier recommendation in class - it seemed like an reasonable obtainable standard to follow. Our target was met as out code coverage averaged to a 90%. It covered 3 tiers. 
 
 ![Overall Code Coverage](api-Cov.png)
 
 
-The lowest rated tier was the Persitence. 3/4 of the DAO files got coverage of 100%, which left the fault of lacked coverage to TagFileDAO, which was missing a testing file all together, explaining the poor coverage.
+The lowest rated tier was the Persistence. 3/4 of the DAO files got coverage of 100%, which left the fault of lacked coverage to TagFileDAO, which was missing a testing file all together, explaining the poor coverage.
 
 ![Persistence coverage](Persistence-Cov.png)
 
 
-The Model tier ranked the second highest. Similarly to the Persistence tier, the one that ranked the poorest was Tag, which same as before lacked a designated testing class. 
+The Model tier ranked the second highest. Similar to the Persistence tier, the one that ranked the poorest was Tag, which same as before lacked a designated testing class. 
  
 ![Overall Code Coverage](Model-Cov.png)
 
-The Controller tier, which ranked the highest, was the only tier that didnt come across this problem. This is due to the tests created for each Controller being fairly thurough, and unlike the other tiers each class having it's own matching testing class.
+The Controller tier, which ranked the highest, was the only tier that didn't come across this problem. This is due to the tests created for each Controller being fairly thorough, and unlike the other tiers each class had its own test class.
 
 ![Overall Code Coverage](Controller-Cov.png)
 
